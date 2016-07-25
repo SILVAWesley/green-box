@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 public class UserFile {
     private File internFile;
     private String name;
-
+    
     public UserFile(String name, String extension, StringBuffer content) throws Exception{
         this.name = name;
         this.internFile = new File(name + extension);

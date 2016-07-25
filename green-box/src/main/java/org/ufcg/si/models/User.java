@@ -4,6 +4,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * Created by Iaron-PC on 17/07/2016.
@@ -15,7 +16,8 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	
-	@Embedded
+	//@Embedded
+	@OneToOne
     private UserDirectory userdirectory;
 	
     private String email, username, password;
