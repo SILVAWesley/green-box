@@ -1,5 +1,6 @@
 package org.ufcg.si.models;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +15,9 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	
+	@Embedded
     private UserDirectory userdirectory;
+	
     private String email, username, password;
 
     public User(){
@@ -29,9 +32,11 @@ public class User {
     }
 
     // Maybe the fileContent will be a String later
+    
     public void createFile(String filename, StringBuffer fileContent) throws Exception{
         userdirectory.addFile(filename, ".txt" ,fileContent); // An enum should be created for file extension
     }
+    
 
 
     public void createDirectory(String directoryName) throws Exception{

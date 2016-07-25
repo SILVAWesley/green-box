@@ -3,11 +3,13 @@ package org.ufcg.si.models;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.UUID;
+
+import javax.persistence.Embeddable;
 
 /**
  * Created by Iaron-PC on 20/07/2016.
  */
+@Embeddable
 public class UserFile {
     private File internFile;
     private String name;
