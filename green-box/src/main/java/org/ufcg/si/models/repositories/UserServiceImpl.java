@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ufcg.si.models.User;
 
+/**
+ * This is a façade that is used in out Controller. It also contains the User Repository
+ */
 @Service
 public class UserServiceImpl implements UserService{
 	

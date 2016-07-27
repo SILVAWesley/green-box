@@ -7,25 +7,39 @@ import java.io.FileWriter;
 import javax.persistence.Embeddable;
 
 /**
- * Created by Iaron-PC on 20/07/2016.
+ * Represents a File in the Green-Box program
  */
 @Embeddable
 public class UserFile {
     private File internFile;
     private String name;
     
+    /**
+     * This constructor creates a new UserFile and writes an initial content in it.
+     * @param name
+     * 		The File's name
+     * @param extension
+     * 		The File's extension
+     * @param content
+     * 		The File's initial content
+     * @throws Exception if the file exists but is a directory rather than a regular file,
+     *  does not exist but cannot be created, or cannot be opened for any other reason
+     */
     public UserFile(String name, String extension, StringBuffer content) throws Exception{
         this.name = name;
         this.internFile = new File(name + extension);
-        writeInFile(internFile, content);
+        writeInFile(content);
     }
-
-    private void writeInFile(File file, StringBuffer fileContent) throws Exception{
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file)); // This throws an exception.
+    
+    //This method receives a StringBuffer with the content to be written in the file
+    private void writeInFile(StringBuffer fileContent) throws Exception{
+        BufferedWriter writer = new BufferedWriter(new FileWriter(internFile)); // This throws an exception.
         writer.write(fileContent.toString());
         writer.close();
     }
-
+    
+    //GETTERS
+    
     public String getName() {
         return name;
     }
