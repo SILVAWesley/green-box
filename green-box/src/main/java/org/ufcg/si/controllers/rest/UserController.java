@@ -12,6 +12,8 @@ import org.ufcg.si.models.User;
 import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 
+
+
 @RestController
 public class UserController {
 	private UserService userService;
@@ -35,7 +37,33 @@ public class UserController {
 	@RequestMapping(value = "/user/new", method = RequestMethod.POST)
 	public ResponseEntity<User> newUser(@RequestBody User newUser) {
 		User savedUser = userService.save(newUser);
-		return new ResponseEntity<>(savedUser, HttpStatus.OK);
+		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
 	}
 	
+	@RequestMapping(value = "/user/deleteid={id}", method = RequestMethod.DELETE)
+	public ResponseEntity<User> deleteUser(@PathVariable Long id){
+		User deletedUser = userService.delete(id);
+		if (deletedUser != null){
+			return new ResponseEntity<> (deletedUser, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@RequestMapping(value = "/user/all", method = RequestMethod.GET)
+	public ResponseEntity<Iterable<User>> getAllUsers(){
+		Iterable<User> allUsers = userService.findAll();
+		return new ResponseEntity<> (allUsers, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/user/put", method = RequestMethod.PUT)
+	public ResponseEntity<User> modifyUser(@RequestBody User newUser){
+		User modifiedUser = userService.modify(newUser);
+		if(modifiedUser != null){
+			return new ResponseEntity<> (modifiedUser, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+		}
+		
+	}	
 }
