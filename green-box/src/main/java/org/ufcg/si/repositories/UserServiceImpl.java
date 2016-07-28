@@ -38,10 +38,10 @@ public class UserServiceImpl implements UserService{
 		return deletedUser;
 	}
 	
-	public User modify(User user){
-		if(userRepository.findOne(user.getId()) != null){
+	public User update(User user){
+		if (userRepository.findOne(user.getId()) != null) {
 			return userRepository.save(user);
-		}else{
+		} else {
 			return null;
 		}
 	}
