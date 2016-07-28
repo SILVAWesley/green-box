@@ -1,4 +1,4 @@
-package org.ufcg.si.models.repositories;
+package org.ufcg.si.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

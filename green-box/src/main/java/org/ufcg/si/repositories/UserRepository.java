@@ -1,4 +1,4 @@
-package org.ufcg.si.models.repositories;
+package org.ufcg.si.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.ufcg.si.models.User;
