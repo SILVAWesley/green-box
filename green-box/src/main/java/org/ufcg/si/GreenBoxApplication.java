@@ -9,4 +9,5 @@ public class GreenBoxApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GreenBoxApplication.class, args);
 	}
+	
 }
