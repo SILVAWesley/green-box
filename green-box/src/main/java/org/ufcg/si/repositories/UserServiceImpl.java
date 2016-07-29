@@ -18,14 +18,32 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public Iterable<User> listAllUsers() {
+	public Iterable<User> findAll() {
 		return userRepository.findAll();
+	}
+	
+	public User findById(Long id) {
+		return userRepository.findOne(id);
 	}
 
 	@Override
-	public void save(User pessoa) {
-		userRepository.save(pessoa);
+	public User save(User pessoa) {
+		return userRepository.save(pessoa);
 		
+	}
+	
+	public User delete(Long id){
+		User deletedUser = userRepository.findOne(id);
+		userRepository.delete(id);
+		return deletedUser;
+	}
+	
+	public User update(User user){
+		if (userRepository.findOne(user.getId()) != null) {
+			return userRepository.save(user);
+		} else {
+			return null;
+		}
 	}
 
 }
