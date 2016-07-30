@@ -10,5 +10,10 @@ public class ServerConstants {
 	public static final String LOGIN_KEY = "login";
 	public static final String LOGIN_PATH = "/" + LOGIN_KEY;
 	
+	public static final String USERDIRECTORY_KEY = "userdirectory";
+	public static final String USERDIRECTORY_PATH = "/" + USERDIRECTORY_KEY;	
+	public static final String USERDIRECTORY_PATTERN = "/" + ACCESS_KEY + "/" + USERDIRECTORY_KEY + "/*";
+	
 	public static final String TOKEN_KEY = "lordoftherings";
+	
 }

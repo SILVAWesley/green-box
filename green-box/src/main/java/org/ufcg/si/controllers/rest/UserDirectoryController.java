@@ -6,9 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.ufcg.si.util.ServerConstants;
 
 @RestController
-@RequestMapping("/userprofile")
+@RequestMapping(ServerConstants.ACCESS_PATH + ServerConstants.USERDIRECTORY_PATH)
 public class UserDirectoryController {
 	
 	@RequestMapping(value = "/test", 

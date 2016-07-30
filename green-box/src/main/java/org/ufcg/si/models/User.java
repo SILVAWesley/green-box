@@ -6,9 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.ufcg.si.exceptions.InvalidEmailException;
-import org.ufcg.si.exceptions.InvalidUsernameException;
-
 /**
  * This class represents a Green-Box user
  */
