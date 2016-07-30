@@ -6,7 +6,16 @@ appGreenbox.config(function($routeProvider, $locationProvider) {
 		templateUrl: "views/home.html",
 		controller: "homeController"
 	})
+	.when("/userdirectory", {
+		templateUrl: "account.html",
+		controller: "accountController"
+	})
 	.otherwise({redirectTo: "/home"});
 	
 	$locationProvider.html5Mode(true);
 });
+
+/*appGreenbox.config(function($httpProvider) {
+	$httpProvider.interceptors.push('loginInterceptor');
+	console.log("hello app");
+});*/
