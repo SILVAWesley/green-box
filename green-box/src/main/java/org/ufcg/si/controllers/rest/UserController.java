@@ -74,7 +74,7 @@ public class UserController {
 	public ResponseEntity<User> updateUser(@RequestBody User user){
 		User modifiedUser = userService.update(user);
 		
-		if(modifiedUser != null) {
+		if (modifiedUser != null) {
 			return new ResponseEntity<> (modifiedUser, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<> (HttpStatus.NOT_FOUND);
