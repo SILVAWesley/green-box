@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class UserDirectory {
-	
 	@Id
 	@GeneratedValue
 	private Long id;

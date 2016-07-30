@@ -32,18 +32,25 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
+	@Override
 	public User delete(Long id){
 		User deletedUser = userRepository.findOne(id);
 		userRepository.delete(id);
 		return deletedUser;
 	}
 	
+	@Override
 	public User update(User user){
 		if (userRepository.findOne(user.getId()) != null) {
 			return userRepository.save(user);
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public User findByUsername(String name) {
+		return userRepository.findByUsername(name);
 	}
 
 }
