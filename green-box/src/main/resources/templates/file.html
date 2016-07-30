@@ -2,11 +2,10 @@
 <html lang="en">
 
     <head>
-
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <title>File Editor</title>
+        <title>Green Box</title>
 
         <!-- CSS -->
 		<link rel="stylesheet" href="../static/css/form-elements.css"></link>
@@ -19,6 +18,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
         
         <!-- Optional icons -->
+        <link rel="shortcut icon" href="../static/img/icons/favicon.ico"></link>
         <link rel="stylesheet" href="../static/css/font-awesome.min.css"></link>
         
         <!-- Optional fonts -->
@@ -28,55 +28,82 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </head>
 
-    <body>
+    <body>    
+            <!-- Navbar -->
+    		<nav class="navbar navbar-default">
+  				<div class="container-fluid">
+    				<!-- Brand and toggle get grouped for better mobile display -->
+    				<div class="navbar-header">
+      					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        					<span class="sr-only">Toggle navigation</span>
+        					<span class="icon-bar"></span>
+        					<span class="icon-bar"></span>
+        					<span class="icon-bar"></span>
+      					</button>
+      					<a class="navbar-brand" href="#">
+      						<i class="fa fa-home fa-2x" aria-hidden="true"></i> Home</a>
+    				</div>
+
+	    		<!-- Collect the nav links, forms, and other content for toggling -->
+    			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      				<ul class="nav navbar-nav">
+        				<li><a href="#">
+        					<i class="fa fa-question fa-2x" aria-hidden="true"></i> About</a></li>
+      				</ul>
+      			
+      				<form class="navbar-form navbar-left">
+        				<div class="form-group">
+          					<input type="text" class="form-control" placeholder="Search">
+        				</div>
+        				<button type="submit" class="btn btn-default"><strong>Submit</strong></button>
+      				</form>
+      	
+      					<ul class="nav navbar-nav navbar-right">
+        					 <li><a href="#">
+        						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Logout</a></li>        				
+        				</ul>
+    			</div>
+  			</div>
+		</nav>
 
         <!-- Top content -->
-        <div class="top-content">
-        	</br>
-        	</br>
-        	<div class="col-sm-8"></div>
-        	<div class="col-sm-4">
-        		<button type="button" class="btn btn-danger">Sair</button>
-        	</div>
-        	
+        <div class="top-content">        	
             <div class="inner-bg">
                 <div class="container">
                 	
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
                             <h1><strong><i class="fa fa-cube fa-2x" aria-hidden="true"></i>
-                            Green Box</strong> - Your File on the Cloud!</h1>   
+                            Green Box</strong></h1>   
                         </div>
                     </div>
-                    </br>
-                    </br>
+                    <br></br>
                     <div class="col-sm-6">
                     	<div class="form-top-right">
                				<h3>Hello, UserName!
                 				<i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
                 			</h3>
 	                    </div>
-					</div>
-                    	
-                    	</br>
-                    	</br>
-                    	</br>
-                    	</br>
+					</div>                  	
+                    	<br></br>
+                    	<br></br>
+
                         <div class="col-sm-12">
                         	
                         	<div class="user-box">
                         		<div class="form-top">
 	                        		<div class="form-top-right">
 		                        		<div class="note-editable panel-body" contenteditable="true" style="height: 50px;">
-		                        			<p>File.txt</p>
+ 		                        			<p><i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> NewPaste 
+ 		                        			<i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+ 		                        			 <i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> File.txt</p>
 		                        		</div>
 	                        		</div>
 	                            </div>
                         	</div>
                         	
-                        	<div class="form-bottom">
-	                            
-				                    <form role="form" action="" method="post" class="login-form">
+                        	<div class="form-bottom">	                            
+				                    <form role="form" action="" method="post" class="edit-form">
 				                    	<div class="form-group">
 				                    		<div class="note-editing-area">
 				                    			<div class="note-handle">
@@ -92,49 +119,33 @@
 				                    			<textarea class="note-codable"></textarea>
 				                    			
 				                    		</div>
-				                        </div>
-				                        
-				                        
-				                    </form>
-				                    
+				                        </div>			                        			                        
+				                    </form>				                    
 			                 </div>
 			                 <br/>
 			                 <div class="col-sm-10">
 			                 </div>
 			                 <div class="col-sm-2">
-			                 	 <button type="submit" class="btn"><strong>Salvar</strong></button>
+			                 	 <button type="submit" class="btn"><strong>
+			                 	 	<i class="fa fa-cloud-upload" aria-hidden="true"></i> Save</strong></button>
 			                 </div>
                         </div>
-                    </div>
-                    
+                    </div>                  
                 </div>
             </div>
-            
-        </div>
 
         <!-- Footer -->
         <footer>
         	<div class="container">
-        		<div class="row">
-        			
+        		<div class="row">       			
         			<div class="col-sm-8 col-sm-offset-2">
         				<div class="footer-border"></div>
-        				<a href="http://www.bluefountainmedia.com/404">Alguma coisa aqui!!</a>
-        			</div>
-        			
+        				<a href="http://www.bluefountainmedia.com/404">
+        					<i class="fa fa-copyright" aria-hidden="true"></i> Developed by team ronan_baitola!!</a>
+        			</div>        			
         		</div>
         	</div>
         </footer>
-
-        <!-- Javascript 
-        <script src="../static/js/jquery-1.11.1.min.js"></script>
-        <script src="../static/bootstrap/js/bootstrap.min.js"></script>
-        <script src="../static/js/jquery.backstretch.min.js"></script>
-        <script src="../static/js/scripts.js"></script>
-        
-        <!--[if lt IE 10]>
-            <script src="../static/js/placeholder.js"></script>
-        <![endif]-->
 
     </body>
 

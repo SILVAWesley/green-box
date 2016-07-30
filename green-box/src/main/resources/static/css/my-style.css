@@ -9,8 +9,11 @@ body {
  	background-repeat: repeat;
 }
 
+li a {
+    width: 180px;
+}
+
 a, a:hover, a:focus {
-    font-family: 'Pattaya', sans-serif; 
 	color: #ec2a1d;
 	text-decoration: none;
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
@@ -102,6 +105,7 @@ img { max-width: 100%; }
     font-family: 'Pattaya', sans-serif;
 	color: #400040; 
 }
+
 
 /***** Forms *****/
 
