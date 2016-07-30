@@ -1,5 +1,6 @@
 package org.ufcg.si.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,16 +11,17 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class User {
-	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	//@Embedded
 	@OneToOne
     private UserDirectory userdirectory;
 	
-    private String email, username, password;
+	@Column(unique = true)
+    private String username;
+    private String email;
+    private String password;
     
     public User(){
 
@@ -35,13 +37,12 @@ public class User {
      * @param password
      * 		 The user's password
      */
-    public User(String email, String username, String password){
+    public User(String email, String username, String password) {
         this.userdirectory = new UserDirectory(username);
         this.username = username;
         this.email = email;
         this.password = password;
     }
-
     
     /**
      * Creates a new UserFile in the current UserDirectory
@@ -56,7 +57,6 @@ public class User {
         userdirectory.createFile(filename, ".txt" ,fileContent); // An enum should be created for file extension
     }
     
-
     /**
      * Creates a new UserDirectory in the current UserDirectory
      * @param directoryName
