@@ -14,83 +14,103 @@ public class User {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	@OneToOne
-    private UserDirectory userdirectory;
-	
+	private UserDirectory userdirectory;
+
 	@Column(unique = true)
-    private String username;
-	@Column(unique = true)
-    private String email;
-    private String password;
-    
-    public User(){
+	private String username;
+	private String email;
+	private String password;
 
-    }
-    
-    /**
-     * This constructor receives three strings: an email, an username and a password
-     * to create a new User. The most external UserDirectory is also created. 
-     * @param email
-     * 		 The user's email
-     * @param username
-     * 		 The user's name
-     * @param password
-     * 		 The user's password
-     */
-    public User(String email, String username, String password) {
-        this.userdirectory = new UserDirectory(username);
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-    
-    /**
-     * Creates a new UserFile in the current UserDirectory
-     * @param filename
-     * 		The file's name
-     * @param fileContent
-     * 		The file's content
-     * @throws Exception if the file exists but is a directory rather than a regular file,
-     *  does not exist but cannot be created, or cannot be opened for any other reason
-     */
-    public void createFile(String filename, StringBuffer fileContent) throws Exception{
-        userdirectory.createFile(filename, ".txt" ,fileContent); // An enum should be created for file extension
-    }
-    
-    /**
-     * Creates a new UserDirectory in the current UserDirectory
-     * @param directoryName
-     * 		The new directory's name
-     */
-    public void createDirectory(String directoryName){
-        userdirectory.createDirectory(directoryName);
-    }
-    
-    // GETTERS
+	public User() {
 
-    public String getUsername(){
-        return username;
-    }
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	/**
+	 * This constructor receives three strings: an email, an username and a
+	 * password to create a new User. The most external UserDirectory is also
+	 * created.
+	 * 
+	 * @param email
+	 *            The user's email
+	 * @param username
+	 *            The user's name
+	 * @param password
+	 *            The user's password
+	 */
+	public User(String email, String username, String password) {
+		this.userdirectory = new UserDirectory(username);
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	/**
+	 * Creates a new UserFile in the current UserDirectory
+	 * 
+	 * @param filename
+	 *            The file's name
+	 * @param fileContent
+	 *            The file's content
+	 * @throws Exception
+	 *             if the file exists but is a directory rather than a regular
+	 *             file, does not exist but cannot be created, or cannot be
+	 *             opened for any other reason
+	 */
+	public void createFile(String filename, StringBuffer fileContent) throws Exception {
 
-    public UserDirectory getUserDirectory(){
-        return userdirectory;
-    }
-    
-    public Long getId(){
-    	return id;
-    }
+		userdirectory.createFile(filename, ".txt", fileContent); // An enum
+																	// should be
+																	// created
+																	// for file
+																	// extension
+	}
 
-    @Override
-    public String toString() {
-    	return "{Username:" + username + ", Email:" + email + "}";
-    }
+	/**
+	 * Creates a new UserDirectory in the current UserDirectory
+	 * 
+	 * @param directoryName
+	 *            The new directory's name
+	 * @throws Exception 
+	 */
+	public void createDirectory(String directoryName) throws Exception {
+		userdirectory.createDirectory(directoryName);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof User) {
+			User temp = (User) obj;
+
+			return this.getUsername().equals(temp.getUsername()) && this.getEmail().equals(temp.getEmail())
+					&& this.getPassword().equals(temp.getPassword())
+					&& this.getUserDirectory().equals(temp.getUserDirectory());
+		} else {
+			return false;
+		}
+
+	}
+	// GETTERS
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public UserDirectory getUserDirectory() {
+		return userdirectory;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
 }
