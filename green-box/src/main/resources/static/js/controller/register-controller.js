@@ -3,12 +3,11 @@ appGreenbox.controller("registerController", function($scope, $http) {
 	$scope.token = "";
 	
 	$scope.registerUser = function() {
-		$http({method:'POST', url:'http://localhost:8080/server/users/new', data:$scope.user}).then(function(response) {
-			$scope.token = response.data.token;
-			localStorage.setItem("userToken", reponse.data.token);
-			console.log("Usuário cadastrado com sucesso! " + "Name: " + user.username + ". Email: " + user.email);
+		
+		$http.post("/server/users/new", $scope.user).then(function(response) {
+			console.log("Cadastrou usuario!");
 		}, function(response) {
-			console.log("TRATA EXCEPTION AQUI.")
+			console.log("TRATA EXCEPTION AQUI.");
 		});
 	};
 	

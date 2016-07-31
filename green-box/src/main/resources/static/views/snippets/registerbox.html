@@ -8,7 +8,7 @@
 	</div>
 	<div class="form-bottom">
 
-		<form role="form" action="" method="post" class="registration-form" ng-submit="registerUser()">
+		<form role="form" class="registration-form" ng-submit="registerUser()">
 			<div class="form-group">
 				<label class="sr-only" for="form-name">First name</label> <input
 					type="text" name="form-name" placeholder="Your name..."
@@ -24,6 +24,7 @@
 					type="password" name="form-password" placeholder="Password..."
 					class="form-password form-control" id="form-password" ng-model="user.password"/>
 			</div>
+			
 			<button type="submit" class="btn">
 				<strong>Create an account!</strong>
 			</button>

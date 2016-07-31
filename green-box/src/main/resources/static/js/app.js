@@ -7,7 +7,7 @@ appGreenbox.config(function($routeProvider, $locationProvider) {
 		controller: "homeController"
 	})
 	.when("/userdirectory", {
-		templateUrl: "account.html",
+		templateUrl: "views/account.html",
 		controller: "accountController"
 	})
 	.otherwise({redirectTo: "/home"});
