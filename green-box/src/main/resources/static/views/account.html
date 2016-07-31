@@ -1,151 +1,142 @@
-<body>
-	<!-- Navbar -->
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-					aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#"> <i class="fa fa-home fa-2x"
-					aria-hidden="true"></i> Home
-				</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="#"> <i class="fa fa-question fa-2x"
-							aria-hidden="true"></i> About
-					</a></li>
-				</ul>
-
-				<form class="navbar-form navbar-left">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-					<button type="submit" class="btn btn-default">
-						<strong>Submit</strong>
-					</button>
-				</form>
-
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"> <i class="fa fa-sign-out fa-2x"
-							aria-hidden="true"></i> Logout
-					</a></li>
-				</ul>
-
-			</div>
-			<!-- /.navbar-collapse -->
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"> <i class="fa fa-home fa-2x"
+				aria-hidden="true"></i> Home
+			</a>
 		</div>
-		<!-- /.container-fluid -->
-	</nav>
 
-	<!-- Top content -->
-	<div class="top-content">
-		<div class="inner-bg">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2 text">
-						<h1>
-							<strong><i class="fa fa-cube fa-2x" aria-hidden="true"></i>
-								Green Box</strong>
-						</h1>
-					</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="#"> <i class="fa fa-question fa-2x"
+						aria-hidden="true"></i> About
+				</a></li>
+			</ul>
+
+			<form class="navbar-form navbar-left">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
 				</div>
-				<br></br>
-				<div class="col-sm-6">
-					<div class="form-top-right">
-						<h3>
-							Hello, UserName! <i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
-						</h3>
-					</div>
+				<button type="submit" class="btn btn-default">
+					<strong>Submit</strong>
+				</button>
+			</form>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"> <i class="fa fa-sign-out fa-2x"
+						aria-hidden="true"></i> Logout
+				</a></li>
+			</ul>
+
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid -->
+</nav>
+
+<!-- Top content -->
+<div class="top-content" ng-controller="accountController">
+	<div class="inner-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2 text">
+					<h1>
+						<strong><i class="fa fa-cube fa-2x" aria-hidden="true"></i>
+							Green Box</strong>
+					</h1>
 				</div>
+			</div>
+			<br></br>
+			<div class="col-sm-6">
+				<div class="form-top-right">
+					<h3>
+						Hello, UserName! <i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
+					</h3>
+				</div>
+			</div>
 
-				<br></br> <br></br>
+			<br></br> <br></br>
 
-				<div class="col-sm-12">
-					<div class="user-box">
-						<div class="form-top">
-							<div class="form-top-right">
-								<h3>
-									<i class="fa fa-archive fa-2x" aria-hidden="true"></i> *current
-									directory*
-								</h3>
-							</div>
+			<div class="col-sm-12">
+				<div class="user-box">
+					<div class="form-top">
+						<div class="form-top-right">
+							<h3>
+								<i class="fa fa-archive fa-2x" aria-hidden="true"></i> *current
+								directory*
+							</h3>
 						</div>
 					</div>
+				</div>
 
-					<div class="form-bottom">
-						<form role="form" action="" method="post" class="login-form">
-							<div class="form-group">
-								<div>
-									<p>up
-									<p>
-								</div>
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th>Type</th>
-											<th>Name</th>
-											<th>Size</th>
-											<th>Created on</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><i class="fa fa-file-text-o fa-2x"
-												aria-hidden="true"></i></td>
-											<td>Document.txt</td>
-											<td>200 kb</td>
-											<td>28/07/2016</td>
-										</tr>
-										<tr>
-											<td><i class="fa fa-folder fa-2x" aria-hidden="true"></i></td>
-											<td>Folder</td>
-											<td>1.2 Mb</td>
-											<td>29/07/2016</td>
-										</tr>
-									</tbody>
-								</table>
+				<div class="form-bottom">
+					<form role="form" action="" method="post" class="login-form">
+						<div class="form-group">
+							<div>
+								<p>up
+								<p>
 							</div>
-						</form>
-					</div>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Type</th>
+										<th>Name</th>
+										<th>Size</th>
+										<th>Created on</th>
+									</tr>
+								</thead>
+								<tbody ng-repeat="file in userdirectory">
+									<tr>
+										<td><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i></td>
+										<td>{{file.name}}</td>
+										<td>{{file.size}}</td>
+										<td>{{file.date}}</td>
+										<td><input type="button" value="Enter" ng-click="directoryclick(file)"/></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</form>
+				</div>
 
-					<br></br>
+				<br/>
 
-					<div class="col-sm-8"></div>
-					<div class="col-sm-4">
-						<button type="submit" class="btn">
-							<strong>Create File</strong>
-						</button>
-						<button type="submit" class="btn bnt">
-							<strong>Create Folder</strong>
-						</button>
-					</div>
+				<div class="col-sm-8"></div>
+				<div class="col-sm-4">
+					<button type="submit" class="btn">
+						<strong>Create File</strong>
+					</button>
+					<button type="submit" class="btn bnt">
+						<strong>Create Folder</strong>
+					</button>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<!-- Footer -->
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2">
-					<div class="footer-border"></div>
-					<a href="http://www.bluefountainmedia.com/404"> <i
-						class="fa fa-copyright" aria-hidden="true"></i> Developed by team
-						ronan_baitola!!
-					</a>
-				</div>
+<!-- Footer -->
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="footer-border"></div>
+				<a href="http://www.bluefountainmedia.com/404"> <i
+					class="fa fa-copyright" aria-hidden="true"></i> Developed by team
+					ronan_baitola!!
+				</a>
 			</div>
 		</div>
-	</footer>
-
-</body>
+	</div>
+</footer>
