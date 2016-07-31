@@ -1,5 +1,7 @@
 package org.ufcg.si.controllers.rest;
 
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,9 +43,13 @@ public class UserController {
 					method = RequestMethod.POST,
 					consumes = MediaType.APPLICATION_JSON_VALUE,
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> createUser(@RequestBody User newUser) {
-		User savedUser = userService.save(newUser);
-		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+	public ResponseEntity<User> createUser(@RequestBody User newUser) throws ServletException {
+		try {
+			User savedUser = userService.save(newUser);
+			return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+		} catch(Exception e) {
+			throw new ServletException("User already inside the database.");
+		}
 	}
 	
 	@RequestMapping(value = "/deleteid={id}", 

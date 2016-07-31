@@ -6,7 +6,9 @@ appGreenbox.controller("registerController", function($scope, $http) {
 		
 		$http.post("/server/users/new", $scope.user).then(function(response) {
 			console.log("Cadastrou usuario!");
+			console.log($scope.user);
 		}, function(response) {
+			window.alert(response.data.message)
 			console.log("TRATA EXCEPTION AQUI.");
 		});
 	};

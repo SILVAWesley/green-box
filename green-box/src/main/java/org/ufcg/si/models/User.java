@@ -20,6 +20,7 @@ public class User {
 	
 	@Column(unique = true)
     private String username;
+	@Column(unique = true)
     private String email;
     private String password;
     
@@ -88,4 +89,8 @@ public class User {
     	return id;
     }
 
+    @Override
+    public String toString() {
+    	return "{Username:" + username + ", Email:" + email + "}";
+    }
 }

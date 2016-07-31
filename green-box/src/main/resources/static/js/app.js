@@ -15,7 +15,6 @@ appGreenbox.config(function($routeProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
 });
 
-/*appGreenbox.config(function($httpProvider) {
+appGreenbox.config(function($httpProvider) {
 	$httpProvider.interceptors.push('loginInterceptor');
-	console.log("hello app");
-});*/
+});

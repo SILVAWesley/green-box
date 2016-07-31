@@ -23,6 +23,7 @@ public class ExceptionHandler {
 	
 	public static void checkMatchingPassword(User loggingUser, User dbUser) throws ServletException {
 		try {
+			System.out.println("Checking password: " + loggingUser.getPassword() + " | " + dbUser.getPassword());
 			if (!loggingUser.getPassword().equals(dbUser.getPassword())) {
 				throw new InvalidPasswordException("The given password is invalid.");
 			}
@@ -32,10 +33,8 @@ public class ExceptionHandler {
 	}
 	
 	public static void checkLoginFields(User user) throws ServletException {
-		try {
-			checkUser(user, USER_USERNAME, USER_PASSWORD);
-		} catch(InvalidUserException e) {
-			throw new ServletException("Username and password are both required. " + e.getMessage());
+		if ((user.getUsername() == null && user.getEmail() == null) || (user.getPassword() == null)) {
+			throw new ServletException("Username/Email or password are both required.");
 		}
 	}
 	

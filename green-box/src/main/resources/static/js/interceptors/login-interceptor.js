@@ -1,4 +1,4 @@
-/*appGreenbox.factory("loginInterceptor", function($q, $location) {
+appGreenbox.factory("loginInterceptor", function($q, $location) {
 	return {
 		'request': function(config) {
 			config.headers.Authorization = 'Bearer ' + localStorage.getItem("userToken");
@@ -12,4 +12,4 @@
 			return $q.reject(rejection);
 		}
 	};
-});*/
+});

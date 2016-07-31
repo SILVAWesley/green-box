@@ -37,8 +37,17 @@ public class LoginController {
 					method = RequestMethod.POST, 
 					consumes = MediaType.APPLICATION_JSON_VALUE)
 	public LoginResponse login(@RequestBody User user) throws ServletException {
+		System.out.println("Password of user = " + user.getPassword());
 		ExceptionHandler.checkLoginFields(user);
-		User foundUser = userService.findByUsername(user.getUsername());
+		System.out.println("Password of user = " + user.getPassword());
+		User foundUser = null;
+		
+		if (user.getEmail() != null) {
+			foundUser = userService.findByEmail(user.getEmail());
+		} else {
+			foundUser = userService.findByUsername(user.getUsername());
+		}
+		System.out.println(foundUser);
 		ExceptionHandler.checkUserInDatabase(foundUser);
 		ExceptionHandler.checkMatchingPassword(user, foundUser);
 		
