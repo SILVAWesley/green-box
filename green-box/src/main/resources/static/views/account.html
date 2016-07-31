@@ -61,7 +61,7 @@
 			<div class="col-sm-6">
 				<div class="form-top-right">
 					<h3>
-						Hello, UserName! <i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
+						Hello, {{user.username}}! <i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
 					</h3>
 				</div>
 			</div>
@@ -73,8 +73,7 @@
 					<div class="form-top">
 						<div class="form-top-right">
 							<h3>
-								<i class="fa fa-archive fa-2x" aria-hidden="true"></i> *current
-								directory*
+								<i class="fa fa-archive fa-2x" aria-hidden="true"></i> {{path}}
 							</h3>
 						</div>
 					</div>

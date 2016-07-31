@@ -1,4 +1,4 @@
-appGreenbox.controller("loginController", function($scope, $http, $location) {
+appGreenbox.controller("loginController", function($scope, $http, $location, $rootScope) {
 	$scope.user = {};
 	$scope.entrydata = "";
 	$scope.token = "";
@@ -13,6 +13,7 @@ appGreenbox.controller("loginController", function($scope, $http, $location) {
 					$scope.token = response.data.token;
 					localStorage.setItem("userToken", response.data.token);
 					$location.path("/userdirectory");
+					$rootScope.user = $scope.user
 					resetFields();
 				}, function(response) {
 					console.log($scope.user);

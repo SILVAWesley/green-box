@@ -1,4 +1,4 @@
-appGreenbox.controller("accountController", function($scope, $http) {
+appGreenbox.controller("accountController", function($scope, $http, $rootScope) {
 	function File(name, size, date) {
 		this.name = name;
 		this.size = size;
@@ -12,11 +12,13 @@ appGreenbox.controller("accountController", function($scope, $http) {
 	
 	var wholeuserdirectory = [folder1];
 	$scope.userdirectory = wholeuserdirectory;
-	$scope.path="/";
+	$scope.user = $rootScope.user;
+	$scope.path= [$rootScope.user.username];
 	
 	$scope.directoryclick = function(clickedDirectory) {
 		console.log($scope.userdirectory);
-		$scope.userdirectory = clickedDirectory;
+		$scope.userdirectory = clickedDirectory.children;
+		$scope.path.push($scope.userdirectory.name);
 		console.log($scope.userdirectory);
 	}
 })
