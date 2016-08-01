@@ -44,7 +44,7 @@ public class UserDirectory {
 	 *            The directory's parent directory
 	 */
 	public UserDirectory(String name, UserDirectory parent) {
-		this.name = name + "/";
+		this.name = name;
 		//this.parent = parent;
 		this.files = new ArrayList<>();
 		this.children = new ArrayList<>();
@@ -85,7 +85,7 @@ public class UserDirectory {
 	 */
 	public void createFile(String filename, String fileExtension, StringBuffer fileContent) throws Exception {
 
-		UserFile file = new UserFile(this.name + "/" + filename, fileExtension, fileContent);
+		UserFile file = new UserFile(filename, fileExtension, fileContent);
 
 		for (int i = 0; i < this.getFiles().size(); i++) {
 			if (this.getFiles().get(i).equals(file)) {
@@ -104,7 +104,7 @@ public class UserDirectory {
 	 * @throws Exception
 	 */
 	public void createDirectory(String directoryName) throws Exception {
-		UserDirectory dir = new UserDirectory(this.name + "/" + directoryName, this);
+		UserDirectory dir = new UserDirectory(directoryName, this);
 
 		for (int i = 0; i < this.getFiles().size(); i++) {
 			if (this.getChildren().get(i).equals(dir)) {
@@ -113,6 +113,10 @@ public class UserDirectory {
 		}
 		this.children.add(dir);
 	}
+	
+	//public void removeDirectory(String directoryName) throws {
+		
+	
 
 	@Override
 	public boolean equals(Object obj) {
