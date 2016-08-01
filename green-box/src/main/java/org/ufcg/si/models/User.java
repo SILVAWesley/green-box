@@ -61,12 +61,8 @@ public class User {
 	 *             opened for any other reason
 	 */
 	public void createFile(String filename, StringBuffer fileContent) throws Exception {
-
-		userdirectory.createFile(filename, ".txt", fileContent); // An enum
-																	// should be
-																	// created
-																	// for file
-																	// extension
+		// An enum should be created for file extension
+		userdirectory.createFile(filename, ".txt", fileContent); 
 	}
 
 	/**
