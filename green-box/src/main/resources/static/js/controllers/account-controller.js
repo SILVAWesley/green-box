@@ -11,17 +11,20 @@ appGreenbox.controller("accountController", function($scope, $http, $rootScope, 
 	}
 	
 	function basicDirectory() {
-		console.log($scope.userdirectory.children);
 		var loucuraDirectory = new Directory("Loucura");
 		loucuraDirectory.files.push(new File("sozueira.txt"));
 		var loucuraDoidaDirectory = new Directory("LoucuraDoida");
+		
 		$scope.userdirectory.children.push(loucuraDirectory);
 		$scope.userdirectory.children.push(loucuraDoidaDirectory);
+		
 		$scope.userdirectory.files.push(new File("hello.txt"));
 		$scope.userdirectory.files.push(new File("hello2.txt"));
 		$scope.userdirectory.files.push(new File("hello3.txt"));
+		
 		$scope.allfiles = $scope.userdirectory.files.concat($scope.userdirectory.children);
 		loucuraDirectory.parent = $scope.userdirectory;
+		loucuraDoidaDirectory.parent = $scope.userdirectory;
 	}
 	
 	$scope.user = $rootScope.user;

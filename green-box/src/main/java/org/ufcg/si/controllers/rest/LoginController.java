@@ -42,7 +42,7 @@ public class LoginController {
 		System.out.println("Password of user = " + user.getPassword());
 		User foundUser = null;
 		
-		if (user.getEmail() != null) {
+		if (user.getEmail() != null && !user.getEmail().equals("")) {
 			foundUser = userService.findByEmail(user.getEmail());
 		} else {
 			foundUser = userService.findByUsername(user.getUsername());

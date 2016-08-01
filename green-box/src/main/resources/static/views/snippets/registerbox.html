@@ -1,4 +1,5 @@
-<div class="form-box" ng-controller="registerController">
+<div class="form-box" ng-controller="registrationController">
+	{{message}}
 	<div class="form-top">
 		<div class="form-top-right">
 			<h3>
@@ -8,7 +9,7 @@
 	</div>
 	<div class="form-bottom">
 
-		<form role="form" name="registrationForm" class="registration-form" ng-submit="registerUser()">
+		<form role="form" name="registrationForm" class="registration-form" ng-submit="doRegister()">
 			<div class="form-group">
 				<label class="sr-only" for="username">First name</label> <input
 					type="text" name="username" placeholder="Your name..."

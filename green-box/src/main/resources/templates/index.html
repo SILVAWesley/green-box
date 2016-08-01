@@ -1,20 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="appGreenbox">
+<html lang="en" ng-app="app">        
+    <!--/*/ <th:block th:include="commons/head :: head_fragment"></th:block> /*/-->
 
-    <head>
-    	<base href="/"/>
-    	
-        <meta charset="utf-8"></meta>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        
-        <title>Green Box</title>
-        
-        <!--/*/ <th:block th:include="imports :: imports_fragment"></th:block> /*/-->
-    </head>
-
-    <body ng-controller="mainController">
-    	<div ng-view="ng-view"> </div>    
+    <body>
+    	<div ui-view=""></div>
     </body>
 
 </html>

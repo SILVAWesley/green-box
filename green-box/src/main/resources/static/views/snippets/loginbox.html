@@ -7,10 +7,10 @@
 	</div>
 	
 	<div class="form-bottom">
-		<form role="form" name="loginForm" class="login-form" ng-submit="authorize()">
+		<form role="form" name="loginForm" class="login-form" ng-submit="doLogin()">
 			<div class="form-group">
-				<label class="sr-only" for="username">Username/Email</label> 
-				<input type="text" name="username" placeholder="Username or Email..." class="form-username form-control" id="form-username" ng-model="entrydata" required/>
+		 		<label class="sr-only" for="username">Username/Email</label> 
+				<input type="text" name="username" placeholder="Username or Email..." class="form-username form-control" id="form-username" ng-model="identification" required/>
 				<span ng-show="loginForm.username.$error.required && loginForm.username.$dirty">Username or Email required.</span>
 			</div>
 

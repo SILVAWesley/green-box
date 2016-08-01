@@ -1,20 +1,16 @@
-var appGreenbox = angular.module("appGreenbox", ['ngRoute']);
+var app = angular.module("app", ['ui.router']);
 
-appGreenbox.config(function($routeProvider, $locationProvider) {
-	$routeProvider
-	.when("/", {
-		templateUrl: "views/home.html",
-		controller: "homeController"
-	})
-	.when("/userdirectory", {
-		templateUrl: "views/account.html",
-		controller: "accountController"
-	})
-	.otherwise({redirectTo: "/"});
+app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
+	$urlRouterProvider.otherwise('/');
 	
-	$locationProvider.html5Mode(false);
-});
-
-appGreenbox.config(function($httpProvider) {
-	$httpProvider.interceptors.push('loginInterceptor');
-});
+	$stateProvider.state('home', {
+		url: '/',
+		templateUrl: 'views/home.html',
+		controller: 'homeController'
+	});
+	
+	$stateProvider.state('dashboard', {
+		url: '/dashboard',
+		templateUrl: 'views/account.html'
+	});
+}]);
