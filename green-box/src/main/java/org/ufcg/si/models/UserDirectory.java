@@ -25,8 +25,8 @@ public class UserDirectory {
 	@ElementCollection
 	private List<UserFile> files;
 
-	@ManyToOne
-	private UserDirectory parent;
+	//@ManyToOne
+	//private UserDirectory parent;
 
 	@OneToMany(/*mappedBy = "parent",*/ cascade = CascadeType.ALL)
 	private List<UserDirectory> children;
@@ -45,7 +45,7 @@ public class UserDirectory {
 	 */
 	public UserDirectory(String name, UserDirectory parent) {
 		this.name = name + "/";
-		this.parent = parent;
+		//this.parent = parent;
 		this.files = new ArrayList<>();
 		this.children = new ArrayList<>();
 	}
@@ -179,7 +179,7 @@ public class UserDirectory {
 		return name;
 	}
 
-	public UserDirectory getParent() {
+	/*public UserDirectory getParent() {
 		return parent;
-	}
+	}*/
 }
