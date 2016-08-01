@@ -1,5 +1,6 @@
 package org.ufcg.si.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,16 +16,17 @@ public class User {
 	@GeneratedValue
 	private Long id;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private UserDirectory userdirectory;
 
 	@Column(unique = true)
 	private String username;
+	@Column(unique = true)
 	private String email;
 	private String password;
 
-	public User() {
-
+	public User() throws Exception {
+		this.userdirectory = new UserDirectory("root");
 	}
 
 	/**
@@ -95,6 +97,10 @@ public class User {
 
 	public String getUsername() {
 		return username;
+	}
+	
+	public void setUsername(String newUsername) {
+		this.username = newUsername;
 	}
 
 	public String getEmail() {

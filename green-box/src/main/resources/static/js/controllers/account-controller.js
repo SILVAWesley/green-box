@@ -1,24 +1,39 @@
-appGreenbox.controller("accountController", function($scope, $http, $rootScope) {
-	function File(name, size, date) {
-		this.name = name;
-		this.size = size;
-		this.date = date;
+appGreenbox.controller("accountController", function($scope, $http, $rootScope, $location) {
+	function Directory(name) {
+		this.files = [];
+		this.parent = null;
 		this.children = [];
+		this.name = name;
 	}
 	
-	var folder1 = new File("loucura", "200kb", "08/11/1996");
-	folder1.children.push(new File("hello.txt", "200 kb", "08/11/1996"));
-	folder1.children.push(new File("hello2.txt", "200 kb", "sdadasds"));
+	function File(name) {
+		this.name = name;
+	}
 	
-	var wholeuserdirectory = [folder1];
-	$scope.userdirectory = wholeuserdirectory;
+	function basicDirectory() {
+		console.log($scope.userdirectory.children);
+		var loucuraDirectory = new Directory("Loucura");
+		loucuraDirectory.files.push(new File("sozueira.txt"));
+		var loucuraDoidaDirectory = new Directory("LoucuraDoida");
+		$scope.userdirectory.children.push(loucuraDirectory);
+		$scope.userdirectory.children.push(loucuraDoidaDirectory);
+		$scope.userdirectory.files.push(new File("hello.txt"));
+		$scope.userdirectory.files.push(new File("hello2.txt"));
+		$scope.userdirectory.files.push(new File("hello3.txt"));
+		$scope.allfiles = $scope.userdirectory.files.concat($scope.userdirectory.children);
+		loucuraDirectory.parent = $scope.userdirectory;
+	}
+	
 	$scope.user = $rootScope.user;
-	$scope.path= [$rootScope.user.username];
+	$scope.userdirectory = $scope.user.userDirectory;
+	$scope.paths = [];
+	basicDirectory();
 	
+	console.log($scope.userdirectory.children);
+	$rootScope.activetab = $location.path();
 	$scope.directoryclick = function(clickedDirectory) {
-		console.log($scope.userdirectory);
-		$scope.userdirectory = clickedDirectory.children;
-		$scope.path.push($scope.userdirectory.name);
-		console.log($scope.userdirectory);
+		$scope.allfiles = clickedDirectory.children.concat(clickedDirectory.files);
+		$scope.paths.push($scope.userdirectory.name);
+		$scope.userdirectory = clickedDirectory;
 	}
 })

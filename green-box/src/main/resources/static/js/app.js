@@ -2,7 +2,7 @@ var appGreenbox = angular.module("appGreenbox", ['ngRoute']);
 
 appGreenbox.config(function($routeProvider, $locationProvider) {
 	$routeProvider
-	.when("/home", {
+	.when("/", {
 		templateUrl: "views/home.html",
 		controller: "homeController"
 	})
@@ -10,9 +10,9 @@ appGreenbox.config(function($routeProvider, $locationProvider) {
 		templateUrl: "views/account.html",
 		controller: "accountController"
 	})
-	.otherwise({redirectTo: "/home"});
+	.otherwise({redirectTo: "/"});
 	
-	$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode(false);
 });
 
 appGreenbox.config(function($httpProvider) {

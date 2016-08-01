@@ -48,7 +48,8 @@ public class UserController {
 			User savedUser = userService.save(newUser);
 			return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
 		} catch(Exception e) {
-			throw new ServletException("User already inside the database.");
+			e.printStackTrace();
+			throw new ServletException("User already inside the database. " + e.getMessage());
 		}
 	}
 	

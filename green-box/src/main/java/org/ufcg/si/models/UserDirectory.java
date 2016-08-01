@@ -3,6 +3,7 @@ package org.ufcg.si.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class UserDirectory {
 	@ManyToOne
 	private UserDirectory parent;
 
-	@OneToMany(mappedBy = "parent")
+	@OneToMany(/*mappedBy = "parent",*/ cascade = CascadeType.ALL)
 	private List<UserDirectory> children;
 
 	private String name;
@@ -52,7 +53,6 @@ public class UserDirectory {
 	public UserDirectory() {
 		this.files = new ArrayList<>();
 		this.children = new ArrayList<>();
-
 	}
 
 	// This constructor should be used only when a new User is created
@@ -108,7 +108,7 @@ public class UserDirectory {
 
 		for (int i = 0; i < this.getFiles().size(); i++) {
 			if (this.getChildren().get(i).equals(dir)) {
-				throw new Exception();
+				throw new Exception("File already in folder.");
 			}
 		}
 		this.children.add(dir);

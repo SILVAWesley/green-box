@@ -46,7 +46,7 @@
 </nav>
 
 <!-- Top content -->
-<div class="top-content" ng-controller="accountController">
+<div class="top-content">
 	<div class="inner-bg">
 		<div class="container">
 			<div class="row">
@@ -73,8 +73,11 @@
 					<div class="form-top">
 						<div class="form-top-right">
 							<h3>
-								<i class="fa fa-archive fa-2x" aria-hidden="true"></i> {{path}}
-							</h3>
+								<i class="fa fa-archive fa-2x" aria-hidden="true"></i> 
+								<span ng-repeat="path in paths">
+									<a href="#">{{path}}</a> /
+								</span>
+								</h3>
 						</div>
 					</div>
 				</div>
@@ -82,10 +85,6 @@
 				<div class="form-bottom">
 					<form role="form" action="" method="post" class="login-form">
 						<div class="form-group">
-							<div>
-								<p>up
-								<p>
-							</div>
 							<table class="table table-striped">
 								<thead>
 									<tr>
@@ -95,12 +94,12 @@
 										<th>Created on</th>
 									</tr>
 								</thead>
-								<tbody ng-repeat="file in userdirectory">
+								<tbody ng-repeat="file in allfiles">
 									<tr>
 										<td><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i></td>
 										<td>{{file.name}}</td>
-										<td>{{file.size}}</td>
-										<td>{{file.date}}</td>
+										<td>{{file.name}}</td>
+										<td>{{file.name}}</td>
 										<td><input type="button" value="Enter" ng-click="directoryclick(file)"/></td>
 									</tr>
 								</tbody>

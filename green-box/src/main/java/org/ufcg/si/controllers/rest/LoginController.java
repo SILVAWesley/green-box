@@ -52,6 +52,6 @@ public class LoginController {
 		ExceptionHandler.checkMatchingPassword(user, foundUser);
 		
 		String token = tokenBuilder.build(foundUser);		
-		return new LoginResponse(token);
+		return new LoginResponse(token, foundUser);
 	}
 }

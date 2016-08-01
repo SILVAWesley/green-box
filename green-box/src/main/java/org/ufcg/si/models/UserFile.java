@@ -34,6 +34,10 @@ public class UserFile {
 		this.internFile = new File(name + extension);
 		writeInFile(content);
 	}
+	
+	public UserFile() {
+		
+	}
 
 	// This method receives a StringBuffer with the content to be written in the
 	// file
@@ -57,7 +61,7 @@ public class UserFile {
 		return internFile;
 	}
 
-	@Override
+	//@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof UserFile) {
 			UserFile temp = (UserFile) obj;
