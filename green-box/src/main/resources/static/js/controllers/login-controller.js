@@ -21,7 +21,7 @@ angular.module('app').controller("loginController", ['$scope', '$http', '$state'
 		.then(function(response) {
 			
 			sessionStorage.setItem("user-token", response.data.token);
-			sessionStorage.setItem("logged-user", response.data.user);
+			sessionStorage.setItem("logged-user", JSON.stringify(response.data.user));
 			$state.go('dashboard');
 			
 		}, function(response) {

@@ -5,12 +5,12 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
 	
 	$stateProvider.state('home', {
 		url: '/',
-		templateUrl: 'views/home.html',
-		controller: 'homeController'
+		templateUrl: 'views/home.html'
 	});
 	
 	$stateProvider.state('dashboard', {
 		url: '/dashboard',
-		templateUrl: 'views/account.html'
+		templateUrl: 'views/account.html',
+		controller: 'accountController'
 	});
 }]);
