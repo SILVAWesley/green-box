@@ -1,5 +1,5 @@
 angular.module('app').controller("accountController", function($scope, $http, $rootScope, $location) {
-	function Directory(name) {
+	/*function Directory(name) {
 		this.files = [];
 		this.children = [];
 		this.name = name;
@@ -31,18 +31,23 @@ angular.module('app').controller("accountController", function($scope, $http, $r
 		$scope.userdirectory.files.push(new File("hello3.txt"));
 		
 		$scope.allfiles = $scope.userdirectory.files.concat($scope.userdirectory.children);
-	}
+	}*/
 	
-	$scope.user = JSON.parse(sessionStorage.getItem("logged-user"));
-	console.log($scope.user);
-	$scope.userdirectory = $scope.user.userDirectory;
+	$scope.loggedUser = JSON.parse(sessionStorage.getItem("logged-user"));
+	$scope.userDirectory = $scope.loggedUser.userDirectory;
+	$scope.allfiles = $scope.userDirectory.files.concat($scope.userDirectory.children);
 	$scope.directories = [];
-	basicDirectory();
 	
+	//basicDirectory();
+	console.log($scope.loggedUser.userDirectory);
 	$scope.directoryclick = function(clickedDirectory) {
 		$scope.allfiles = clickedDirectory.children.concat(clickedDirectory.files);
-		$scope.directories.push($scope.userdirectory);
-		$scope.userdirectory = clickedDirectory;
+		$scope.directories.push($scope.userDirectory);
+		$scope.userDirectory = clickedDirectory;
+	}
+	
+	$scope.newfolder = function() {
+		
 	}
 	
 	$scope.pathclick = function(clickedPath) {
@@ -62,6 +67,6 @@ angular.module('app').controller("accountController", function($scope, $http, $r
 		}
 		
 		$scope.allfiles = clickedPath.children.concat(clickedPath.files);
-		$scope.userdirectory = clickedPath;
+		$scope.userDirectory = clickedPath;
 	}
 })
