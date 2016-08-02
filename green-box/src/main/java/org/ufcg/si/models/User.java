@@ -82,8 +82,7 @@ public class User {
 			User temp = (User) obj;
 
 			return this.getUsername().equals(temp.getUsername()) && this.getEmail().equals(temp.getEmail())
-					&& this.getPassword().equals(temp.getPassword())
-					&& this.getUserDirectory().equals(temp.getUserDirectory());
+					&& this.getPassword().equals(temp.getPassword());
 		} else {
 			return false;
 		}
