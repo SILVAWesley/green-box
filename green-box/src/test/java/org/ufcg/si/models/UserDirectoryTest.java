@@ -54,10 +54,10 @@ public class UserDirectoryTest {
 
 	@Test
 	public void testGetChildren() {
-		StringBuffer sb1 = new StringBuffer("I see fire");
-		StringBuffer sb2 = new StringBuffer("I see water");
-		StringBuffer sb3 = new StringBuffer("I see nigth");
-		StringBuffer sb4 = new StringBuffer("I see fate");
+		String sb1 = new String("I see fire");
+		String sb2 = new String("I see water");
+		String sb3 = new String("I see nigth");
+		String sb4 = new String("I see fate");
 		List<UserFile> list1 = new ArrayList<UserFile>();
 		List<UserFile> list2 = new ArrayList<UserFile>();
 		List<UserFile> list3 = new ArrayList<UserFile>();

@@ -6,10 +6,10 @@ import org.junit.Test;
 import org.ufcg.si.models.UserFile;
 
 public class UserFileTest {
-	StringBuffer sb1 = new StringBuffer("I see fire");
-	StringBuffer sb2 = new StringBuffer("I see water");
-	StringBuffer sb3 = new StringBuffer("I see nigth");
-	StringBuffer sb4 = new StringBuffer("I see fate");
+	String sb1 = new String("I see fire");
+	String sb2 = new String("I see water");
+	String sb3 = new String("I see nigth");
+	String sb4 = new String("I see fate");
 	private UserFile file1;
 	private UserFile file2;
 	private UserFile file3;
@@ -17,10 +17,10 @@ public class UserFileTest {
 
 	@Before
 	public void setup() throws Exception {
-		file1 = new UserFile("fire", ".txt", sb1);
-		file2 = new UserFile("water", ".txt", sb2);
-		file3 = new UserFile("nigth", ".txt", sb3);
-		file4 = new UserFile("fate", ".txt", sb4);
+		file1 = new UserFile("fire", "txt", sb1);
+		file2 = new UserFile("water", "txt", sb2);
+		file3 = new UserFile("nigth", "txt", sb3);
+		file4 = new UserFile("fate", "txt", sb4);
 
 	}
 	
@@ -63,13 +63,13 @@ public class UserFileTest {
 	public void testEquals() {
 		try {
 			Assert.assertFalse(file1.equals(file2));
-			Assert.assertEquals(file1, new UserFile("fire", ".txt", sb1));
-			Assert.assertEquals(file2, new UserFile("water", ".txt", sb2));
-			Assert.assertEquals(file3, new UserFile("nigth", ".txt", sb3));
-			Assert.assertEquals(file4, new UserFile("fate", ".txt", sb4));
-			Assert.assertFalse(file2.equals(new UserFile("nigth", ".txt", sb3)));
-			Assert.assertTrue(file3.equals(new UserFile("nigth", ".txt", sb2)));
-			Assert.assertTrue(file4.equals(new UserFile("fate", ".txt", sb2)));
+			Assert.assertEquals(file1, new UserFile("fire", "txt", sb1));
+			Assert.assertEquals(file2, new UserFile("water", "txt", sb2));
+			Assert.assertEquals(file3, new UserFile("nigth", "txt", sb3));
+			Assert.assertEquals(file4, new UserFile("fate", "txt", sb4));
+			Assert.assertFalse(file2.equals(new UserFile("nigth", "txt", sb3)));
+			Assert.assertTrue(file3.equals(new UserFile("nigth", "txt", sb2)));
+			Assert.assertTrue(file4.equals(new UserFile("fate", "txt", sb2)));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();

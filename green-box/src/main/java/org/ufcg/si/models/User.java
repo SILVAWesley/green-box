@@ -62,7 +62,7 @@ public class User {
 	 */
 	public void createFile(String filename, String  content) throws Exception {
 		// An enum should be created for file extension
-		userdirectory.createFile(filename, ".txt", content); 
+		userdirectory.createFile(filename, "txt", content); 
 	}
 
 	/**
