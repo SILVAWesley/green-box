@@ -32,21 +32,42 @@ angular.module('app').controller("accountController", function($scope, $http, $r
 		
 		$scope.allfiles = $scope.userdirectory.files.concat($scope.userdirectory.children);
 	}*/
+	function update() {
+		$scope.loggedUser = JSON.parse(sessionStorage.getItem("logged-user"));
+		$scope.userDirectory = $scope.loggedUser.userDirectory;
+		$scope.allfiles = $scope.userDirectory.files.concat($scope.userDirectory.children);
+	}
 	
-	$scope.loggedUser = JSON.parse(sessionStorage.getItem("logged-user"));
-	$scope.userDirectory = $scope.loggedUser.userDirectory;
-	$scope.allfiles = $scope.userDirectory.files.concat($scope.userDirectory.children);
+	update();
 	$scope.directories = [];
+	$scope.folderName = "";
 	
 	//basicDirectory();
 	console.log($scope.loggedUser.userDirectory);
 	$scope.directoryclick = function(clickedDirectory) {
+		
 		$scope.allfiles = clickedDirectory.children.concat(clickedDirectory.files);
 		$scope.directories.push($scope.userDirectory);
 		$scope.userDirectory = clickedDirectory;
+		
 	}
-	
-	$scope.newfolder = function() {
+
+	$scope.addFolder = function() {
+		console.log(sessionStorage.getItem('user-token') + " loucura");
+		$http({method: 'POST', url: '/server/userdirectory/newfolder/' + $scope.folderName, headers: {
+			'Authorization': 'Bearer ' + sessionStorage.getItem("user-token")}, data: JSON.parse(sessionStorage.getItem("logged-user"))
+		})
+		.then(function(response) {
+			
+			console.log(response);
+			sessionStorage.setItem("logged-user", JSON.stringify(response.data));
+			update();
+			
+		}, function(response) {
+			
+			window.alert(response.data.message);
+			
+		});
 		
 	}
 	
@@ -54,9 +75,8 @@ angular.module('app').controller("accountController", function($scope, $http, $r
 		for (i = 0; i < $scope.directories.length; i++) {
 			console.log($scope.directories[i]);
 			if ($scope.directories[i] == clickedPath) {
-				console.log("achou");
-				
 				$scope.newdirectories = [];
+				
 				for (j = 0; j < i; j++) {
 					$scope.newdirectories.push($scope.directories[j]);
 				}
@@ -68,5 +88,5 @@ angular.module('app').controller("accountController", function($scope, $http, $r
 		
 		$scope.allfiles = clickedPath.children.concat(clickedPath.files);
 		$scope.userDirectory = clickedPath;
-	}
+	};
 })
