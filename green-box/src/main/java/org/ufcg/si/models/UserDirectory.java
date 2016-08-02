@@ -84,7 +84,6 @@ public class UserDirectory {
 	 *             opened for any other reason
 	 */
 	public void createFile(String filename, String fileExtension, String content) throws Exception {
-
 		UserFile file = new UserFile(filename, fileExtension, content);
 
 		for (int i = 0; i < this.getFiles().size(); i++) {
