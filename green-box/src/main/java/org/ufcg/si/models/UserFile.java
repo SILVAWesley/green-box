@@ -13,6 +13,7 @@ import javax.persistence.Embeddable;
 public class UserFile {
 	private File internFile;
 	private String name;
+	private String content;
 
 	/**
 	 * This constructor creates a new UserFile and writes an initial content in
@@ -29,26 +30,25 @@ public class UserFile {
 	 *             file, does not exist but cannot be created, or cannot be
 	 *             opened for any other reason
 	 */
-	public UserFile(String name, String extension, StringBuffer content) throws Exception {
+	public UserFile(String name, String extension, String content) throws Exception {
 		this.name = name;
-		this.internFile = new File(name + extension);
+		this.content = content;
+		this.internFile = new File(name + "." + extension);
 		writeInFile(content);
 	}
 	
 	public UserFile() {
 		
 	}
-
-	// This method receives a StringBuffer with the content to be written in the
-	// file
-	private void writeInFile(StringBuffer fileContent) throws Exception {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(internFile)); // This
-																				// throws
-																				// an
-																				// exception.
-		writer.write(fileContent.toString());
-		writer.close();
-	}
+	
+	private void writeInFile(String fileContent) throws Exception {
+	 	BufferedWriter writer = new BufferedWriter(new FileWriter(internFile)); // This
+	 	// throws
+	 	// an
+	 	// exception.
+	 	writer.write(fileContent.toString());
+	 	writer.close();
+	 }
 
 	// GETTERS
 
@@ -59,6 +59,10 @@ public class UserFile {
 	// We should check later if this get should exist
 	public File getInternFile() {
 		return internFile;
+	}
+	
+	public String getContent(){
+		return content;
 	}
 
 	//@Override

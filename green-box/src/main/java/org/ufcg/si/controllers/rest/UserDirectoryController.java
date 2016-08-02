@@ -41,7 +41,7 @@ public class UserDirectoryController {
 				   	consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> addFile(@RequestBody User user, @PathVariable String filename) throws Exception {
 		User newUser = userService.findByUsername(user.getUsername());
-		newUser.getUserDirectory().createFile(filename, "txt", new StringBuffer("Curau Mago!"));
+		newUser.getUserDirectory().createFile(filename, "txt", new String ("Curau Mago!"));
 		User updateUser = userService.update(newUser);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}

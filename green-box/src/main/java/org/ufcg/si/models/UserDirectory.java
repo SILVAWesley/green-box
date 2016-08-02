@@ -83,9 +83,9 @@ public class UserDirectory {
 	 *             file, does not exist but cannot be created, or cannot be
 	 *             opened for any other reason
 	 */
-	public void createFile(String filename, String fileExtension, StringBuffer fileContent) throws Exception {
+	public void createFile(String filename, String fileExtension, String content) throws Exception {
 
-		UserFile file = new UserFile(filename, fileExtension, fileContent);
+		UserFile file = new UserFile(filename, fileExtension, content);
 
 		for (int i = 0; i < this.getFiles().size(); i++) {
 			if (this.getFiles().get(i).equals(file)) {

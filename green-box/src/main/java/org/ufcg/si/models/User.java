@@ -60,9 +60,9 @@ public class User {
 	 *             file, does not exist but cannot be created, or cannot be
 	 *             opened for any other reason
 	 */
-	public void createFile(String filename, StringBuffer fileContent) throws Exception {
+	public void createFile(String filename, String  content) throws Exception {
 		// An enum should be created for file extension
-		userdirectory.createFile(filename, ".txt", fileContent); 
+		userdirectory.createFile(filename, ".txt", content); 
 	}
 
 	/**
