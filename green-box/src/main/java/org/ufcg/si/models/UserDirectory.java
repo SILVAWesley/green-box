@@ -85,7 +85,7 @@ public class UserDirectory {
 	 */
 	public void createFile(String filename, String fileExtension, StringBuffer fileContent) throws Exception {
 
-		UserFile file = new UserFile(this.name + "/" + filename, fileExtension, fileContent);
+		UserFile file = new UserFile(filename, fileExtension, fileContent);
 
 		for (int i = 0; i < this.getFiles().size(); i++) {
 			if (this.getFiles().get(i).equals(file)) {
@@ -104,7 +104,7 @@ public class UserDirectory {
 	 * @throws Exception
 	 */
 	public void createDirectory(String directoryName) throws Exception {
-		UserDirectory dir = new UserDirectory(this.name + "/" + directoryName, this);
+		UserDirectory dir = new UserDirectory(this.name + directoryName, this);
 
 		for (int i = 0; i < this.getFiles().size(); i++) {
 			if (this.getChildren().get(i).equals(dir)) {
