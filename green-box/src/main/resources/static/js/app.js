@@ -1,4 +1,4 @@
-angular.module('app', ['ui.router']);
+angular.module('app', ['ui.router', 'ngStorage']);
 
 angular.module('app').config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
 	$urlRouterProvider.otherwise('/');

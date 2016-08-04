@@ -1,8 +1,8 @@
-angular.module('app').factory("tokenInterceptor",[$q, $location, function($q, $location) {
+angular.module('app').factory('tokenInterceptor',['$injector', '$localStorage', function($injector, $localStorage) {
 	
 	return {
 		'request': function(config) {
-			config.headers.Authorization = 'Bearer ' + sessionStorage.getItem("user-token");
+			config.headers.Authorization = 'Bearer ' + $localStorage.token;
 			return config;
 		},
 		
