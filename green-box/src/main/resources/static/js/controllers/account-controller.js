@@ -1,5 +1,6 @@
 angular.module('app').controller("accountController", function($scope, $http, $rootScope, $location) {
-	/*function Directory(name) {
+	/*
+	function Directory(name) {
 		this.files = [];
 		this.children = [];
 		this.name = name;
@@ -31,7 +32,8 @@ angular.module('app').controller("accountController", function($scope, $http, $r
 		$scope.userdirectory.files.push(new File("hello3.txt"));
 		
 		$scope.allfiles = $scope.userdirectory.files.concat($scope.userdirectory.children);
-	}*/
+	}
+	*/
 	function update() {
 		$scope.loggedUser = JSON.parse(sessionStorage.getItem("logged-user"));
 		$scope.userDirectory = $scope.loggedUser.userDirectory;
