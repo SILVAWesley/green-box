@@ -150,10 +150,7 @@ public class UserDirectory {
 	 * @throws Exception
 	 */
 	public UserDirectory getChildDirectory(String dirName) throws Exception{
-		System.out.println("GetChild");
 		for(UserDirectory dir: this.children){
-			System.out.println("1 " + dir.getName());
-			System.out.println("2 " + dirName);
 			if(dir.getName().equals(dirName)){
 				return dir;
 			}
