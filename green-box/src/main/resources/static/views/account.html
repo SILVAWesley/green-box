@@ -107,10 +107,16 @@
 				<div class="col-sm-6"></div>
 				<div class="col-sm-6">
 					<button type="submit" class="btn" ng-click="newFile()">
-						<strong>Create File</strong>
+						<strong>
+							<i class="fa fa-file-text-o" aria-hidden="true" fa-3x></i>
+							Create File
+						</strong>
 					</button>
-					<button type="submit" class="btn bnt" ng-click="newFolder()">
-						<strong>Create Folder</strong>
+					<button type="submit" class="btn bnt" ng-click="addFolder()">
+						<strong>
+						<i class="fa fa-folder" aria-hidden="true fa-3x"></i> 
+						Create Folder
+						</strong>
 					</button>
 					<input type="text" placeholder="folder name" ng-model="newFolderName"/>
 				</div>
