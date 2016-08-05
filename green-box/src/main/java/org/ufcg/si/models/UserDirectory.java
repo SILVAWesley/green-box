@@ -44,7 +44,7 @@ public class UserDirectory {
 	 *            The directory's parent directory
 	 */
 	public UserDirectory(String name, UserDirectory parent) {
-		this.name = name + "/";
+		this.name = name;
 		//this.parent = parent;
 		this.files = new ArrayList<>();
 		this.children = new ArrayList<>();
@@ -88,12 +88,12 @@ public class UserDirectory {
 		if(files.contains(file)) throw new Exception("File already in folder.");
 		files.add(file);
 	}
-	
+	/*
 	public void createFile(String filename, String fileExtension, String fileContent, String filePath) throws Exception{
-		String[] pathFolders = filePath.split("/");
+		String[] pathFolders = filePath.split("+");
 		UserDirectory lastDir = getLastDirectory(pathFolders);
 		lastDir.createFile(filename, fileExtension, fileContent);
-	}
+	}*/
 
 
 	/**
@@ -103,37 +103,28 @@ public class UserDirectory {
 	 *            The new Directory's name
 	 * @throws Exception
 	 */
+	
 	public void createDirectory(String directoryName) throws Exception {
-		UserDirectory dir = new UserDirectory(this.name + directoryName, this);
+		UserDirectory dir = new UserDirectory(directoryName, this);
 		if(children.contains(dir)) throw new Exception("Directory already in folder.");
 		this.children.add(dir);
+		System.out.println(this.name);
+		for(int i = 0; i < children.size(); i++){
+			System.out.println(children.get(i).getName());
+		}
 	}
 	
 	public void createDirectory(String directoryName, String directoryPath) throws Exception{
-		String[] pathFolders = directoryPath.split("/");
-		UserDirectory lastDir = getLastDirectory(pathFolders);
-		lastDir.createDirectory(directoryName);
+		String[] pathFolders = directoryPath.split("-");
+		createDirectory(pathFolders, 0, directoryName);
 	}
 	
-	
-	
-	private UserDirectory getLastDirectory(String[] pathFolders) throws Exception {
-		String currentName = "";
-		UserDirectory currentDir = null;
-		
-		boolean isUpdated = false;
-		for(int i = 0; i < pathFolders.length; i++){
-			currentName += pathFolders[i] + "/";
-			if(isUpdated){
-				currentDir = currentDir.getChildDirectory(currentName);
-			} else {
-				if(currentName.equals(this.name)){
-					currentDir = this;
-					isUpdated = true;
-				}
-			}
+	private void createDirectory(String[] pathFolders, int actualIndex, String directoryName) throws Exception {
+		if(actualIndex == pathFolders.length - 1){
+			getChildDirectory(pathFolders[actualIndex]).createDirectory(directoryName);
+		}else{ 
+			getChildDirectory(pathFolders[actualIndex]).createDirectory(pathFolders, actualIndex++, directoryName);
 		}
-		return currentDir;
 	}
 	
 	public UserDirectory getChildDirectory(String dirName) throws Exception{
