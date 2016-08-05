@@ -83,19 +83,25 @@ public class UserDirectory {
 	 *             file, does not exist but cannot be created, or cannot be
 	 *             opened for any other reason
 	 */
-	public void createFile(String filename, String fileExtension, String fileContent) throws Exception {
-		UserFile file = new UserFile(filename, fileExtension, fileContent);
+	public void createFile(String fileName, String fileExtension, String fileContent) throws Exception {
+		UserFile file = new UserFile(fileName, fileExtension, fileContent);
 		if(files.contains(file)) throw new Exception("File already in folder.");
 		files.add(file);
 	}
-	/*
-	public void createFile(String filename, String fileExtension, String fileContent, String filePath) throws Exception{
-		String[] pathFolders = filePath.split("+");
-		UserDirectory lastDir = getLastDirectory(pathFolders);
-		lastDir.createFile(filename, fileExtension, fileContent);
-	}*/
-
-
+	
+	public void createFile(String fileName, String fileExtension, String fileContent, String filePath) throws Exception{
+		String[] pathFolders = filePath.split("-");
+		createFile(pathFolders, 0, fileName, fileExtension, fileContent);
+	}
+	
+	private void createFile(String[] pathFolders, int actualIndex, String fileName, String fileExtension, String fileContent) throws Exception {
+		if(actualIndex == pathFolders.length - 1){
+			getChildDirectory(pathFolders[actualIndex]).createFile(fileName, fileExtension, fileContent);
+		}else{ 
+			getChildDirectory(pathFolders[actualIndex]).createFile(pathFolders, ++actualIndex, fileName, fileExtension, fileContent);
+		}
+	}
+	
 	/**
 	 * Creates a new UserDirectory, with this one as a Parent.
 	 * 
@@ -108,26 +114,43 @@ public class UserDirectory {
 		UserDirectory dir = new UserDirectory(directoryName, this);
 		if(children.contains(dir)) throw new Exception("Directory already in folder.");
 		this.children.add(dir);
-		System.out.println("Arquivo atual " + this.name);
-		for(int i = 0; i < children.size(); i++){
-			System.out.println("Filho " + children.get(i).getName());
-		}
 	}
 	
+	/**
+	 * 
+	 * @param directoryName
+	 * @param directoryPath
+	 * @throws Exception
+	 */
 	public void createDirectory(String directoryName, String directoryPath) throws Exception{
 		String[] pathFolders = directoryPath.split("-");
 		createDirectory(pathFolders, 0, directoryName);
 	}
 	
+	/**
+	 * 
+	 * @param pathFolders
+	 * @param actualIndex
+	 * @param directoryName
+	 * @throws Exception
+	 */
+	
 	private void createDirectory(String[] pathFolders, int actualIndex, String directoryName) throws Exception {
 		if(actualIndex == pathFolders.length - 1){
 			getChildDirectory(pathFolders[actualIndex]).createDirectory(directoryName);
 		}else{ 
-			getChildDirectory(pathFolders[actualIndex]).createDirectory(pathFolders, actualIndex++, directoryName);
+			getChildDirectory(pathFolders[actualIndex]).createDirectory(pathFolders, ++actualIndex, directoryName);
 		}
 	}
 	
+	/**
+	 * 
+	 * @param dirName
+	 * @return
+	 * @throws Exception
+	 */
 	public UserDirectory getChildDirectory(String dirName) throws Exception{
+		System.out.println("GetChild");
 		for(UserDirectory dir: this.children){
 			System.out.println("1 " + dir.getName());
 			System.out.println("2 " + dirName);
@@ -138,6 +161,9 @@ public class UserDirectory {
 		throw new Exception("Directory not found");
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof UserDirectory) {
