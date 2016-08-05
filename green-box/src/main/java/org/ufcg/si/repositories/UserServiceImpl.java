@@ -8,7 +8,7 @@ import org.ufcg.si.models.User;
  * This is a façade that is used in out Controller. It also contains the User Repository
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 	
 	private UserRepository userRepository;
 	

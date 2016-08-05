@@ -18,14 +18,25 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
         
         <!-- Optional icons -->
-        <link rel="shortcut icon" href="../static/img/icons/favicon.ico"></link>
-        <link rel="stylesheet" href="../static/css/font-awesome.min.css"></link>
-        
+        <link rel="shortcut icon" href="../img/icons/favicon.ico"></link>
+                
         <!-- Optional fonts -->
 		<link href='https://fonts.googleapis.com/css?family=Pattaya' rel='stylesheet' type='text/css'></link>
 		   
 		<!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+        <!-- include libraries(jQuery, bootstrap) -->
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+		<!-- include summernote css/js-->
+		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>	
+
+		<script src="../js/controllers/file-controller.js"></script>
+
     </head>
 
     <body>    
@@ -104,30 +115,17 @@
                         	
                         	<div class="form-bottom">	                            
 				                    <form role="form" action="" method="post" class="edit-form">
-				                    	<div class="form-group">
-				                    		<div class="note-editing-area">
-				                    			<div class="note-handle">
-				                    				<div class="note-control-selection" style="display: none;">
-				                    					<div class="note-control-selection-bg"></div>
-				                    					<div class="note-control-holder note-control-nw"></div>
-				                    					<div class="note-control-holder note-control-ne"></div>
-				                    					<div class="note-control-holder note-control-sw"></div>
-				                    					<div class="note-control-sizing note-control-se"></div>
-				                    					<div class="note-control-selection-info"></div>
-				                    				</div>
-				                    			</div>
-				                    			<textarea class="note-codable"></textarea>
-				                    			
-				                    		</div>
-				                        </div>			                        			                        
+				            			<div id="summernote"></div>          	                        			                        
 				                    </form>				                    
 			                 </div>
 			                 <br/>
-			                 <div class="col-sm-10">
-			                 </div>
-			                 <div class="col-sm-2">
+			                 
+			                 <div class="col-sm-8"></div>
+			                 <div class="col-sm-4">
 			                 	 <button type="submit" class="btn"><strong>
 			                 	 	<i class="fa fa-cloud-upload" aria-hidden="true"></i> Save</strong></button>
+			                 	 <button type="submit" class="btn bnt"><strong>Cancel</strong></button>
+			                 	 	
 			                 </div>
                         </div>
                     </div>                  
