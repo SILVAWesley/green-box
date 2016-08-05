@@ -2,7 +2,9 @@ package org.ufcg.si.models;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 import javax.persistence.Embeddable;
 
@@ -13,7 +15,6 @@ import javax.persistence.Embeddable;
 public class UserFile {
 	private File internFile;
 	private String name;
-	private String content;
 
 	/**
 	 * This constructor creates a new UserFile and writes an initial content in
@@ -23,8 +24,6 @@ public class UserFile {
 	 *            The File's name
 	 * @param extension
 	 *            The File's extension
-	 * @param content
-	 *            The File's initial content
 	 * @throws Exception
 	 *             if the file exists but is a directory rather than a regular
 	 *             file, does not exist but cannot be created, or cannot be
@@ -32,48 +31,63 @@ public class UserFile {
 	 */
 	public UserFile(String name, String extension, String content) throws Exception {
 		this.name = name;
-		this.content = content;
 		this.internFile = new File(name + "." + extension);
 		writeInFile(content);
 	}
 	
+	/**
+	 * Default constructor. Should only be used by the Controller
+	 */
 	public UserFile() {
 		
 	}
 	
 	private void writeInFile(String fileContent) throws Exception {
-	 	BufferedWriter writer = new BufferedWriter(new FileWriter(internFile)); // This
-	 	// throws
-	 	// an
-	 	// exception.
+		//This throws an exception
+	 	BufferedWriter writer = new BufferedWriter(new FileWriter(internFile)); 
 	 	writer.write(fileContent.toString());
 	 	writer.close();
 	 }
-
+	
+	/**
+	 * Reads what's inside the file
+	 * @return the file's content
+	 * @throws FileNotFoundException if the internFile doesnt exist
+	 */
+	public String readFileContent() throws FileNotFoundException{
+		//This throws an exception
+		Scanner scanner = new Scanner(internFile);
+		StringBuffer content = new StringBuffer();
+		while(scanner.hasNextLine()){
+			content.append(scanner.nextLine() + "\n");
+		}
+		
+		scanner.close();
+		return content.toString();
+	}
+	
 	// GETTERS
-
+	
+	/**
+	 * The File's name getter
+	 * @return The file's name
+	 */
 	public String getName() {
 		return name;
 	}
 
-	// We should check later if this get should exist
-	public File getInternFile() {
-		return internFile;
-	}
-	
-	public String getContent(){
-		return content;
-	}
-
-	//@Override
+	/**
+	 * Two UserFiles are equals if they have the same name.
+	 * @param obj the object to be compared
+	 * @return if the obj is equals to this object
+	 */
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof UserFile) {
 			UserFile temp = (UserFile) obj;
-			return this.getInternFile().equals(temp.getInternFile()) && this.getName().equals(temp.getName());
-
+			return this.name.equals(temp.getName());
 		} else {
 			return false;
 		}
 	}
-
 }

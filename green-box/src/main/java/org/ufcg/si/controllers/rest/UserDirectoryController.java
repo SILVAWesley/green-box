@@ -35,6 +35,17 @@ public class UserDirectoryController {
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/newfolder/{dirpath}/{dirname}", 
+				method = RequestMethod.POST,
+				produces = MediaType.APPLICATION_JSON_VALUE,
+				consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> addDirectory(@RequestBody User user, @PathVariable String dirname, @PathVariable String dirpath) throws Exception {
+		User newUser = userService.findByUsername(user.getUsername());
+		newUser.getUserDirectory().createDirectory(dirname,dirpath);
+		User updateUser = userService.update(newUser);
+		return new ResponseEntity<>(updateUser, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/newfile/{filename}",
 				   	method = RequestMethod.POST,
 				   	produces = MediaType.APPLICATION_JSON_VALUE,
@@ -42,6 +53,17 @@ public class UserDirectoryController {
 	public ResponseEntity<User> addFile(@RequestBody User user, @PathVariable String filename) throws Exception {
 		User newUser = userService.findByUsername(user.getUsername());
 		newUser.getUserDirectory().createFile(filename, "txt", new String ("Curau Mago!"));
+		User updateUser = userService.update(newUser);
+		return new ResponseEntity<>(updateUser, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/newfile/{filepath}/{filename}",
+		   	method = RequestMethod.POST,
+		   	produces = MediaType.APPLICATION_JSON_VALUE,
+		   	consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> addFile(@RequestBody User user, @PathVariable String filename, @PathVariable String filepath) throws Exception {
+		User newUser = userService.findByUsername(user.getUsername());
+		newUser.getUserDirectory().createFile(filename, "txt", new String ("Curau Mago!"), filepath);
 		User updateUser = userService.update(newUser);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}

@@ -75,7 +75,15 @@ public class User {
 	public void createDirectory(String directoryName) throws Exception {
 		userdirectory.createDirectory(directoryName);
 	}
-
+	
+	
+	/**
+	 * Receives an object and checks if it's equal to the User.
+	 * Users are considered equals if they have the same username, email and password.
+	 * @param obj
+	 * 		The object to be compared with the User.
+	 * @return if the obj is equals to this object
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof User) {
@@ -88,28 +96,55 @@ public class User {
 		}
 
 	}
-	// GETTERS
-
+	
+	// GETTERS AND SETTERS
+	
+	/**
+	 * The username getter. The username is used for authentication in the Green-Box application
+	 * @return the User's username
+	 */
 	public String getUsername() {
 		return username;
 	}
 	
+	
+	/**
+	 * Updates the User's username
+	 * @param newUsername
+	 * 		New username
+	 */
 	public void setUsername(String newUsername) {
 		this.username = newUsername;
 	}
-
+	
+	/**
+	 * The email getter. The email is used for authentication in the Green-Box application
+	 * @return the User's email
+	 */
 	public String getEmail() {
 		return email;
 	}
-
+	
+	/**
+	 * The password getter. The password is used for authentication on the Green-Box application
+	 * @return the User's password
+	 */
 	public String getPassword() {
 		return password;
 	}
-
+	
+	/**
+	 * The userDirectory getter. The userDirectory is the user's most external directory.
+	 * @return the User's most external UserDirectory
+	 */
 	public UserDirectory getUserDirectory() {
 		return userdirectory;
 	}
-
+	
+	/**
+	 * The ID getter. The ID is used when saving a User in the database and for unique identification
+	 * @return the User's ID
+	 */
 	public Long getId() {
 		return id;
 	}
