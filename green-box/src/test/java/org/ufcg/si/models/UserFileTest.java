@@ -88,16 +88,4 @@ public class UserFileTest {
 		Assert.assertFalse(file4.getName().equals("someone"));
 	}
 
-	@Test
-	public void testGetInternFile() {
-		Assert.assertEquals(file1.getInternFile().getPath(), "fire.txt");
-		Assert.assertEquals(file2.getInternFile().getPath(), "water.txt");
-		Assert.assertEquals(file3.getInternFile().getPath(), "nigth.txt");
-		Assert.assertEquals(file4.getInternFile().getPath(), "fate.txt");
-		Assert.assertFalse(file1.getInternFile().getPath().equals(file2.getInternFile().getPath()));
-		Assert.assertFalse(file1.getInternFile().getPath().equals(file3.getInternFile().getPath()));
-		Assert.assertFalse(file1.getInternFile().getPath().equals(file4.getInternFile().getPath()));
-		Assert.assertFalse(file3.getInternFile().getPath().equals(file4.getInternFile().getPath()));
-		Assert.assertFalse(file2.getInternFile().getPath().equals(file1.getInternFile().getPath()));
-	}
 }
