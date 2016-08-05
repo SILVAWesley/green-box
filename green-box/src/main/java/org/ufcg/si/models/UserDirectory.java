@@ -108,9 +108,9 @@ public class UserDirectory {
 		UserDirectory dir = new UserDirectory(directoryName, this);
 		if(children.contains(dir)) throw new Exception("Directory already in folder.");
 		this.children.add(dir);
-		System.out.println(this.name);
+		System.out.println("Arquivo atual " + this.name);
 		for(int i = 0; i < children.size(); i++){
-			System.out.println(children.get(i).getName());
+			System.out.println("Filho " + children.get(i).getName());
 		}
 	}
 	
@@ -129,11 +129,12 @@ public class UserDirectory {
 	
 	public UserDirectory getChildDirectory(String dirName) throws Exception{
 		for(UserDirectory dir: this.children){
+			System.out.println("1 " + dir.getName());
+			System.out.println("2 " + dirName);
 			if(dir.getName().equals(dirName)){
 				return dir;
 			}
 		}
-		
 		throw new Exception("Directory not found");
 	}
 	
