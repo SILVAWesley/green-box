@@ -1,4 +1,4 @@
-angular.module('app').controller("accountController", function($scope, dashboardService) {
+angular.module('app').controller("accountController", function($scope, dashboardService, $state) {
 	$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
 	$scope.foldersPath = dashboardService.foldersPath;
 	$scope.newFolderName = "";
@@ -18,6 +18,10 @@ angular.module('app').controller("accountController", function($scope, dashboard
 	$scope.folderClick = function(folder) {
 		dashboardService.goFoward(folder);
 		$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
+	}
+	
+	$scope.newFile = function() {
+		$state.go("file");
 	}
 	
 });
