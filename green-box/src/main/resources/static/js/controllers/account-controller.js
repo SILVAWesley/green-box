@@ -1,4 +1,4 @@
-angular.module('app').controller("accountController", function($scope, $http, $rootScope, $location) {
+angular.module('app').controller("accountController", function($scope, $http, $rootScope, $location, $state) {
 	/*function Directory(name) {
 		this.files = [];
 		this.children = [];
@@ -68,6 +68,11 @@ angular.module('app').controller("accountController", function($scope, $http, $r
 			window.alert(response.data.message);
 			
 		});
+		
+	}
+	$scope.newFile = function() {
+		$state.go("file");
+		
 		
 	}
 	

@@ -13,4 +13,9 @@ app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider,
 		templateUrl: 'views/account.html',
 		controller: 'accountController'
 	});
+	
+	$stateProvider.state('file', {
+		url: '/newFile',
+		templateUrl: 'views/file.html'
+	});
 }]);
