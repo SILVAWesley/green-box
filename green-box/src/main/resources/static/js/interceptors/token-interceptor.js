@@ -1,15 +1,15 @@
-angular.module('app').factory('tokenInterceptor',['$injector', '$localStorage', function($injector, $localStorage) {
+angular.module('app').factory('tokenInterceptor',['$injector', '$localStorage', '$q', function($injector, $localStorage, $q) {
 	
 	return {
 		'request': function(config) {
-			config.headers.Authorization = 'Bearer ' + $localStorage.token;
+			config.headers.Authorization = 'Bearer ' + $localStorage.session.token;
 			return config;
 		},
 		
 		'responseError': function(rejection) {
-			if (response.status === 401 || response.status === 403) {
+			/*(if (rejection.status === 401 || rejection.status === 403) {
 				$state.go('home');
-			}
+			}*/
 			
 			return $q.reject(rejection);
 		}

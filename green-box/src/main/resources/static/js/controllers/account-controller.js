@@ -1,5 +1,28 @@
-angular.module('app').controller("accountController", function($scope, $http, $rootScope, $location, $state) {
-	function update() {
+angular.module('app').controller("accountController", function($scope, dashboardService) {
+	$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
+	$scope.foldersPath = dashboardService.foldersPath;
+	$scope.newFolderName = "";
+	
+	$scope.newFolder = function() {
+		dashboardService.newFolder($scope.newFolderName, function(result) {
+			if (result == true) {
+				$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
+				console.log("executou");
+			}
+		});
+		
+		console.log($scope.filesNFoldersToShow);
+	};
+	
+	
+	$scope.folderClick = function(folder) {
+		dashboardService.goFoward(folder);
+		$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
+	}
+	
+});
+
+	/*function update() {
 		$scope.loggedUser = JSON.parse(sessionStorage.getItem("logged-user"));
 		$scope.userDirectory = $scope.loggedUser.userDirectory;
 		$scope.allfiles = $scope.userDirectory.files.concat($scope.userDirectory.children);
@@ -7,7 +30,7 @@ angular.module('app').controller("accountController", function($scope, $http, $r
 	
 	update();
 
-	$scope.directoryclick = function(clickedDirectory) {
+	/*$scope.directoryclick = function(clickedDirectory) {
 		
 		$scope.allfiles = clickedDirectory.children.concat(clickedDirectory.files);
 		$scope.directories.push($scope.userDirectory);

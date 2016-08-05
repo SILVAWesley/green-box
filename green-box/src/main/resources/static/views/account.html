@@ -74,8 +74,8 @@
 						<div class="form-top-right">
 							<h3>
 								<i class="fa fa-archive fa-2x" aria-hidden="true"></i> 
-								<span ng-repeat="directory in directories track by $index">
-									<a ng-click="pathclick(directory)">{{directory.name}}</a> /
+								<span ng-repeat="folder in foldersPath track by $index">
+									<a ng-click="pathclick(directory)">{{folder.name}}</a> /
 								</span>
 								</h3>
 						</div>
@@ -91,10 +91,10 @@
 										<th>Name</th>
 									</tr>
 								</thead>
-								<tbody ng-repeat="file in allfiles">
+								<tbody ng-repeat="item in filesNFoldersToShow">
 									<tr>
-										<td>{{file.name}}</td>
-										<td><input type="button" value="Enter" ng-click="directoryclick(file)"/></td>
+										<td>{{item.name}}</td>
+										<td><input type="button" value="Enter" ng-click="folderClick(item)"/></td>
 									</tr>
 								</tbody>
 							</table>
@@ -109,10 +109,10 @@
 					<button type="submit" class="btn" ng-click="newFile()">
 						<strong>Create File</strong>
 					</button>
-					<button type="submit" class="btn bnt" ng-click="addFolder()">
+					<button type="submit" class="btn bnt" ng-click="newFolder()">
 						<strong>Create Folder</strong>
 					</button>
-					<input type="text" placeholder="folder name" ng-model="folderName"/>
+					<input type="text" placeholder="folder name" ng-model="newFolderName"/>
 				</div>
 			</div>
 		</div>
