@@ -12,7 +12,7 @@ function($scope, $http, $state, authService) {
 	$scope.login = function() {
 		authService.login($scope.entrydata, $scope.password, function(result) {
 			if (result) {
-				$state.go('dashboard');
+				$state.go('dashboard.directories');
 			} else {
 				window.alert("Login not successful");
 			}	

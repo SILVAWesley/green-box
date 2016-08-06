@@ -1,30 +1,139 @@
-angular.module('app').controller("accountController", function($scope, dashboardService, $state) {
-	$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
-	$scope.foldersPath = dashboardService.foldersPath;
-	$scope.newFolderName = "";
+angular.module('app').controller("accountController", function($scope, $state, $localStorage, $http, $rootScope) {
 	
-	$scope.newFolder = function() {
-		dashboardService.newFolder($scope.newFolderName, function(result) {
-			if (result == true) {
-				$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
-				console.log("executou");
-			}
-		});
-		
-		console.log($scope.filesNFoldersToShow);
+	$scope.user = $localStorage.session.user;
+	$scope.rootDirectory = $scope.user.userDirectory;
+	$scope.currentDirectory = $scope.rootDirectory;
+	$scope.foldersPath = [$scope.rootDirectory];
+	$localStorage.path = $scope.foldersPath;
+	
+	$scope.newFolderName = "";
+	$scope.newFileName = "";
+	
+	$scope.options = {
+		height: 150,
+		toolbar: [
+		      ['style', ['bold', 'italic', 'underline', 'clear']],
+	          ['fontsize', ['fontsize']],
+	          ['color', ['color']],
+	          ['para', ['ul', 'ol', 'paragraph']],
+	          ['height', ['height']]
+		]
 	};
 	
 	
-	$scope.folderClick = function(folder) {
-		dashboardService.goFoward(folder);
-		$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
+	$scope.getFilesNFolders = function() {
+		return $scope.getFolders().concat($scope.getFiles());
+	}
+	
+	$scope.getFiles = function() {
+		return $scope.currentDirectory.files;	
+	}	
+
+	$scope.getFolders = function() {
+		return $scope.currentDirectory.children;
 	}
 	
 	$scope.newFile = function() {
-		$state.go("file");
+		$state.go('dashboard.file');
+		console.log($scope.foldersPath.length + ' : ENTROU EM NEWFILE');
 	}
 	
+	$scope.directoriesView = function() {
+		$state.go('dashboard.directories');
+		
+	}
+
+	$scope.newFolder = function() {
+		path = "";
+		console.log($scope.foldersPath);
+		for (i = 1; i < $scope.foldersPath.length - 1; i++) {
+			path += $scope.foldersPath[i].name + "-";
+		}
+		 
+		if ($scope.foldersPath.length > 1) {
+			path += $scope.foldersPath[$scope.foldersPath.length - 1].name + '/';
+		}
+		
+		console.log(path + " : esse é o caminho");
+		$http.post('/server/userdirectory/newfolder/' + path + $scope.newFolderName, $scope.user)
+			.then(function(response) {
+				
+				$localStorage.session.user = response.data;
+				$rootScope.update();
+				
+			}, function(response) {
+				
+				window.alert(response.data.message);
+				
+		});
+	} 
+
+	$scope.goFoward = function(folder) {
+		$scope.currentDirectory = folder;
+		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
+		$scope.foldersPath.push(folder);
+		$localStorage.path = $scope.foldersPath;
+		console.log($scope.foldersPath.length + " : FOWARD.");
+	}
+	
+	$scope.goBack = function(folder) {
+		for (i = 0; i < $scope.foldersPath.length; i++) {
+			if ($scope.foldersPath[i] == folder) {
+				$scope.newdirectories = [];
+				
+				for (j = 0; j <= i; j++) {
+					$scope.newdirectories.push($scope.foldersPath[j]);
+				}
+				
+				$scope.foldersPath = $scope.newdirectories;
+				$localStorage.path = $scope.foldersPath;
+				break;
+			}
+		}
+		
+		$scope.currentDirectory = folder;
+		$scope.filesNFoldersToShow = $scope.getFilesNFolders(); 
+	}
+	
+	
+	$scope.filesNFoldersToShow = $scope.getFilesNFolders();
+	
+	$rootScope.update = function () {
+		$scope.user = $localStorage.session.user;
+		$scope.rootDirectory = $scope.user.userDirectory;
+		$scope.currentDirectory = $scope.rootDirectory;
+		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
+		$scope.foldersPath = [$scope.rootDirectory];
+		$localStorage.path = $scope.foldersPath;
+		console.log($scope.filesNFoldersToShow);
+	}
 });
+
+/*$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
+$scope.foldersPath = dashboardService.foldersPath;
+$scope.newFolderName = "";
+console.log("executou controller");
+$scope.newFolder = function() {
+	dashboardService.newFolder($scope.newFolderName, function(result) {
+		if (result == true) {
+			$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
+			console.log("executou");
+		}
+	});
+	
+	console.log($scope.filesNFoldersToShow);
+};
+
+
+$scope.folderClick = function(folder) {
+	dashboardService.goFoward(folder);
+	$scope.filesNFoldersToShow = dashboardService.getFilesNFolders();
+}
+
+$scope.newFile = function() {
+	$state.go("file");
+}*/
+
 
 	/*function update() {
 		$scope.loggedUser = JSON.parse(sessionStorage.getItem("logged-user"));

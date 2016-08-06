@@ -1,6 +1,7 @@
 package org.ufcg.si.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -124,6 +125,7 @@ public class UserDirectory {
 	 */
 	public void createDirectory(String directoryName, String directoryPath) throws Exception{
 		String[] pathFolders = directoryPath.split("-");
+		System.out.println(Arrays.toString(pathFolders));
 		createDirectory(pathFolders, 0, directoryName);
 	}
 	

@@ -61,66 +61,14 @@
 			<div class="col-sm-6">
 				<div class="form-top-right">
 					<h3>
-						Hello, {{loggedUser.username}}! <i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
+						Hello, {{user.username}}! <i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
 					</h3>
 				</div>
 			</div>
 
 			<br></br> <br></br>
 
-			<div class="col-sm-12">
-				<div class="user-box">
-					<div class="form-top">
-						<div class="form-top-right">
-							<h3>
-								<i class="fa fa-archive fa-2x" aria-hidden="true"></i> 
-								<span ng-repeat="folder in foldersPath track by $index">
-									<a ng-click="pathclick(directory)">{{folder.name}}</a> /
-								</span>
-								</h3>
-						</div>
-					</div>
-				</div>
-
-				<div class="form-bottom">
-					<form role="form" action="" method="post" class="login-form">
-						<div class="form-group">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th>Name</th>
-									</tr>
-								</thead>
-								<tbody ng-repeat="item in filesNFoldersToShow">
-									<tr>
-										<td>{{item.name}}</td>
-										<td><input type="button" value="Enter" ng-click="folderClick(item)"/></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</form>
-				</div>
-
-				<br/>
-
-				<div class="col-sm-6"></div>
-				<div class="col-sm-6">
-					<button type="submit" class="btn" ng-click="newFile()">
-						<strong>
-							<i class="fa fa-file-text-o" aria-hidden="true" fa-3x></i>
-							Create File
-						</strong>
-					</button>
-					<button type="submit" class="btn bnt" ng-click="addFolder()">
-						<strong>
-						<i class="fa fa-folder" aria-hidden="true fa-3x"></i> 
-						Create Folder
-						</strong>
-					</button>
-					<input type="text" placeholder="folder name" ng-model="newFolderName"/>
-				</div>
-			</div>
+			<div ui-view=""></div>			
 		</div>
 	</div>
 </div>

@@ -14,7 +14,7 @@ import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ExceptionHandler;
 import org.ufcg.si.util.ServerConstants;
 import org.ufcg.si.util.responses.LoginResponse;
-import org.ufcg.si.util.tokens.HS512_2Minutes_Token;
+import org.ufcg.si.util.tokens.HS512_24Hours_Token;
 import org.ufcg.si.util.tokens.TokenBuilder;
 
 @RestController
@@ -29,7 +29,7 @@ public class LoginController {
 	}
 	
 	@Autowired
-	public void setTokenBuilder(HS512_2Minutes_Token tokenBuilder) {
+	public void setTokenBuilder(HS512_24Hours_Token tokenBuilder) {
 		this.tokenBuilder = tokenBuilder;
 	}
 	
