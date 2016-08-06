@@ -17,13 +17,12 @@ public class ExceptionHandler {
 		try {
 			checkNotNullData(user);
 		} catch(InvalidDataException e) {
-			throw new ServletException("User not found inside the database. ");
+			throw new ServletException("Invalid username or password.");
 		}
 	}
 	
 	public static void checkMatchingPassword(User loggingUser, User dbUser) throws ServletException {
 		try {
-			System.out.println("Checking password: " + loggingUser.getPassword() + " | " + dbUser.getPassword());
 			if (!loggingUser.getPassword().equals(dbUser.getPassword())) {
 				throw new InvalidPasswordException("The given password is invalid.");
 			}
@@ -34,7 +33,7 @@ public class ExceptionHandler {
 	
 	public static void checkLoginFields(User user) throws ServletException {
 		if ((user.getUsername() == null && user.getEmail() == null) || (user.getPassword() == null)) {
-			throw new ServletException("Username/Email or password are both required.");
+			throw new ServletException("Username/Email and password are both required.");
 		}
 	}
 	

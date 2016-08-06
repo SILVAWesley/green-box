@@ -1,5 +1,6 @@
 angular.module('app').controller('fileController', function($localStorage, $scope, $http, $rootScope, $state) {
 	$scope.path = $localStorage.path;
+	$scope.newFileName;
 	console.log($scope.path + " EM INICIO DE FILECONT");
 	
 	$scope.saveFile = function() {

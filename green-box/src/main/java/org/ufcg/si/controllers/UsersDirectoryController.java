@@ -1,4 +1,4 @@
-package org.ufcg.si.controllers.rest;
+package org.ufcg.si.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +14,16 @@ import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ServerConstants;
 
+/**
+ * This controller class uses JSON data format to be the 
+ * endpoint of requests related to directories of users
+ * on the server-side.
+ * 
+ * <strong>This controller needs to a valid token to be accessed.</strong>
+ */
 @RestController
-@RequestMapping(ServerConstants.ACCESS_PATH + ServerConstants.USERDIRECTORY_PATH)
-public class UserDirectoryController {
+@RequestMapping(ServerConstants.SERVER_REQUEST_URL + ServerConstants.USERS_DIRECTORY_REQUEST_URL)
+public class UsersDirectoryController {
 	private UserService userService;
 	
 	@Autowired
@@ -40,8 +47,6 @@ public class UserDirectoryController {
 				produces = MediaType.APPLICATION_JSON_VALUE,
 				consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> addDirectory(@RequestBody User user, @PathVariable String dirname, @PathVariable String dirpath) throws Exception {
-		System.out.println(dirname);
-		System.out.println(dirpath);
 		User newUser = userService.findByUsername(user.getUsername());
 		newUser.getUserDirectory().createDirectory(dirname,dirpath);
 		User updateUser = userService.update(newUser);
@@ -52,34 +57,21 @@ public class UserDirectoryController {
 				   	method = RequestMethod.POST,
 				   	produces = MediaType.APPLICATION_JSON_VALUE,
 				   	consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFile(@RequestBody User user, @PathVariable String filename) throws Exception {
+	public ResponseEntity<User> addFile(@RequestBody User user, @PathVariable("filename") String fileName) throws Exception {
 		User newUser = userService.findByUsername(user.getUsername());
-		newUser.getUserDirectory().createFile(filename, "txt", new String ("Curau Mago!"));
+		newUser.getUserDirectory().createFile(fileName, "txt", new String ("Curau Mago!"));
 		User updateUser = userService.update(newUser);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/newfile/{filepath}/{filename}",
-		   	method = RequestMethod.POST,
-		   	produces = MediaType.APPLICATION_JSON_VALUE,
-		   	consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFile(@RequestBody User user, @PathVariable String filename, @PathVariable String filepath) throws Exception {
+		   			method = RequestMethod.POST,
+		   			produces = MediaType.APPLICATION_JSON_VALUE,
+		   			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> addFile(@RequestBody User user, @PathVariable("filename") String fileName, @PathVariable("filepath") String filePath) throws Exception {
 		User newUser = userService.findByUsername(user.getUsername());
-		newUser.getUserDirectory().createFile(filename, "txt", new String ("Curau Mago!"), filepath);
+		newUser.getUserDirectory().createFile(fileName, "txt", new String ("Curau Mago!"), filePath);
 		User updateUser = userService.update(newUser);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}
-	
-	/*
-	@RequestMapping(value = "/remove/{dirname}",
-					method = RequestMethod.DELETE,
-					produces = MediaType.APPLICATION_JSON_VALUE,
-					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> removeDirectory(@RequestBody User user, @PathVariable String dirname) throws Exception{
-		user.getUserDirectory().
-		
-		return new ResponseEntity<>();
-	}
-	*/
-	
 }

@@ -1,4 +1,4 @@
-package org.ufcg.si.controllers.rest;
+package org.ufcg.si.controllers;
 
 import javax.servlet.ServletException;
 
@@ -16,76 +16,79 @@ import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ServerConstants;
 
+/**
+ * This controller class uses JSON data format to be the 
+ * endpoint of requests related to users on the server-side.d
+ */
 @RestController
-@RequestMapping(ServerConstants.ACCESS_PATH + ServerConstants.USERS_PATH)
-public class UserController {
+@RequestMapping(ServerConstants.SERVER_REQUEST_URL + ServerConstants.USERS_REQUEST_URL)
+public class UsersController {
 	private UserService userService;
-	
+
 	@Autowired
 	public void setUserService(UserServiceImpl userServiceImpl) {
 		this.userService = userServiceImpl;
 	}
-	
+
 	@RequestMapping(value = "/{id}", 
-					method = RequestMethod.GET,
+					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> getUser(@PathVariable Long id) {
 		User matchingUser = userService.findById(id);
-		
+
 		if (matchingUser != null) {
 			return new ResponseEntity<>(matchingUser, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@RequestMapping(value = "/new", 
-					method = RequestMethod.POST,
-					consumes = MediaType.APPLICATION_JSON_VALUE,
+					method = RequestMethod.POST, 
+					consumes = MediaType.APPLICATION_JSON_VALUE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> createUser(@RequestBody User newUser) throws ServletException {
 		try {
 			User savedUser = userService.save(newUser);
 			return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException("User already inside the database. " + e.getMessage());
 		}
 	}
-	
+
 	@RequestMapping(value = "/deleteid={id}", 
-					method = RequestMethod.DELETE,
+					method = RequestMethod.DELETE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> deleteUser(@PathVariable Long id){
+	public ResponseEntity<User> deleteUser(@PathVariable Long id) {
 		User deletedUser = userService.delete(id);
-		
+
 		if (deletedUser != null) {
-			return new ResponseEntity<> (deletedUser, HttpStatus.OK);
+			return new ResponseEntity<>(deletedUser, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@RequestMapping(value = "/all", 
-					method = RequestMethod.GET,
+					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Iterable<User>> getAllUsers(){
+	public ResponseEntity<Iterable<User>> getAllUsers() {
 		Iterable<User> allUsers = userService.findAll();
-		return new ResponseEntity<> (allUsers, HttpStatus.OK);
+		return new ResponseEntity<>(allUsers, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/update", 
-					method = RequestMethod.PUT,
-					consumes = MediaType.APPLICATION_JSON_VALUE,
+					method = RequestMethod.PUT, 
+					consumes = MediaType.APPLICATION_JSON_VALUE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> updateUser(@RequestBody User user){
+	public ResponseEntity<User> updateUser(@RequestBody User user) {
 		User modifiedUser = userService.update(user);
-		
+
 		if (modifiedUser != null) {
-			return new ResponseEntity<> (modifiedUser, HttpStatus.OK);
+			return new ResponseEntity<>(modifiedUser, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-	}	
+	}
 }

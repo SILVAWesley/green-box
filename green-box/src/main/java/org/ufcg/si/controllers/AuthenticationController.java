@@ -1,4 +1,4 @@
-package org.ufcg.si.controllers.rest;
+package org.ufcg.si.controllers;
 
 import javax.servlet.ServletException;
 
@@ -17,9 +17,17 @@ import org.ufcg.si.util.responses.LoginResponse;
 import org.ufcg.si.util.tokens.HS512_24Hours_Token;
 import org.ufcg.si.util.tokens.TokenBuilder;
 
+/**
+ * This controller class uses JSON data format to be the 
+ * endpoint of requests related to authentication of users
+ * on the server-side.<br>
+ * An authenticated user has a session unique token, which
+ * provides him the permission to successfully obtain responses
+ * from requests sent to UserDirectoryController. 
+ */
 @RestController
-@RequestMapping(ServerConstants.ACCESS_PATH + ServerConstants.LOGIN_PATH)
-public class LoginController {
+@RequestMapping(ServerConstants.SERVER_REQUEST_URL + ServerConstants.AUTHENTICATION_REQUEST_URL)
+public class AuthenticationController {
 	private TokenBuilder tokenBuilder;
 	private UserService userService;
 	
@@ -35,11 +43,11 @@ public class LoginController {
 	
 	@RequestMapping(value = "/authenticate",
 					method = RequestMethod.POST, 
+					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
 	public LoginResponse login(@RequestBody User user) throws ServletException {
-		System.out.println("Password of user = " + user.getPassword());
 		ExceptionHandler.checkLoginFields(user);
-		System.out.println("Password of user = " + user.getPassword());
+		
 		User foundUser = null;
 		
 		if (user.getEmail() != null && !user.getEmail().equals("")) {
@@ -47,7 +55,7 @@ public class LoginController {
 		} else {
 			foundUser = userService.findByUsername(user.getUsername());
 		}
-		System.out.println(foundUser);
+		
 		ExceptionHandler.checkUserInDatabase(foundUser);
 		ExceptionHandler.checkMatchingPassword(user, foundUser);
 		
