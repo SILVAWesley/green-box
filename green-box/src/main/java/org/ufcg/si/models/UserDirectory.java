@@ -90,6 +90,16 @@ public class UserDirectory {
 		files.add(file);
 	}
 	
+	/**
+	 * This method find the last create directory by the path, and create a new file in the directory 
+	 * 
+	 * @param fileName The new File's name
+	 * @param fileExtension The extension of the file	
+	 * @param fileContent The content of the file
+	 * @param filePath The path to found the directory where we will create the file
+	 * @throws Exception
+	 */
+	
 	public void createFile(String fileName, String fileExtension, String fileContent, String filePath) throws Exception{
 		String[] pathFolders = filePath.split("-");
 		createFile(pathFolders, 0, fileName, fileExtension, fileContent);
@@ -119,8 +129,10 @@ public class UserDirectory {
 	
 	/**
 	 * 
-	 * @param directoryName
-	 * @param directoryPath
+	 * This method create a new directory inside of another directory 
+	 * 
+	 * @param directoryName The new Directory's name
+	 * @param directoryPath The path of new directory	
 	 * @throws Exception
 	 */
 	public void createDirectory(String directoryName, String directoryPath) throws Exception{
@@ -128,14 +140,6 @@ public class UserDirectory {
 		System.out.println(Arrays.toString(pathFolders));
 		createDirectory(pathFolders, 0, directoryName);
 	}
-	
-	/**
-	 * 
-	 * @param pathFolders
-	 * @param actualIndex
-	 * @param directoryName
-	 * @throws Exception
-	 */
 	
 	private void createDirectory(String[] pathFolders, int actualIndex, String directoryName) throws Exception {
 		if(actualIndex == pathFolders.length - 1){
@@ -146,9 +150,10 @@ public class UserDirectory {
 	}
 	
 	/**
+	 * Find the child of a directory
 	 * 
-	 * @param dirName
-	 * @return
+	 * @param dirName The directory name you want Find Your child
+	 * @return The child of the directory
 	 * @throws Exception
 	 */
 	public UserDirectory getChildDirectory(String dirName) throws Exception{
