@@ -1,159 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8"></meta>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <title>Green Box</title>
+<head>
+<!-- include summernote configuration js-->
+<script src="./js/configurations/summernote-file-config.js"></script>
+</head>
 
-        <!-- CSS -->
-		<link rel="stylesheet" href="../css/form-elements.css"></link>
-        <link rel="stylesheet" href="../css/my-style.css"></link>
-        
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></link>
-        
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"></link>
-        
-        <!-- Optional icons -->
-        <link rel="shortcut icon" href="../img/icons/favicon.ico"></link>
-                
-        <!-- Optional fonts -->
-		<link href='https://fonts.googleapis.com/css?family=Pattaya' rel='stylesheet' type='text/css'></link>
-		   
-		<!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        
-        <!-- include libraries(jQuery, bootstrap) -->
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<body>
+	<!-- Top content -->
+	<div class="top-content">
+		<div class="inner-bg">
+			<div class="container">
+				<div class="col-sm-12">
 
-		<!-- include summernote css/js-->
-		<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet">
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js"></script>	
+					<div class="user-box">
+						<div class="form-top">
+							<div class="form-top-right">
+								<input type="text" ng-model="newFileName" placeholder="File Name"/>
+								<!-- <div class="note-editable panel-body" contenteditable="true"
+									style="height: 50px;">
+									<p>
+										{{newFileName}}
+									</p>
+								</div> -->
+							</div>
+						</div>
+					</div>
 
-		<!-- include summernote configuration js-->
-		<script src="../js/controllers/file-controller.js"></script>
-		
-    </head>
+					<form role="form" action="" method="post" class="edit-form">
+						<div id="summernote" class="click2edit"></div>
+					</form>
 
-    <body>    
-            <!-- Navbar -->
-    		<nav class="navbar navbar-default">
-  				<div class="container-fluid">
-    				<!-- Brand and toggle get grouped for better mobile display -->
-    				<div class="navbar-header">
-      					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        					<span class="sr-only">Toggle navigation</span>
-        					<span class="icon-bar"></span>
-        					<span class="icon-bar"></span>
-        					<span class="icon-bar"></span>
-      					</button>
-      					<a class="navbar-brand" href="#">
-      						<i class="fa fa-home fa-2x" aria-hidden="true"></i> Home</a>
-    				</div>
+					<br>
+					<br />
+					<div class="col-sm-8"></div>
+					<div class="col-sm-4">
+						<button type="submit" class="btn" ng-click="saveFile()">
+							<strong> <i class="fa fa-floppy-o fa-lg"
+								aria-hidden="true"></i> Save
+							</strong>
+						</button>
+						<button type="submit" class="btn bnt" ng-click="directoriesView()">
+							<strong> <i class="fa fa-times-circle fa-lg"
+								aria-hidden="true"></i> Cancel
+							</strong>
+						</button>
 
-	    		<!-- Collect the nav links, forms, and other content for toggling -->
-    			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      				<ul class="nav navbar-nav">
-        				<li><a href="#">
-        					<i class="fa fa-question fa-2x" aria-hidden="true"></i> About</a></li>
-      				</ul>
-      			
-      				<form class="navbar-form navbar-left">
-        				<div class="form-group">
-          					<input type="text" class="form-control" placeholder="Search">
-        				</div>
-        				<button type="submit" class="btn btn-default"><strong>Submit</strong></button>
-      				</form>
-      	
-      					<ul class="nav navbar-nav navbar-right">
-        					 <li><a href="#">
-        						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Logout</a></li>        				
-        				</ul>
-    			</div>
-  			</div>
-		</nav>
-
-        <!-- Top content -->
-        <div class="top-content">        	
-            <div class="inner-bg">
-                <div class="container">
-                	
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1><strong><i class="fa fa-cube fa-2x" aria-hidden="true"></i>
-                            Green Box</strong></h1>   
-                        </div>
-                    </div>
-                    <br></br>
-                    <div class="col-sm-6">
-                    	<div class="form-top-right">
-               				<h3>Hello, UserName!
-                				<i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
-                			</h3>
-	                    </div>
-					</div>                  	
-                    	<br></br>
-                    	<br></br>
-
-                        <div class="col-sm-12">
-                        	
-                        	<div class="user-box">
-                        		<div class="form-top">
-	                        		<div class="form-top-right">
-		                        		<div class="note-editable panel-body" contenteditable="true" style="height: 50px;">
- 		                        			<p><i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> NewPaste 
- 		                        			<i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
- 		                        			 <i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> File.txt</p>
-		                        		</div>
-	                        		</div>
-	                            </div>
-                        	</div>
-                        	
-				            <form role="form" action="" method="post" class="edit-form">
-				            	<div id="summernote" class="click2edit">
-								
-								</div>	          
-				            </form>
-			                 
-			                 <br><br/>
-			                 <div class="col-sm-8"></div>
-			                 <div class="col-sm-4">
-			                 	 <button type="submit" class="btn" onclick="save()">
-			                 	 	<strong>
-			                 	 		<i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> 
-			                 	 		Save
-			                 	 	</strong>
-			                 	 </button>
-			                 	 <button type="submit" class="btn bnt">
-			                 	 	<strong>
-			                 	 		<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i>
-			                 	 		Cancel
-			                 	 	</strong>
-			                 	 </button>
-			                 	 
-			                 </div>
-                        </div>
-                    </div>                  
-                </div>
-            </div>
-
-        <!-- Footer -->
-        <footer>
-        	<div class="container">
-        		<div class="row">       			
-        			<div class="col-sm-8 col-sm-offset-2">
-        				<div class="footer-border"></div>
-        				<a href="http://www.bluefountainmedia.com/404">
-        					<i class="fa fa-copyright" aria-hidden="true"></i> Developed by team ronan_baitola!!</a>
-        			</div>        			
-        		</div>
-        	</div>
-        </footer>
-
-    </body>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 </html>
