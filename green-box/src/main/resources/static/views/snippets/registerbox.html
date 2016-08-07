@@ -1,5 +1,7 @@
 <div class="form-box" ng-controller="registrationController">
+	
 	{{message}}
+	
 	<div class="form-top">
 		<div class="form-top-right">
 			<h3>
@@ -7,35 +9,40 @@
 			</h3>
 		</div>
 	</div>
+	
 	<div class="form-bottom">
 
 		<form role="form" name="registrationForm" class="registration-form" ng-submit="doRegister()">
+			
 			<div class="form-group">
-				<label class="sr-only" for="username">First name</label> <input
-					type="text" name="username" placeholder="Your name..."
-					class="form-name form-control" id="form-name" ng-model="user.username" required/>
-				<span ng-show="registrationForm.username.$error.required && registrationForm.username.$dirty">Username required.</span>
-			</div>
-			<div class="form-group">
-				<label class="sr-only" for="email">Email</label> <input
-					type="text" name="email" placeholder="Email..."
-					class="form-email form-control" id="form-email" ng-model="user.email" required/>
-				<span ng-show="registrationForm.password.$error.required && registrationForm.password.$dirty">Email required.</span>
-			</div>
-			<div class="form-group">
-				<label class="sr-only" for="password">Password</label> <input
-					type="password" name="password" placeholder="Password..."
-					class="form-password form-control" id="form-password" ng-model="user.password" required/>
-				<span ng-show="registrationForm.password.$error.required && registrationForm.password.$dirty">Password required.</span>
+				<label class="sr-only" for="username">First name</label> 
+					<input type="text" name="username" placeholder="Your name..."
+							class="form-name form-control" id="form-name" ng-model="user.username" required/>
+					<span style="color:red" ng-show="registrationForm.username.$error.required && registrationForm.username.$dirty">Username required.</span>
 			</div>
 			
-			<button type="submit" class="btn" ng-disabled="registrationForm.$invalid">
+			<div class="form-group">
+				<label class="sr-only" for="email">Email</label> 
+					<input type="text" name="email" placeholder="Email..."
+						class="form-email form-control" id="form-email" ng-model="user.email" required/>
+					<span style="color:red" ng-show="registrationForm.email.$error.required && registrationForm.email.$dirty">Email required.</span>
+			</div>
+			
+			<div class="form-group">
+				<label class="sr-only" for="password">Password</label> 
+					<input type="password" name="password" placeholder="Password..."
+							class="form-password form-control" id="form-password" ng-model="user.password" required/>
+					<span style="color:red" ng-show="registrationForm.password.$error.required && registrationForm.password.$dirty">Password required.</span>
+			</div>
+			
+			<button type="submit" class="btn btn-warning" ng-disabled="registrationForm.$invalid">
 				<strong>
-					<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i>
-					Create an account!
+					<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Create an account!
 				</strong>
 			</button>
+			
 		</form>
 
 	</div>
+	
 </div>

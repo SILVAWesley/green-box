@@ -3,17 +3,17 @@
 		<div class="form-top">
 			<div class="form-top-right">
 				<h3>
-
 					<span ng-repeat="folder in openedFolders.slice(0, foldersPath.length - 1) track by $index">
 						<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
 						<a
+							style="color:green"
 							ui-sref="dashboard.directories({folderPath: folder.path})">{{folder.name}}
 						</a> / 
 					</span>
 					
 					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
-						{{currentDirectory.name + "/"}} 
-	
+					{{currentDirectory.name + "/"}} 
+					
 				</h3>
 			</div>
 		</div>
@@ -23,45 +23,52 @@
 		<form role="form" action="" method="post" class="login-form">
 			<div class="form-group">
 				<table class="table table-striped">
+					
 					<thead>
 						<tr>
 							<th>Name</th>
 						</tr>
 					</thead>
+					
 					<tbody ng-repeat="item in getFolders() track by $index">
 						<tr>
-							<td><i class="fa fa-folder fa-2x" aria-hidden="true"></i> {{item.name}}</td>
-							<td><input type="button" value="Enter"
-								ng-click="folderClick(item)" /></td>
+							<td>
+								<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
+								<a style="color:green" href="" ng-click="folderClick(item)"> {{item.name}}</a>
+							</td>
 						</tr>
 					</tbody>
 					
 					<tbody ng-repeat="item in getFiles() track by $index">
 						<tr>
-							<td><i class="fa fa-file fa-2x" aria-hidden="true"></i> {{item.name}}</td>
-							<td><input type="button" value="Enter"
-								ng-click="fileClick(item)" /></td>
-						</tr>
+							<td>
+								<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
+								<a style="color:green" href="" ng-click="folderClick(item)"> {{item.name}}</a>
+							</td>
 					</tbody>
+				
 				</table>
 			</div>
 		</form>
 	</div>
 
 	<br />
-
+	
+	<!-- organising of boxes -->
 	<div class="col-sm-8"></div>
+	
 	<div class="col-sm-4">
+		
 		<button type="submit" class="btn btn-primary btn-lg" ng-click="newFilePage()">
-			<strong> <i class="fa fa-file-text-o" aria-hidden="true"
-				fa-3x></i> Create File
+			<strong> 
+				<i class="fa fa-file-text-o" aria-hidden="true fa-3x"></i> Create File
 			</strong>
 		</button>
 	
 		<!-- Button trigger modal -->
 		<button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">
-			<strong> <i class="fa fa-folder" aria-hidden="true fa-3x"></i>
-				Create Folder
+			<strong> 
+				<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
 			</strong>
 		</button>
 
@@ -70,25 +77,48 @@
   			<div class="modal-dialog" role="document">
     			<div class="modal-content">
       				<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        				<h4 class="modal-title" id="myModalLabel"><strong>Creating Folder</strong></h4>
+        				
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        					<span aria-hidden="true">&times;</span>
+        				</button>
+        				
+        				<h3 class="modal-title" id="myModalLabel" style="font-family: 'Pattaya', sans-serif">
+        					<strong>
+        						<i class="fa fa-cog fa-lg" aria-hidden="true"></i> Creating Folder
+        					</strong>
+        				</h3>
+        				
       				</div>
+      				
       				<div class="modal-body">
-	        			<input type="text" placeholder="folder name" ng-model="newFolderName" />
+      					<h3 style="font-family: 'Pattaya', sans-serif">
+      						<strong>
+      							New Folder <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> 
+      							<input type="text" placeholder="Folder Name" ng-model="newFolderName" />
+      						</strong>
+      					</h3>
     	  			</div>
+    	  			
       				<div class="modal-footer">
+						
 						<button type="submit" class="btn btn-warning" ng-click="newFolder()">
-							<strong> <i class="fa fa-folder" aria-hidden="true fa-3x"></i>
-								Create Folder
+							<strong> 
+								<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
 							</strong>
 						</button>
+						
         				<button type="button" class="btn btn-danger" data-dismiss="modal">							
-        					<strong> <i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close</strong>
+        					<strong> 
+        						<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
+        					</strong>
+        				</button>
+        				
       				</div>
+      				
     			</div>
   			</div>
 		</div>
 		
-
 	</div>
+	
 </div>

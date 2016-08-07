@@ -27,7 +27,8 @@ h1 {
     line-height: 50px;
 }
 
-h3 {	
+h3 {
+	font-family: 'Pattaya', sans-serif;
 	font-size: 22px;
     font-weight: 300;
     color: #555;
@@ -172,19 +173,19 @@ img { max-width: 100%; }
 
 footer {
 	padding-bottom: 70px;
-	color: #400040;
+	color: #000;
 }
 
 footer .footer-border {
 	width: 200px;
 	margin: 0 auto;
 	padding-bottom: 30px;
-	border-top: 1px solid #400040;
+	border-top: 1px solid #000;
 }
 
 footer p { opacity: 0.8; }
 
-footer a {	color: #400040; }
+footer a {	color: #000; }
 
 footer a:hover, footer a:focus { 
 	color: #fff; 

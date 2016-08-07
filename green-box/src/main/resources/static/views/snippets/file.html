@@ -15,29 +15,26 @@
 
 					<div class="user-box">
 						<div class="form-top">
-							</br>
-							<div class="col-sm-3">
+							
+							<h3 style="font-family: 'Pattaya', sans-serif"><strong>New File: </strong>
+								
 								<input type="text" ng-model="newFileName" placeholder="File Name"/>
-								<!-- <div class="note-editable panel-body" contenteditable="true"
-									style="height: 50px;">
-									<p>
-										{{newFileName}}
-									</p>
-								</div> -->
-							</div>
-							<div class="col-sm-3">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Extensions
-							  <span class="caret"></span></button>
-							  <ul class="dropdown-menu">
-							    <li><a href="#">.txt</a></li>
-							  </ul>
-							</div>
-							</br>
-							</br>
-							</br>
-							</br>
-						</div>
+								&emsp;&emsp; <!-- adition of space -->
+								<strong> Select Extension: </strong>
+								
+								<select class="btn btn-success" style="font-family: 'Open Sans', sans-serif;font-size: 18px">
+  									<option value="txt"><strong>Text File (.txt)</strong></option>
+								</select>
+								
+							</h3>
+							<!-- <div class="note-editable panel-body" contenteditable="true"
+								style="height: 50px;">
+								<p>
+									{{newFileName}}
+								</p>
+							</div> -->
 						
+						</div>						
 					</div>
 
 					<form role="form" action="" method="post" class="edit-form">
@@ -46,25 +43,29 @@
 
 					<br>
 					<br />
+					
+					<!-- organising of boxes -->
 					<div class="col-sm-8"></div>
+					
 					<div class="col-sm-4">
+						
 						<button type="submit" class="btn btn-primary" ng-click="saveFile()">
-							<strong> <i class="fa fa-floppy-o fa-lg"
-								aria-hidden="true"></i> Save
+							<strong> 
+								<i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> Save
 							</strong>
-
 						</button>
+						
 						<button type="submit" class="btn btn-danger" ng-click="directoriesView()">
-							<strong> <i class="fa fa-times-circle fa-lg"
-								aria-hidden="true"></i> Cancel
+							<strong> 
+								<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
 							</strong>
 						</button>
 
 					</div>
+					
 				</div>
 			</div>
 		</div>
 	</div>
-</body>
 
-</html>
+</body>
