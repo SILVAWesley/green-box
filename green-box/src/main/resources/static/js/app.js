@@ -14,13 +14,13 @@ angular.module('app').config(['$urlRouterProvider', '$stateProvider', function($
 	});
 	
 	$stateProvider.state('dashboard.directories', {
-		url: '/dashboard.directories/{folderPath:.*}',
+		url: '/directories/{folderPath:.*}',
 		templateUrl: 'views/snippets/directorybox.html',
 		controller: 'accountController'
 	});
 	
 	$stateProvider.state('dashboard.file', {
-		url: '/dashboard.file',
+		url: '/file',
 		templateUrl: 'views/snippets/file.html',
 		controller: 'fileController'
 	});

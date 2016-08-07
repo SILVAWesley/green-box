@@ -6,8 +6,10 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	
 	$scope.newFileName = "";
 	
-	$scope.newFileName = $localStorage.clickedFile.name;
-	$scope.content = $localStorage.clickedFile.content;
+	if ($localStorage.clickedFile != undefined) {
+		$scope.newFileName = $localStorage.clickedFile.name;
+		$scope.content = $localStorage.clickedFile.content;
+	}
 	
 	console.log($localStorage.clickedFile + " CLICKED FILE");
 	
@@ -28,9 +30,13 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		
 		
 		
-		$http.post('/server/userdirectory/newfile/' + path + $scope.newFileName, requestData)
+		$http.post('/server/userdirectory/newfile/' + path, requestData)
 		.then(function(response) {
+			
 			$localStorage.session.user = response.data;
+			window.alert("File successfully created.");
+			$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
+			$scope.path = $localStorage.session.currentPath;
 			
 		}, function(response) {
 			

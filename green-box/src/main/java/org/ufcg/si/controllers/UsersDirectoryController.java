@@ -59,10 +59,6 @@ public class UsersDirectoryController {
 				   	produces = MediaType.APPLICATION_JSON_VALUE,
 				   	consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> addFile(@RequestBody FileRequestBody fileRequestBody, @PathVariable("filename") String fileName) throws Exception {
-		System.out.println(fileRequestBody.getUser());
-		System.out.println(fileRequestBody.getFileName());
-		System.out.println(fileRequestBody.getFileContent());
-		System.out.println(fileRequestBody.getFileExtension());
 		User userFromRequest = fileRequestBody.getUser();
 		User user = userService.findByUsername(userFromRequest.getUsername());
 		user.getUserDirectory().createFile(fileName, fileRequestBody.getFileExtension(), fileRequestBody.getFileContent());
@@ -75,10 +71,6 @@ public class UsersDirectoryController {
 		   			produces = MediaType.APPLICATION_JSON_VALUE,
 		   			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> addFile(@RequestBody FileRequestBody fileRequestBody, @PathVariable("filename") String fileName, @PathVariable("filepath") String filePath) throws Exception {
-		System.out.println(fileRequestBody.getUser());
-		System.out.println(fileRequestBody.getFileName());
-		System.out.println(fileRequestBody.getFileContent());
-		System.out.println(fileRequestBody.getFileExtension());
 		User userFromRequest = fileRequestBody.getUser();
 		User user = userService.findByUsername(userFromRequest.getUsername());
 		user.getUserDirectory().createFile(fileName, fileRequestBody.getFileExtension(), fileRequestBody.getFileContent(), filePath);
