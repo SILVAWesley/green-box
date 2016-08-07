@@ -24,10 +24,7 @@ public class UserDirectory {
 	@ElementCollection
 	private List<UserFile> files;
 
-	//@ManyToOne
-	//private UserDirectory parent;
-
-	@OneToMany(/*mappedBy = "parent",*/ cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<UserDirectory> children;
 
 	private String name;
@@ -100,7 +97,6 @@ public class UserDirectory {
 	 * @param filePath The path to found the directory where we will create the file
 	 * @throws Exception
 	 */
-	
 	public void createFile(String fileName, String fileExtension, String fileContent, String filePath) throws Exception{
 		String[] pathFolders = filePath.split("-");
 		createFile(pathFolders, 0, fileName, fileExtension, fileContent);
@@ -119,7 +115,7 @@ public class UserDirectory {
 	 * 
 	 * @param directoryName
 	 *            The new Directory's name
-	 * @throws Exception
+	 * @throws Exception if there is already a directory with the directoryName
 	 */
 	
 	public void createDirectory(String directoryName) throws Exception {
@@ -134,7 +130,7 @@ public class UserDirectory {
 	 * 
 	 * @param directoryName The new Directory's name
 	 * @param directoryPath The path of new directory	
-	 * @throws Exception
+	 * @throws Exception if there is no directory in the directoryPath
 	 */
 	public void createDirectory(String directoryName, String directoryPath) throws Exception{
 		String[] pathFolders = directoryPath.split("-");
@@ -154,7 +150,7 @@ public class UserDirectory {
 	 * 
 	 * @param dirName The directory name you want Find Your child
 	 * @return The child of the directory
-	 * @throws Exception
+	 * @throws Exception if there is no directory with the dirName
 	 */
 	public UserDirectory getChildDirectory(String dirName) throws Exception{
 		for(UserDirectory dir: this.children){
@@ -166,7 +162,11 @@ public class UserDirectory {
 	}
 	
 	/**
-	 * 
+	 * Compares an object to this one to see if they are equals. Two UserDirectories are equals
+	 * if they have the same name.
+	 * @param obj
+	 * 		The object to be compared
+	 * @return if obj is equals to the object
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -178,59 +178,29 @@ public class UserDirectory {
 		}
 	}
 
-	// private boolean recursiveEquals(UserDirectory first, UserDirectory
-	// second) {
-	// if (this.oneDirectoryEquals(first, second) == false) {
-	// return false;
-	// } else {
-	// if (first.getChildren().size() != second.getChildren().size()) {
-	// return false;
-	// }
-	//
-	// for(int i =0; i < first.getChildren().size(); i++){
-	// if(this.oneDirectoryEquals(first.getChildren().get(i),
-	// second.getChildren().get(i)) == false){
-	// return false;
-	// }
-	// }
-	// return true;
-	// }
-	// }
-	//
-	// private boolean oneDirectoryEquals(UserDirectory first, UserDirectory
-	// second) {
-	// if (first == null && second != null || first == null && second != null) {
-	// return false;
-	// } else if (first == null && second == null) {
-	// return true;
-	// } else {
-	// if (first.getFiles().size() != second.getFiles().size()) {
-	// return false;
-	// }
-	// boolean isEqual = true;
-	// for (int i = 0; i < first.getFiles().size(); i++) {
-	// if (first.getFiles().get(i).equals(second.getFiles().get(i)) == false) {
-	// isEqual = false;
-	// break;
-	// }
-	//
-	// }
-	// return first.getName().equals(second.getName()) && isEqual;
-	// }
-	// }
-
 	// GETTERS
 	
 	
-	
+	/**
+	 * The files getter. Files is a list of intern files.
+	 * @return A list of files inside of this object
+	 */
 	public List<UserFile> getFiles() {
 		return files;
 	}
-
+	
+	/**
+	 * The children getter. Children is a list of intern directories.
+	 * @return The list of directories
+	 */
 	public List<UserDirectory> getChildren() {
 		return children;
 	}
-
+	
+	/**
+	 * The name getter. The name is used to identify the directory.
+	 * @return The directory's name
+	 */
 	public String getName() {
 		return name;
 	}
@@ -239,11 +209,13 @@ public class UserDirectory {
 		return path;
 	}
 	
+	/**
+	 * Updates the directories name
+	 * @param name
+	 * 		The new directory's name.
+	 */
 	public void setName(String name){
 		this.name = name;
 	}
 
-	/*public UserDirectory getParent() {
-		return parent;
-	}*/
 }
