@@ -41,6 +41,12 @@ public class AuthenticationController {
 		this.tokenBuilder = tokenBuilder;
 	}
 	
+	/**
+	 * this method authenticates a User so you can have access to your files 
+	 * @param user The User that will be authenticated
+	 * @return A LoginResponse
+	 * @throws ServletException
+	 */
 	@RequestMapping(value = "/authenticate",
 					method = RequestMethod.POST, 
 					produces = MediaType.APPLICATION_JSON_VALUE,
