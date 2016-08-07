@@ -30,7 +30,7 @@ public class UsersController {
 		this.userService = userServiceImpl;
 	}
 
-	@RequestMapping(value = "/{id}", 
+	@RequestMapping(value = "/get/{id}", 
 					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> getUser(@PathVariable Long id) {

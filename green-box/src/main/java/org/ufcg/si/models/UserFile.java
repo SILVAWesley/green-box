@@ -15,6 +15,7 @@ import javax.persistence.Embeddable;
 public class UserFile {
 	private File internFile;
 	private String name;
+	private String content;
 
 	/**
 	 * This constructor creates a new UserFile and writes an initial content in
@@ -33,6 +34,7 @@ public class UserFile {
 		this.name = name;
 		this.internFile = new File(name + "." + extension);
 		writeInFile(content);
+		this.content = readFileContent();
 	}
 	
 	/**
@@ -40,6 +42,10 @@ public class UserFile {
 	 */
 	public UserFile() {
 		
+	}
+	
+	public String getContent() {
+		return content;
 	}
 	
 	private void writeInFile(String fileContent) throws Exception {

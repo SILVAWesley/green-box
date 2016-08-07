@@ -4,6 +4,9 @@ package org.ufcg.si.util;
  * This class put together constants used all along the server. 
  */
 public class ServerConstants {
+	/* Constants related to io */
+	public static final String LINE_BREAK = System.lineSeparator();
+	
 	/* Constants related to request mapping */
 	
 	/**

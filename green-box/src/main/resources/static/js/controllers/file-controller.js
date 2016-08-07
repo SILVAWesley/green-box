@@ -1,27 +1,36 @@
 angular.module('app').controller('fileController', function($localStorage, $scope, $http, $rootScope, $state) {
-	$scope.path = $localStorage.path;
-	$scope.newFileName;
-	console.log($scope.path + " EM INICIO DE FILECONT");
+	$scope.path = $localStorage.session.currentPath;
+	$scope.user = $localStorage.session.user;
+	$scope.content = "";
+	$scope.extension = "txt";
+	
+	$scope.newFileName = "";
+	
+	$scope.newFileName = $localStorage.clickedFile.name;
+	$scope.content = $localStorage.clickedFile.content;
+	
+	console.log($localStorage.clickedFile + " CLICKED FILE");
 	
 	$scope.saveFile = function() {
-		path = "";
-		console.log($scope.path);
+		path = formatPathToApiPattern($scope.path);
 		
-		for (i = 1; i < $scope.path.length - 1; i++) {
-			path += $scope.path[i].name + "-";
-		}
-		 
-		if ($scope.path.length > 1) {
-			path += $scope.path[$scope.path.length - 1].name + '/';
-		}
+		var div = document.createElement("div");
+		div.innerHTML = $scope.content;
+		var parsedContent = div.textContent || div.innerText || "";
 		
-		console.log('/server/userdirectory/newfile/' + path + $scope.newFileName);
+		requestData = {};
+		requestData.user = $scope.user;
+		requestData.fileName = $scope.newFileName;
+		requestData.fileExtension = $scope.extension;
+		requestData.fileContent = parsedContent;
 		
-		$http.post('/server/userdirectory/newfile/' + path + $scope.newFileName, $scope.user)
+		console.log(requestData);
+		
+		
+		
+		$http.post('/server/userdirectory/newfile/' + path + $scope.newFileName, requestData)
 		.then(function(response) {
-			
 			$localStorage.session.user = response.data;
-			$rootScope.update();
 			
 		}, function(response) {
 			
@@ -30,8 +39,12 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	});
 	}
 	
+	function formatPathToApiPattern(path) {
+		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "")
+		return tempPath.substring(1, tempPath.length) + "/" + $scope.newFileName;
+	}
+	
 	$scope.directoriesView = function() {
-		$state.go('dashboard.directories');
-		
+		$state.go('dashboard.directories', {folderPath: $localStorage.session.currentPath});
 	}
 });

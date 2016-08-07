@@ -2,7 +2,10 @@ angular.module('app').factory('tokenInterceptor',['$injector', '$localStorage', 
 	
 	return {
 		'request': function(config) {
-			config.headers.Authorization = 'Bearer ' + $localStorage.session.token;
+			if ($localStorage.session != undefined) {
+				config.headers.Authorization = 'Bearer ' + $localStorage.session.token;
+			}
+			
 			return config;
 		},
 		

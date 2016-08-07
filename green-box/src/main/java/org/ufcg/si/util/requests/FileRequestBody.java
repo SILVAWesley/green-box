@@ -18,6 +18,10 @@ public class FileRequestBody {
 		this.fileExtension = fileExtension;
 		this.fileContent = fileContent;
 	}
+	
+	public FileRequestBody() {
+		
+	}
 
 	public User getUser() {
 		return user;
@@ -38,4 +42,26 @@ public class FileRequestBody {
 	public String getFileContent() {
 		return fileContent;
 	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public void setFileExtension(String fileExtension) {
+		this.fileExtension = fileExtension;
+	}
+
+	public void setFileContent(String fileContent) {
+		this.fileContent = fileContent;
+	}
+	
+	
 }

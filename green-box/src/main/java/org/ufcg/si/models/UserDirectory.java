@@ -1,7 +1,6 @@
 package org.ufcg.si.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,7 +8,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -33,6 +31,7 @@ public class UserDirectory {
 	private List<UserDirectory> children;
 
 	private String name;
+	private String path;
 
 	/**
 	 * This constructor receives the directory's name and it's parent to create
@@ -44,11 +43,12 @@ public class UserDirectory {
 	 * @param parent
 	 *            The directory's parent directory
 	 */
-	public UserDirectory(String name, UserDirectory parent) {
+	public UserDirectory(String name, String path) {
 		this.name = name;
-		//this.parent = parent;
 		this.files = new ArrayList<>();
 		this.children = new ArrayList<>();
+		this.path = path;
+		System.out.println(path);
 	}
 
 	public UserDirectory() {
@@ -67,7 +67,8 @@ public class UserDirectory {
 	 *            The directory's name
 	 */
 	public UserDirectory(String name) {
-		this(name, null);
+		this(name, name);
+		System.out.println("HELLO WORLD");
 	}
 
 	/**
@@ -122,7 +123,7 @@ public class UserDirectory {
 	 */
 	
 	public void createDirectory(String directoryName) throws Exception {
-		UserDirectory dir = new UserDirectory(directoryName, this);
+		UserDirectory dir = new UserDirectory(directoryName, this.path + "/" + directoryName);
 		if(children.contains(dir)) throw new Exception("Directory already in folder.");
 		this.children.add(dir);
 	}
@@ -137,7 +138,6 @@ public class UserDirectory {
 	 */
 	public void createDirectory(String directoryName, String directoryPath) throws Exception{
 		String[] pathFolders = directoryPath.split("-");
-		System.out.println(Arrays.toString(pathFolders));
 		createDirectory(pathFolders, 0, directoryName);
 	}
 	
@@ -235,7 +235,11 @@ public class UserDirectory {
 		return name;
 	}
 	
-	public void serName(String name){
+	public String getPath() {
+		return path;
+	}
+	
+	public void setName(String name){
 		this.name = name;
 	}
 

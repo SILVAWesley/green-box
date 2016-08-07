@@ -13,6 +13,7 @@ import org.ufcg.si.models.User;
 import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ServerConstants;
+import org.ufcg.si.util.requests.FileRequestBody;
 
 /**
  * This controller class uses JSON data format to be the 
@@ -57,10 +58,15 @@ public class UsersDirectoryController {
 				   	method = RequestMethod.POST,
 				   	produces = MediaType.APPLICATION_JSON_VALUE,
 				   	consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFile(@RequestBody User user, @PathVariable("filename") String fileName) throws Exception {
-		User newUser = userService.findByUsername(user.getUsername());
-		newUser.getUserDirectory().createFile(fileName, "txt", new String ("Curau Mago!"));
-		User updateUser = userService.update(newUser);
+	public ResponseEntity<User> addFile(@RequestBody FileRequestBody fileRequestBody, @PathVariable("filename") String fileName) throws Exception {
+		System.out.println(fileRequestBody.getUser());
+		System.out.println(fileRequestBody.getFileName());
+		System.out.println(fileRequestBody.getFileContent());
+		System.out.println(fileRequestBody.getFileExtension());
+		User userFromRequest = fileRequestBody.getUser();
+		User user = userService.findByUsername(userFromRequest.getUsername());
+		user.getUserDirectory().createFile(fileName, fileRequestBody.getFileExtension(), fileRequestBody.getFileContent());
+		User updateUser = userService.update(user);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}
 	
@@ -68,10 +74,15 @@ public class UsersDirectoryController {
 		   			method = RequestMethod.POST,
 		   			produces = MediaType.APPLICATION_JSON_VALUE,
 		   			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFile(@RequestBody User user, @PathVariable("filename") String fileName, @PathVariable("filepath") String filePath) throws Exception {
-		User newUser = userService.findByUsername(user.getUsername());
-		newUser.getUserDirectory().createFile(fileName, "txt", new String ("Curau Mago!"), filePath);
-		User updateUser = userService.update(newUser);
+	public ResponseEntity<User> addFile(@RequestBody FileRequestBody fileRequestBody, @PathVariable("filename") String fileName, @PathVariable("filepath") String filePath) throws Exception {
+		System.out.println(fileRequestBody.getUser());
+		System.out.println(fileRequestBody.getFileName());
+		System.out.println(fileRequestBody.getFileContent());
+		System.out.println(fileRequestBody.getFileExtension());
+		User userFromRequest = fileRequestBody.getUser();
+		User user = userService.findByUsername(userFromRequest.getUsername());
+		user.getUserDirectory().createFile(fileName, fileRequestBody.getFileExtension(), fileRequestBody.getFileContent(), filePath);
+		User updateUser = userService.update(user);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}
 }

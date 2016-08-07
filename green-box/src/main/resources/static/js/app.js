@@ -10,12 +10,11 @@ angular.module('app').config(['$urlRouterProvider', '$stateProvider', function($
 	
 	$stateProvider.state('dashboard', {
 		url: '/dashboard',
-		templateUrl: 'views/account.html',
-		controller: 'accountController'
+		templateUrl: 'views/account.html'
 	});
 	
 	$stateProvider.state('dashboard.directories', {
-		url: '/dashboard.directories',
+		url: '/dashboard.directories/{folderPath:.*}',
 		templateUrl: 'views/snippets/directorybox.html',
 		controller: 'accountController'
 	});

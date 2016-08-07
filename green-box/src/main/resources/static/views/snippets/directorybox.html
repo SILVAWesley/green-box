@@ -4,12 +4,16 @@
 			<div class="form-top-right">
 				<h3>
 
-					<span ng-repeat="folder in foldersPath track by $index">
+					<span ng-repeat="folder in openedFolders.slice(0, foldersPath.length - 1) track by $index">
 						<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
 						<a
-							ng-click="goBack(folder)">{{folder.name}}
+							ui-sref="dashboard.directories({folderPath: folder.path})">{{folder.name}}
 						</a> / 
 					</span>
+					
+					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
+						{{currentDirectory.name + "/"}} 
+	
 				</h3>
 			</div>
 		</div>
@@ -24,11 +28,19 @@
 							<th>Name</th>
 						</tr>
 					</thead>
-					<tbody ng-repeat="item in filesNFoldersToShow track by $index">
+					<tbody ng-repeat="item in getFolders() track by $index">
 						<tr>
 							<td><i class="fa fa-folder fa-2x" aria-hidden="true"></i> {{item.name}}</td>
 							<td><input type="button" value="Enter"
-								ng-click="goFoward(item)" /></td>
+								ng-click="folderClick(item)" /></td>
+						</tr>
+					</tbody>
+					
+					<tbody ng-repeat="item in getFiles() track by $index">
+						<tr>
+							<td><i class="fa fa-file fa-2x" aria-hidden="true"></i> {{item.name}}</td>
+							<td><input type="button" value="Enter"
+								ng-click="fileClick(item)" /></td>
 						</tr>
 					</tbody>
 				</table>
@@ -40,7 +52,7 @@
 
 	<div class="col-sm-8"></div>
 	<div class="col-sm-4">
-		<button type="submit" class="btn btn-primary btn-lg" ng-click="newFile()">
+		<button type="submit" class="btn btn-primary btn-lg" ng-click="newFilePage()">
 			<strong> <i class="fa fa-file-text-o" aria-hidden="true"
 				fa-3x></i> Create File
 			</strong>
