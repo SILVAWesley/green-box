@@ -71,7 +71,7 @@ public class UserTest {
 		Assert.assertEquals(user4.getUsername(), "Homero");
 	}
 
-	@Test
+	@Deprecated
 	public void testGetDirectory() {
 		Assert.assertEquals(user0.getUserDirectory().getName(), "root/");
 		Assert.assertEquals(user1.getUserDirectory().getName(), "root/");

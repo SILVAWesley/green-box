@@ -16,9 +16,9 @@ public class UserDirectoryTest {
 	@Before
 	public void setUp() {
 		dir1 = new UserDirectory("parent");
-		dir2 = new UserDirectory("son1", dir1);
-		dir3 = new UserDirectory("son2", dir1);
-		dir4 = new UserDirectory("grandSon1-1", dir2);
+		dir2 = new UserDirectory("son1");
+		dir3 = new UserDirectory("son2");
+		dir4 = new UserDirectory("grandSon1-1");
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class UserDirectoryTest {
 
 	}
 
-	@Test
+	@Deprecated
 	public void testGetName() {
 		Assert.assertEquals(dir1.getName(), "parent/");
 		Assert.assertEquals(dir2.getName(), "son1/");
@@ -104,7 +104,7 @@ public class UserDirectoryTest {
 		Assert.assertEquals(dir4.getFiles(), list4);
 	}
 
-	@Test
+	@Deprecated
 	public void testcreateDirectory() {
 
 

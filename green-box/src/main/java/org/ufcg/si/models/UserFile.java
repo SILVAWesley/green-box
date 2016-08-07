@@ -16,6 +16,7 @@ public class UserFile {
 	private File internFile;
 	private String name;
 	private String content;
+	private String extension;
 
 	/**
 	 * This constructor creates a new UserFile and writes an initial content in
@@ -32,6 +33,7 @@ public class UserFile {
 	 */
 	public UserFile(String name, String extension, String content) throws Exception {
 		this.name = name;
+		this.extension = extension;
 		this.internFile = new File(name + "." + extension);
 		writeInFile(content);
 		this.content = readFileContent();
@@ -42,10 +44,6 @@ public class UserFile {
 	 */
 	public UserFile() {
 		
-	}
-	
-	public String getContent() {
-		return content;
 	}
 	
 	private void writeInFile(String fileContent) throws Exception {
@@ -80,6 +78,22 @@ public class UserFile {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * The extension getter. The extension represents the internFile format
+	 * @return The internFile's format
+	 */
+	public String getExtension(){
+		return extension;
+	}
+	
+	/**
+	 * The file's content getter
+	 * @return The internFile's content
+	 */
+	public String getContent() {
+		return content;
 	}
 
 	/**

@@ -45,7 +45,6 @@ public class UserDirectory {
 		this.files = new ArrayList<>();
 		this.children = new ArrayList<>();
 		this.path = path;
-		System.out.println(path);
 	}
 
 	public UserDirectory() {
@@ -65,7 +64,6 @@ public class UserDirectory {
 	 */
 	public UserDirectory(String name) {
 		this(name, name);
-		System.out.println("HELLO WORLD");
 	}
 
 	/**
@@ -99,14 +97,14 @@ public class UserDirectory {
 	 */
 	public void createFile(String fileName, String fileExtension, String fileContent, String filePath) throws Exception{
 		String[] pathFolders = filePath.split("-");
-		createFile(pathFolders, 0, fileName, fileExtension, fileContent);
+		recursiveCreateFile(pathFolders, 0, fileName, fileExtension, fileContent);
 	}
 	
-	private void createFile(String[] pathFolders, int actualIndex, String fileName, String fileExtension, String fileContent) throws Exception {
+	private void recursiveCreateFile(String[] pathFolders, int actualIndex, String fileName, String fileExtension, String fileContent) throws Exception {
 		if(actualIndex == pathFolders.length - 1){
 			getChildDirectory(pathFolders[actualIndex]).createFile(fileName, fileExtension, fileContent);
 		}else{ 
-			getChildDirectory(pathFolders[actualIndex]).createFile(pathFolders, ++actualIndex, fileName, fileExtension, fileContent);
+			getChildDirectory(pathFolders[actualIndex]).recursiveCreateFile(pathFolders, ++actualIndex, fileName, fileExtension, fileContent);
 		}
 	}
 	
@@ -134,14 +132,14 @@ public class UserDirectory {
 	 */
 	public void createDirectory(String directoryName, String directoryPath) throws Exception{
 		String[] pathFolders = directoryPath.split("-");
-		createDirectory(pathFolders, 0, directoryName);
+		recursiveCreateDirectory(pathFolders, 0, directoryName);
 	}
 	
-	private void createDirectory(String[] pathFolders, int actualIndex, String directoryName) throws Exception {
+	private void recursiveCreateDirectory(String[] pathFolders, int actualIndex, String directoryName) throws Exception {
 		if(actualIndex == pathFolders.length - 1){
 			getChildDirectory(pathFolders[actualIndex]).createDirectory(directoryName);
 		}else{ 
-			getChildDirectory(pathFolders[actualIndex]).createDirectory(pathFolders, ++actualIndex, directoryName);
+			getChildDirectory(pathFolders[actualIndex]).recursiveCreateDirectory(pathFolders, ++actualIndex, directoryName);
 		}
 	}
 	
