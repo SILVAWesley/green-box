@@ -29,7 +29,11 @@ public class UsersController {
 	public void setUserService(UserServiceImpl userServiceImpl) {
 		this.userService = userServiceImpl;
 	}
-
+	/**
+	 * This method return a User according to their ID
+	 * @param id The identification of a user
+	 * @return A user
+	 */
 	@RequestMapping(value = "/get/{id}", 
 					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,7 +46,13 @@ public class UsersController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
+	
+	/**
+	 * Create a new User
+	 * @param newUser The new User
+	 * @return The newly created user
+	 * @throws ServletException
+	 */
 	@RequestMapping(value = "/new", 
 					method = RequestMethod.POST, 
 					consumes = MediaType.APPLICATION_JSON_VALUE, 
@@ -56,7 +66,12 @@ public class UsersController {
 			throw new ServletException("User already inside the database. " + e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * Delete a User
+	 * @param id The identification of the user
+	 * @return
+	 */
 	@RequestMapping(value = "/deleteid={id}", 
 					method = RequestMethod.DELETE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,7 +84,12 @@ public class UsersController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
+	
+	/**
+	 * This method return a list with all user createds 
+	 * @returnAll A list of Users 
+	 */
+	
 	@RequestMapping(value = "/all", 
 					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
@@ -77,7 +97,13 @@ public class UsersController {
 		Iterable<User> allUsers = userService.findAll();
 		return new ResponseEntity<>(allUsers, HttpStatus.OK);
 	}
-
+	
+	/**
+	 * This method update a user
+	 * @param user The user who will be update 
+	 * @return
+	 */
+	
 	@RequestMapping(value = "/update", 
 					method = RequestMethod.PUT, 
 					consumes = MediaType.APPLICATION_JSON_VALUE, 
