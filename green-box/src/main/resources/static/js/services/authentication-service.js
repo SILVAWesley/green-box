@@ -1,4 +1,4 @@
-angular.module('app').factory("authService", function($localStorage, $http, userService) {
+angular.module('app').factory("authService", function($localStorage, $http) {
 	return {
 		'login' : function(entryinfo, password, callback) {
 			var user = createUser(entryinfo, password);
@@ -32,7 +32,7 @@ angular.module('app').factory("authService", function($localStorage, $http, user
 				$localStorage.session = {'user': response.data.user,
 						 				 'token': response.data.token,
 						 				 'currentPath': response.data.user.userDirectory.path};
-				userService.setUser(response.data.user);
+
 				callback(true);
 				
 			}, function(response) {
