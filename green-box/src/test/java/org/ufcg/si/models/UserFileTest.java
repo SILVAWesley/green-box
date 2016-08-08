@@ -37,33 +37,7 @@ public class UserFileTest {
 		UserFile broken4 = new UserFile("broken", null, sb1);
 	}
 
-	// @Test
-	// public void construction() throws Exception {
-	// try {
-	// UserFile broken1 = new UserFile(null, null, null);
-	// Assert.fail();
-	// } catch (NullPointerException e) {
-	// e.printStackTrace();
-	// }
-	// try {
-	// UserFile broken2 = new UserFile(null, ".txt", sb1);
-	// Assert.fail();
-	// } catch (NullPointerException e) {
-	// e.printStackTrace();
-	// }
-	// try {
-	// UserFile broken3 = new UserFile("broken", ".txt", null);
-	// Assert.fail();
-	// } catch (NullPointerException e) {
-	// e.printStackTrace();
-	// }
-	// try {
-	// UserFile broken4 = new UserFile("broken", null, sb1);
-	// Assert.fail();
-	// } catch (NullPointerException e) {
-	// e.printStackTrace();
-	// }
-	// }
+
 	@Test
 	public void testEquals() {
 		try {
