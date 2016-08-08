@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 import javax.persistence.Embeddable;
 
+import org.ufcg.si.util.ServerConstants;
+
 /**
  * Represents a File in the Green-Box program
  */
@@ -63,7 +65,7 @@ public class UserFile {
 		Scanner scanner = new Scanner(internFile);
 		StringBuffer content = new StringBuffer();
 		while(scanner.hasNextLine()){
-			content.append(scanner.nextLine() + "\n");
+			content.append(scanner.nextLine() + ServerConstants.LINE_BREAK);
 		}
 		
 		scanner.close();
