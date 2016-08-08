@@ -20,7 +20,7 @@ public class UserDirectoryTest {
 		dir3 = new UserDirectory("son2");
 		dir4 = new UserDirectory("grandSon1-1");
 	}
-
+	
 	@Test
 	public void testEquals() {
 		Assert.assertEquals(dir1, new UserDirectory("parent"));
@@ -36,12 +36,14 @@ public class UserDirectoryTest {
 
 	}
 
-	@Deprecated
+	
+	
+	@Test
 	public void testGetName() {
-		Assert.assertEquals(dir1.getName(), "parent/");
-		Assert.assertEquals(dir2.getName(), "son1/");
-		Assert.assertEquals(dir3.getName(), "son2/");
-		Assert.assertEquals(dir4.getName(), "grandSon1-1/");
+		Assert.assertEquals(dir1.getName(), "parent");
+		Assert.assertEquals(dir2.getName(), "son1");
+		Assert.assertEquals(dir3.getName(), "son2");
+		Assert.assertEquals(dir4.getName(), "grandSon1-1");
 	}
 
 	// @Test
@@ -51,9 +53,35 @@ public class UserDirectoryTest {
 	// Assert.assertEquals(dir3.getParent(), dir1);
 	// Assert.assertEquals(dir4.getParent(), dir2);
 	// }
-
+	
 	@Test
-	public void testGetChildren() {
+	public void testGetChildDirectory(){
+		try {
+			dir1.createDirectory("pepe");
+			dir1.createDirectory("blobo");
+			dir1.createDirectory("bojack");
+			dir2.createDirectory("something");
+			dir2.createDirectory("something else");
+			Assert.assertEquals(dir1.getChildDirectory("pepe"), new UserDirectory("pepe"));
+			Assert.assertEquals(dir1.getChildDirectory("blobo"), new UserDirectory("blobo"));
+			Assert.assertEquals(dir1.getChildDirectory("bojack"), new UserDirectory("bojack"));
+			Assert.assertEquals(dir2.getChildDirectory("something"), new UserDirectory("something"));
+			Assert.assertEquals(dir2.getChildDirectory("something else"), new UserDirectory("something else"));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	@Test(expected = Exception.class)
+	public void testGetChildwithError() throws Exception{
+		dir1.getChildDirectory("something");
+		dir2.getChildDirectory("something");
+		dir3.getChildDirectory("something");
+		dir4.getChildDirectory("something");
+	}
+	@Test
+	public void testGetFiles() {
 		String sb1 = new String("I see fire");
 		String sb2 = new String("I see water");
 		String sb3 = new String("I see nigth");
@@ -104,7 +132,7 @@ public class UserDirectoryTest {
 		Assert.assertEquals(dir4.getFiles(), list4);
 	}
 
-	@Deprecated
+	@Test
 	public void testcreateDirectory() {
 
 
@@ -122,14 +150,14 @@ public class UserDirectoryTest {
 			e.printStackTrace();
 		}
 		
-		Assert.assertEquals(dir1.getChildren().get(0).getName(), "parent/games/");
-		Assert.assertEquals(dir1.getChildren().get(1).getName(), "parent/music/");
-		Assert.assertEquals(dir2.getChildren().get(0).getName(), "son1/games/");
-		Assert.assertEquals(dir2.getChildren().get(1).getName(), "son1/books/");
-		Assert.assertEquals(dir3.getChildren().get(0).getName(), "son2/music/");
-		Assert.assertEquals(dir3.getChildren().get(1).getName(), "son2/books/");
-		Assert.assertEquals(dir4.getChildren().get(0).getName(), "grandSon1-1/comics/");
-		Assert.assertEquals(dir4.getChildren().get(1).getName(), "grandSon1-1/papers/");
+		Assert.assertEquals(dir1.getChildren().get(0), new UserDirectory("games"));
+		Assert.assertEquals(dir1.getChildren().get(1),  new UserDirectory("music"));
+		Assert.assertEquals(dir2.getChildren().get(0),  new UserDirectory("games"));
+		Assert.assertEquals(dir2.getChildren().get(1),  new UserDirectory("books"));
+		Assert.assertEquals(dir3.getChildren().get(0),  new UserDirectory("music"));
+		Assert.assertEquals(dir3.getChildren().get(1),  new UserDirectory("books"));
+		Assert.assertEquals(dir4.getChildren().get(0),  new UserDirectory("comics"));
+		Assert.assertEquals(dir4.getChildren().get(1),  new UserDirectory("papers"));
 
 	}
 }
