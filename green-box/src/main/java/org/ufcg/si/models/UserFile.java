@@ -36,7 +36,7 @@ public class UserFile {
 	public UserFile(String name, String extension, String content) throws Exception {
 		this.name = name;
 		this.extension = extension;
-		this.internFile = new File(name + "." + extension);
+		this.internFile = new File("files/" + name + "." + extension);
 		writeInFile(content);
 		this.content = readFileContent();
 	}

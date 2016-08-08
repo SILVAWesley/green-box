@@ -7,7 +7,6 @@ angular.module('app').factory("authService", function($localStorage, $http) {
 		
 		'logout' : function() {
 			delete $localStorage.session;
-			userService.setUser(null);
 		}
 	}
 	

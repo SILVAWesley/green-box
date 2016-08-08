@@ -32,6 +32,11 @@ angular.module('app').controller('registrationController', ['$scope', '$http', f
 						 "Username: " + response.data.username + " "
 						 + "Email: " + response.data.email);
 			
+			$scope.user = {username: "", 
+					   	   email: "", 
+					   	   password: ""}
+			$scope.registrationForm.$setPristine();
+			
 		}, function(response) {
 			
 			window.alert("Failure: " + response.data.message);
