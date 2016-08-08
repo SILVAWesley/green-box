@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.ufcg.si.models.UserFile;
+import org.ufcg.si.util.ServerConstants;
 
 public class UserFileTest {
 	String sb1 = new String("I see fire");
@@ -23,42 +24,42 @@ public class UserFileTest {
 		file4 = new UserFile("fate", "txt", sb4);
 
 	}
-	
+
 	@Test(expected = NullPointerException.class)
-	public void construction() throws Exception{
+	public void construction() throws Exception {
 		UserFile broken1 = new UserFile(null, null, null);
 		UserFile broken2 = new UserFile(null, ".txt", sb1);
 		UserFile broken3 = new UserFile("broken", ".txt", null);
 		UserFile broken4 = new UserFile("broken", null, sb1);
 	}
-	
-//	@Test
-//	public void construction() throws Exception {
-//		try {
-//			UserFile broken1 = new UserFile(null, null, null);
-//			Assert.fail();
-//		} catch (NullPointerException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			UserFile broken2 = new UserFile(null, ".txt", sb1);
-//			Assert.fail();
-//		} catch (NullPointerException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			UserFile broken3 = new UserFile("broken", ".txt", null);
-//			Assert.fail();
-//		} catch (NullPointerException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			UserFile broken4 = new UserFile("broken", null, sb1);
-//			Assert.fail();
-//		} catch (NullPointerException e) {
-//			e.printStackTrace();
-//		}
-//	}
+
+	// @Test
+	// public void construction() throws Exception {
+	// try {
+	// UserFile broken1 = new UserFile(null, null, null);
+	// Assert.fail();
+	// } catch (NullPointerException e) {
+	// e.printStackTrace();
+	// }
+	// try {
+	// UserFile broken2 = new UserFile(null, ".txt", sb1);
+	// Assert.fail();
+	// } catch (NullPointerException e) {
+	// e.printStackTrace();
+	// }
+	// try {
+	// UserFile broken3 = new UserFile("broken", ".txt", null);
+	// Assert.fail();
+	// } catch (NullPointerException e) {
+	// e.printStackTrace();
+	// }
+	// try {
+	// UserFile broken4 = new UserFile("broken", null, sb1);
+	// Assert.fail();
+	// } catch (NullPointerException e) {
+	// e.printStackTrace();
+	// }
+	// }
 	@Test
 	public void testEquals() {
 		try {
@@ -77,6 +78,28 @@ public class UserFileTest {
 	}
 
 	@Test
+	public void testGetContent() {
+		UserFile tempFile1;
+		UserFile tempFile2;
+		UserFile tempFile3;
+		UserFile tempFile4;
+		try {
+			tempFile1 = new UserFile("fire", "txt", sb1);
+			tempFile2 = new UserFile("water", "txt", sb2);
+			tempFile3 = new UserFile("nigth", "txt", sb3);
+			tempFile4 = new UserFile("fate", "txt", sb4);
+			Assert.assertEquals(file1.getContent(), tempFile1.getContent());
+			Assert.assertEquals(file2.getContent(), tempFile2.getContent());
+			Assert.assertEquals(file3.getContent(),tempFile3.getContent());
+			Assert.assertEquals(file4.getContent(), tempFile4.getContent());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Test
 	public void testGetName() {
 		Assert.assertEquals(file1.getName(), "fire");
 		Assert.assertEquals(file2.getName(), "water");
@@ -86,6 +109,20 @@ public class UserFileTest {
 		Assert.assertFalse(file2.getName().equals("somebody else"));
 		Assert.assertFalse(file3.getName().equals("not you"));
 		Assert.assertFalse(file4.getName().equals("someone"));
+	}
+	
+	@Test
+	public void testGetExtension(){
+		Assert.assertEquals(file1.getExtension(), "txt");
+		Assert.assertEquals(file2.getExtension(), "txt");
+		Assert.assertEquals(file3.getExtension(), "txt");
+		Assert.assertEquals(file4.getExtension(), "txt");
+
+		Assert.assertNotEquals(file1.getExtension(), "exe");
+		Assert.assertNotEquals(file2.getExtension(), "font");
+		Assert.assertNotEquals(file3.getExtension(), "fmt");
+		Assert.assertNotEquals(file4.getExtension(), "md");
+		
 	}
 
 }
