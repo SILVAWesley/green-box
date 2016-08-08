@@ -7,10 +7,10 @@ import org.ufcg.si.models.UserFile;
 import org.ufcg.si.util.ServerConstants;
 
 public class UserFileTest {
-	String sb1 = new String("I see fire");
-	String sb2 = new String("I see water");
-	String sb3 = new String("I see nigth");
-	String sb4 = new String("I see fate");
+	String sb1;
+	String sb2;
+	String sb3;
+	String sb4;
 	private UserFile file1;
 	private UserFile file2;
 	private UserFile file3;
@@ -18,6 +18,10 @@ public class UserFileTest {
 
 	@Before
 	public void setup() throws Exception {
+		sb1 = new String("I see fire");
+		sb2 = new String("I see water");
+		sb3 = new String("I see nigth");
+		sb4 = new String("I see fate");
 		file1 = new UserFile("fire", "txt", sb1);
 		file2 = new UserFile("water", "txt", sb2);
 		file3 = new UserFile("nigth", "txt", sb3);

@@ -12,6 +12,10 @@ public class UserDirectoryTest {
 	private UserDirectory dir2;
 	private UserDirectory dir3;
 	private UserDirectory dir4;
+	String sb1;
+	String sb2;
+	String sb3;
+	String sb4;
 
 	@Before
 	public void setUp() {
@@ -19,8 +23,12 @@ public class UserDirectoryTest {
 		dir2 = new UserDirectory("son1");
 		dir3 = new UserDirectory("son2");
 		dir4 = new UserDirectory("grandSon1-1");
+		sb1 = new String("I see fire");
+		sb2 = new String("I see water");
+		sb3 = new String("I see nigth");
+		sb4 = new String("I see fate");
 	}
-	
+
 	@Test
 	public void testEquals() {
 		Assert.assertEquals(dir1, new UserDirectory("parent"));
@@ -36,8 +44,6 @@ public class UserDirectoryTest {
 
 	}
 
-	
-	
 	@Test
 	public void testGetName() {
 		Assert.assertEquals(dir1.getName(), "parent");
@@ -53,9 +59,9 @@ public class UserDirectoryTest {
 	// Assert.assertEquals(dir3.getParent(), dir1);
 	// Assert.assertEquals(dir4.getParent(), dir2);
 	// }
-	
+
 	@Test
-	public void testGetChildDirectory(){
+	public void testGetChildDirectory() {
 		try {
 			dir1.createDirectory("pepe");
 			dir1.createDirectory("blobo");
@@ -67,19 +73,21 @@ public class UserDirectoryTest {
 			Assert.assertEquals(dir1.getChildDirectory("bojack"), new UserDirectory("bojack"));
 			Assert.assertEquals(dir2.getChildDirectory("something"), new UserDirectory("something"));
 			Assert.assertEquals(dir2.getChildDirectory("something else"), new UserDirectory("something else"));
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
+
 	@Test(expected = Exception.class)
-	public void testGetChildwithError() throws Exception{
+	public void testGetChildwithError() throws Exception {
 		dir1.getChildDirectory("something");
 		dir2.getChildDirectory("something");
 		dir3.getChildDirectory("something");
 		dir4.getChildDirectory("something");
 	}
+
 	@Test
 	public void testGetFiles() {
 		String sb1 = new String("I see fire");
@@ -135,7 +143,6 @@ public class UserDirectoryTest {
 	@Test
 	public void testcreateDirectory() {
 
-
 		try {
 			dir1.createDirectory("games");
 			dir1.createDirectory("music");
@@ -149,15 +156,136 @@ public class UserDirectoryTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		Assert.assertEquals(dir1.getChildren().get(0), new UserDirectory("games"));
-		Assert.assertEquals(dir1.getChildren().get(1),  new UserDirectory("music"));
-		Assert.assertEquals(dir2.getChildren().get(0),  new UserDirectory("games"));
-		Assert.assertEquals(dir2.getChildren().get(1),  new UserDirectory("books"));
-		Assert.assertEquals(dir3.getChildren().get(0),  new UserDirectory("music"));
-		Assert.assertEquals(dir3.getChildren().get(1),  new UserDirectory("books"));
-		Assert.assertEquals(dir4.getChildren().get(0),  new UserDirectory("comics"));
-		Assert.assertEquals(dir4.getChildren().get(1),  new UserDirectory("papers"));
+		Assert.assertEquals(dir1.getChildren().get(1), new UserDirectory("music"));
+		Assert.assertEquals(dir2.getChildren().get(0), new UserDirectory("games"));
+		Assert.assertEquals(dir2.getChildren().get(1), new UserDirectory("books"));
+		Assert.assertEquals(dir3.getChildren().get(0), new UserDirectory("music"));
+		Assert.assertEquals(dir3.getChildren().get(1), new UserDirectory("books"));
+		Assert.assertEquals(dir4.getChildren().get(0), new UserDirectory("comics"));
+		Assert.assertEquals(dir4.getChildren().get(1), new UserDirectory("papers"));
+
+	}
+
+	@Test
+	public void testCreatDirectorywithPath() {
+		try {
+			dir1.createDirectory("heaven");
+			dir1.createDirectory("sky", "heaven");
+			dir1.createDirectory("earth", "heaven-sky");
+			dir1.createDirectory("midgard", "heaven-sky-earth");
+			dir1.createDirectory("purgatory", "heaven-sky-earth-midgard");
+			dir1.createDirectory("hell", "heaven-sky-earth-midgard-purgatory");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			UserDirectory heaven = dir1.getChildDirectory("heaven");
+			UserDirectory sky = heaven.getChildDirectory("sky");
+			UserDirectory earth = sky.getChildDirectory("earth");
+			UserDirectory midgard = earth.getChildDirectory("midgard");
+			UserDirectory purgatory = midgard.getChildDirectory("purgatory");
+			UserDirectory hell = purgatory.getChildDirectory("hell");
+
+			Assert.assertEquals(heaven, new UserDirectory("heaven"));
+			Assert.assertEquals(sky, new UserDirectory("sky"));
+			Assert.assertEquals(earth, new UserDirectory("earth"));
+			Assert.assertEquals(midgard, new UserDirectory("midgard"));
+			Assert.assertEquals(purgatory, new UserDirectory("purgatory"));
+			Assert.assertEquals(hell, new UserDirectory("hell"));
+			Assert.assertEquals(heaven, new UserDirectory("heaven"));
+			Assert.assertNotEquals(earth, new UserDirectory("sky"));
+			Assert.assertNotEquals(hell, new UserDirectory("earth"));
+			Assert.assertNotEquals(heaven, new UserDirectory("midgard"));
+			Assert.assertNotEquals(midgard, new UserDirectory("purgatory"));
+			Assert.assertNotEquals(sky, new UserDirectory("hell"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testCreateFile(){
+		
+		try {
+			dir1.createFile("fire", "txt", sb1);
+			dir1.createFile("water", "txt", sb2);
+			dir2.createFile("nigth", "txt", sb3);
+			dir2.createFile("fate", "txt", sb4);
+			dir3.createFile("nigth", "txt", sb3);
+			dir3.createFile("fire", "txt", sb1);
+			dir3.createFile("fate", "txt", sb4);
+			dir3.createFile("water", "txt", sb2);
+			dir4.createFile("nigth", "txt", sb3);
+			dir4.createFile("fire", "txt", sb1);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			Assert.assertEquals(dir1.getFiles().get(0), new UserFile("fire", "txt", sb1));
+			Assert.assertEquals(dir1.getFiles().get(1), new UserFile("water", "txt", sb2));
+			Assert.assertEquals(dir2.getFiles().get(0), new UserFile("nigth", "txt", sb3));
+			Assert.assertEquals(dir2.getFiles().get(1), new UserFile("fate", "txt", sb4));
+			Assert.assertEquals(dir3.getFiles().get(0), new UserFile("nigth", "txt", sb3));
+			Assert.assertEquals(dir3.getFiles().get(1), new UserFile("fire", "txt", sb1));
+			Assert.assertEquals(dir3.getFiles().get(2), new UserFile("fate", "txt", sb4));
+			Assert.assertEquals(dir3.getFiles().get(3), new UserFile("water", "txt", sb2));
+			Assert.assertEquals(dir4.getFiles().get(0), new UserFile("nigth", "txt", sb3));
+			Assert.assertEquals(dir4.getFiles().get(1), new UserFile("fire", "txt", sb1));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+//		Assert.assertEquals(heaven.getFiles().get(0), new UserFile("fire", "txt", sb1));
+//		Assert.assertEquals(sky.getFiles().get(0), new UserFile("water", "txt", sb2));
+//		Assert.assertEquals(earth.getFiles().get(0), new UserFile("nigth", "txt", sb3));
+//		Assert.assertEquals(midgard.getFiles().get(0), new UserFile("fate", "txt", sb4));
+	}
+	@Test
+	public void testCreatFileWithPath() {
+		try {
+			dir1.createDirectory("heaven");
+			dir1.createDirectory("sky", "heaven");
+			dir1.createDirectory("earth", "heaven-sky");
+			dir1.createDirectory("midgard", "heaven-sky-earth");
+			dir1.createDirectory("purgatory", "heaven-sky-earth-midgard");
+			dir1.createDirectory("hell", "heaven-sky-earth-midgard-purgatory");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			dir1.createFile("fire", "txt", sb1, "heaven");
+			dir1.createFile("water", "txt", sb2, "heaven-sky");
+			dir1.createFile("nigth", "txt", sb3, "heaven-sky-earth");
+			dir1.createFile("fate", "txt", sb4, "heaven-sky-earth-midgard");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			UserDirectory heaven = dir1.getChildDirectory("heaven");
+			UserDirectory sky = heaven.getChildDirectory("sky");
+			UserDirectory earth = sky.getChildDirectory("earth");
+			UserDirectory midgard = earth.getChildDirectory("midgard");
+
+			Assert.assertEquals(heaven.getFiles().get(0), new UserFile("fire", "txt", sb1));
+			Assert.assertEquals(sky.getFiles().get(0), new UserFile("water", "txt", sb2));
+			Assert.assertEquals(earth.getFiles().get(0), new UserFile("nigth", "txt", sb3));
+			Assert.assertEquals(midgard.getFiles().get(0), new UserFile("fate", "txt", sb4));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 	}
 }
