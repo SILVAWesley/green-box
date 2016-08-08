@@ -11,8 +11,6 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		$scope.content = $localStorage.clickedFile.content;
 	}
 	
-	console.log($localStorage.clickedFile + " CLICKED FILE");
-	
 	$scope.saveFile = function() {
 		path = formatPathToApiPattern($scope.path);
 		
@@ -25,10 +23,6 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		requestData.fileName = $scope.newFileName;
 		requestData.fileExtension = $scope.extension;
 		requestData.fileContent = parsedContent;
-		
-		console.log(requestData);
-		
-		
 		
 		$http.post('/server/userdirectory/newfile/' + path, requestData)
 		.then(function(response) {

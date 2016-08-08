@@ -1,4 +1,4 @@
-angular.module('app').controller("accountController", function($scope, $state, $localStorage, $http, $rootScope, authService, $stateParams) {
+angular.module('app').controller("directoriesController", function($scope, $state, $localStorage, $http, $rootScope, $stateParams) {
 	$scope.user = $localStorage.session.user;
 	$scope.rootDirectory = $scope.user.userDirectory;
 	$scope.currentDirectory = $scope.rootDirectory;
@@ -15,7 +15,6 @@ angular.module('app').controller("accountController", function($scope, $state, $
 	$scope.fileClick = function(file) {
 		$localStorage.clickedFile = file;
 		$state.go('dashboard.file');
-		console.log("chegou aqui");
 	}
 	
 	$scope.newFolder = function() {
@@ -52,10 +51,6 @@ angular.module('app').controller("accountController", function($scope, $state, $
 		$localStorage.clickedFile = null;
 		$state.go('dashboard.file');
 	}
-	
-	$scope.logout = function() {
-		authService.logout();
-	}	
 	
 	$scope.filesNFoldersToShow = $scope.getFilesNFolders();
 	goToPath($stateParams.folderPath);
