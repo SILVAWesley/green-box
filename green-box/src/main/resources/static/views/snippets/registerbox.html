@@ -8,41 +8,36 @@
 				Create your account <i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
 			</h3>
 		</div>
-	</div>
+	</div> <!-- form-top ends -->
 	
 	<div class="form-bottom">
-
-		<form role="form" name="registrationForm" class="registration-form" ng-submit="doRegister()">
+		<form class="registration-form" name="registrationForm" role="form" ng-submit="doRegister()">
 			
-			<div class="form-group">
+			<div class="form-group" id="form-group-1">
 				<label class="sr-only" for="username">First name</label> 
-					<input type="text" name="username" placeholder="Your name..."
-							class="form-name form-control" id="form-name" ng-model="user.username" required/>
+					<input class="form-name form-control" id="form-name" type="text" name="username" placeholder="Your name..." ng-model="user.username" required/>
 					<span style="color:red" ng-show="registrationForm.username.$error.required && registrationForm.username.$dirty">Username required.</span>
-			</div>
+			</div> <!-- form-group-1 ends -->
 			
-			<div class="form-group">
+			<div class="form-group" id="form-group-2">
 				<label class="sr-only" for="email">Email</label> 
-					<input type="text" name="email" placeholder="Email..."
-						class="form-email form-control" id="form-email" ng-model="user.email" required/>
+					<input class="form-email form-control" id="form-email" type="text" name="email" placeholder="Email..." ng-model="user.email" required/>
 					<span style="color:red" ng-show="registrationForm.email.$error.required && registrationForm.email.$dirty">Email required.</span>
-			</div>
+			</div> <!-- form-group-2 ends -->
 			
-			<div class="form-group">
+			<div class="form-group" id="form-group-3">
 				<label class="sr-only" for="password">Password</label> 
-					<input type="password" name="password" placeholder="Password..."
-							class="form-password form-control" id="form-password" ng-model="user.password" required/>
+					<input class="form-password form-control" id="form-password" type="password" name="password" placeholder="Password..." ng-model="user.password" required/>
 					<span style="color:red" ng-show="registrationForm.password.$error.required && registrationForm.password.$dirty">Password required.</span>
-			</div>
+			</div> <!-- form-group-3 ends -->
 			
-			<button type="submit" class="btn btn-warning" ng-disabled="registrationForm.$invalid">
+			<button class="btn btn-warning" type="submit" ng-disabled="registrationForm.$invalid">
 				<strong>
 					<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Create an account!
 				</strong>
 			</button>
 			
 		</form>
-
-	</div>
+	</div> <!-- for-bottom ends -->
 	
-</div>
+</div> <!-- form-box ends -->

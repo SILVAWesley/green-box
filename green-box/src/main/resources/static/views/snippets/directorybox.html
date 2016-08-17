@@ -1,94 +1,24 @@
 <div class="col-sm-12">
-	<div class="user-box">
-		<div class="form-top">
-			<div class="form-top-right">
-				<h3>
-					<span ng-repeat="folder in openedFolders.slice(0, foldersPath.length - 1) track by $index">
-						<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
-						<a
-							style="color:green"
-							ui-sref="dashboard.directories({folderPath: folder.path})">{{folder.name}}
-						</a> / 
-					</span>
-					
-					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
-					{{currentDirectory.name + "/"}} 
-					
-				</h3>
-			</div>
-		</div>
-	</div>
+	<ng-include src="'views/snippets/itemsbox.html'"> </ng-include>
 
-	<div class="form-bottom">
-		<form role="form" action="" method="post" class="login-form">
-			<div class="form-group">
-				<table class="table table-striped">
-					
-					<thead>
-						<tr>
-							<th>Name</th>
-						</tr>
-					</thead>
-					
-					<tbody ng-repeat="item in getFolders() track by $index">
-						<tr>
-							<td>
-								<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
-								<a style="color:green" href="" ng-click="folderClick(item)"> {{item.name}}</a>
-							</td>
-						</tr>
-					</tbody>
-					
-					<tbody ng-repeat="item in getFiles() track by $index">
-						<tr>
-							<td>
-								<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
-								<a style="color:green" href="" ng-click="fileClick(item)"> {{item.name + '.' + item.extension}}</a>
-							</td>
-					</tbody>
-				
-				</table>
-			</div>
-		</form>
-	</div>
-
-	<br />
-	
-	<!-- organising of boxes -->
-	<div class="col-sm-8"></div>
-	
-	<div class="col-sm-12 col-md-12">
-		
-		<button type="submit" class="btn btn-primary btn-lg" ng-click="newFilePage()">
-			<strong> 
-				<i class="fa fa-file-text-o" aria-hidden="true fa-3x"></i> Create File
-			</strong>
-		</button>
-	
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">
-			<strong> 
-				<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
-			</strong>
-		</button>
-
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<!-- Modal Create File-->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalFolder">
   			<div class="modal-dialog" role="document">
     			<div class="modal-content">
+      				
       				<div class="modal-header">
         				
-        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
         					<span aria-hidden="true">&times;</span>
         				</button>
         				
-        				<h3 class="modal-title" id="myModalLabel" style="font-family: 'Pattaya', sans-serif">
+        				<h3 class="modal-title" id="modalFolder" style="font-family: 'Pattaya', sans-serif">
         					<strong>
         						<i class="fa fa-cog fa-lg" aria-hidden="true"></i> Creating Folder
         					</strong>
         				</h3>
         				
-      				</div>
+      				</div> <!-- modal-header ends -->
       				
       				<div class="modal-body">
       					<h3 style="font-family: 'Pattaya', sans-serif">
@@ -97,28 +27,95 @@
       							<input type="text" placeholder="Folder Name" ng-model="newFolderName" />
       						</strong>
       					</h3>
-    	  			</div>
+    	  			</div> <!-- modal-body ends -->
     	  			
       				<div class="modal-footer">
 						
-						<button type="submit" class="btn btn-warning" ng-click="newFolder()">
+						<button class="btn btn-warning" type="submit" ng-click="newFolder()">
 							<strong> 
 								<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
 							</strong>
 						</button>
 						
-        				<button type="button" class="btn btn-danger" data-dismiss="modal">							
+        				<button class="btn btn-danger" data-dismiss="modal" type="button">							
         					<strong> 
         						<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         					</strong>
         				</button>
         				
-      				</div>
+      				</div> <!-- modal-footer ends -->
       				
-    			</div>
-  			</div>
-		</div>
+    			</div> <!-- modal-content ends -->
+  			</div> <!-- modal-dialog ends -->
+		</div> 
+
+		<!-- Modal Share File -->
+		<div class="modal fade" id="modalShare" tabindex="-1" role="dialog" aria-labelledby="modalSharing">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      				
+      				<div class="modal-header">
+        				
+        				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+        					<span aria-hidden="true">&times;</span>
+        				</button>
+        				
+        				<h3 class="modal-title" id="modalSharing" style="font-family: 'Pattaya', sans-serif">
+        					<strong>
+        						<i class="fa fa-share-alt-square fa-lg" aria-hidden="true"></i> Share
+        					</strong>
+        				</h3>
+        				
+      				</div> <!-- modal-header ends -->
+      				
+      				<div class="modal-body">
+      					<h3 style="font-family: 'Pattaya', sans-serif">
+      						<strong>
+      							<i class="fa fa-users fa-lg" aria-hidden="true"></i>
+      							User Name: 
+      							&emsp;&emsp;&ensp; <!-- Adition of space --> 
+      							<input title="Choose a friend for sharing your file" type="text" placeholder="UserName..." ng-model="" />
+      							
+      							<p></p>
+      							
+								<i class="fa fa-file-text-o" aria-hidden="true"></i>
+								&nbsp; <!-- Adition of space -->
+      							File to Share: 
+      							&emsp;&emsp; <!-- Adition of space -->
+      							<input style="background: #ffffff; border: 3px solid #ffffff;" type="text" 
+      								   placeholder="{{item.name + '.' + item.extension}}" ng-disabled="true" 
+      							/>
+								
+      						</strong>
+      					</h3>
+    	  			</div> <!-- modal-body ends -->
+    	  			
+      				<div class="modal-footer">
+						
+						<button class="btn btn-info" type="submit" ng-click="">
+							<strong> 
+								<i class="fa fa-share-alt-square" aria-hidden="true"></i> Only Reading
+							</strong>
+						</button>
+						
+						<button class="btn btn-primary" type="submit" ng-click="">
+							<strong> 
+								<i class="fa fa-share-alt-square" aria-hidden="true"></i> Reading and Writing
+							</strong>
+						</button>
+						
+        				<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        					<strong> 
+        						<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
+        					</strong>
+        				</button>
+        				
+      				</div> <!-- modal-footer ends -->
+      				
+    			</div> <!-- modal-content ends -->
+  			</div> <!-- modal-dialog ends -->
+		</div> <!-- modalShare ends -->
 		
-	</div>
+	</div> <!-- col-sm-12 col-md-12 ends -->
 	
-</div>
+</div> <!-- col-sm-12 ends -->

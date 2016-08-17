@@ -15,4 +15,3 @@ $(document).ready(function() {
  	  $('.click2edit').summernote('destroy');
  };
 
-

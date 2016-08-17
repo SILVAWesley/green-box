@@ -7,30 +7,30 @@
 				Access your files <i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
 			</h3>
 		</div>
-	</div>
+	</div> <!-- form-top ends -->
 	
 	<div class="form-bottom">
 		<form role="form" name="loginForm" class="login-form" ng-submit="login()">
 			
-			<div class="form-group">
+			<div class="form-group" id="form-gruop-1">
 		 		<label class="sr-only" for="username">Username/Email</label> 
 				<input type="text" name="username" placeholder="Username or Email..." class="form-username form-control" id="form-username" ng-model="entrydata" required/>
 				<span style="color:red" ng-show="loginForm.username.$error.required && loginForm.username.$dirty">Username or Email required</span>
-			</div>
+			</div> <!-- form-gruop-1 ends -->
 
-			<div class="form-group">
+			<div class="form-group" id="form-gruop-2">
 				<label class="sr-only" for="password2">Password</label> 
-				<input type="password" name="password2" placeholder="Password..." class="form-password form-control" id="form-password" ng-model="password" required/>
+				<input class="form-password form-control" id="form-password" type="password" name="password2" placeholder="Password..." ng-model="password" required/>
 				<span style="color:red" ng-show="loginForm.password2.$error.required && loginForm.password2.$dirty">Password required</span>
-			</div>
+			</div> <!-- form-gruop-2 ends -->
 
-			<button type="submit" class="btn" ng-disabled="loginForm.$invalid">
+			<button class="btn" type="submit" ng-disabled="loginForm.$invalid">
 				<strong>
 					<i class="fa fa-user fa-lg" aria-hidden="true"></i> Sign in!
 				</strong>
 			</button>
 			
 		</form>
-	</div>
+	</div> <!-- form-bottom ends -->
 	
-</div>
+</div> <!-- form-box ends -->

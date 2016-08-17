@@ -1,0 +1,88 @@
+	<div class="user-box">
+		<div class="form-top">
+			<div class="form-top-right">
+				<h3>
+					<span ng-repeat="folder in openedFolders.slice(0, foldersPath.length - 1) track by $index">
+						<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
+						<a
+							style="color:green"
+							ui-sref="dashboard.directories({folderPath: folder.path})">{{folder.name}}
+						</a> / 
+					</span>
+					
+					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
+					{{currentDirectory.name + "/"}} 
+					
+				</h3>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-bottom">
+		<form role="form" action="" method="post" class="login-form">
+			<div class="form-group">
+				<table class="table table-striped">
+					
+					<thead>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</thead>
+					
+					<tbody ng-repeat="item in getFolders() track by $index">
+						<tr>
+						
+							<td>
+								<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
+								<a style="color:green" href="" ng-click="folderClick(item)"> {{item.name}}</a>
+							</td>
+							
+							<td class="col-sm-1"></td> <!-- standardization of box -->
+							
+						</tr>
+					</tbody>
+					
+					<tbody ng-repeat="item in getFiles() track by $index">
+						<tr>
+							
+							<td>
+								<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
+								<a style="color:green" href="" ng-click="fileClick(item)"> {{item.name + '.' + item.extension}}</a>
+							</td>
+							
+		
+							<td class="col-sm-1">
+								<a title="Share with your friends" class="fa fa-slideshare fa-2x" aria-hidden="true" 
+								   style="color:#92FF70" href="" data-toggle="modal" data-target="#modalShare">
+								</a>
+							</td>
+					
+
+						</tr>
+					</tbody>
+				
+				</table>
+			</div>
+		</form>
+	</div>
+
+	<br />
+
+	<!-- organising of boxes -->
+	<div class="col-sm-8"></div>
+	
+	<div class="col-sm-12 col-md-12">
+		
+		<button class="btn btn-primary btn-lg" type="submit" ng-click="newFilePage()">
+			<strong> 
+				<i class="fa fa-file-text-o" aria-hidden="true fa-3x"></i> Create File
+			</strong>
+		</button>
+	
+		<!-- Button trigger modal -->
+		<button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal" type="button">
+			<strong> 
+				<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
+			</strong>
+		</button>
+	
