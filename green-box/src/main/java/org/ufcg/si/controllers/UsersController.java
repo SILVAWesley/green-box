@@ -59,6 +59,8 @@ public class UsersController {
 					produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> createUser(@RequestBody User newUser) throws ServletException {
 		try {
+			String username = newUser.getUsername();
+			newUser.getUserDirectory().setName(username);
 			User savedUser = userService.save(newUser);
 			return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
 		} catch (Exception e) {
