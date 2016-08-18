@@ -2,7 +2,8 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	$scope.path = $localStorage.session.currentPath;
 	$scope.user = $localStorage.session.user;
 	$scope.content = "";
-	$scope.extension = "txt";
+	$scope.extensions = ["txt", "md"];
+	$scope.currentExtension = "txt";
 	
 	$scope.newFileName = "";
 	
@@ -17,8 +18,9 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		requestData = {};
 		requestData.user = $scope.user;
 		requestData.fileName = $scope.newFileName;
-		requestData.fileExtension = $scope.extension;
+		requestData.fileExtension = $scope.currentExtension;
 		requestData.fileContent = $scope.content;
+		console.log($scope.currentExtension);
 		
 		console.log('content: ' + requestData.fileContent);
 		
@@ -26,8 +28,7 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 			
 			window.alert("File name cannot be empty.");
 			
-		} else {
-		
+		} else if ($localStorage.clickedFile == undefined){
 			$http.post('/server/userdirectory/newfile/' + path, requestData)
 			.then(function(response) {
 				
@@ -40,6 +41,16 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 				
 				window.alert(response.data.message);
 				
+			});
+		} else {
+			$http.post('/server/userdirectory/editFile/' + path, requestData)
+			.then(function(response){
+				
+				$localStorage.session.user = response.data;
+				window.alert("File successfully edited");
+				
+			}, function(response){
+				window.alert(response.data.message);
 			});
 		}
 	}
