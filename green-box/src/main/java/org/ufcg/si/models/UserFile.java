@@ -97,6 +97,12 @@ public class UserFile {
 	public String getContent() {
 		return content;
 	}
+	
+	public void setContent(String newContent) throws Exception {
+		this.content = newContent;
+		this.internFile = new File("files/" + name + "." + extension);
+		writeInFile(newContent);
+	}
 
 	/**
 	 * Two UserFiles are equals if they have the same name.
