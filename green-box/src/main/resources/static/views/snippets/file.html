@@ -26,9 +26,8 @@
 								&emsp;&emsp; <!-- adition of space -->
 								<strong> Select Extension: </strong>
 								
-								<select class="btn btn-success" style="font-family: 'Open Sans', sans-serif;font-size: 18px">
-  									<option value="txt"><strong>Text File (.txt)</strong></option>
-  									<option value="txt"><strong>MarkDown File (.md)</strong></option>
+								<select ng-model="currentExtension" class="btn btn-success" style="font-family: 'Open Sans', sans-serif;font-size: 18px">
+  									<option ng-repeat="extension in extensions"><strong>{{extension}}</strong></option>
 								</select>
 								
 							</h3>
