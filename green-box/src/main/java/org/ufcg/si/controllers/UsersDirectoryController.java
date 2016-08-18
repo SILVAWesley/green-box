@@ -77,4 +77,17 @@ public class UsersDirectoryController {
 		User updateUser = userService.update(user);
 		return new ResponseEntity<>(updateUser, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/editFile/{filepath}",
+					method = RequestMethod.POST,
+					produces = MediaType.APPLICATION_JSON_VALUE,
+					consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> editFile(@RequestBody FileRequestBody fileRequestBody, @PathVariable("filepath") String filePath) throws Exception{
+		User userFromRequest = fileRequestBody.getUser();
+		System.out.println(userFromRequest.getUsername());
+		User user = userService.findByUsername(userFromRequest.getUsername());
+		user.getUserDirectory().editFile(filePath, fileRequestBody.getFileName(), fileRequestBody.getFileContent());
+		User updateUser = userService.update(user);
+		return new ResponseEntity<>(updateUser, HttpStatus.OK);
+	}
 }

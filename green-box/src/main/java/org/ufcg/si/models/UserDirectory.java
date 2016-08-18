@@ -143,6 +143,28 @@ public class UserDirectory {
 		}
 	}
 	
+	public void editFile(String directoryPath, String fileName, String newContent) throws Exception {
+		String[] pathFolders = directoryPath.split("-");
+		recursiveEditFile(pathFolders, 0, fileName, newContent);
+	}
+	
+	private void recursiveEditFile(String[] pathFolders, int actualIndex, String fileName, String newContent) throws Exception {
+		if(actualIndex == pathFolders.length - 1){
+			getChildDirectory(pathFolders[actualIndex]).getChildFile(fileName).setContent(newContent);
+		}else{ 
+			getChildDirectory(pathFolders[actualIndex]).recursiveEditFile(pathFolders, ++actualIndex, fileName, newContent);
+		}
+	}
+	
+	public UserFile getChildFile(String fileName) throws Exception{
+		for(UserFile file: this.files){
+			if(file.getName().equals(fileName)){
+				return  file;
+			}
+		}
+		throw new Exception("File not found");
+	} 
+	
 	/**
 	 * Find the child of a directory
 	 * 
