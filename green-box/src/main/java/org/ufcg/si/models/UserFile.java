@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import org.ufcg.si.util.ServerConstants;
@@ -17,6 +18,7 @@ import org.ufcg.si.util.ServerConstants;
 public class UserFile {
 	private File internFile;
 	private String name;
+	@Column(length = 10000000)
 	private String content;
 	private String extension;
 

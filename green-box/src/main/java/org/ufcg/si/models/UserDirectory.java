@@ -82,7 +82,7 @@ public class UserDirectory {
 	 */
 	public void createFile(String fileName, String fileExtension, String fileContent) throws Exception {
 		UserFile file = new UserFile(fileName, fileExtension, fileContent);
-		if(files.contains(file)) throw new Exception("File already in folder.");
+		if(files.contains(file)) throw new Exception("Invalid name: Name already in use");
 		files.add(file);
 	}
 	
@@ -118,7 +118,7 @@ public class UserDirectory {
 	
 	public void createDirectory(String directoryName) throws Exception {
 		UserDirectory dir = new UserDirectory(directoryName, this.path + "/" + directoryName);
-		if(children.contains(dir)) throw new Exception("Directory already in folder.");
+		if(children.contains(dir)) throw new Exception("Invalid name: Name already in use");
 		this.children.add(dir);
 	}
 	
