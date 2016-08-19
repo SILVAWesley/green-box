@@ -21,6 +21,7 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		requestData.fileExtension = $scope.currentExtension;
 		requestData.fileContent = $scope.content;
 		console.log($scope.currentExtension);
+		console.log("Path: " + path);
 		
 		console.log('content: ' + requestData.fileContent);
 		
@@ -43,11 +44,14 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 				
 			});
 		} else {
+			path = formatPathToApiPattern2($scope.path);
+			console.log("Path 2: " + path);
 			$http.post('/server/userdirectory/editFile/' + path, requestData)
 			.then(function(response){
 				
 				$localStorage.session.user = response.data;
 				window.alert("File successfully edited");
+				$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
 				
 			}, function(response){
 				window.alert(response.data.message);
@@ -56,8 +60,13 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	}
 	
 	function formatPathToApiPattern(path) {
-		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "")
+		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "");
 		return tempPath.substring(1, tempPath.length) + "/" + $scope.newFileName;
+	}
+	
+	function formatPathToApiPattern2(path) {
+		tempPath = path.replace(new RegExp('/', 'g'), '-');
+		return tempPath.substring(1, tempPath.length);
 	}
 	
 	$scope.directoriesView = function() {

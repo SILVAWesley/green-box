@@ -145,7 +145,12 @@ public class UserDirectory {
 	
 	public void editFile(String directoryPath, String fileName, String newContent) throws Exception {
 		String[] pathFolders = directoryPath.split("-");
-		recursiveEditFile(pathFolders, 0, fileName, newContent);
+		
+		try {
+			this.getChildFile(fileName).setContent(newContent);
+		} catch(Exception e) {
+			recursiveEditFile(pathFolders, 1, fileName, newContent);
+		}
 	}
 	
 	private void recursiveEditFile(String[] pathFolders, int actualIndex, String fileName, String newContent) throws Exception {
@@ -236,6 +241,7 @@ public class UserDirectory {
 	 */
 	public void setName(String name){
 		this.name = name;
+		//this.path = name;
 	}
 
 }
