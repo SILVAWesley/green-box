@@ -2,8 +2,13 @@
 <html lang="en">
 
 <head>
-<!-- include summernote configuration js-->
-<script src="./js/configurations/summernote-file-config.js"></script>
+  
+	<!-- include summernote configuration js-->
+	<script src="./js/configurations/summernote-file-config.js"></script>
+
+  <script src="../../js/markdown-it.js"></script>
+  <script src="../../js/summernote-ext-markdown.js"></script>
+
 </head>
 
 <body>
@@ -14,16 +19,15 @@
 				<div class="col-sm-12">
 
 					<div class="user-box">
-						<div class="form-top">
-							
+						<div class="form-top">	
 							<h3 style="font-family: 'Pattaya', sans-serif"><strong>New File: </strong>
 								
-								<input type="text" ng-model="newFileName" placeholder="File Name"/>
+								<input type="text" placeholder="File Name" ng-model="newFileName"/>
 								&emsp;&emsp; <!-- adition of space -->
 								<strong> Select Extension: </strong>
 								
-								<select class="btn btn-success" style="font-family: 'Open Sans', sans-serif;font-size: 18px">
-  									<option value="txt"><strong>Text File (.txt)</strong></option>
+								<select ng-model="currentExtension" class="btn btn-success" style="font-family: 'Open Sans', sans-serif;font-size: 18px">
+  									<option ng-repeat="extension in extensions"><strong>{{extension}}</strong></option>
 								</select>
 								
 							</h3>
@@ -34,38 +38,37 @@
 								</p>
 							</div> -->
 						
-						</div>						
-					</div>
+						</div> <!-- form-top ends -->					
+					</div> <!-- userbox ends -->
 
-					<form role="form" action="" method="post" class="edit-form">
-						<summernote id="summernote" class="click2edit" ng-model="content"></summernote>
+					<form class="edit-form" method="post" action="" role="form">
+						<summernote class="click2edit" id="summernote" ng-model="content"></summernote>
 					</form>
 
-					<br>
-					<br />
+					<p></p>
 					
 					<!-- organising of boxes -->
 					<div class="col-sm-8"></div>
 					
 					<div class="col-sm-4">
 						
-						<button type="submit" class="btn btn-primary" ng-click="saveFile()">
+						<button class="btn btn-primary" type="submit" ng-click="saveFile()">
 							<strong> 
 								<i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> Save
 							</strong>
 						</button>
 						
-						<button type="submit" class="btn btn-danger" ng-click="directoriesView()">
+						<button class="btn btn-danger" type="submit" ng-click="directoriesView()">
 							<strong> 
 								<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
 							</strong>
 						</button>
 
-					</div>
+					</div> <!-- col-sm-4 -->
 					
-				</div>
-			</div>
-		</div>
-	</div>
+				</div> <!-- col-sm-12 ends -->
+			</div> <!-- container ends -->
+		</div> <!-- inner-bg ends -->
+	</div> <!-- top-content ends -->
 
 </body>

@@ -2,7 +2,8 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	$scope.path = $localStorage.session.currentPath;
 	$scope.user = $localStorage.session.user;
 	$scope.content = "";
-	$scope.extension = "txt";
+	$scope.extensions = ["txt", "md"];
+	$scope.currentExtension = "txt";
 	
 	$scope.newFileName = "";
 	
@@ -17,8 +18,10 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		requestData = {};
 		requestData.user = $scope.user;
 		requestData.fileName = $scope.newFileName;
-		requestData.fileExtension = $scope.extension;
+		requestData.fileExtension = $scope.currentExtension;
 		requestData.fileContent = $scope.content;
+		console.log($scope.currentExtension);
+		console.log("Path: " + path);
 		
 		console.log('content: ' + requestData.fileContent);
 		
@@ -26,8 +29,7 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 			
 			window.alert("File name cannot be empty.");
 			
-		} else {
-		
+		} else if ($localStorage.clickedFile == undefined){
 			$http.post('/server/userdirectory/newfile/' + path, requestData)
 			.then(function(response) {
 				
@@ -41,12 +43,30 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 				window.alert(response.data.message);
 				
 			});
+		} else {
+			path = formatPathToApiPattern2($scope.path);
+			console.log("Path 2: " + path);
+			$http.post('/server/userdirectory/editFile/' + path, requestData)
+			.then(function(response){
+				
+				$localStorage.session.user = response.data;
+				window.alert("File successfully edited");
+				$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
+				
+			}, function(response){
+				window.alert(response.data.message);
+			});
 		}
 	}
 	
 	function formatPathToApiPattern(path) {
-		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "")
+		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "");
 		return tempPath.substring(1, tempPath.length) + "/" + $scope.newFileName;
+	}
+	
+	function formatPathToApiPattern2(path) {
+		tempPath = path.replace(new RegExp('/', 'g'), '-');
+		return tempPath.substring(1, tempPath.length);
 	}
 	
 	$scope.directoriesView = function() {

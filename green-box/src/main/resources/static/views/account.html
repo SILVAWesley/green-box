@@ -4,60 +4,77 @@
 
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
+			
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
 					data-target="#bs-example-navbar-collapse-1"aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
+			
+				<span class="sr-only">Toggle navigation</span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
+			
 			</button>
-			<a class="navbar-brand" href="#"> <i class="fa fa-home fa-2x" aria-hidden="true"></i> Home </a>
-		</div>
+			
+			<a class="navbar-brand" href="#/dashboard/directories/root">
+				<i class="fa fa-home fa-2x" aria-hidden="true"></i>
+				<strong>Home</strong>  
+			</a>
+		
+		</div> <!-- navbar-header ends -->
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse">
+
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="/" ng-click="logout()">
+						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> 
+						Logout
+					</a>
+				</li>
+			</ul>
 			
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav navbar-right">
 				<li>
 					<a href="https://github.com/SILVAWesley/green-box">
-						<i class="fa fa-question fa-2x"aria-hidden="true"></i> About
+						<i class="fa fa-question fa-2x" aria-hidden="true"></i>
+						About 
 					</a>
 				</li>
 			</ul>
 
 			<!-- Optional Form -->
 			<form class="navbar-form navbar-left">
+				
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
+					<input type="text" class="form-control" placeholder="Find" ng-model="findFile"><!-- need implement this -->
 				</div>
-				<button type="submit" class="btn btn-default">
+				
+				<button type="submit" class="btn btn-default" title="Find in all root" ng-click="findFile()"><!-- need implement this -->
 					<strong>Submit</strong>
 				</button>
+			
 			</form>
-
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a href="/" ng-click="logout()">
-						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> Logout
-					</a>
-				</li>
-			</ul>
-
-		</div>
-		
-	</div> <!-- /.container-fluid -->
+						
+		</div> <!-- collapse navbar-collapse ends -->
+	</div> <!-- container-fluid ends -->
 </nav>
 
 <!-- Top content -->
 <div class="top-content">
-
 	<div class="inner-bg">
 		<div class="container">
+			
 			<div class="row">
 				<div class="col-sm-8 col-sm-offset-2 text">
 					<h1>
-						<strong><i class="fa fa-cube fa-2x" aria-hidden="true"></i> Green Box</strong>
+						<strong>
+							<i class="fa fa-cube fa-2x" aria-hidden="true"></i> 
+							Green Box
+						</strong>
 					</h1>
 				</div>
-			</div>
+			</div> <!-- row ends -->
 
 			<div class="col-sm-6">
 				<div class="form-top-right">
@@ -65,26 +82,14 @@
 						Hello, {{username}}! <i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
 					</h3>
 				</div>
-			</div>
+			</div> <!-- col-sm-6 ends -->
 
-			<br></br> <br></br>
+			<p></p><p></p>
 
 			<div ui-view=""></div><!-- need complete -->		
-		</div>
-	</div><!-- inner-bg -->
+		</div> <!-- container ends --> 
+	</div> <!-- inner-bg ends -->
+</div> <!-- top-content ends -->
 
-</div>
-
-<!-- Footer -->
-<footer>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
-				<div class="footer-border"></div>
-				<a href="https://github.com/SILVAWesley/green-box"> 
-					<i class="fa fa-copyright" aria-hidden="true"></i>  Created and Maintained by team Green Box
-				</a>
-			</div>
-		</div>
-	</div>
-</footer>
+<!-- footer -->
+<ng-include src="'views/snippets/footer.html'"></ng-include>
