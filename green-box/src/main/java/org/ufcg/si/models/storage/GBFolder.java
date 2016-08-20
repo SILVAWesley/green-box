@@ -78,7 +78,7 @@ public class GBFolder {
 		return files;
 	}
 	
-	public List<GBFolder> getChildren() {
+	public List<GBFolder> getFolders() {
 		return folders;
 	}
 	
@@ -92,7 +92,15 @@ public class GBFolder {
 	
 	public void setName(String name){
 		this.name = name;
-		this.path = name;
+		
+		String[] splPath = this.path.split(ServerConstants.PATH_SEPARATOR);
+		this.path = "";
+		
+		for (int i = 0; i < splPath.length - 1; i++) {
+			this.path += splPath[i] + "-";
+		}
+		
+		this.path += name;
 	}
 	
 	private GBFolder findFolderByName(String name) throws MissingItemException {

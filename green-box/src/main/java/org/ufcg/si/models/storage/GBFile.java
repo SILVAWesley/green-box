@@ -24,11 +24,11 @@ public class GBFile {
 	public GBFile(String name, String extension, String content, String path) throws IOException {
 		this.name = name;
 		this.extension = extension;
-		this.content = readContentFromFile();
 		this.path = path;
 		
 		this.file = new File(ServerConstants.FILES_PATH + name + "." + extension);
 		writeContentToFile(content);
+		this.content = readContentFromFile();
 	}
 	
 	public GBFile() {
