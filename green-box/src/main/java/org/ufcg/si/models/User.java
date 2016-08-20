@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.ufcg.si.models.storage.GBFolder;
+
 /**
  * This class represents a Green-Box user
  */
@@ -15,18 +17,17 @@ public class User {
 	@Id
 	@GeneratedValue
 	private Long id;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	private UserDirectory userdirectory;
-
 	@Column(unique = true)
 	private String username;
 	@Column(unique = true)
 	private String email;
 	private String password;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	private GBFolder rootFolder;
+
 	public User() throws Exception {
-		this.userdirectory = new UserDirectory("root");
+		this.rootFolder = new GBFolder();
 	}
 
 	/**
@@ -42,7 +43,7 @@ public class User {
 	 *            The user's password
 	 */
 	public User(String email, String username, String password) {
-		this.userdirectory = new UserDirectory(username);
+		this.rootFolder = new GBFolder(username);
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -62,7 +63,7 @@ public class User {
 	 */
 	public void createFile(String filename, String  content) throws Exception {
 		// An enum should be created for file extension
-		userdirectory.createFile(filename, "txt", content); 
+		//userdirectory.createFile(filename, "txt", content); 
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class User {
 	 * @throws Exception 
 	 */
 	public void createDirectory(String directoryName) throws Exception {
-		userdirectory.createDirectory(directoryName);
+		//userdirectory.createDirectory(directoryName);
 	}
 	
 	
@@ -137,8 +138,8 @@ public class User {
 	 * The userDirectory getter. The userDirectory is the user's most external directory.
 	 * @return the User's most external UserDirectory
 	 */
-	public UserDirectory getUserDirectory() {
-		return userdirectory;
+	public GBFolder getUserDirectory() {
+		return rootFolder;
 	}
 	
 	/**

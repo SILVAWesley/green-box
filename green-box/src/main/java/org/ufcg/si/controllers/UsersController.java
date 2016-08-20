@@ -38,18 +38,18 @@ public class UsersController {
 					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> getUser(@PathVariable Long id) {
-		User matchingUser = userService.findById(id);
+		User dbUser = userService.findById(id);
 
-		if (matchingUser != null) {
-			return new ResponseEntity<>(matchingUser, HttpStatus.OK);
-		} else {
+		if (dbUser == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+		
+		return new ResponseEntity<>(dbUser, HttpStatus.OK);
 	}
 	
 	/**
 	 * Create a new User
-	 * @param newUser The new User
+	 * @param reqBody The new User
 	 * @return The newly created user
 	 * @throws ServletException
 	 */
@@ -57,12 +57,14 @@ public class UsersController {
 					method = RequestMethod.POST, 
 					consumes = MediaType.APPLICATION_JSON_VALUE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> createUser(@RequestBody User newUser) throws ServletException {
+	public ResponseEntity<User> createUser(@RequestBody User reqBody) throws ServletException {
 		try {
-			String username = newUser.getUsername();
-			newUser.getUserDirectory().setName(username);
-			User savedUser = userService.save(newUser);
-			return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+			/* FUTURE WORKS ON THIS CLASS SHOULD ENABLE:
+			 * Modifying data coming from the body only 
+			 * Exception handling */
+			reqBody.getUserDirectory().setName(reqBody.getUsername());
+			User newUser = userService.save(reqBody);
+			return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServletException("User already inside the database. " + e.getMessage());
@@ -74,24 +76,23 @@ public class UsersController {
 	 * @param id The identification of the user
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteid={id}", 
+	@RequestMapping(value = "/delete/{id}", 
 					method = RequestMethod.DELETE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> deleteUser(@PathVariable Long id) {
 		User deletedUser = userService.delete(id);
 
-		if (deletedUser != null) {
-			return new ResponseEntity<>(deletedUser, HttpStatus.OK);
-		} else {
+		if (deletedUser == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+		
+		return new ResponseEntity<>(deletedUser, HttpStatus.OK);
 	}
 	
 	/**
 	 * This method return a list with all user createds 
 	 * @returnAll A list of Users 
 	 */
-	
 	@RequestMapping(value = "/all", 
 					method = RequestMethod.GET, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
@@ -102,21 +103,23 @@ public class UsersController {
 	
 	/**
 	 * This method update a user
-	 * @param user The user who will be update 
+	 * @param reqBody The user who will be update 
 	 * @return
 	 */
-	
 	@RequestMapping(value = "/update", 
 					method = RequestMethod.PUT, 
 					consumes = MediaType.APPLICATION_JSON_VALUE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> updateUser(@RequestBody User user) {
-		User modifiedUser = userService.update(user);
+	public ResponseEntity<User> updateUser(@RequestBody User reqBody) {
+		/* FUTURE WORKS ON THIS CLASS SHOULD ENABLE:
+		 * Modifying data coming from the body only 
+		 * Exception handling */
+		User updatedUser = userService.update(reqBody);
 
-		if (modifiedUser != null) {
-			return new ResponseEntity<>(modifiedUser, HttpStatus.OK);
-		} else {
+		if (updatedUser == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	
+		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 	}
 }

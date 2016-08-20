@@ -3,18 +3,18 @@ package org.ufcg.si.models;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.ufcg.si.models.UserFile;
+import org.ufcg.si.models.storage.GBFile;
 import org.ufcg.si.util.ServerConstants;
 
-public class UserFileTest {
+public class GBFileTest {
 	String sb1;
 	String sb2;
 	String sb3;
 	String sb4;
-	private UserFile file1;
-	private UserFile file2;
-	private UserFile file3;
-	private UserFile file4;
+	private GBFile file1;
+	private GBFile file2;
+	private GBFile file3;
+	private GBFile file4;
 
 	@Before
 	public void setup() throws Exception {
@@ -22,19 +22,19 @@ public class UserFileTest {
 		sb2 = new String("I see water");
 		sb3 = new String("I see nigth");
 		sb4 = new String("I see fate");
-		file1 = new UserFile("fire", "txt", sb1);
-		file2 = new UserFile("water", "txt", sb2);
-		file3 = new UserFile("nigth", "txt", sb3);
-		file4 = new UserFile("fate", "txt", sb4);
+		file1 = new GBFile("fire", "txt", sb1);
+		file2 = new GBFile("water", "txt", sb2);
+		file3 = new GBFile("nigth", "txt", sb3);
+		file4 = new GBFile("fate", "txt", sb4);
 
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void construction() throws Exception {
-		UserFile broken1 = new UserFile(null, null, null);
-		UserFile broken2 = new UserFile(null, ".txt", sb1);
-		UserFile broken3 = new UserFile("broken", ".txt", null);
-		UserFile broken4 = new UserFile("broken", null, sb1);
+		GBFile broken1 = new GBFile(null, null, null);
+		GBFile broken2 = new GBFile(null, ".txt", sb1);
+		GBFile broken3 = new GBFile("broken", ".txt", null);
+		GBFile broken4 = new GBFile("broken", null, sb1);
 	}
 
 
@@ -42,13 +42,13 @@ public class UserFileTest {
 	public void testEquals() {
 		try {
 			Assert.assertFalse(file1.equals(file2));
-			Assert.assertEquals(file1, new UserFile("fire", "txt", sb1));
-			Assert.assertEquals(file2, new UserFile("water", "txt", sb2));
-			Assert.assertEquals(file3, new UserFile("nigth", "txt", sb3));
-			Assert.assertEquals(file4, new UserFile("fate", "txt", sb4));
-			Assert.assertFalse(file2.equals(new UserFile("nigth", "txt", sb3)));
-			Assert.assertTrue(file3.equals(new UserFile("nigth", "txt", sb2)));
-			Assert.assertTrue(file4.equals(new UserFile("fate", "txt", sb2)));
+			Assert.assertEquals(file1, new GBFile("fire", "txt", sb1));
+			Assert.assertEquals(file2, new GBFile("water", "txt", sb2));
+			Assert.assertEquals(file3, new GBFile("nigth", "txt", sb3));
+			Assert.assertEquals(file4, new GBFile("fate", "txt", sb4));
+			Assert.assertFalse(file2.equals(new GBFile("nigth", "txt", sb3)));
+			Assert.assertTrue(file3.equals(new GBFile("nigth", "txt", sb2)));
+			Assert.assertTrue(file4.equals(new GBFile("fate", "txt", sb2)));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -57,15 +57,15 @@ public class UserFileTest {
 
 	@Test
 	public void testGetContent() {
-		UserFile tempFile1;
-		UserFile tempFile2;
-		UserFile tempFile3;
-		UserFile tempFile4;
+		GBFile tempFile1;
+		GBFile tempFile2;
+		GBFile tempFile3;
+		GBFile tempFile4;
 		try {
-			tempFile1 = new UserFile("fire", "txt", sb1);
-			tempFile2 = new UserFile("water", "txt", sb2);
-			tempFile3 = new UserFile("nigth", "txt", sb3);
-			tempFile4 = new UserFile("fate", "txt", sb4);
+			tempFile1 = new GBFile("fire", "txt", sb1);
+			tempFile2 = new GBFile("water", "txt", sb2);
+			tempFile3 = new GBFile("nigth", "txt", sb3);
+			tempFile4 = new GBFile("fate", "txt", sb4);
 			Assert.assertEquals(file1.getContent(), tempFile1.getContent());
 			Assert.assertEquals(file2.getContent(), tempFile2.getContent());
 			Assert.assertEquals(file3.getContent(),tempFile3.getContent());

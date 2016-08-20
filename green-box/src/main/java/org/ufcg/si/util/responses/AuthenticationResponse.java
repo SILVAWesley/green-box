@@ -7,7 +7,7 @@ import org.ufcg.si.models.User;
  * It encapsulates a user and a token, which needs to be returned
  * when a user successfully login into the system.
  */
-public class LoginResponse {
+public class AuthenticationResponse {
 	private String token;
 	private User user;
 	
@@ -17,7 +17,7 @@ public class LoginResponse {
 	 * @param token A token representing the session of the user.
 	 * @param user The user that made login.
 	 */
-	public LoginResponse(String token, User user) {
+	public AuthenticationResponse(String token, User user) {
 		this.token = token;
 		this.user = user;
 	}

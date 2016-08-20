@@ -6,6 +6,8 @@ package org.ufcg.si.util;
 public class ServerConstants {
 	/* Constants related to io */
 	public static final String LINE_BREAK = System.lineSeparator();
+	public static final String PATH_SEPARATOR = "-";
+	public static final String FILES_PATH = "files/";
 	
 	/* Constants related to request mapping */
 	
@@ -28,7 +30,7 @@ public class ServerConstants {
 	 * in a request to access any operation allowed by 
 	 * the AuthenticationController.
 	 */
-	public static final String AUTHENTICATION_REQUEST_URL = "/login";
+	public static final String AUTHENTICATION_REQUEST_URL = "/authentication";
 	
 	/**
 	 * Represents the piece of URL that should be inserted

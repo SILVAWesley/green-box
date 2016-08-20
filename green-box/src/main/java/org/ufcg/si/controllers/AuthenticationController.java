@@ -3,7 +3,9 @@ package org.ufcg.si.controllers;
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +15,7 @@ import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ExceptionHandler;
 import org.ufcg.si.util.ServerConstants;
-import org.ufcg.si.util.responses.LoginResponse;
+import org.ufcg.si.util.responses.AuthenticationResponse;
 import org.ufcg.si.util.tokens.HS512_24Hours_Token;
 import org.ufcg.si.util.tokens.TokenBuilder;
 
@@ -28,8 +30,40 @@ import org.ufcg.si.util.tokens.TokenBuilder;
 @RestController
 @RequestMapping(ServerConstants.SERVER_REQUEST_URL + ServerConstants.AUTHENTICATION_REQUEST_URL)
 public class AuthenticationController {
-	private TokenBuilder tokenBuilder;
 	private UserService userService;
+	private TokenBuilder tokenBuilder;
+	
+	/**
+	 * this method authenticates a User so you can have access to your files 
+	 * @param requestBody The User that will be authenticated
+	 * @return A LoginResponse
+	 * @throws ServletException
+	 */
+	@RequestMapping(value = "/login",
+					method = RequestMethod.POST, 
+					produces = MediaType.APPLICATION_JSON_VALUE,
+					consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AuthenticationResponse> login(@RequestBody User requestBody) throws ServletException {
+		/* FUTURE WORKS ON THIS CLASS SHOULD ENABLE: 
+		 * Exception handling (REFACTORING) */
+		ExceptionHandler.checkLoginFields(requestBody);
+		
+		User dbUser = null;
+		
+		if (requestBody.getEmail() != null) {
+			dbUser = userService.findByEmail(requestBody.getEmail());
+		} else {
+			dbUser = userService.findByUsername(requestBody.getUsername());
+		}
+		
+		ExceptionHandler.checkUserInDatabase(dbUser);
+		ExceptionHandler.checkMatchingPassword(requestBody, dbUser);
+		
+		String token = tokenBuilder.build(dbUser);
+		AuthenticationResponse response = new AuthenticationResponse(token, dbUser);
+		
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 	
 	@Autowired
 	public void setUserService(UserServiceImpl userServiceImpl) {
@@ -39,33 +73,5 @@ public class AuthenticationController {
 	@Autowired
 	public void setTokenBuilder(HS512_24Hours_Token tokenBuilder) {
 		this.tokenBuilder = tokenBuilder;
-	}
-	
-	/**
-	 * this method authenticates a User so you can have access to your files 
-	 * @param user The User that will be authenticated
-	 * @return A LoginResponse
-	 * @throws ServletException
-	 */
-	@RequestMapping(value = "/authenticate",
-					method = RequestMethod.POST, 
-					produces = MediaType.APPLICATION_JSON_VALUE,
-					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public LoginResponse login(@RequestBody User user) throws ServletException {
-		ExceptionHandler.checkLoginFields(user);
-		
-		User foundUser = null;
-		
-		if (user.getEmail() != null && !user.getEmail().equals("")) {
-			foundUser = userService.findByEmail(user.getEmail());
-		} else {
-			foundUser = userService.findByUsername(user.getUsername());
-		}
-		
-		ExceptionHandler.checkUserInDatabase(foundUser);
-		ExceptionHandler.checkMatchingPassword(user, foundUser);
-		
-		String token = tokenBuilder.build(foundUser);		
-		return new LoginResponse(token, foundUser);
 	}
 }

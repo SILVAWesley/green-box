@@ -6,12 +6,31 @@ import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.InvalidPasswordException;
 import org.ufcg.si.exceptions.InvalidUserException;
 import org.ufcg.si.exceptions.InvalidUsernameException;
+import org.ufcg.si.exceptions.MissingItemException;
 import org.ufcg.si.models.User;
 
 public class ExceptionHandler {
 	public static final String USER_USERNAME = "username";
 	public static final String USER_EMAIL = "email";
 	public static final String USER_PASSWORD = "password";
+	
+	public static void checkLogin(User reqBody, User dbUser) {
+		if (reqBody.getEmail() == null && reqBody.getUsername() == null) {
+			throw new InvalidDataException("No username or email to make a login attempt.");
+		}
+		
+		
+		
+		// User found in the database
+		if (dbUser == null) {
+			throw new MissingItemException("User could not be found in the database.");
+		}
+		
+		// Password match
+		if (!dbUser.getPassword().equals(reqBody.getPassword())) {
+			throw new InvalidDataException("Username/Email or password incorrect.");
+		}
+	}
 	
 	public static void checkUserInDatabase(User user) throws ServletException {
 		try {
