@@ -19,9 +19,16 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	
 	$scope.newFolder = function() {
 		
-		requestUrl = "/server/userdirectory/newfolder/" + formatPathToApiPattern($scope.currentDirectory.path);
-
-		$http.post(requestUrl, $scope.user)
+		requestData = {};
+		requestData.user = $scope.user;
+		requestData.folderName = $scope.newFolderName;
+		//requestData.folderPath = formatPathToApiPattern2($scope.currentDirectory.path);
+		requestData.folderPath = $scope.currentDirectory.path;
+		//console.log("Path: " + $scope.path);
+		
+		
+		
+		$http.post("/server/userdirectory/newfolder", requestData)
 			.then(function(response) {
 				
 				$localStorage.session.user = response.data;
@@ -70,6 +77,11 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	function formatPathToApiPattern(path) {
 		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "")
 		return tempPath.substring(1, tempPath.length) + "/" + $scope.newFolderName;
+	}
+	
+	function formatPathToApiPattern2(path) {
+		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "")
+		return tempPath.substring(1, tempPath.length);
 	}
 	
 	function update () {

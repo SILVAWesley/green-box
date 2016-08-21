@@ -20,17 +20,16 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		requestData.fileName = $scope.newFileName;
 		requestData.fileExtension = $scope.currentExtension;
 		requestData.fileContent = $scope.content;
-		console.log($scope.currentExtension);
-		console.log("Path: " + path);
+		requestData.filePath = $scope.path;
 		
-		console.log('content: ' + requestData.fileContent);
+		console.log("Path: " + $scope.path);
 		
 		if (requestData.fileName == "") {
 			
 			window.alert("File name cannot be empty.");
 			
 		} else if ($localStorage.clickedFile == undefined){
-			$http.post('/server/userdirectory/newfile/' + path, requestData)
+			$http.post("/server/userdirectory/newfile", requestData)
 			.then(function(response) {
 				
 				$localStorage.session.user = response.data;
@@ -46,7 +45,7 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		} else {
 			path = formatPathToApiPattern2($scope.path);
 			console.log("Path 2: " + path);
-			$http.post('/server/userdirectory/editFile/' + path, requestData)
+			$http.put("/server/userdirectory/editfile", requestData)
 			.then(function(response){
 				
 				$localStorage.session.user = response.data;
@@ -57,6 +56,17 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 				window.alert(response.data.message);
 			});
 		}
+	}
+	
+	function getNamelessPath(path){
+		var splitPath = path.split("/");
+		result = "";
+		for(i = 0; i < splitPath.length -1; i++){
+			result += splitPath[i];
+		}
+		
+		return result;
+		
 	}
 	
 	function formatPathToApiPattern(path) {

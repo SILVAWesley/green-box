@@ -63,6 +63,7 @@ public class GBFolder {
 	}
 	
 	public void addFolder(String name, String path) throws Exception {
+		System.out.println("EITA BIXIGA:" + path);
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder folderToAdd = findFolderByName(splPath, 0);
 		folderToAdd.addFolder(name);
@@ -78,7 +79,7 @@ public class GBFolder {
 		return files;
 	}
 	
-	public List<GBFolder> getFolders() {
+	public List<GBFolder> getChildren() {
 		return folders;
 	}
 	
@@ -93,14 +94,15 @@ public class GBFolder {
 	public void setName(String name){
 		this.name = name;
 		
-		String[] splPath = this.path.split(ServerConstants.PATH_SEPARATOR);
+		/*String[] splPath = this.path.split(ServerConstants.PATH_SEPARATOR);
 		this.path = "";
 		
 		for (int i = 0; i < splPath.length - 1; i++) {
 			this.path += splPath[i] + "-";
 		}
 		
-		this.path += name;
+		this.path += name;*/
+		this.path = name;
 	}
 	
 	private GBFolder findFolderByName(String name) throws MissingItemException {

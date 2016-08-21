@@ -44,6 +44,7 @@ public class UsersActionsController {
 					consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> addFile(@RequestBody FileRequestBody requestBody) throws Exception {
 		User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+		System.out.println("TESTE: " + requestBody.getFilePath());
 		dbUser.getUserDirectory().addFile(requestBody.getFileName(), requestBody.getFileExtension(), requestBody.getFileContent(), requestBody.getFilePath());
 		User updatedUser = userService.update(dbUser);
 		return new ResponseEntity<>(updatedUser, HttpStatus.OK);
