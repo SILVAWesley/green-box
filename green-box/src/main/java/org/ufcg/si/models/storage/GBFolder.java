@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.MissingItemException;
 import org.ufcg.si.util.ServerConstants;
 
@@ -49,27 +50,37 @@ public class GBFolder {
 	
 	public void addFile(String name, String extension, String content) throws IOException {
 		GBFile newFile = StorageFactory.createFile(name, extension, content, this.path);
+		
+		if (files.contains(newFile)) {
+			throw new InvalidDataException("Invalid name " + name + " already in use."); 
+		}
+		
 		files.add(newFile);
 	}
 	
-	public void addFile(String name, String extension, String content, String path) throws IOException {
+	public void addFile(String name, String extension, String content, String path) throws IOException, InvalidDataException {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder folderToAdd = findFolderByName(splPath, 0);
 		folderToAdd.addFile(name, extension, content);
 	}
 	
-	public void addFolder(String name) {
-		GBFolder newFolder = StorageFactory.createFolder(name, this.path); 
+	public void addFolder(String name) throws InvalidDataException {
+		GBFolder newFolder = StorageFactory.createFolder(name, this.path);
+		
+		if (folders.contains(newFolder)) {
+			throw new InvalidDataException("Invalid name " + name + " already in use."); 
+		}
+		
 		folders.add(newFolder);
 	}
 	
-	public void addFolder(String name, String path) throws MissingItemException {
+	public void addFolder(String name, String path) throws MissingItemException, InvalidDataException {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder folderToAdd = findFolderByName(splPath, 0);
 		folderToAdd.addFolder(name);
 	}
 	
-	public void editFile(String name, String newContent, String path) throws Exception {
+	public void editFile(String name, String newContent, String path) throws IOException {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder folder = findFolderByName(splPath, 0);
 		folder.findFileByName(name).setContent(newContent);
