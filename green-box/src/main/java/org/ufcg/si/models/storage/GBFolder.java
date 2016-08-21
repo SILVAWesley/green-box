@@ -1,5 +1,6 @@
 package org.ufcg.si.models.storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,12 +47,12 @@ public class GBFolder {
 		this(null, null);
 	}
 	
-	public void addFile(String name, String extension, String content) throws Exception {
+	public void addFile(String name, String extension, String content) throws IOException {
 		GBFile newFile = StorageFactory.createFile(name, extension, content, this.path);
 		files.add(newFile);
 	}
 	
-	public void addFile(String name, String extension, String content, String path) throws Exception {
+	public void addFile(String name, String extension, String content, String path) throws IOException {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder folderToAdd = findFolderByName(splPath, 0);
 		folderToAdd.addFile(name, extension, content);
@@ -62,8 +63,7 @@ public class GBFolder {
 		folders.add(newFolder);
 	}
 	
-	public void addFolder(String name, String path) throws Exception {
-		System.out.println("EITA BIXIGA:" + path);
+	public void addFolder(String name, String path) throws MissingItemException {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder folderToAdd = findFolderByName(splPath, 0);
 		folderToAdd.addFolder(name);
@@ -94,15 +94,17 @@ public class GBFolder {
 	public void setName(String name){
 		this.name = name;
 		
-		/*String[] splPath = this.path.split(ServerConstants.PATH_SEPARATOR);
-		this.path = "";
+		if (this.path == null) {
+			this.path = "";
+		}
 		
+		String[] splPath = this.path.split(ServerConstants.PATH_SEPARATOR);
+		this.path = "";
 		for (int i = 0; i < splPath.length - 1; i++) {
 			this.path += splPath[i] + "-";
 		}
 		
-		this.path += name;*/
-		this.path = name;
+		this.path += name;
 	}
 	
 	private GBFolder findFolderByName(String name) throws MissingItemException {
@@ -115,7 +117,7 @@ public class GBFolder {
 		throw new MissingItemException("Folder: " + name + " not found in collection: " + this.folders);
 	}
 	
-	private GBFolder findFolderByName(String[] splPath, int currentIndex) throws Exception {
+	private GBFolder findFolderByName(String[] splPath, int currentIndex) throws MissingItemException {
 		if (splPath.length == 1) {
 			return this;
 		} else if (currentIndex == splPath.length - 2) {

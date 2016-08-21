@@ -1,4 +1,4 @@
-package org.ufcg.si.models.storage;
+	package org.ufcg.si.models.storage;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -34,12 +34,6 @@ public class GBFile {
 	public GBFile() {
 		
 	}
-	
-	private void writeContentToFile(String content) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-		writer.write(content);
-		writer.close();
-	}
 
 	public String readContentFromFile() throws FileNotFoundException {
 		Scanner scanner = new Scanner(file);
@@ -69,13 +63,19 @@ public class GBFile {
 		return path;
 	}
 	
-	public void setContent(String newContent) throws Exception {
+	public void setContent(String newContent) throws IOException {
 		this.content = newContent;
 		
 		this.file = new File(ServerConstants.FILES_PATH + name + "." + extension);
 		writeContentToFile(newContent);
 	}
 
+	private void writeContentToFile(String content) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+		writer.write(content);
+		writer.close();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
