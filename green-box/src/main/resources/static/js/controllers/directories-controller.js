@@ -36,7 +36,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		requestData.userSharedWith = $scope.userSharedWith;
 		requestData.fileName = $localStorage.selectedItem.name;
 		
-		$http.post("to-be-completed", requestData)
+		$http.post("to-be-completed", requestData, sharingType)
 		.then(function(response){
 			$localStorage.session.user = response.data;
 			window.alert("File successfully shared");
