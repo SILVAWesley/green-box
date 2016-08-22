@@ -3,10 +3,9 @@ package org.ufcg.si.util;
 import java.util.regex.Pattern;
 
 public class Validator {
-	public static final String USERNAME_REGEXP = "^[a-z0-9_-]{4,15}$";
+	public static final String USERNAME_REGEXP = "^[a-zA-Z0-9_-]{4,15}$";
 	public static final String PASSWORD_REGEXP = "^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$";
-	public static final String STORAGE_ITEM_NAME_REGEXP = "^([a-z0-9_\\s]+)";
-	public static final String FILE_NAME_REGEXP = "[a-z0-9_\\s]+";
+	public static final String STORAGE_ITEM_NAME_REGEXP = "^([a-zA-Z0-9_\\s]+)";
 	public static final String EMAIL_REGEXP = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 											 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
