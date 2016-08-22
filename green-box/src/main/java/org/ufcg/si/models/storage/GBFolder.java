@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.jboss.jandex.Main;
 import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.MissingItemException;
 import org.ufcg.si.util.ServerConstants;
@@ -40,6 +41,22 @@ public class GBFolder {
 		this.path = path;
 	}
 
+	public static void main(String[] args) {
+		GBFolder p1 = new GBFolder("p1", "p1");
+		GBFolder p2 = new GBFolder("p2", "p1/p2");
+		GBFolder p3 = new GBFolder("p2", "p1/p3");
+		GBFolder p4 = new GBFolder("p4", "p1/p2/p4");
+		GBFolder p5 = new GBFolder("p4", "p1/p2/p4/p5");
+		
+		p1.addFolder("p2", "p1");
+		p1.addFolder("p3", "p1");
+		p1.addFolder("p4", "p1/p2");
+		p1.addFolder("p5", "p1/p2/p4");
+		
+		p1.rename("a");
+		System.out.println(p1);
+	}
+	
 	public GBFolder(String name) {
 		this(name, name);
 	}
@@ -85,6 +102,49 @@ public class GBFolder {
 		GBFolder folder = findFolderByName(splPath, 0);
 		folder.findFileByName(name).setContent(newContent);
 	}
+	
+	public void rename(String newName, String name, String path) {
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		GBFolder parentOfFolderToRename = findFolderByName(splPath, 0);
+		parentOfFolderToRename.findFolderByName(name).rename(newName);
+	}
+	
+	public void rename(String newName) {
+		if (path == null) {
+			path = "";
+		}
+		
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		int depthLevel = splPath.length - 1;
+		List<String> discovered = new ArrayList<String>();
+		renamePath(newName, depthLevel);
+		name = newName;
+		discovered.add(this.getName());
+		recursiveRename(discovered, newName, depthLevel);
+	}
+	
+	private void renamePath(String newName, int depthLevel) {
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		splPath[depthLevel] = newName;
+		path = String.join(ServerConstants.PATH_SEPARATOR, splPath);
+	}
+	
+	private void recursiveRename(List<String> discovered, String newName, int depthLevel) {
+		for (GBFolder folder : folders) {
+			if (!discovered.contains(folder.getName())) {
+				discovered.add(folder.getName());
+				folder.renamePath(newName, depthLevel);
+				
+//				for (GBFile file : files) {
+//					String[] fsplPath = path.split(ServerConstants.PATH_SEPARATOR);
+//					fsplPath[depthLevel] = newName;
+//					file = String.join(ServerConstants.PATH_SEPARATOR, fsplPath);
+//				}
+				
+				folder.recursiveRename(discovered, newName, depthLevel);
+			}
+		}
+	}
 
 	public List<GBFile> getFiles() {
 		return files;
@@ -102,22 +162,6 @@ public class GBFolder {
 		return name;
 	}
 	
-	public void setName(String name){
-		this.name = name;
-		
-		if (this.path == null) {
-			this.path = "";
-		}
-		
-		String[] splPath = this.path.split(ServerConstants.PATH_SEPARATOR);
-		this.path = "";
-		for (int i = 0; i < splPath.length - 1; i++) {
-			this.path += splPath[i] + "-";
-		}
-		
-		this.path += name;
-	}
-	
 	private GBFolder findFolderByName(String name) throws MissingItemException {
 		for (GBFolder folder : this.folders) {
 			if (folder.getName().equals(name)) {
@@ -129,15 +173,10 @@ public class GBFolder {
 	}
 	
 	private GBFolder findFolderByName(String[] splPath, int currentIndex) throws MissingItemException {
-		if (splPath.length == 1) {
+		if (splPath.length - 1 == currentIndex) {
 			return this;
-		} else if (currentIndex == splPath.length - 2) {
-			return findFolderByName(splPath[currentIndex + 1]); 
-		} else if (currentIndex == 0) {
-			return findFolderByName(splPath, currentIndex + 1);
 		} else {
-			GBFolder childFolder = findFolderByName(splPath[currentIndex]);  
-			return childFolder.findFolderByName(splPath, currentIndex + 1);
+			return findFolderByName(splPath[currentIndex + 1]).findFolderByName(splPath, currentIndex + 1);
 		}
 	}
 	
