@@ -12,6 +12,7 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		$scope.content = $localStorage.clickedFile.content;
 	}
 	
+	
 	$scope.saveFile = function() {
 		path = formatPathToApiPattern($scope.path);
 		

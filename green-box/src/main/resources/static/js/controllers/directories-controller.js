@@ -12,9 +12,54 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$state.go('dashboard.directories', {folderPath: folder.path});
 	}
 	
+	$scope.actionClick = function(item){
+		$localStorage.selectedItem = item;
+	}
+	
 	$scope.fileClick = function(file) {
 		$localStorage.clickedFile = file;
 		$state.go('dashboard.file');
+	}
+	
+	
+	$scope.shareR = function(){
+		share("R");
+	}
+	
+	$scope.shareRW = function(){
+		share("RW");
+	}
+	
+	function share(sharingType){
+		requestData = {};
+		requestData.user = $scope.user;
+		requestData.userSharedWith = $scope.userSharedWith;
+		requestData.fileName = $localStorage.selectedItem.name;
+		
+		$http.post("to-be-completed", requestData)
+		.then(function(response){
+			$localStorage.session.user = response.data;
+			window.alert("File successfully shared");
+		}, function(response){
+			window.alert(response.data.message);
+			window.alert("whoops!");
+		});
+	}
+	
+	$scope.renameFile = function(){
+		requestData = {};
+		requestData.user = $scope.user;
+		requestData.newFileName = $scope.newFileName;
+		requestData.oldFileName = $localStorage.selectedItem.name;
+		
+		$http.post("to-be-completed", requestData)
+			.then(function(response){
+				$localStorage.session.user = response.data;
+				window.alert("File renamed successfully");
+			}, function(response){
+				window.alert(response.data.message);
+				window.alert("whoops!");
+			});
 	}
 	
 	$scope.newFolder = function() {
