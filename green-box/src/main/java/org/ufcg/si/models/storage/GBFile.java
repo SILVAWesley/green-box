@@ -63,6 +63,10 @@ public class GBFile {
 		return path;
 	}
 	
+	public void setPath(String newPath) {
+		this.path = newPath;
+	}
+	
 	public void setContent(String newContent) throws IOException {
 		this.content = newContent;
 		
