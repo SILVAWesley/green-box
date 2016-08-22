@@ -60,7 +60,7 @@ public class UsersController {
 	public ResponseEntity<User> createUser(@RequestBody User requestBody) throws ServletException {
 		try {
 			ExceptionHandler.checkRegistrationBody(requestBody);
-			requestBody.getUserDirectory().setName(requestBody.getUsername());
+			requestBody.getUserDirectory().rename(requestBody.getUsername());
 			User newUser = userService.save(requestBody);
 			return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 		} catch(GreenboxException gbe) {
