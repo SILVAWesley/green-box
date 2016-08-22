@@ -74,7 +74,7 @@
       							<i class="fa fa-users fa-lg" aria-hidden="true"></i>
       							User Name: 
       							&emsp;&emsp;&ensp; <!-- Adition of space --> 
-      							<input title="Choose a friend for sharing your file" type="text" placeholder="UserName..." ng-model="" />
+      							<input title="Choose a friend for sharing your file" type="text" placeholder="UserName..." ng-model="userSharedWith" />
       							
       							<p></p>
       							
@@ -92,13 +92,13 @@
     	  			
       				<div class="modal-footer">
 						
-						<button class="btn btn-info" type="submit" ng-click="">
+						<button class="btn btn-info" type="submit" ng-click="shareR()">
 							<strong> 
 								<i class="fa fa-share-alt-square" aria-hidden="true"></i> Only Reading
 							</strong>
 						</button>
 						
-						<button class="btn btn-primary" type="submit" ng-click="">
+						<button class="btn btn-primary" type="submit" ng-click="shareRW()">
 							<strong> 
 								<i class="fa fa-share-alt-square" aria-hidden="true"></i> Reading and Writing
 							</strong>
@@ -147,7 +147,7 @@
       					</h3>
     	  			</div> <!-- modal-body ends -->
     	  			<div class="modal-footer">
-    	  				<button class="btn btn-info" type="submit" ng-click="">
+    	  				<button class="btn btn-info" type="submit" ng-click="renameFile()">
 							<strong> 
 								<i class="fa fa-pencil" aria-hidden="true"></i> Rename
 							</strong>
