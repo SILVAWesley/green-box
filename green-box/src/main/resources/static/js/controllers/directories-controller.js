@@ -21,16 +21,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$state.go('dashboard.file');
 	}
 	
-	
-	$scope.shareR = function(){
-		share("R");
-	}
-	
-	$scope.shareRW = function(){
-		share("RW");
-	}
-	
-	function share(sharingType){
+	$scope.share = function(sharingType){
 		requestData = {};
 		requestData.user = $scope.user;
 		requestData.userSharedWith = $scope.userSharedWith;
@@ -76,7 +67,6 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 				$localStorage.session.user = response.data;
 				update();
 				goToPath($stateParams.folderPath);
-				
 			}, function(response) {
 				
 				window.alert(response.data.message);
@@ -114,16 +104,6 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		}
 	
 		return null;
-	}
-	
-	function formatPathToApiPattern(path) {
-		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "")
-		return tempPath.substring(1, tempPath.length) + "/" + $scope.newFolderName;
-	}
-	
-	function formatPathToApiPattern2(path) {
-		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "")
-		return tempPath.substring(1, tempPath.length);
 	}
 	
 	function update () {
