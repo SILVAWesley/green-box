@@ -14,7 +14,6 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	
 	
 	$scope.saveFile = function() {
-		//path = formatPathToApiPattern($scope.path);
 		
 		requestData = {};
 		requestData.user = $scope.user;
@@ -63,27 +62,6 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 			window.alert(response.data.message);
 			
 		});
-	}
-	
-	function getNamelessPath(path){
-		var splitPath = path.split("/");
-		result = "";
-		for(i = 0; i < splitPath.length -1; i++){
-			result += splitPath[i];
-		}
-		
-		return result;
-		
-	}
-	
-	function formatPathToApiPattern(path) {
-		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "");
-		return tempPath.substring(1, tempPath.length) + "/" + $scope.newFileName;
-	}
-	
-	function formatPathToApiPattern2(path) {
-		tempPath = path.replace(new RegExp('/', 'g'), '-');
-		return tempPath.substring(1, tempPath.length);
 	}
 	
 	$scope.directoriesView = function() {
