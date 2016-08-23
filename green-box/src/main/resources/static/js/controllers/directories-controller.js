@@ -67,10 +67,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		requestData = {};
 		requestData.user = $scope.user;
 		requestData.folderName = $scope.newFolderName;
-		//requestData.folderPath = formatPathToApiPattern2($scope.currentDirectory.path);
-		requestData.folderPath = $scope.currentDirectory.path;
-		//console.log("Path: " + $scope.path);
-		
+		requestData.folderPath = $scope.currentDirectory.path;		
 		
 		
 		$http.post("/server/userdirectory/newfolder", requestData)
