@@ -27,13 +27,13 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		requestData.userSharedWith = $scope.userSharedWith;
 		requestData.fileName = $localStorage.selectedItem.name;
 		
-		$http.post("to-be-completed", requestData, sharingType)
+		$http.post('to-be-completed', requestData, sharingType)
 		.then(function(response){
 			$localStorage.session.user = response.data;
-			window.alert("File successfully shared");
+			window.alert('File successfully shared');
 		}, function(response){
 			window.alert(response.data.message);
-			window.alert("whoops!");
+			window.alert('whoops!');
 		});
 	}
 	
@@ -43,13 +43,13 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		requestData.newFileName = $scope.newFileName;
 		requestData.oldFileName = $localStorage.selectedItem.name;
 		
-		$http.post("to-be-completed", requestData)
+		$http.post('to-be-completed', requestData)
 			.then(function(response){
 				$localStorage.session.user = response.data;
-				window.alert("File renamed successfully");
+				window.alert('File renamed successfully');
 			}, function(response){
 				window.alert(response.data.message);
-				window.alert("whoops!");
+				window.alert('whoops!');
 			});
 	}
 	
@@ -61,7 +61,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		requestData.folderPath = $scope.currentDirectory.path;		
 		
 		
-		$http.post("/server/userdirectory/newfolder", requestData)
+		$http.post('/server/userdirectory/newfolder', requestData)
 			.then(function(response) {
 				
 				$localStorage.session.user = response.data;

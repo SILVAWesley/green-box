@@ -22,11 +22,10 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		requestData.fileContent = $scope.content;
 		requestData.filePath = $scope.path;
 		
-		console.log("Path: " + $scope.path);
 		
 		if (requestData.fileName == "") {
 			
-			window.alert("File name cannot be empty.");
+			window.alert('File name cannot be empty.');
 			
 		} else if ($localStorage.clickedFile == undefined){
 			createNewFile();
@@ -36,11 +35,11 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	}
 	
 	function editFile(){
-		$http.put("/server/userdirectory/editfile", requestData, $localStorage.clickedFile)
+		$http.put('/server/userdirectory/editfile', requestData, $localStorage.clickedFile)
 		.then(function(response){
 			
 			$localStorage.session.user = response.data;
-			window.alert("File successfully edited");
+			window.alert('File successfully edited');
 			$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
 			
 		}, function(response){
@@ -49,11 +48,11 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	}
 	
 	function createNewFile(){
-		$http.post("/server/userdirectory/newfile", requestData)
+		$http.post('/server/userdirectory/newfile', requestData)
 		.then(function(response) {
 			
 			$localStorage.session.user = response.data;
-			window.alert("File successfully created.");
+			window.alert('File successfully created.');
 			$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
 			$scope.path = $localStorage.session.currentPath;
 			
