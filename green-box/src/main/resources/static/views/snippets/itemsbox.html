@@ -37,7 +37,11 @@
 							<a style="color:green" href="" ng-click="folderClick(item)"> {{item.name}}</a>
 						</td>
 						
-						<td class="col-sm-2"></td> <!-- standardization of box -->
+						<td class="col-sm-2">
+							<a title="Rename file" class="fa fa-pencil fa-2x" aria-hidden="true" 
+							   style="color:#18A103" href="" ng-click="actionClick(item)" data-toggle="modal" data-target="#renameModal"> Rename
+							</a>
+						</td> <!-- standardization of box -->
 						<td class="col-sm-1"></td> <!-- standardization of box -->
 						
 					</tr>
@@ -62,7 +66,6 @@
 							   style="color:#18A103" href="" ng-click="actionClick(item)" data-toggle="modal" data-target="#modalShare"> Share
 							</a>
 						</td>
-				
 
 					</tr>
 				</tbody>
