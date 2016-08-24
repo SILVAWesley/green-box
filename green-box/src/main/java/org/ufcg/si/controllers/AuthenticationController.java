@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.ufcg.si.exceptions.GreenboxException;
 import org.ufcg.si.models.User;
 import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ExceptionHandler;
 import org.ufcg.si.util.ServerConstants;
+import org.ufcg.si.util.Validator;
 import org.ufcg.si.util.responses.AuthenticationResponse;
 import org.ufcg.si.util.tokens.HS512_24Hours_Token;
 import org.ufcg.si.util.tokens.TokenBuilder;
@@ -44,25 +46,27 @@ public class AuthenticationController {
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AuthenticationResponse> login(@RequestBody User requestBody) throws ServletException {
-		/* FUTURE WORKS ON THIS CLASS SHOULD ENABLE: 
-		 * Exception handling (REFACTORING) */
-		ExceptionHandler.checkLoginFields(requestBody);
-		
-		User dbUser = null;
-		
-		if (requestBody.getEmail() != null) {
-			dbUser = userService.findByEmail(requestBody.getEmail());
-		} else {
-			dbUser = userService.findByUsername(requestBody.getUsername());
+		try {
+			ExceptionHandler.checkLoginBody(requestBody);
+			
+			User dbUser = null;
+			
+			if (Validator.isEmpty(requestBody.getUsername())) {
+				dbUser = userService.findByEmail(requestBody.getEmail());
+			} else {
+				dbUser = userService.findByUsername(requestBody.getUsername());
+			}
+			
+			ExceptionHandler.checkLoginSuccess(requestBody, dbUser);
+			
+			String token = tokenBuilder.build(dbUser);
+			AuthenticationResponse response = new AuthenticationResponse(token, dbUser);
+			
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch(GreenboxException e) {
+			e.printStackTrace();
+			throw new ServletException("Request error while trying to login... " + e.getMessage());
 		}
-		
-		ExceptionHandler.checkUserInDatabase(dbUser);
-		ExceptionHandler.checkMatchingPassword(requestBody, dbUser);
-		
-		String token = tokenBuilder.build(dbUser);
-		AuthenticationResponse response = new AuthenticationResponse(token, dbUser);
-		
-		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@Autowired
