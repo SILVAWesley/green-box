@@ -3,116 +3,124 @@ package org.ufcg.si.util;
 import javax.servlet.ServletException;
 
 import org.ufcg.si.exceptions.InvalidDataException;
-import org.ufcg.si.exceptions.InvalidPasswordException;
-import org.ufcg.si.exceptions.InvalidUserException;
-import org.ufcg.si.exceptions.InvalidUsernameException;
+import org.ufcg.si.exceptions.InvalidRequestBodyException;
 import org.ufcg.si.exceptions.MissingItemException;
 import org.ufcg.si.models.User;
+import org.ufcg.si.util.requests.FileRequestBody;
+import org.ufcg.si.util.requests.FolderRequestBody;
 
 public class ExceptionHandler {
 	public static final String USER_USERNAME = "username";
 	public static final String USER_EMAIL = "email";
 	public static final String USER_PASSWORD = "password";
 	
-	public static void checkLogin(User reqBody, User dbUser) {
-		if (reqBody.getEmail() == null && reqBody.getUsername() == null) {
-			throw new InvalidDataException("No username or email to make a login attempt.");
+	public static void checkNewFolderBody(FolderRequestBody requestBody) {
+		if (Validator.isEmpty(requestBody.getUser())) {
+			throw new InvalidRequestBodyException("Invalid user: " + requestBody.getUser() + ".");
 		}
 		
+		String username = requestBody.getUser().getUsername();
+		String folderName = requestBody.getFolderName();
+		String folderPath = requestBody.getFolderPath();
 		
-		
-		// User found in the database
-		if (dbUser == null) {
-			throw new MissingItemException("User could not be found in the database.");
+		if (Validator.isUsernameInvalid(username)) {
+			throw new InvalidRequestBodyException("Invalid username: " + username + ".");
 		}
 		
-		// Password match
-		if (!dbUser.getPassword().equals(reqBody.getPassword())) {
-			throw new InvalidDataException("Username/Email or password incorrect.");
+		if (Validator.isStorageItemNameInvalid(folderName)) {
+			throw new InvalidRequestBodyException("Invalid name for folder: " + folderName + ".");
+		}
+		
+		if (Validator.isEmpty(folderPath)) {
+			throw new InvalidRequestBodyException("Invalid path for folder: " + folderPath + ".");
+		}
+	}
+	
+	public static void checkNewFileBody(FileRequestBody requestBody) {
+		if (Validator.isEmpty(requestBody.getUser())) {
+			throw new InvalidRequestBodyException("Invalid user: " + requestBody.getUser() + ".");
+		}
+		
+		String username = requestBody.getUser().getUsername();
+		String fileName = requestBody.getFileName();
+		String filePath = requestBody.getFilePath();
+		String fileExtension = requestBody.getFileExtension();
+		
+		if (Validator.isUsernameInvalid(username)) {
+			throw new InvalidRequestBodyException("Invalid username: " + username + ".");
+		}
+		
+		if (Validator.isStorageItemNameInvalid(fileName)) {
+			throw new InvalidRequestBodyException("Invalid name for file: " + fileName + ".");
+		}
+		
+		if (Validator.isEmpty(filePath)) {
+			throw new InvalidRequestBodyException("Invalid path for file: " + filePath + ".");
+		}
+		
+		if (Validator.isEmpty(fileExtension)) {
+			throw new InvalidRequestBodyException("Invalid extension for file: " + fileExtension + ".");
+		}
+	}
+	
+	public static void checkEditFileBody(FileRequestBody requestBody) {
+		if (Validator.isEmpty(requestBody.getUser())) {
+			throw new InvalidRequestBodyException("Invalid user: " + requestBody.getUser() + ".");
+		}
+		
+		String username = requestBody.getUser().getUsername();
+		String fileName = requestBody.getFileName();
+		String filePath = requestBody.getFilePath();
+		
+		if (Validator.isUsernameInvalid(username)) {
+			throw new InvalidRequestBodyException("Invalid username: " + username + ".");
+		}
+		
+		if (Validator.isStorageItemNameInvalid(fileName)) {
+			throw new InvalidRequestBodyException("Invalid name for file: " + fileName + ".");
+		}
+		
+		if (Validator.isEmpty(filePath)) {
+			throw new InvalidRequestBodyException("Invalid path for file: " + filePath + ".");
+		}
+	}
+	
+	public static void checkRegistrationBody(User requestBody) throws InvalidRequestBodyException {
+		String username = requestBody.getUsername();
+		String email = requestBody.getEmail();
+		String password = requestBody.getPassword();
+		
+		if (Validator.isUsernameInvalid(username)) {
+			throw new InvalidRequestBodyException("Request with invalid username: " + username + ".");
+		}
+		
+		if (Validator.isEmailInvalid(email)) {
+			throw new InvalidRequestBodyException("Request with invalid email: " + email + ".");
+		}
+		
+		if (Validator.isPasswordInvalid(password)) {
+			throw new InvalidRequestBodyException("Request with invalid password.");
+		}
+	}
+	public static void checkLoginBody(User requestBody) throws InvalidRequestBodyException {
+		if (Validator.isEmpty(requestBody.getUsername()) && Validator.isEmpty(requestBody.getEmail())) {
+			throw new InvalidRequestBodyException("Request without email or username.");
+		}
+		
+		if (Validator.isEmpty(requestBody.getPassword())) {
+			throw new InvalidRequestBodyException("Request without password.");
+		}
+	}
+	
+	public static void checkLoginSuccess(User requestBody, User dbUser) throws InvalidDataException {
+		if (Validator.isEmpty(dbUser) || !dbUser.getPassword().equals(requestBody.getPassword())) {
+			throw new InvalidDataException("Invalid username or password.");
 		}
 	}
 	
 	public static void checkUserInDatabase(User user) throws ServletException {
-		try {
-			checkNotNullData(user);
-		} catch(InvalidDataException e) {
-			throw new ServletException("Invalid username or password.");
+		if (Validator.isEmpty(user)) {
+			throw new MissingItemException("User " + user + " not found in the database.");
 		}
 	}
-	
-	public static void checkMatchingPassword(User loggingUser, User dbUser) throws ServletException {
-		try {
-			if (!loggingUser.getPassword().equals(dbUser.getPassword())) {
-				throw new InvalidPasswordException("The given password is invalid.");
-			}
-		} catch(InvalidDataException e) {
-			throw new ServletException("Invalid username or password.");
-		}
-	}
-	
-	public static void checkLoginFields(User user) throws ServletException {
-		if ((user.getUsername() == null && user.getEmail() == null) || (user.getPassword() == null)) {
-			throw new ServletException("Username/Email and password are both required.");
-		}
-	}
-	
-	public static void checkUser(User user, String... attributes) throws InvalidUserException {
-		try {
-			for (String attribute : attributes) {
-				if (attribute.equals(USER_USERNAME)) {
-					checkUsername(user.getUsername());
-				}
-				
-				if (attribute.equals(USER_EMAIL)) {
-					checkEmail(user.getEmail());
-				}
-				
-				if (attribute.equals(USER_PASSWORD)) {
-					checkPassword(user.getPassword());
-				}
-			}
-		} catch(InvalidDataException e) {
-			throw new InvalidUserException("User is not valid. " + e.getMessage());
-		}
-	}
-	
-	public static void checkUsername(String username) throws InvalidUsernameException {
-		try {
-			checkNotNullData(username);
-			checkNotEmptyString(username);
-		} catch(InvalidDataException e) {
-			throw new InvalidUsernameException("The given username is invalid. " + e.getMessage());
-		}
-	}
-	
-	public static void checkEmail(String email) {
-		try {
-			checkNotNullData(email);
-			checkNotEmptyString(email);
-		} catch(InvalidDataException e) {
-			throw new InvalidUsernameException("The given email is invalid. " + e.getMessage());
-		}
-	}
-	
-	public static void checkPassword(String password) throws InvalidUsernameException {
-		try {
-			checkNotNullData(password);
-			checkNotEmptyString(password);
-		} catch(InvalidDataException e) {
-			throw new InvalidUsernameException("The given password is invalid. " + e.getMessage());
-		}
-	}
-	
-	public static void checkNotEmptyString(String checkingData) throws InvalidDataException {
-		if (checkingData.trim().isEmpty()) { 
-			throw new InvalidDataException("Empty data.");
-		}
-	}
-	
-	public static <T> void checkNotNullData(T checkingData) throws InvalidDataException {
-		if (checkingData == null) { 
-			throw new InvalidDataException("Null data.");
-		}
-	}
-	
 }

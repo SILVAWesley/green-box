@@ -25,7 +25,7 @@ angular.module('app').factory("authService", function($localStorage, $http) {
 	
 	function authenticate(userInfo, callback) {
 		
-		$http.post("/server/login/authenticate", userInfo)
+		$http.post("/server/authentication/login", userInfo)
 			.then(function(response) {
 				
 				$localStorage.session = {'user': response.data.user,

@@ -1,5 +1,6 @@
 package org.ufcg.si.models.storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.jboss.jandex.Main;
+import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.MissingItemException;
 import org.ufcg.si.util.ServerConstants;
 
@@ -38,6 +41,24 @@ public class GBFolder {
 		this.path = path;
 	}
 
+	public static void main(String[] args) throws IOException {
+		GBFolder p1 = new GBFolder("p1", "p1");
+		GBFolder p2 = new GBFolder("p2", "p1/p2");
+		GBFolder p3 = new GBFolder("p2", "p1/p3");
+		GBFolder p4 = new GBFolder("p4", "p1/p2/p4");
+		GBFolder p5 = new GBFolder("p4", "p1/p2/p4/p5");
+		
+		p1.addFolder("p2", "p1");
+		p1.addFolder("p3", "p1");
+		p1.addFolder("p4", "p1/p2");
+		p1.addFolder("p5", "p1/p2/p4");
+		
+		p1.addFile("Hello World", "txt", "ola pessoas");
+		
+		p1.rename("a");
+		System.out.println(p1);
+	}
+	
 	public GBFolder(String name) {
 		this(name, name);
 	}
@@ -46,39 +67,92 @@ public class GBFolder {
 		this(null, null);
 	}
 	
-	public void addFile(String name, String extension, String content) throws Exception {
+	public void addFile(String name, String extension, String content) throws IOException {
 		GBFile newFile = StorageFactory.createFile(name, extension, content, this.path);
+		
+		if (files.contains(newFile)) {
+			throw new InvalidDataException("Invalid name " + name + " already in use."); 
+		}
+		
 		files.add(newFile);
 	}
 	
-	public void addFile(String name, String extension, String content, String path) throws Exception {
+	public void addFile(String name, String extension, String content, String path) throws IOException, InvalidDataException {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder folderToAdd = findFolderByName(splPath, 0);
 		folderToAdd.addFile(name, extension, content);
 	}
 	
-	public void addFolder(String name) {
-		GBFolder newFolder = StorageFactory.createFolder(name, this.path); 
+	public void addFolder(String name) throws InvalidDataException {
+		GBFolder newFolder = StorageFactory.createFolder(name, this.path);
+		
+		if (folders.contains(newFolder)) {
+			throw new InvalidDataException("Invalid name " + name + " already in use."); 
+		}
+		
 		folders.add(newFolder);
 	}
 	
-	public void addFolder(String name, String path) throws Exception {
+	public void addFolder(String name, String path) throws MissingItemException, InvalidDataException {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder folderToAdd = findFolderByName(splPath, 0);
 		folderToAdd.addFolder(name);
 	}
 	
-	public void editFile(String name, String newContent, String path) throws Exception {
+	public void editFile(String name, String newContent, String path) throws IOException {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder folder = findFolderByName(splPath, 0);
 		folder.findFileByName(name).setContent(newContent);
+	}
+	
+	public void rename(String newName, String name, String path) {
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		GBFolder parentOfFolderToRename = findFolderByName(splPath, 0);
+		parentOfFolderToRename.findFolderByName(name).rename(newName);
+	}
+	
+	public void rename(String newName) {
+		if (path == null) {
+			path = "";
+		}
+		
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		int depthLevel = splPath.length - 1;
+		List<String> discovered = new ArrayList<String>();
+		renamePath(newName, depthLevel);
+		name = newName;
+		discovered.add(this.getName());
+		recursiveRename(discovered, newName, depthLevel);
+	}
+	
+	private void renamePath(String newName, int depthLevel) {
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		splPath[depthLevel] = newName;
+		path = String.join(ServerConstants.PATH_SEPARATOR, splPath);
+	}
+	
+	private void recursiveRename(List<String> discovered, String newName, int depthLevel) {
+		for (GBFolder folder : folders) {
+			if (!discovered.contains(folder.getName())) {
+				discovered.add(folder.getName());
+				folder.renamePath(newName, depthLevel);
+				
+				for (GBFile file : files) {
+					String[] fsplPath = file.getPath().split(ServerConstants.PATH_SEPARATOR);
+					fsplPath[depthLevel] = newName;
+					file.setPath(String.join(ServerConstants.PATH_SEPARATOR, fsplPath));
+				}
+				
+				folder.recursiveRename(discovered, newName, depthLevel);
+			}
+		}
 	}
 
 	public List<GBFile> getFiles() {
 		return files;
 	}
 	
-	public List<GBFolder> getFolders() {
+	public List<GBFolder> getChildren() {
 		return folders;
 	}
 	
@@ -88,19 +162,6 @@ public class GBFolder {
 	
 	public String getName() {
 		return name;
-	}
-	
-	public void setName(String name){
-		this.name = name;
-		
-		String[] splPath = this.path.split(ServerConstants.PATH_SEPARATOR);
-		this.path = "";
-		
-		for (int i = 0; i < splPath.length - 1; i++) {
-			this.path += splPath[i] + "-";
-		}
-		
-		this.path += name;
 	}
 	
 	private GBFolder findFolderByName(String name) throws MissingItemException {
@@ -113,16 +174,11 @@ public class GBFolder {
 		throw new MissingItemException("Folder: " + name + " not found in collection: " + this.folders);
 	}
 	
-	private GBFolder findFolderByName(String[] splPath, int currentIndex) throws Exception {
-		if (splPath.length == 1) {
+	private GBFolder findFolderByName(String[] splPath, int currentIndex) throws MissingItemException {
+		if (splPath.length - 1 == currentIndex) {
 			return this;
-		} else if (currentIndex == splPath.length - 2) {
-			return findFolderByName(splPath[currentIndex + 1]); 
-		} else if (currentIndex == 0) {
-			return findFolderByName(splPath, currentIndex + 1);
 		} else {
-			GBFolder childFolder = findFolderByName(splPath[currentIndex]);  
-			return childFolder.findFolderByName(splPath, currentIndex + 1);
+			return findFolderByName(splPath[currentIndex + 1]).findFolderByName(splPath, currentIndex + 1);
 		}
 	}
 	

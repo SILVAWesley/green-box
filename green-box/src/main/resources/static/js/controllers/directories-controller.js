@@ -7,9 +7,20 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	$localStorage.session.currentPath = $stateParams.folderPath;
 	
 	$scope.newFolderName = "";
+	$scope.currentType = "";
 	
 	$scope.folderClick = function(folder) {
 		$state.go('dashboard.directories', {folderPath: folder.path});
+	}
+	
+	$scope.actionClick = function(item){
+		$localStorage.selectedItem = item;
+	}
+	
+	
+	$scope.renameClick = function(item, type){
+		$localStorage.selectedItem = item;
+		$scope.currentType = type;
 	}
 	
 	$scope.fileClick = function(file) {
@@ -17,17 +28,73 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$state.go('dashboard.file');
 	}
 	
+	$scope.share = function(sharingType){
+		requestData = {};
+		requestData.user = $scope.user;
+		requestData.userSharedWith = $scope.userSharedWith;
+		requestData.fileName = $localStorage.selectedItem.name;
+		
+		$http.post('to-be-completed', requestData, sharingType)
+		.then(function(response){
+			$localStorage.session.user = response.data;
+			window.alert('File successfully shared');
+		}, function(response){
+			window.alert(response.data.message);
+			window.alert('whoops!');
+		});
+	}
+	
+	$scope.renameItem = function(){
+		requestData = {};
+		requestData.user = $scope.user;
+		requestData.newName = $scope.newName;
+		requestData.oldName = $localStorage.selectedItem.name;
+		
+		if($scope.currentType == 'File'){
+			renameFile();
+		} else if( $scope.currentType == 'Folder'){
+			renameFolder();
+		} else{
+			window.alert('NOT FILE NOR FOLDER');
+		}
+	}
+	
+	function renameFile(){
+		$http.post('to-be-completed', requestData)
+		.then(function(response){
+			$localStorage.session.user = response.data;
+			window.alert('File renamed successfully');
+		}, function(response){
+			window.alert(response.data.message);
+			window.alert('whoops!');
+		});
+	}
+	
+	function renameFolder(){
+		$http.post('to-be-completed', requestData)
+		.then(function(response){
+			$localStorage.session.user = response.data;
+			window.alert('Folder renamed successfully');
+		}, function(response){
+			window.alert(response.data.message);
+			window.alert('whoops!');
+		});
+	}
+	
 	$scope.newFolder = function() {
 		
-		requestUrl = "/server/userdirectory/newfolder/" + formatPathToApiPattern($scope.currentDirectory.path);
-
-		$http.post(requestUrl, $scope.user)
+		requestData = {};
+		requestData.user = $scope.user;
+		requestData.folderName = $scope.newFolderName;
+		requestData.folderPath = $scope.currentDirectory.path;		
+		
+		
+		$http.post('/server/userdirectory/newfolder', requestData)
 			.then(function(response) {
 				
 				$localStorage.session.user = response.data;
 				update();
 				goToPath($stateParams.folderPath);
-				
 			}, function(response) {
 				
 				window.alert(response.data.message);
@@ -65,11 +132,6 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		}
 	
 		return null;
-	}
-	
-	function formatPathToApiPattern(path) {
-		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "")
-		return tempPath.substring(1, tempPath.length) + "/" + $scope.newFolderName;
 	}
 	
 	function update () {

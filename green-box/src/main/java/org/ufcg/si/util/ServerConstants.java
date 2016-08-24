@@ -6,7 +6,7 @@ package org.ufcg.si.util;
 public class ServerConstants {
 	/* Constants related to io */
 	public static final String LINE_BREAK = System.lineSeparator();
-	public static final String PATH_SEPARATOR = "-";
+	public static final String PATH_SEPARATOR = "/";
 	public static final String FILES_PATH = "files/";
 	
 	/* Constants related to request mapping */

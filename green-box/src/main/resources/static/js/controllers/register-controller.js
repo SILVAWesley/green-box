@@ -27,9 +27,11 @@ angular.module('app').controller('registrationController', ['$scope', '$http', f
 		
 		$http.post("/server/users/new", $scope.user)
 		.then(function(response) {
-			window.alert("Congratulations! You now have a greenbox account to store your files. " +
-						 "Username: " + response.data.username + " "
-						 + "Email: " + response.data.email);
+			//window.alert("Congratulations! You now have a greenbox account to store your files. " +
+			//			 "Username: " + response.data.username + " "
+			//			 + "Email: " + response.data.email);
+		    $("#modalRegister").modal("show");
+
 			
 			$scope.user = {username: "", 
 					   	   email: "", 
