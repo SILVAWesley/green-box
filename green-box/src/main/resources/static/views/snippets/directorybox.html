@@ -1,8 +1,8 @@
 <div class="col-sm-12">
 	<ng-include src="'views/snippets/itemsbox.html'"> </ng-include>
 
-		<!-- Modal Create File-->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalFolder">
+		<!-- Modal Create Folder-->
+		<div class="modal fade" id="modalFolder" tabindex="-1" role="dialog" aria-labelledby="modalFolder">
   			<div class="modal-dialog" role="document">
     			<div class="modal-content">
       				
@@ -24,14 +24,14 @@
       					<h3 style="font-family: 'Pattaya', sans-serif">
       						<strong>
       							New Folder <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> 
-      							<input type="text" placeholder="Folder Name" ng-model="newFolderName" />
-      						</strong>
+      							<input type="text" placeholder="Folder Name" name="country_code" pattern="(?!.*\s.*).*" ng-model="newFolderName" />
+      						</strong><!-- pattern="([a-zA-Z\d]+\.?)[a-zA-Z\d]"---> 
       					</h3>
     	  			</div> <!-- modal-body ends -->
     	  			
       				<div class="modal-footer">
 						
-						<button class="btn btn-warning" type="submit" ng-click="newFolder()">
+						<button class="btn btn-warning" type="submit" data-dismiss="modal" ng-click="newFolder()">
 							<strong> 
 								<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
 							</strong>
@@ -47,7 +47,7 @@
       				
     			</div> <!-- modal-content ends -->
   			</div> <!-- modal-dialog ends -->
-		</div> 
+		</div>  
 
 		<!-- Modal Share File -->
 		<div class="modal fade" id="modalShare" tabindex="-1" role="dialog" aria-labelledby="modalSharing">
@@ -92,13 +92,13 @@
     	  			
       				<div class="modal-footer">
 						
-						<button class="btn btn-info" type="submit" ng-click="share('R')">
+						<button class="btn btn-info" type="submit" data-dismiss="modal" ng-click="share('R')">
 							<strong> 
 								<i class="fa fa-share-alt-square" aria-hidden="true"></i> Only Reading
 							</strong>
 						</button>
 						
-						<button class="btn btn-primary" type="submit" ng-click="share('RW')">
+						<button class="btn btn-primary" type="submit" data-dismiss="modal" ng-click="share('RW')">
 							<strong> 
 								<i class="fa fa-share-alt-square" aria-hidden="true"></i> Reading and Writing
 							</strong>
@@ -147,7 +147,7 @@
       					</h3>
     	  			</div> <!-- modal-body ends -->
     	  			<div class="modal-footer">
-    	  				<button class="btn btn-info" type="submit" ng-click="renameFile()">
+    	  				<button class="btn btn-info" type="submit" data-dismiss="modal" ng-click="renameFile()">
 							<strong> 
 								<i class="fa fa-pencil" aria-hidden="true"></i> Rename
 							</strong>
