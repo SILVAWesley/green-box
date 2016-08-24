@@ -75,6 +75,7 @@ public class GBFile {
 	}
 	
 	public void rename(String newName) {
+		this.name = newName;
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		splPath[splPath.length - 1] = newName;
 		path = String.join(ServerConstants.PATH_SEPARATOR, splPath);
