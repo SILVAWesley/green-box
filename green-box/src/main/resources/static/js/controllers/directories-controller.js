@@ -7,6 +7,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	$localStorage.session.currentPath = $stateParams.folderPath;
 	
 	$scope.newFolderName = "";
+	$scope.currentType = "";
 	
 	$scope.folderClick = function(folder) {
 		$state.go('dashboard.directories', {folderPath: folder.path});
@@ -14,6 +15,12 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	
 	$scope.actionClick = function(item){
 		$localStorage.selectedItem = item;
+	}
+	
+	
+	$scope.renameClick = function(item, type){
+		$localStorage.selectedItem = item;
+		$scope.currentType = type;
 	}
 	
 	$scope.fileClick = function(file) {
@@ -37,20 +44,41 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		});
 	}
 	
-	$scope.renameFile = function(){
+	$scope.renameItem = function(){
 		requestData = {};
 		requestData.user = $scope.user;
-		requestData.newFileName = $scope.newFileName;
-		requestData.oldFileName = $localStorage.selectedItem.name;
+		requestData.newName = $scope.newName;
+		requestData.oldName = $localStorage.selectedItem.name;
 		
+		if($scope.currentType == 'File'){
+			renameFile();
+		} else if( $scope.currentType == 'Folder'){
+			renameFolder();
+		} else{
+			window.alert('NOT FILE NOR FOLDER');
+		}
+	}
+	
+	function renameFile(){
 		$http.post('to-be-completed', requestData)
-			.then(function(response){
-				$localStorage.session.user = response.data;
-				window.alert('File renamed successfully');
-			}, function(response){
-				window.alert(response.data.message);
-				window.alert('whoops!');
-			});
+		.then(function(response){
+			$localStorage.session.user = response.data;
+			window.alert('File renamed successfully');
+		}, function(response){
+			window.alert(response.data.message);
+			window.alert('whoops!');
+		});
+	}
+	
+	function renameFolder(){
+		$http.post('to-be-completed', requestData)
+		.then(function(response){
+			$localStorage.session.user = response.data;
+			window.alert('Folder renamed successfully');
+		}, function(response){
+			window.alert(response.data.message);
+			window.alert('whoops!');
+		});
 	}
 	
 	$scope.newFolder = function() {

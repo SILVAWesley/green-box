@@ -38,8 +38,8 @@
 						</td>
 						
 						<td class="col-sm-2">
-							<a title="Rename file" class="fa fa-pencil fa-2x" aria-hidden="true" 
-							   style="color:#18A103" href="" ng-click="actionClick(item)" data-toggle="modal" data-target="#renameModal"> Rename
+							<a title="Rename folder" class="fa fa-pencil fa-2x" aria-hidden="true" 
+							   style="color:#18A103" href="" ng-click="renameClick(item, 'Folder')" data-toggle="modal" data-target="#renameModal"> Rename
 							</a>
 						</td> <!-- standardization of box -->
 						<td class="col-sm-1"></td> <!-- standardization of box -->
@@ -57,7 +57,7 @@
 						
 						<td class="col-sm-2">
 							<a title="Rename file" class="fa fa-pencil fa-2x" aria-hidden="true" 
-							   style="color:#18A103" href="" ng-click="actionClick(item)" data-toggle="modal" data-target="#renameModal"> Rename
+							   style="color:#18A103" href="" ng-click="renameClick(item, 'File')" data-toggle="modal" data-target="#renameModal"> Rename
 							</a>
 						</td>
 	
