@@ -31,6 +31,32 @@
 					<span style="color:red" ng-show="registrationForm.password.$error.required && registrationForm.password.$dirty">Password required.</span>
 			</div> <!-- form-group-3 ends -->
 			
+			<!-- Information Modal -->
+			<div class="modal fade" id="informationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			        <h4 class="modal-title" id="myModalLabel">What do I need to register?</h4>
+			      </div>
+			      <div class="modal-body">
+			        <ol>
+				      	<li>Username between 4 and 15 characters between letters, numbers and "- or _"</li>
+				      	<li>Valid Email</li>
+				      	<li>Password with at least 6 characters, at least one letter and one number</li>
+			      	</ol>	
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+			
+			<a title="help" class="glyphicon glyphicon-info-sign" aria-hidden="true" 
+							   style="color:#18A103" href="" ng-click="actionClick(item)" data-toggle="modal" data-target="#informationModal"> Help!
+			</a>
+			<h5></h5>
 			<button class="btn btn-warning" type="submit" ng-disabled="registrationForm.$invalid">
 				<strong>
 					<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Create an account!
