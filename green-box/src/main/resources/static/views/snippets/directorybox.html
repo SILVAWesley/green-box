@@ -1,8 +1,22 @@
+<div class="col-sm-5">
+	<div class="form-top-left">
+		<button class="btn btn-primary btn-lg" type="submit" ng-click="">
+			<strong> 
+				<i class="fa fa-check-circle" aria-hidden="true fa-3x"></i> My Files
+			</strong>
+		</button>
+		<button class="btn btn-primary btn-lg" type="submit" ng-click="">
+			<strong> 
+				<i class="fa fa-share-alt" aria-hidden="true fa-3x"></i> Shared With Me
+			</strong>
+		</button>
+	</div>
+</div>
 <div class="col-sm-12">
 	<ng-include src="'views/snippets/itemsbox.html'"> </ng-include>
-
+	
 		<!-- Modal Create Folder-->
-		<div class="modal fade" id="modalFolder" tabindex="-1" role="dialog" aria-labelledby="modalFolder">
+		<div class="modal fade" id="folderModal" tabindex="-1" role="dialog" aria-labelledby="modalFolder">
   			<div class="modal-dialog" role="document">
     			<div class="modal-content">
       				
@@ -50,7 +64,7 @@
 		</div>  
 
 		<!-- Modal Share File -->
-		<div class="modal fade" id="modalShare" tabindex="-1" role="dialog" aria-labelledby="modalSharing">
+		<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="modalSharing">
   			<div class="modal-dialog" role="document">
     			<div class="modal-content">
       				
@@ -117,24 +131,27 @@
 		</div> <!-- modalShare ends -->
 		
 	</div> <!-- col-sm-12 col-md-12 ends -->
-	
-</div> <!-- col-sm-12 ends -->
 
 		<!-- Modal Rename File/Folder-->
 		<div class="modal fade" id="renameModal" tabindex="-1" role="dialog" aria-labelledby="renameModal" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
+		        
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
+  				
   				<h3 class="modal-title" id="modalFolder" style="font-family: 'Pattaya', sans-serif">
    					<strong>
    						<i class="fa fa-pencil" aria-hidden="true"></i> Rename File/Folder
    					</strong>
    				</h3>
+		      
 		      </div>
+				
 				<div class="modal-body">
+   					
    					<h3 style="font-family: 'Pattaya', sans-serif">
    						<strong>
    							<i class="fa fa-pencil" aria-hidden="true"></i>
@@ -144,12 +161,20 @@
    						</strong>
    					</h3>
 	   	  		</div> <!-- modal-body ends -->
+		      
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" ng-click="renameItem()">
-	        		<strong> 
+		        
+					<button class="btn btn-primary" type="button" data-dismiss="modal" ng-click="renameItem()">
+	        			<strong> 
       						<i class="fa fa-pencil" aria-hidden="true"></i> Rename
-      				</strong>
-		        </button>
+      					</strong>
+		        	</button>
+		        
+        			<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        				<strong> 
+        					<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
+        				</strong>
+        			</button>
 		      </div>
 		    </div>
 		  </div>
