@@ -133,8 +133,10 @@ public class UsersActionsController {
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 		
 			ExceptionHandler.checkUserInDatabase(dbUser);
-		
-			dbUser.getUserDirectory().rename(requestBody.getNewName(), requestBody.getOldName(), requestBody.getNewFolderPath());
+			
+			System.out.println(dbUser.getUserDirectory());
+			System.out.println(requestBody);
+			dbUser.getUserDirectory().rename(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
 			User updateUser = userService.update(dbUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
