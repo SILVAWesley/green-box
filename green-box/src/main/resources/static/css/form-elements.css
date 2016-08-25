@@ -92,7 +92,7 @@ button.btn:active {
 
 button.btn:focus { 
 	outline: 0; 
-	opacity: 0.6; 
+	opacity: none; 
 	background: #19e748; 
 	color: #fff; 
 }

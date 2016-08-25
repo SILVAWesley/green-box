@@ -73,6 +73,13 @@ public class GBFile {
 		this.file = new File(ServerConstants.FILES_PATH + name + "." + extension);
 		writeContentToFile(newContent);
 	}
+	
+	public void rename(String newName) {
+		this.name = newName;
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		splPath[splPath.length - 1] = newName;
+		path = String.join(ServerConstants.PATH_SEPARATOR, splPath);
+	}
 
 	private void writeContentToFile(String content) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
