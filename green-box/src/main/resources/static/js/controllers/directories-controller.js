@@ -4,6 +4,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	$scope.currentDirectory = $scope.rootDirectory;
 	$scope.openedFolders = [$scope.rootDirectory];
 	
+	
 	$localStorage.session.currentPath = $stateParams.folderPath;
 	
 	$scope.newFolderName = "";
@@ -49,6 +50,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		requestData.user = $scope.user;
 		requestData.newName = $scope.newName;
 		requestData.oldName = $localStorage.selectedItem.name;
+		requestData.folderPath = $localStorage.session.currentPath;
 		
 		if($scope.currentType == 'File'){
 			renameFile();
@@ -75,10 +77,12 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		.then(function(response){
 			$localStorage.session.user = response.data;
 			window.alert('Folder renamed successfully');
+			//update();
 		}, function(response){
 			window.alert(response.data.message);
 			window.alert('whoops!');
 		});
+		
 	}
 	
 	$scope.newFolder = function() {

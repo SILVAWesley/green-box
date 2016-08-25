@@ -6,13 +6,13 @@ public class NewFolderRequestBody {
 	private User user;
 	private String newName;
 	private String oldName;
-	private String newFolderPath;
+	private String folderPath;
 	
-	public NewFolderRequestBody(User user, String newName, String oldName, String newFolderPath){
+	public NewFolderRequestBody(User user, String newName, String oldName, String folderPath){
 		this.user = user;
 		this.newName = newName;
 		this.oldName = oldName;
-		this.newFolderPath = newFolderPath;
+		this.folderPath = folderPath;
 	}
 	
 	public NewFolderRequestBody(){
@@ -43,12 +43,12 @@ public class NewFolderRequestBody {
 		this.oldName = oldName;
 	}
 
-	public String getNewFolderPath() {
-		return newFolderPath;
+	public String getFolderPath() {
+		return folderPath;
 	}
 
-	public void setNewFolderPath(String newFolderPath) {
-		this.newFolderPath = newFolderPath;
+	public void setFolderPath(String newFolderPath) {
+		this.folderPath = newFolderPath;
 	}
 	
 	
