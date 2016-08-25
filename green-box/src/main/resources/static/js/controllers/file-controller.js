@@ -13,7 +13,7 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	}
 	
 	
-	$scope.saveFile = function() {
+	$scope.saveFile = function(){
 		
 		requestData = {};
 		requestData.user = $scope.user;
@@ -21,7 +21,7 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		requestData.fileExtension = $scope.currentExtension;
 		requestData.fileContent = $scope.content;
 		requestData.filePath = $scope.path;
-		
+		requestData.clickedFile = $localStorage.clickedFile;
 		
 		if (requestData.fileName == "") {
 			
@@ -35,7 +35,7 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 	}
 	
 	function editFile(){
-		$http.put('/server/userdirectory/editfile', requestData, $localStorage.clickedFile)
+		$http.put('/server/userdirectory/editfile', requestData)
 		.then(function(response){
 			
 			$localStorage.session.user = response.data;

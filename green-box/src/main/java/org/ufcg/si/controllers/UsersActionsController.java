@@ -96,8 +96,11 @@ public class UsersActionsController {
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			dbUser.getUserDirectory().editFile(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFilePath());
-			User updateUser = userService.update(dbUser);
+			//Comprar o nome se existe e extenção
+			//Verificar possibilidade de edição
+			
+			
+			User updateUser = editFileContent(requestBody, dbUser);
 			
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
 		} catch(GreenboxException gbe) {
@@ -110,6 +113,37 @@ public class UsersActionsController {
 			ioe.printStackTrace();
 			throw new ServletException("Request error while trying to edit file... " + ioe.getMessage());
 		}
+	}
+	
+	private User editFileContent(FileRequestBody requestBody, User dbUser) throws Exception{
+		dbUser.getUserDirectory().editFile(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFilePath());
+		User updateUser = userService.update(dbUser);
+		
+		return updateUser;
+	}
+	
+	@RequestMapping(value = "/renamefolder", 
+					method = RequestMethod.POST,
+					produces = MediaType.APPLICATION_JSON_VALUE,
+					consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> renameFolder(@RequestBody FolderRequestBody requestBody)throws Exception{
+		try{
+			
+			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+		
+			ExceptionHandler.checkUserInDatabase(dbUser);
+		
+			dbUser.getUserDirectory().rename(requestBody.getFolderName());
+			User updateUser = userService.update(dbUser);
+		
+			return new ResponseEntity<>(updateUser, HttpStatus.OK);
+		} catch(GreenboxException gbe) {
+			gbe.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + gbe.getMessage());
+		} catch (DataAccessException dae) {
+			dae.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
+		} 
 	}
 	
 	@Autowired
