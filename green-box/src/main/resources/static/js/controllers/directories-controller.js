@@ -71,7 +71,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	}
 	
 	function renameFolder(){
-		$http.post('to-be-completed', requestData)
+		$http.post('/server/userdirectory/renamefolder', requestData)
 		.then(function(response){
 			$localStorage.session.user = response.data;
 			window.alert('Folder renamed successfully');
