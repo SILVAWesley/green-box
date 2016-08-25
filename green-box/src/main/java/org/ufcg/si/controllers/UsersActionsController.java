@@ -21,6 +21,7 @@ import org.ufcg.si.util.ExceptionHandler;
 import org.ufcg.si.util.ServerConstants;
 import org.ufcg.si.util.requests.FileRequestBody;
 import org.ufcg.si.util.requests.FolderRequestBody;
+import org.ufcg.si.util.requests.NewFolderRequestBody;
 
 /**
  * This controller class uses JSON data format to be the 
@@ -126,14 +127,14 @@ public class UsersActionsController {
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> renameFolder(@RequestBody FolderRequestBody requestBody)throws Exception{
+	public ResponseEntity<User> renameFolder(@RequestBody NewFolderRequestBody requestBody)throws Exception{
 		try{
 			
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 		
 			ExceptionHandler.checkUserInDatabase(dbUser);
 		
-			dbUser.getUserDirectory().rename(requestBody.getFolderName());
+			dbUser.getUserDirectory().rename(requestBody.getNewName(), requestBody.getOldName(), requestBody.getNewFolderPath());
 			User updateUser = userService.update(dbUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
