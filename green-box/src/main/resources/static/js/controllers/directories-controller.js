@@ -62,7 +62,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	}
 	
 	function renameFile(){
-		$http.post('to-be-completed', requestData)
+		$http.post('/server/userdirectory/renamefile', requestData)
 		.then(function(response){
 			$localStorage.session.user = response.data;
 			window.alert('File renamed successfully');
