@@ -81,6 +81,14 @@ public class GBFile {
 		path = String.join(ServerConstants.PATH_SEPARATOR, splPath);
 	}
 
+	public void rename(String newName, String newExtension) {
+		this.name = newName;
+		this.extension = newExtension;
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		splPath[splPath.length - 1] = newName;
+		path = String.join(ServerConstants.PATH_SEPARATOR, splPath);
+	}
+	
 	private void writeContentToFile(String content) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		writer.write(content);

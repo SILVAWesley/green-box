@@ -2,20 +2,20 @@ package org.ufcg.si.util.requests;
 
 import org.ufcg.si.models.User;
 
-public class NewFolderRequestBody {
+public class RenameFileRequestBody {
 	private User user;
 	private String newName;
 	private String oldName;
 	private String folderPath;
 	
-	public NewFolderRequestBody(User user, String newName, String oldName, String folderPath){
+	public RenameFileRequestBody(User user, String newName, String oldName, String folderPath){
 		this.user = user;
 		this.newName = newName;
 		this.oldName = oldName;
 		this.folderPath = folderPath;
 	}
 	
-	public NewFolderRequestBody(){
+	public RenameFileRequestBody(){
 		
 	}
 	

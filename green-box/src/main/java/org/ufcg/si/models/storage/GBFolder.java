@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.jboss.jandex.Main;
 import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.MissingItemException;
 import org.ufcg.si.util.ServerConstants;
@@ -109,6 +108,18 @@ public class GBFolder {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
 		GBFolder parentOfFolderToRename = findFolderByName(splPath, 0);
 		parentOfFolderToRename.findFolderByName(name).rename(newName);
+	}
+	
+	public void renameFile(String newName, String name, String extension, String path) {
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		GBFolder parentOfFileToRename = findFolderByName(splPath, 0);
+		parentOfFileToRename.findFileByName(name).rename(newName, extension);
+	}
+	
+	public void renameFile(String newName, String name, String path) {
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		GBFolder parentOfFileToRename = findFolderByName(splPath, 0);
+		parentOfFileToRename.findFileByName(name).rename(newName);
 	}
 	
 	public void rename(String newName) {
