@@ -46,7 +46,7 @@ public class GBFileTest {
 	@Test
 	public void testEquals() {
 		try {
-			Assert.assertFalse(file1.equals(file2));
+			Assert.assertNotEquals(file1, file2);
 			Assert.assertEquals(file1, new GBFile("fire", "txt", sb1, "archives/file1"));
 			Assert.assertEquals(file2, new GBFile("water", "txt", sb2, "archives/file2"));
 			Assert.assertEquals(file3, new GBFile("nigth", "txt", sb3, "archives/file3"));
@@ -108,10 +108,10 @@ public class GBFileTest {
 		Assert.assertEquals(file2.getName(), "water");
 		Assert.assertEquals(file3.getName(), "nigth");
 		Assert.assertEquals(file4.getName(), "fate");
-		Assert.assertFalse(file1.getName().equals("depths of despair"));
-		Assert.assertFalse(file2.getName().equals("somebody else"));
-		Assert.assertFalse(file3.getName().equals("not you"));
-		Assert.assertFalse(file4.getName().equals("someone"));
+		Assert.assertNotEquals(file1.getName(), "depths of despair");
+		Assert.assertNotEquals(file2.getName(), "somebody else");
+		Assert.assertNotEquals(file3.getName(), "not you");
+		Assert.assertNotEquals(file4.getName(), "someone");
 	}
 
 	@Test
@@ -121,10 +121,10 @@ public class GBFileTest {
 		file3.setPath("storage/file3");
 		file4.setPath("storage/file4");
 
-		Assert.assertFalse(file1.getPath().equals("archives/file1"));
-		Assert.assertFalse(file2.getPath().equals("archives/file2"));
-		Assert.assertFalse(file3.getPath().equals("archives/file3"));
-		Assert.assertFalse(file4.getPath().equals("archives/file4"));
+		Assert.assertNotEquals(file1.getPath(), "archives/file1");
+		Assert.assertNotEquals(file2.getPath(), "archives/file2");
+		Assert.assertNotEquals(file3.getPath(), "archives/file3");
+		Assert.assertNotEquals(file4.getPath(), "archives/file4");
 		Assert.assertEquals(file1.getPath(), "storage/file1");
 		Assert.assertEquals(file2.getPath(), "storage/file2");
 		Assert.assertEquals(file3.getPath(), "storage/file3");
@@ -147,10 +147,10 @@ public class GBFileTest {
 		file3.rename("Nyx");
 		file4.rename("Moira");
 
-		Assert.assertFalse(file1.getName().equals("fire"));
-		Assert.assertFalse(file2.getName().equals("water"));
-		Assert.assertFalse(file3.getName().equals("nigth"));
-		Assert.assertFalse(file4.getName().equals("fate"));
+		Assert.assertNotEquals(file1.getName(), "fire");
+		Assert.assertNotEquals(file2.getName(), "water");
+		Assert.assertNotEquals(file3.getName(), "nigth");
+		Assert.assertNotEquals(file4.getName(), "fate");
 		Assert.assertEquals(file1.getName(), "Vulcan");
 		Assert.assertEquals(file2.getName(), "Poseidon");
 		Assert.assertEquals(file3.getName(), "Nyx");
@@ -165,19 +165,19 @@ public class GBFileTest {
 		file3.rename("Nyx", "md");
 		file4.rename("Moira", "md");
 
-		Assert.assertFalse(file1.getName().equals("fire"));
-		Assert.assertFalse(file2.getName().equals("water"));
-		Assert.assertFalse(file3.getName().equals("nigth"));
-		Assert.assertFalse(file4.getName().equals("fate"));
+		Assert.assertNotEquals(file1.getName(), "fire");
+		Assert.assertNotEquals(file2.getName(), "water");
+		Assert.assertNotEquals(file3.getName(), "nigth");
+		Assert.assertNotEquals(file4.getName(), "fate");
 		Assert.assertEquals(file1.getName(), "Vulcan");
 		Assert.assertEquals(file2.getName(), "Poseidon");
 		Assert.assertEquals(file3.getName(), "Nyx");
 		Assert.assertEquals(file4.getName(), "Moira");
 
-		Assert.assertFalse(file1.getExtension().equals("txt"));
-		Assert.assertFalse(file2.getExtension().equals("txt"));
-		Assert.assertFalse(file3.getExtension().equals("txt"));
-		Assert.assertFalse(file4.getExtension().equals("txt"));
+		Assert.assertNotEquals(file1.getExtension(), "txt");
+		Assert.assertNotEquals(file2.getExtension(), "txt");
+		Assert.assertNotEquals(file3.getExtension(), "txt");
+		Assert.assertNotEquals(file4.getExtension(), "txt");
 		Assert.assertEquals(file1.getExtension(), "md");
 		Assert.assertEquals(file2.getExtension(), "md");
 		Assert.assertEquals(file3.getExtension(), "md");
