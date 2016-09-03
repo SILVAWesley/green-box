@@ -1,0 +1,330 @@
+<!-- Modals -->
+<div class="col-sm-12">
+		<!-- Notification Modal -->
+		<div class="modal fade" id="modalNotification" tabindex="-1" role="dialog" aria-labelledby="modalNotification" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		        <h3 class="modal-title" id="myModalLabel" style="font-family: 'Pattaya', sans-serif">
+		        	<i class="fa fa-bell-o" aria-hidden="true"></i>
+		        	<strong>Notification</strong>
+		        </h3>
+		      </div>
+		      <div class="modal-body">
+		        ...
+		      </div>
+		      <div class="modal-footer" >
+					<button class="btn btn-danger" data-dismiss="modal" type="button">							
+   					<strong> 
+   						<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
+   					</strong>
+   				</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	
+		<!-- Modal Create Folder-->
+		<div class="modal fade" id="folderModal" tabindex="-1" role="dialog" aria-labelledby="modalFolder">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      				
+      				<div class="modal-header">
+        				
+        				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+        					<span aria-hidden="true">&times;</span>
+        				</button>
+        				
+        				<h3 class="modal-title" id="modalFolder" style="font-family: 'Pattaya', sans-serif">
+        					<strong>
+        						<i class="fa fa-cog fa-lg" aria-hidden="true"></i> Creating Folder
+        					</strong>
+        				</h3>
+        				
+      				</div> <!-- modal-header ends -->
+      				
+      				<div class="modal-body">
+      					<h3 style="font-family: 'Pattaya', sans-serif">
+      						<strong>
+      							New Folder <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> 
+      							<input type="text" placeholder="Folder Name" name="country_code" pattern="(?!.*\s.*).*" ng-model="newFolderName" />
+      						</strong><!-- pattern="([a-zA-Z\d]+\.?)[a-zA-Z\d]"---> 
+      					</h3>
+    	  			</div> <!-- modal-body ends -->
+    	  			
+      				<div class="modal-footer">
+						
+						<button class="btn btn-warning" type="submit" data-dismiss="modal" ng-click="newFolder()">
+							<strong> 
+								<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
+							</strong>
+						</button>
+						
+        				<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        					<strong> 
+        						<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
+        					</strong>
+        				</button>
+        				
+      				</div> <!-- modal-footer ends -->
+      				
+    			</div> <!-- modal-content ends -->
+  			</div> <!-- modal-dialog ends -->
+		</div>  
+
+		<!-- Modal Share File -->
+		<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="modalSharing">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      				
+      				<div class="modal-header">
+        				
+        				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+        					<span aria-hidden="true">&times;</span>
+        				</button>
+        				
+        				<h3 class="modal-title" id="modalSharing" style="font-family: 'Pattaya', sans-serif">
+        					<strong>
+        						<i class="fa fa-share-alt-square fa-lg" aria-hidden="true"></i> Share
+        					</strong>
+        				</h3>
+        				
+      				</div> <!-- modal-header ends -->
+      				
+      				<div class="modal-body">
+      					<h3 style="font-family: 'Pattaya', sans-serif">
+      						<strong>
+      							<i class="fa fa-users fa-lg" aria-hidden="true"></i>
+      							User Name: 
+      							&emsp;&emsp;&ensp; <!-- Adition of space --> 
+      							<input title="Choose a friend for sharing your file" type="text" placeholder="UserName..." ng-model="userSharedWith" />
+      							
+      							<p></p>
+      							
+								<i class="fa fa-file-text-o" aria-hidden="true"></i>
+								&nbsp; <!-- Adition of space -->
+      							File to Share: 
+      							&emsp;&emsp; <!-- Adition of space -->
+      							<input style="background: #ffffff; border: 3px solid #ffffff;" type="text" 
+      								   placeholder="{{item.name + '.' + item.extension}}" ng-disabled="true" 
+      							/>
+								
+      						</strong>
+      					</h3>
+    	  			</div> <!-- modal-body ends -->
+    	  			
+      				<div class="modal-footer">
+						
+						<button class="btn btn-info" type="submit" data-dismiss="modal" ng-click="share('R')">
+							<strong> 
+								<i class="fa fa-share-alt-square" aria-hidden="true"></i> Only Reading
+							</strong>
+						</button>
+						
+						<button class="btn btn-primary" type="submit" data-dismiss="modal" ng-click="share('RW')">
+							<strong> 
+								<i class="fa fa-share-alt-square" aria-hidden="true"></i> Reading and Writing
+							</strong>
+						</button>
+						
+        				<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        					<strong> 
+        						<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
+        					</strong>
+        				</button>
+        				
+      				</div> <!-- modal-footer ends -->
+      				
+    			</div> <!-- modal-content ends -->
+  			</div> <!-- modal-dialog ends -->
+		</div> <!-- modalShare ends -->
+		
+		<!-- Modal Rename File/Folder-->
+		<div class="modal fade" id="renameModal" tabindex="-1" role="dialog" aria-labelledby="renameModal" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+  				
+  				<h3 class="modal-title" id="modalFolder" style="font-family: 'Pattaya', sans-serif">
+   					<strong>
+   						<i class="fa fa-pencil" aria-hidden="true"></i> Rename File/Folder
+   					</strong>
+   				</h3>
+		      
+		      </div>
+				
+				<div class="modal-body">
+   					
+   					<h3 style="font-family: 'Pattaya', sans-serif">
+   						<strong>
+   							<i class="fa fa-pencil" aria-hidden="true"></i>
+   							New Name: 
+   							&emsp;&emsp;&ensp; <!-- Adition of space --> 
+   							<input title="New Name" type="text" placeholder="New Name..." ng-model="newName" />
+   						</strong>
+   					</h3>
+	   	  		</div> <!-- modal-body ends -->
+		      
+		      <div class="modal-footer">
+		        
+					<button class="btn btn-primary" type="button" data-dismiss="modal" ng-click="renameItem()">
+	        			<strong> 
+      						<i class="fa fa-pencil" aria-hidden="true"></i> Rename
+      					</strong>
+		        	</button>
+		        
+        			<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        				<strong> 
+        					<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
+        				</strong>
+        			</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- Change UserName modal -->
+		<div class="modal fade" id="changeUserModal" tabindex="-1" role="dialog" aria-labelledby="changeUserModal" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		        <h3 class="modal-title" id="modalFolder" style="font-family: 'Pattaya', sans-serif">
+   					<strong>
+   						<i class="fa fa-pencil" aria-hidden="true"></i> Change Username
+   					</strong>
+   				</h3>
+		      </div>
+		      <div class="modal-body">
+		       	<h3 style="font-family: 'Pattaya', sans-serif">
+					<strong>
+						<i class="fa fa-pencil" aria-hidden="true"></i>
+						UserName: 
+						&emsp;&emsp;&ensp; <!-- Adition of space --> 
+						<input title="New Name" type="text"  ng-model="newName" />
+					</strong>
+				</h3>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+		        	<strong>
+		        		<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
+		        	</strong>
+		        </button>
+		        <button type="button" class="btn btn-primary">
+		        	<strong>
+		        		<i class="fa fa-pencil" aria-hidden="true"></i> Save changes
+		        	</strong>
+		        </button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		<!-- Change Email modal -->
+		<div class="modal fade" id="changeEmailModal" tabindex="-1" role="dialog" aria-labelledby="changeEmailModal" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		        <h3 class="modal-title" id="modalFolder" style="font-family: 'Pattaya', sans-serif">
+   					<strong>
+   						<i class="fa fa-pencil" aria-hidden="true"></i> Change Email
+   					</strong>
+   				</h3>
+		      </div>
+		      <div class="modal-body">
+		       	<h3 style="font-family: 'Pattaya', sans-serif">
+					<strong>
+						<i class="fa fa-pencil" aria-hidden="true"></i>
+						Email: 
+						&emsp;&emsp;&ensp; <!-- Adition of space --> 
+						<input title="New Name" type="text"  ng-model="newName" />
+					</strong>
+				</h3>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+		        	<strong>
+		        		<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
+		        	</strong>
+		        </button>
+		        <button type="button" class="btn btn-primary">
+		        	<strong>
+		        		<i class="fa fa-pencil" aria-hidden="true"></i> Save changes
+		        	</strong>
+		        </button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		<!-- Change Password modal -->
+		<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModal" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		        <h3 class="modal-title" id="modalFolder" style="font-family: 'Pattaya', sans-serif">
+   					<strong>
+   						<i class="fa fa-pencil" aria-hidden="true"></i> Change Username
+   					</strong>
+   				</h3>
+		      </div>
+		      <div class="modal-body">
+		       	<h3 style="font-family: 'Pattaya', sans-serif">
+					<strong>
+						<i class="fa fa-pencil" aria-hidden="true"></i>
+						Current Password: 
+						&emsp;&emsp;&ensp; <!-- Adition of space --> 
+						<input class="form-password form-control" id="form-password" type="password" name="password2" placeholder="Password..." pattern="^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$" ng-model="password" required/>
+					</strong>
+				</h3>
+				<h3 style="font-family: 'Pattaya', sans-serif">
+					<strong>
+						<i class="fa fa-pencil" aria-hidden="true"></i>
+						New Password: 
+						&emsp;&emsp;&ensp; <!-- Adition of space --> 
+						<input class="form-password form-control" id="form-password" type="password" name="password2" placeholder="Password..." pattern="^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$" ng-model="password" required/>
+					</strong>
+				</h3>
+				<h3 style="font-family: 'Pattaya', sans-serif">
+					<strong>
+						<i class="fa fa-pencil" aria-hidden="true"></i>
+						Confirm Password: 
+						&emsp;&emsp;&ensp; <!-- Adition of space --> 
+						<input class="form-password form-control" id="form-password" type="password" name="password2" placeholder="Password..." pattern="^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$" ng-model="password" required/>
+					</strong>
+				</h3>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+		        	<strong>
+		        		<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
+		        	</strong>
+		        </button>
+		        <button type="button" class="btn btn-primary">
+		        	<strong>
+		        		<i class="fa fa-pencil" aria-hidden="true"></i> Save changes
+		        	</strong>
+		        </button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+</div> <!-- col-sm-12 col-md-12 ends -->
+

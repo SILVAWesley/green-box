@@ -12,8 +12,8 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		$scope.content = $localStorage.clickedFile.content;
 	}
 	
-	$scope.saveFile = function() {
-		path = formatPathToApiPattern($scope.path);
+	
+	$scope.saveFile = function(){
 		
 		requestData = {};
 		requestData.user = $scope.user;
@@ -21,62 +21,46 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		requestData.fileExtension = $scope.currentExtension;
 		requestData.fileContent = $scope.content;
 		requestData.filePath = $scope.path;
-		
-		console.log("Path: " + $scope.path);
+		requestData.clickedFile = $localStorage.clickedFile;
 		
 		if (requestData.fileName == "") {
 			
-			window.alert("File name cannot be empty.");
+			window.alert('File name cannot be empty.');
 			
 		} else if ($localStorage.clickedFile == undefined){
-			$http.post("/server/userdirectory/newfile", requestData)
-			.then(function(response) {
-				
-				$localStorage.session.user = response.data;
-				window.alert("File successfully created.");
-				$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
-				$scope.path = $localStorage.session.currentPath;
-				
-			}, function(response) {
-				
-				window.alert(response.data.message);
-				
-			});
+			createNewFile();
 		} else {
-			path = formatPathToApiPattern2($scope.path);
-			console.log("Path 2: " + path);
-			$http.put("/server/userdirectory/editfile", requestData)
-			.then(function(response){
-				
-				$localStorage.session.user = response.data;
-				window.alert("File successfully edited");
-				$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
-				
-			}, function(response){
-				window.alert(response.data.message);
-			});
+			editFile();
 		}
 	}
 	
-	function getNamelessPath(path){
-		var splitPath = path.split("/");
-		result = "";
-		for(i = 0; i < splitPath.length -1; i++){
-			result += splitPath[i];
-		}
-		
-		return result;
-		
+	function editFile(){
+		$http.put('/server/userdirectory/editfile', requestData)
+		.then(function(response){
+			
+			$localStorage.session.user = response.data;
+			window.alert('File successfully edited');
+			$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
+			
+		}, function(response){
+			window.alert(response.data.message);
+		});
 	}
 	
-	function formatPathToApiPattern(path) {
-		tempPath = path.replace(new RegExp('/', 'g'), '-').replace("root/", "").replace("root", "");
-		return tempPath.substring(1, tempPath.length) + "/" + $scope.newFileName;
-	}
-	
-	function formatPathToApiPattern2(path) {
-		tempPath = path.replace(new RegExp('/', 'g'), '-');
-		return tempPath.substring(1, tempPath.length);
+	function createNewFile(){
+		$http.post('/server/userdirectory/newfile', requestData)
+		.then(function(response) {
+			
+			$localStorage.session.user = response.data;
+			window.alert('File successfully created.');
+			$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
+			$scope.path = $localStorage.session.currentPath;
+			
+		}, function(response) {
+			
+			window.alert(response.data.message);
+			
+		});
 	}
 	
 	$scope.directoriesView = function() {
