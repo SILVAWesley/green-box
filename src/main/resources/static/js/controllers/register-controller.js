@@ -30,6 +30,7 @@ angular.module('app').controller('registrationController', ['$scope', '$http', f
 			window.alert("Congratulations! You now have a greenbox account to store your files. " +
 						 "Username: " + response.data.username + " "
 						 + "Email: " + response.data.email);
+
 			
 			$scope.user = {username: "", 
 					   	   email: "", 

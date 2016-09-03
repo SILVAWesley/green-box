@@ -11,7 +11,8 @@ public class FileRequestBody {
 	private String fileExtension;
 	private String fileContent;
 	
-	public FileRequestBody(User user, String fileName, String fileExtension, String filePath, String fileContent) {
+
+	public FileRequestBody(User user, String fileName, String fileExtension, String filePath, String fileContent, String fileNewName) {
 		this.user = user;
 		this.fileName = fileName;
 		this.filePath = filePath;
