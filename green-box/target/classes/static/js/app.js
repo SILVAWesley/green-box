@@ -20,11 +20,6 @@ angular.module('app').config(['$urlRouterProvider', '$stateProvider', function($
 		controller: 'directoriesController'
 	});
 	
-	$stateProvider.state('dashboard.user', {
-		url: '/user/',
-		templateUrl: 'views/snippets/user.html',
-	});
-	
 	$stateProvider.state('dashboard.file', {
 		url: '/file',
 		templateUrl: 'views/snippets/file.html',

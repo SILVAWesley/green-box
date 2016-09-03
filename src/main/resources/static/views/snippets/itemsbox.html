@@ -37,7 +37,11 @@
 							<a style="color:green" href="" ng-click="folderClick(item)"> {{item.name}}</a>
 						</td>
 						
-
+						<td class="col-sm-2">
+							<a title="Rename folder" class="fa fa-pencil fa-2x" aria-hidden="true" 
+							   style="color:#18A103" href="" ng-click="renameClick(item, 'Folder')" data-toggle="modal" data-target="#renameModal"> Rename
+							</a>
+						</td> <!-- standardization of box -->
 						<td class="col-sm-1"></td> <!-- standardization of box -->
 						
 					</tr>
@@ -53,18 +57,15 @@
 						
 						<td class="col-sm-2">
 							<a title="Rename file" class="fa fa-pencil fa-2x" aria-hidden="true" 
-							   style="color:#18A103" href="" data-toggle="modal" data-target="#renameModal"> Rename
-
+							   style="color:#18A103" href="" ng-click="renameClick(item, 'File')" data-toggle="modal" data-target="#renameModal"> Rename
 							</a>
 						</td>
 	
 						<td class="col-sm-2">
 							<a title="Share with your friends" class="fa fa-share-alt fa-2x" aria-hidden="true" 
-							   style="color:#18A103" href="" data-toggle="modal" data-target="#modalShare"> Share
+							   style="color:#18A103" href="" ng-click="actionClick(item)" data-toggle="modal" data-target="#shareModal"> Share
 							</a>
 						</td>
-				
-
 
 					</tr>
 				</tbody>
@@ -74,8 +75,7 @@
 	</form>
 </div>
 
-<br />
-
+<p></p>
 
 <!-- organising of boxes -->
 <div class="col-sm-8"></div>
@@ -89,8 +89,7 @@
 	</button>
 
 	<!-- Button trigger modal -->
-	<button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal" type="button">
-
+	<button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#folderModal" type="button">
 		<strong> 
 			<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
 		</strong>

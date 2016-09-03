@@ -1,0 +1,43 @@
+<div class="form-box" ng-controller="registrationController">
+	
+	{{message}}
+	
+	<div class="form-top">
+		<div class="form-top-right">
+			<h3>
+				Create your account <i class="fa fa-cloud fa-lg" aria-hidden="true"></i>
+			</h3>
+		</div>
+	</div> <!-- form-top ends -->
+	
+	<div class="form-bottom">
+		<form class="registration-form" name="registrationForm" role="form" ng-submit="doRegister()">
+			
+			<div class="form-group" id="form-group-1">
+				<label class="sr-only" for="username">First name</label> 
+					<input class="form-name form-control" id="form-name" type="text" name="username" placeholder="Your name..." ng-model="user.username" required/>
+					<span style="color:red" ng-show="registrationForm.username.$error.required && registrationForm.username.$dirty">Username required.</span>
+			</div> <!-- form-group-1 ends -->
+			
+			<div class="form-group" id="form-group-2">
+				<label class="sr-only" for="email">Email</label> 
+					<input class="form-email form-control" id="form-email" type="email" name="email" placeholder="Email..." ng-model="user.email" required/>
+					<span style="color:red" ng-show="registrationForm.email.$error.required && registrationForm.email.$dirty">Email required.</span>
+			</div> <!-- form-group-2 ends -->
+			
+			<div class="form-group" id="form-group-3">
+				<label class="sr-only" for="password">Password</label> 
+					<input class="form-password form-control" id="form-password" type="password" name="password" placeholder="Password..." ng-model="user.password" required/>
+					<span style="color:red" ng-show="registrationForm.password.$error.required && registrationForm.password.$dirty">Password required.</span>
+			</div> <!-- form-group-3 ends -->
+			
+			<button class="btn btn-warning" type="submit" ng-disabled="registrationForm.$invalid">
+				<strong>
+					<i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Create an account!
+				</strong>
+			</button>
+			
+		</form>
+	</div> <!-- for-bottom ends -->
+	
+</div> <!-- form-box ends -->
