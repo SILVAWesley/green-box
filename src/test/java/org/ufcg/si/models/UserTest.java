@@ -74,8 +74,11 @@ public class UserTest {
 
 	@Test
 	public void testGetDirectory() {
-		Assert.assertEquals(user0.getUserDirectory(), new GBFolder("root"));
-		Assert.assertEquals(user1.getUserDirectory(), new GBFolder("root"));
+
+		Assert.assertTrue(user0.getUserDirectory().getName() == null);
+		Assert.assertTrue(user0.getUserDirectory().getPath() == null);
+		Assert.assertTrue(user1.getUserDirectory().getName() == null);
+		Assert.assertTrue(user1.getUserDirectory().getPath() == null);
 		Assert.assertEquals(user2.getUserDirectory(), new GBFolder("someone"));
 		Assert.assertEquals(user3.getUserDirectory(), new GBFolder(""));
 		Assert.assertEquals(user4.getUserDirectory(), new GBFolder(" "));

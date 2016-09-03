@@ -63,13 +63,32 @@ public class GBFile {
 		return path;
 	}
 	
+	public void setPath(String newPath) {
+		this.path = newPath;
+	}
+	
 	public void setContent(String newContent) throws IOException {
 		this.content = newContent;
 		
 		this.file = new File(ServerConstants.FILES_PATH + name + "." + extension);
 		writeContentToFile(newContent);
 	}
+	
+	public void rename(String newName) {
+		this.name = newName;
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		splPath[splPath.length - 1] = newName;
+		path = String.join(ServerConstants.PATH_SEPARATOR, splPath);
+	}
 
+	public void rename(String newName, String newExtension) {
+		this.name = newName;
+		this.extension = newExtension;
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		splPath[splPath.length - 1] = newName;
+		path = String.join(ServerConstants.PATH_SEPARATOR, splPath);
+	}
+	
 	private void writeContentToFile(String content) throws IOException {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		writer.write(content);

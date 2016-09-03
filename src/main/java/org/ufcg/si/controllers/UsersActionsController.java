@@ -19,8 +19,11 @@ import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ExceptionHandler;
 import org.ufcg.si.util.ServerConstants;
+import org.ufcg.si.util.requests.EditFileRequestBody;
 import org.ufcg.si.util.requests.FileRequestBody;
 import org.ufcg.si.util.requests.FolderRequestBody;
+import org.ufcg.si.util.requests.RenameFileRequestBody;
+import org.ufcg.si.util.requests.RenameFolderRequestBody;
 
 /**
  * This controller class uses JSON data format to be the 
@@ -89,15 +92,26 @@ public class UsersActionsController {
 					method = RequestMethod.PUT,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> editFile(@RequestBody FileRequestBody requestBody) throws Exception{
+	public ResponseEntity<User> editFile(@RequestBody EditFileRequestBody requestBody) throws Exception{
 		try {
-			ExceptionHandler.checkEditFileBody(requestBody);
+			//ExceptionHandler.checkEditFileBody(requestBody);
 			
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			dbUser.getUserDirectory().editFile(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFilePath());
-			User updateUser = userService.update(dbUser);
+			System.out.println(requestBody.getFilePath());
+			System.out.println(requestBody.getFileName());
+			System.out.println(requestBody.getClickedFile().getName());
+			
+			if (!requestBody.getFileName().equals(requestBody.getClickedFile().getName())) {
+				dbUser.getUserDirectory().renameFile(requestBody.getFileName(), requestBody.getClickedFile().getName(), requestBody.getFileExtension(), requestBody.getFilePath());
+			}			
+			
+			//Comprar o nome se existe e extenção
+			//Verificar possibilidade de edição
+			
+			
+			User updateUser = editFileContent(requestBody, dbUser);
 			
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
 		} catch(GreenboxException gbe) {
@@ -110,6 +124,63 @@ public class UsersActionsController {
 			ioe.printStackTrace();
 			throw new ServletException("Request error while trying to edit file... " + ioe.getMessage());
 		}
+	}
+	
+
+	
+	private User editFileContent(EditFileRequestBody requestBody, User dbUser) throws Exception{
+		dbUser.getUserDirectory().editFile(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFilePath());
+		User updateUser = userService.update(dbUser);
+		
+		return updateUser;
+	}
+	
+	@RequestMapping(value = "/renamefolder", 
+					method = RequestMethod.POST,
+					produces = MediaType.APPLICATION_JSON_VALUE,
+					consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> renameFolder(@RequestBody RenameFolderRequestBody requestBody)throws Exception{
+		try{
+			
+			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+		
+			ExceptionHandler.checkUserInDatabase(dbUser);
+			
+			dbUser.getUserDirectory().rename(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
+			User updateUser = userService.update(dbUser);
+		
+			return new ResponseEntity<>(updateUser, HttpStatus.OK);
+		} catch(GreenboxException gbe) {
+			gbe.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + gbe.getMessage());
+		} catch (DataAccessException dae) {
+			dae.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
+		} 
+	}
+	
+	@RequestMapping(value = "/renamefile", 
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> renameFile(@RequestBody RenameFileRequestBody requestBody) throws Exception {
+		try {
+			
+			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+		
+			ExceptionHandler.checkUserInDatabase(dbUser);
+			
+			dbUser.getUserDirectory().renameFile(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
+			User updateUser = userService.update(dbUser);
+		
+			return new ResponseEntity<>(updateUser, HttpStatus.OK);
+		} catch(GreenboxException gbe) {
+			gbe.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + gbe.getMessage());
+		} catch (DataAccessException dae) {
+			dae.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
+		} 
 	}
 	
 	@Autowired
