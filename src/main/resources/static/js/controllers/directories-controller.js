@@ -66,6 +66,8 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		.then(function(response){
 			$localStorage.session.user = response.data;
 			window.alert('File renamed successfully');
+			update();
+			goToPath($stateParams.folderPath);
 		}, function(response){
 			window.alert(response.data.message);
 			window.alert('whoops!');
@@ -77,7 +79,8 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		.then(function(response){
 			$localStorage.session.user = response.data;
 			window.alert('Folder renamed successfully');
-			//update();
+			update();
+			goToPath($stateParams.folderPath);
 		}, function(response){
 			window.alert(response.data.message);
 			window.alert('whoops!');
