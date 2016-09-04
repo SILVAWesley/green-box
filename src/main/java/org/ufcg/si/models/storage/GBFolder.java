@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.ufcg.si.exceptions.InvalidDataException;
@@ -28,7 +28,7 @@ public class GBFolder {
 	private String name;
 	private String path;
 	
-	@ElementCollection
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<GBFile> files;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<GBFolder> folders;
@@ -157,7 +157,7 @@ public class GBFolder {
 		return name;
 	}
 	
-	private GBFolder findFolderByName(String name) throws MissingItemException {
+	public GBFolder findFolderByName(String name) throws MissingItemException {
 		for (GBFolder folder : this.folders) {
 			if (folder.getName().equals(name)) {
 				return folder;
@@ -173,6 +173,16 @@ public class GBFolder {
 		} else {
 			return findFolderByName(splPath[currentIndex + 1]).findFolderByName(splPath, currentIndex + 1);
 		}
+	}
+	
+	public GBFile findFileByName(String name, String path) {
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		GBFolder folder = findFolderByName(splPath, 0);
+		return folder.findFileByName(name);
+	}
+	
+	public void addFile(GBFile file) {
+		this.files.add(file);
 	}
 	
 	private GBFile findFileByName(String name) throws MissingItemException {

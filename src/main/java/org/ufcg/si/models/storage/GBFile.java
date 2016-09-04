@@ -8,12 +8,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import org.ufcg.si.util.ServerConstants;
 
-@Embeddable
+@Entity
 public class GBFile {
+	@Id
+	@GeneratedValue
+	private Long id;
 	private String name;
 	private String extension;
 	@Column(length = 10000000)
@@ -93,6 +98,10 @@ public class GBFile {
 		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 		writer.write(content);
 		writer.close();
+	}
+	
+	public Long getId() {
+		return id;
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package org.ufcg.si.models;
 
+import java.io.IOException;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.ufcg.si.models.storage.GBFile;
 import org.ufcg.si.models.storage.GBFolder;
+import org.ufcg.si.models.storage.StorageFactory;
 
 /**
  * This class represents a Green-Box user
@@ -27,7 +31,8 @@ public class User {
 	private GBFolder rootFolder;
 
 	public User() throws Exception {
-		this.rootFolder = new GBFolder();
+		this("email", "dir", "password");
+		
 	}
 
 	/**
@@ -43,7 +48,7 @@ public class User {
 	 *            The user's password
 	 */
 	public User(String email, String username, String password) {
-		this.rootFolder = new GBFolder(username);
+		this.rootFolder = StorageFactory.createRootFolder(username);
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -77,6 +82,14 @@ public class User {
 		//userdirectory.createDirectory(directoryName);
 	}
 	
+	public void shareFile(User user, String name, String path) throws IOException {
+		GBFile file = this.rootFolder.findFileByName(name, path);
+		user.recieveFile(file);
+	}
+	
+	public void recieveFile(GBFile file) throws IOException {
+		this.rootFolder.findFolderByName("Shared with me").addFile(file);
+	}
 	
 	/**
 	 * Receives an object and checks if it's equal to the User.
@@ -150,4 +163,11 @@ public class User {
 		return id;
 	}
 
+	public GBFolder getSharedWithMeFolder() {
+		return this.rootFolder.findFolderByName("Shared with me");
+	}
+
+	public void setSharedWithMeFolder(GBFolder sharedWithMeFolder) {
+		
+	}
 }
