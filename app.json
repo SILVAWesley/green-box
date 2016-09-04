@@ -1,0 +1,8 @@
+{
+  "name": "Green Box",
+  "description": "Green box is an application that allows users to create files and folders and manage them.",
+  "website": "",
+  "repository": "https://github.com/SILVAWesley/green-box",
+  "image": "heroku/java",
+  "addons": [ "heroku-postgresql" ]
+}
