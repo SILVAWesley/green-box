@@ -39,24 +39,6 @@ public class GBFolder {
 		this.folders = new ArrayList<>();
 		this.path = path;
 	}
-
-	public static void main(String[] args) throws IOException {
-		GBFolder p1 = new GBFolder("p1", "p1");
-		GBFolder p2 = new GBFolder("p2", "p1/p2");
-		GBFolder p3 = new GBFolder("p2", "p1/p3");
-		GBFolder p4 = new GBFolder("p4", "p1/p2/p4");
-		GBFolder p5 = new GBFolder("p4", "p1/p2/p4/p5");
-		
-		p1.addFolder("p2", "p1");
-		p1.addFolder("p3", "p1");
-		p1.addFolder("p4", "p1/p2");
-		p1.addFolder("p5", "p1/p2/p4");
-		
-		p1.addFile("Hello World", "txt", "ola pessoas");
-		
-		p1.rename("a");
-		System.out.println(p1);
-	}
 	
 	public GBFolder(String name) {
 		this(name, name);
