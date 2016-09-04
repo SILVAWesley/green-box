@@ -12,4 +12,11 @@ public class StorageFactory {
 	public static GBFile createFile(String name, String extension, String content, String contextPath) throws IOException {
 		return new GBFile(name, extension, content, contextPath + ServerConstants.PATH_SEPARATOR + name); 
 	}
+	
+	public static GBFolder createRootFolder(String username) {
+		GBFolder folder = new GBFolder("root");
+		folder.addFolder(username);
+		folder.addFolder("Shared with me");
+		return folder;
+	}
 }

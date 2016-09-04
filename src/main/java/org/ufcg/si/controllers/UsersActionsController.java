@@ -24,6 +24,7 @@ import org.ufcg.si.util.requests.FileRequestBody;
 import org.ufcg.si.util.requests.FolderRequestBody;
 import org.ufcg.si.util.requests.RenameFileRequestBody;
 import org.ufcg.si.util.requests.RenameFolderRequestBody;
+import org.ufcg.si.util.requests.ShareFileRequestBody;
 
 /**
  * This controller class uses JSON data format to be the 
@@ -172,6 +173,32 @@ public class UsersActionsController {
 			
 			dbUser.getUserDirectory().renameFile(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
 			User updateUser = userService.update(dbUser);
+		
+			return new ResponseEntity<>(updateUser, HttpStatus.OK);
+		} catch(GreenboxException gbe) {
+			gbe.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + gbe.getMessage());
+		} catch (DataAccessException dae) {
+			dae.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
+		} 
+	}
+	
+	@RequestMapping(value = "/sharefile", 
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> shareFile(@RequestBody ShareFileRequestBody requestBody) throws Exception {
+		try {
+			System.out.println(requestBody.getName());
+			User sendingUser = userService.findByUsername(requestBody.getUser().getUsername());
+			User receivingUser = userService.findByUsername(requestBody.getUserSharedWith().getUsername());
+		
+			ExceptionHandler.checkUserInDatabase(sendingUser);
+			ExceptionHandler.checkUserInDatabase(receivingUser);
+			
+			sendingUser.shareFile(receivingUser, requestBody.getName(), requestBody.getFolderPath());
+			User updateUser = userService.update(sendingUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
 		} catch(GreenboxException gbe) {

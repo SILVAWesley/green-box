@@ -30,8 +30,8 @@ angular.module('app').factory("authService", function($localStorage, $http) {
 				
 				$localStorage.session = {'user': response.data.user,
 						 				 'token': response.data.token,
-						 				 'currentPath': response.data.user.userDirectory.path};
-
+						 				 'currentPath': response.data.user.userDirectory.children[0].path};
+				console.log($localStorage.session.user);
 				callback(true);
 				
 			}, function(response) {
