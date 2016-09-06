@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.ufcg.si.beans.requests.RegistrationBody;
 import org.ufcg.si.exceptions.GreenboxException;
 import org.ufcg.si.models.User;
 import org.ufcg.si.repositories.UserService;
@@ -57,11 +58,13 @@ public class UsersController {
 					method = RequestMethod.POST, 
 					consumes = MediaType.APPLICATION_JSON_VALUE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> createUser(@RequestBody User requestBody) throws ServletException {
+	public ResponseEntity<User> createUser(@RequestBody RegistrationBody requestBody) throws ServletException {
 		try {
 			ExceptionHandler.checkRegistrationBody(requestBody);
-			requestBody.getUserDirectory().findFolderByName("dir").rename(requestBody.getUsername());
-			User newUser = userService.save(requestBody);
+			
+			User newUser = new User(requestBody.getEmail(), requestBody.getUsername(), requestBody.getPassword());
+			userService.save(newUser);
+			
 			return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 		} catch(GreenboxException gbe) {
 			gbe.printStackTrace();

@@ -1,4 +1,4 @@
-package org.ufcg.si.util.requests;
+package org.ufcg.si.beans.requests;
 
 import org.ufcg.si.models.User;
 
@@ -7,12 +7,14 @@ public class ShareFileRequestBody {
 	private String name;
 	private String folderPath;
 	private User userSharedWith;
+	private String permissionLevel;
 	
-	public ShareFileRequestBody(User user, User userSharedWith, String name, String folderPath){
+	public ShareFileRequestBody(User user, User userSharedWith, String name, String folderPath, String permissionLevel) {
 		this.user = user;
 		this.name = name;
 		this.folderPath = folderPath;
 		this.userSharedWith = userSharedWith;
+		this.permissionLevel = permissionLevel;
 	}
 	
 	public ShareFileRequestBody(){
@@ -25,6 +27,14 @@ public class ShareFileRequestBody {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String getPermissionLevel() {
+		return permissionLevel;
+	}
+	
+	public void setPermissionLevel(String newPermissionLevel) {
+		this.permissionLevel = newPermissionLevel;
 	}
 
 	public String getName() {

@@ -13,18 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.ufcg.si.beans.requests.AddFileRequestBody;
+import org.ufcg.si.beans.requests.AddFolderRequestBody;
+import org.ufcg.si.beans.requests.EditFileRequestBody;
+import org.ufcg.si.beans.requests.ShareFileRequestBody;
 import org.ufcg.si.exceptions.GreenboxException;
 import org.ufcg.si.models.User;
 import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ExceptionHandler;
 import org.ufcg.si.util.ServerConstants;
-import org.ufcg.si.util.requests.EditFileRequestBody;
-import org.ufcg.si.util.requests.FileRequestBody;
-import org.ufcg.si.util.requests.FolderRequestBody;
+import org.ufcg.si.util.permissions.FilePermission;
 import org.ufcg.si.util.requests.RenameFileRequestBody;
 import org.ufcg.si.util.requests.RenameFolderRequestBody;
-import org.ufcg.si.util.requests.ShareFileRequestBody;
 
 /**
  * This controller class uses JSON data format to be the 
@@ -42,14 +43,14 @@ public class UsersActionsController {
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFolder(@RequestBody FolderRequestBody requestBody) throws ServletException {
+	public ResponseEntity<User> addFolder(@RequestBody AddFolderRequestBody requestBody) throws ServletException {
 		try {
-			ExceptionHandler.checkNewFolderBody(requestBody);
+			ExceptionHandler.checkAddFolderBody(requestBody);
 		
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 
-			dbUser.getUserDirectory().addFolder(requestBody.getFolderName(), requestBody.getFolderPath());
+			dbUser.addFolder(requestBody.getFolderName(), requestBody.getFolderPath());
 			User updatedUser = userService.update(dbUser);
 		
 			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
@@ -66,14 +67,14 @@ public class UsersActionsController {
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFile(@RequestBody FileRequestBody requestBody) throws ServletException {
+	public ResponseEntity<User> addFile(@RequestBody AddFileRequestBody requestBody) throws ServletException {
 		try {
-			ExceptionHandler.checkNewFileBody(requestBody);
+			ExceptionHandler.checkAddFileBody(requestBody);
 			
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			dbUser.getUserDirectory().addFile(requestBody.getFileName(), requestBody.getFileExtension(), requestBody.getFileContent(), requestBody.getFilePath());
+			dbUser.addFile(requestBody.getFileName(), requestBody.getFileExtension(), requestBody.getFileContent(), requestBody.getFilePath());
 			User updatedUser = userService.update(dbUser);
 			
 			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
@@ -100,17 +101,9 @@ public class UsersActionsController {
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			System.out.println(requestBody.getFilePath());
-			System.out.println(requestBody.getFileName());
-			System.out.println(requestBody.getClickedFile().getName());
-			
 			if (!requestBody.getFileName().equals(requestBody.getClickedFile().getName())) {
-				dbUser.getUserDirectory().renameFile(requestBody.getFileName(), requestBody.getClickedFile().getName(), requestBody.getFileExtension(), requestBody.getFilePath());
+				dbUser.editFileName(requestBody.getFileName(), requestBody.getClickedFile().getName(), requestBody.getFilePath());
 			}			
-			
-			//Comprar o nome se existe e extenção
-			//Verificar possibilidade de edição
-			
 			
 			User updateUser = editFileContent(requestBody, dbUser);
 			
@@ -130,7 +123,7 @@ public class UsersActionsController {
 
 	
 	private User editFileContent(EditFileRequestBody requestBody, User dbUser) throws Exception{
-		dbUser.getUserDirectory().editFile(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFilePath());
+		dbUser.editFileContent(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFilePath());
 		User updateUser = userService.update(dbUser);
 		
 		return updateUser;
@@ -147,7 +140,7 @@ public class UsersActionsController {
 		
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			dbUser.getUserDirectory().rename(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
+			dbUser.editFolderName(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
 			User updateUser = userService.update(dbUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
@@ -171,7 +164,7 @@ public class UsersActionsController {
 		
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			dbUser.getUserDirectory().renameFile(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
+			dbUser.editFileName(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
 			User updateUser = userService.update(dbUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
@@ -190,15 +183,15 @@ public class UsersActionsController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> shareFile(@RequestBody ShareFileRequestBody requestBody) throws Exception {
 		try {
-			System.out.println(requestBody.getName());
 			User sendingUser = userService.findByUsername(requestBody.getUser().getUsername());
 			User receivingUser = userService.findByUsername(requestBody.getUserSharedWith().getUsername());
 		
 			ExceptionHandler.checkUserInDatabase(sendingUser);
 			ExceptionHandler.checkUserInDatabase(receivingUser);
 			
-			sendingUser.shareFile(receivingUser, requestBody.getName(), requestBody.getFolderPath());
+			sendingUser.shareFile(receivingUser, requestBody.getName(), requestBody.getFolderPath(), FilePermission.valueOfIgnoreCase(requestBody.getPermissionLevel()));
 			User updateUser = userService.update(sendingUser);
+			userService.update(receivingUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
 		} catch(GreenboxException gbe) {
