@@ -9,9 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.ufcg.si.models.storage.GBFile;
-import org.ufcg.si.models.storage.GBFolder;
+import org.ufcg.si.models.storage.GBDirectory;
 import org.ufcg.si.models.storage.StorageFactory;
+import org.ufcg.si.util.permissions.FilePermission;
 
 /**
  * This class represents a Green-Box user
@@ -28,90 +28,47 @@ public class User {
 	private String password;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private GBFolder rootFolder;
+	private GBDirectory directory;
 
 	public User() throws Exception {
 		this("email", "dir", "password");
 		
 	}
 
-	/**
-	 * This constructor receives three strings: an email, an username and a
-	 * password to create a new User. The most external UserDirectory is also
-	 * created.
-	 * 
-	 * @param email
-	 *            The user's email
-	 * @param username
-	 *            The user's name
-	 * @param password
-	 *            The user's password
-	 */
 	public User(String email, String username, String password) {
-		this.rootFolder = StorageFactory.createRootFolder(username);
+		this.directory = StorageFactory.createDirectory(username);
 		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
-
-	/**
-	 * Creates a new UserFile in the current UserDirectory
-	 * 
-	 * @param filename
-	 *            The file's name
-	 * @param fileContent
-	 *            The file's content
-	 * @throws Exception
-	 *             if the file exists but is a directory rather than a regular
-	 *             file, does not exist but cannot be created, or cannot be
-	 *             opened for any other reason
-	 */
-	public void createFile(String filename, String  content) throws Exception {
-		// An enum should be created for file extension
-		//userdirectory.createFile(filename, "txt", content); 
-	}
-
-	/**
-	 * Creates a new UserDirectory in the current UserDirectory
-	 * 
-	 * @param directoryName
-	 *            The new directory's name
-	 * @throws Exception 
-	 */
-	public void createDirectory(String directoryName) throws Exception {
-		//userdirectory.createDirectory(directoryName);
+	
+	public void addFile(String name, String extension, String content, String path) throws IOException {
+		directory.addFile(name, extension, content, path);
 	}
 	
-	public void shareFile(User user, String name, String path) throws IOException {
-		GBFile file = this.rootFolder.findFileByName(name, path);
-		user.recieveFile(file);
+	public void addFolder(String name, String path) {
+		directory.addFolder(name, path);
 	}
 	
-	public void recieveFile(GBFile file) throws IOException {
-		this.rootFolder.findFolderByName("Shared with me").addFile(file);
+	public void editFileName(String newName, String oldName, String path) {
+		directory.editFileName(newName, oldName, path);
 	}
 	
-	/**
-	 * Receives an object and checks if it's equal to the User.
-	 * Users are considered equals if they have the same username, email and password.
-	 * @param obj
-	 * 		The object to be compared with the User.
-	 * @return if the obj is equals to this object
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof User) {
-			User temp = (User) obj;
-
-			return this.getUsername().equals(temp.getUsername()) && this.getEmail().equals(temp.getEmail())
-					&& this.getPassword().equals(temp.getPassword());
-		} else {
-			return false;
-		}
-
+	public void editFileContent(String name, String newContent, String path) throws IOException {
+		directory.editFileContent(name, newContent, path);
 	}
 	
-	// GETTERS AND SETTERS
+	public void editFileExtension(String newExtension, String name, String path) {
+		directory.editFileExtension(newExtension, name, path);
+	}
+	
+	public void editFolderName(String newName, String oldName, String path) {
+		directory.editFolderName(newName, oldName, path);
+	}
+	
+	public void shareFile(User user, String name, String path, FilePermission filePermission) throws IOException {
+		directory.shareFile(user.directory, name, path, filePermission);
+	}
 	
 	/**
 	 * The username getter. The username is used for authentication in the Green-Box application
@@ -151,8 +108,8 @@ public class User {
 	 * The userDirectory getter. The userDirectory is the user's most external directory.
 	 * @return the User's most external UserDirectory
 	 */
-	public GBFolder getUserDirectory() {
-		return rootFolder;
+	public GBDirectory getDirectory() {
+		return directory;
 	}
 	
 	/**
@@ -162,12 +119,24 @@ public class User {
 	public Long getId() {
 		return id;
 	}
+	
+	/**
+	 * Receives an object and checks if it's equal to the User.
+	 * Users are considered equals if they have the same username, email and password.
+	 * @param obj
+	 * 		The object to be compared with the User.
+	 * @return if the obj is equals to this object
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof User) {
+			User temp = (User) obj;
 
-	public GBFolder getSharedWithMeFolder() {
-		return this.rootFolder.findFolderByName("Shared with me");
-	}
+			return this.getUsername().equals(temp.getUsername()) && this.getEmail().equals(temp.getEmail())
+					&& this.getPassword().equals(temp.getPassword());
+		} else {
+			return false;
+		}
 
-	public void setSharedWithMeFolder(GBFolder sharedWithMeFolder) {
-		
 	}
 }

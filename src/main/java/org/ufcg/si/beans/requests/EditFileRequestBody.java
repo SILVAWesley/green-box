@@ -1,15 +1,16 @@
-package org.ufcg.si.util.requests;
+package org.ufcg.si.beans.requests;
 
 import org.ufcg.si.models.User;
 import org.ufcg.si.models.storage.GBFile;
 
 public class EditFileRequestBody {
 	private User user;
+	private GBFile clickedFile;
+	
 	private String fileName;
 	private String fileExtension;
 	private String fileContent;
 	private String filePath;
-	private GBFile clickedFile;
 	
 	public EditFileRequestBody(User user, String fileName, String fileExtension, String fileContent, String filePath, GBFile clickedFile){
 		this.user = user;

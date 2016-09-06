@@ -1,14 +1,4 @@
 angular.module('app').controller("directoriesController", function($scope, $state, $localStorage, $http, $rootScope, $stateParams) {
-	$scope.user = $localStorage.session.user;
-	$scope.rootDirectory = $scope.user.userDirectory;
-	$scope.currentDirectory = $scope.rootDirectory;
-	$scope.openedFolders = [$scope.rootDirectory];
-	
-	
-	$localStorage.session.currentPath = $stateParams.folderPath;
-	
-	$scope.newFolderName = "";
-	$scope.currentType = "";
 	$scope.folderClick = function(folder) {
 		$state.go('dashboard.directories', {folderPath: folder.path});
 	}
@@ -20,7 +10,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	
 	$scope.myFilesClick = function() {
 		console.log($scope.rootDirectory.name);
-		$state.go('dashboard.directories', {folderPath: 'root/' + $scope.rootDirectory.children[0].name});
+		$state.go('dashboard.directories', {folderPath: $scope.rootDirectory.folders[0].path});
 		console.log('foi');
 	}
 	
@@ -48,6 +38,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		console.log(requestData.userSharedWith);
 		requestData.name = $localStorage.selectedItem.name;
 		requestData.folderPath = $localStorage.session.currentPath;
+		requestData.permissionLevel = sharingType;
 		
 		$http.post('/server/userdirectory/sharefile', requestData)
 		.then(function(response){
@@ -107,8 +98,9 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		requestData = {};
 		requestData.user = $scope.user;
 		requestData.folderName = $scope.newFolderName;
-		requestData.folderPath = $scope.currentDirectory.path;		
-		
+		requestData.folderPath = $scope.currentDirectory.path;
+		console.log('data');
+		console.log(requestData.folderPath);
 		
 		$http.post('/server/userdirectory/newfolder', requestData)
 			.then(function(response) {
@@ -132,7 +124,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	}	
 
 	$scope.getFolders = function() {
-		return $scope.currentDirectory.children;
+		return $scope.currentDirectory.folders;
 	}
 	
 	$scope.newFilePage = function() {
@@ -140,12 +132,10 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$state.go('dashboard.file');
 	}
 	
-	$scope.filesNFoldersToShow = $scope.getFilesNFolders();
-	console.log($stateParams.folderPath);
-	goToPath($stateParams.folderPath);
+	
 	
 	function findFileOrFolderByName(name, directory) {
-		var foldersNFiles = directory.children.concat(directory.files);
+		var foldersNFiles = directory.folders.concat(directory.files);
 		
 		for (j = 0; j < foldersNFiles.length; j++) {
 			if (foldersNFiles[j].name == name) {
@@ -163,7 +153,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	
 	function update () {
 		$scope.user = $localStorage.session.user;
-		$scope.rootDirectory = $scope.user.userDirectory;
+		$scope.rootDirectory = $scope.user.directory.rootFolder;
 		$scope.currentDirectory = $scope.rootDirectory;
 		$scope.openedFolders = [$scope.rootDirectory];
 	}
@@ -173,6 +163,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$scope.currentDirectory = $scope.rootDirectory;
 			
 		for (i = 1; i < directoryNames.length; i++) {
+			console.log($scope.currentDirectory);
 			$scope.currentDirectory = findFileOrFolderByName(directoryNames[i], $scope.currentDirectory);
 			goForward($scope.currentDirectory);
 		}
@@ -185,4 +176,21 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$scope.openedFolders.push(folder);
 		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
 	}
+	
+	function init() {
+		$scope.user = $localStorage.session.user;
+		$scope.rootDirectory = $scope.user.directory.rootFolder;
+		$scope.currentDirectory = $scope.rootDirectory;
+		$scope.openedFolders = [$scope.rootDirectory];
+		
+		$localStorage.session.currentPath = $stateParams.folderPath;
+		
+		$scope.newFolderName = "";
+		$scope.currentType = "";
+		
+		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
+		goToPath($stateParams.folderPath);
+	}
+	
+	init();
 });

@@ -13,6 +13,10 @@ public class StorageFactory {
 		return new GBFile(name, extension, content, contextPath + ServerConstants.PATH_SEPARATOR + name); 
 	}
 	
+	public static GBDirectory createDirectory(String name) {
+		return new GBDirectory(name);
+	}
+	
 	public static GBFolder createRootFolder(String username) {
 		GBFolder folder = new GBFolder("root");
 		folder.addFolder(username);

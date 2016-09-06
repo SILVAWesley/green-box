@@ -238,10 +238,10 @@ public class GBFolderTest {
 		}
 
 		try {
-			dir1.editFile("water", "Madness is only the start", "");
-			dir2.editFile("fate", "Death is only the start", "");
-			dir3.editFile("fire", "Disgrace thy family", "");
-			dir4.editFile("nigth", "Plague take you", "");
+			dir1.editFileContent("water", "Madness is only the start", "");
+			dir2.editFileContent("fate", "Death is only the start", "");
+			dir3.editFileContent("fire", "Disgrace thy family", "");
+			dir4.editFileContent("nigth", "Plague take you", "");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
