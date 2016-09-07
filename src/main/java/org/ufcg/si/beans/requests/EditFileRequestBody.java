@@ -1,18 +1,18 @@
 package org.ufcg.si.beans.requests;
 
 import org.ufcg.si.models.User;
-import org.ufcg.si.models.storage.GBFile;
+import org.ufcg.si.models.storage.FileGB;
 
 public class EditFileRequestBody {
 	private User user;
-	private GBFile clickedFile;
+	private FileGB clickedFile;
 	
 	private String fileName;
 	private String fileExtension;
 	private String fileContent;
 	private String filePath;
 	
-	public EditFileRequestBody(User user, String fileName, String fileExtension, String fileContent, String filePath, GBFile clickedFile){
+	public EditFileRequestBody(User user, String fileName, String fileExtension, String fileContent, String filePath, FileGB clickedFile){
 		this.user = user;
 		this.fileName = fileName;
 		this.fileExtension = fileExtension;
@@ -65,11 +65,11 @@ public class EditFileRequestBody {
 		this.fileContent = fileContent;
 	}
 
-	public GBFile getClickedFile() {
+	public FileGB getClickedFile() {
 		return clickedFile;
 	}
 
-	public void setClickedFile(GBFile clickedFile) {
+	public void setClickedFile(FileGB clickedFile) {
 		this.clickedFile = clickedFile;
 	}
 }
