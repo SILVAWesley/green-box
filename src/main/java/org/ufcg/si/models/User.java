@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.ufcg.si.models.storage.GBDirectory;
+import org.ufcg.si.models.storage.FolderManager;
 import org.ufcg.si.models.storage.StorageFactory;
 import org.ufcg.si.util.permissions.FilePermission;
 
@@ -28,7 +28,7 @@ public class User {
 	private String password;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private GBDirectory directory;
+	private FolderManager directory;
 
 	public User() throws Exception {
 		this("email", "dir", "password");
@@ -108,7 +108,7 @@ public class User {
 	 * The userDirectory getter. The userDirectory is the user's most external directory.
 	 * @return the User's most external UserDirectory
 	 */
-	public GBDirectory getDirectory() {
+	public FolderManager getDirectory() {
 		return directory;
 	}
 	

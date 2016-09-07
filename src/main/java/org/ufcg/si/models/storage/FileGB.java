@@ -15,7 +15,7 @@ import javax.persistence.Id;
 import org.ufcg.si.util.ServerConstants;
 
 @Entity
-public class GBFile {
+public class FileGB {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -26,7 +26,7 @@ public class GBFile {
 	private String path;
 	private File file;
 
-	public GBFile(String name, String extension, String content, String path) throws IOException {
+	public FileGB(String name, String extension, String content, String path) throws IOException {
 		this.name = name;
 		this.extension = extension;
 		this.path = path;
@@ -36,7 +36,7 @@ public class GBFile {
 		this.content = readContentFromFile();
 	}
 	
-	public GBFile() {
+	public FileGB() {
 		
 	}
 
@@ -115,8 +115,8 @@ public class GBFile {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof GBFile) {
-			GBFile otherFile = (GBFile) obj;
+		if (obj instanceof FileGB) {
+			FileGB otherFile = (FileGB) obj;
 			return this.getName().equals(otherFile.getName()) && this.getPath().equals(otherFile.getPath());
 		}
 		

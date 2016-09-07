@@ -7,15 +7,15 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.ufcg.si.models.storage.GBFile;
-import org.ufcg.si.models.storage.GBFolder;
+import org.ufcg.si.models.storage.FileGB;
+import org.ufcg.si.models.storage.FolderGB;
 import org.ufcg.si.util.ServerConstants;
 
 public class GBFolderTest {
-	private GBFolder dir1;
-	private GBFolder dir2;
-	private GBFolder dir3;
-	private GBFolder dir4;
+	private FolderGB dir1;
+	private FolderGB dir2;
+	private FolderGB dir3;
+	private FolderGB dir4;
 	String sb1;
 	String sb2;
 	String sb3;
@@ -23,10 +23,10 @@ public class GBFolderTest {
 
 	@Before
 	public void setUp() {
-		dir1 = new GBFolder("parent");
-		dir2 = new GBFolder("son1");
-		dir3 = new GBFolder("son2");
-		dir4 = new GBFolder("grandSon1-1");
+		dir1 = new FolderGB("parent");
+		dir2 = new FolderGB("son1");
+		dir3 = new FolderGB("son2");
+		dir4 = new FolderGB("grandSon1-1");
 		sb1 = new String("I see fire");
 		sb2 = new String("I see water");
 		sb3 = new String("I see nigth");
@@ -35,10 +35,10 @@ public class GBFolderTest {
 
 	@Test
 	public void testEquals() {
-		Assert.assertEquals(dir1, new GBFolder("parent"));
-		Assert.assertEquals(dir2, new GBFolder("son1"));
-		Assert.assertEquals(dir3, new GBFolder("son2"));
-		Assert.assertEquals(dir4, new GBFolder("grandSon1-1"));
+		Assert.assertEquals(dir1, new FolderGB("parent"));
+		Assert.assertEquals(dir2, new FolderGB("son1"));
+		Assert.assertEquals(dir3, new FolderGB("son2"));
+		Assert.assertEquals(dir4, new FolderGB("grandSon1-1"));
 		Assert.assertFalse(dir1.equals(dir2));
 		Assert.assertFalse(dir1.equals(dir3));
 		Assert.assertFalse(dir1.equals(dir4));
@@ -100,11 +100,11 @@ public class GBFolderTest {
 			dir1.addFolder("bojack");
 			dir2.addFolder("something");
 			dir2.addFolder("something else");
-			Assert.assertEquals(dir1.getChildren().get(0), new GBFolder("pepe", "parent/pepe"));
-			Assert.assertEquals(dir1.getChildren().get(1), new GBFolder("blobo", "parent/blobo"));
-			Assert.assertEquals(dir1.getChildren().get(2), new GBFolder("bojack", "parent/bojack"));
-			Assert.assertEquals(dir2.getChildren().get(0), new GBFolder("something", "son1/something"));
-			Assert.assertEquals(dir2.getChildren().get(1), new GBFolder("something else", "son1/something else"));
+			Assert.assertEquals(dir1.getChildren().get(0), new FolderGB("pepe", "parent/pepe"));
+			Assert.assertEquals(dir1.getChildren().get(1), new FolderGB("blobo", "parent/blobo"));
+			Assert.assertEquals(dir1.getChildren().get(2), new FolderGB("bojack", "parent/bojack"));
+			Assert.assertEquals(dir2.getChildren().get(0), new FolderGB("something", "son1/something"));
+			Assert.assertEquals(dir2.getChildren().get(1), new FolderGB("something else", "son1/something else"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,10 +118,10 @@ public class GBFolderTest {
 		String sb2 = new String("I see water");
 		String sb3 = new String("I see nigth");
 		String sb4 = new String("I see fate");
-		List<GBFile> list1 = new ArrayList<GBFile>();
-		List<GBFile> list2 = new ArrayList<GBFile>();
-		List<GBFile> list3 = new ArrayList<GBFile>();
-		List<GBFile> list4 = new ArrayList<GBFile>();
+		List<FileGB> list1 = new ArrayList<FileGB>();
+		List<FileGB> list2 = new ArrayList<FileGB>();
+		List<FileGB> list3 = new ArrayList<FileGB>();
+		List<FileGB> list4 = new ArrayList<FileGB>();
 
 		try {
 			dir1.addFile("fire", ".txt", sb1);
@@ -139,14 +139,14 @@ public class GBFolderTest {
 
 		try {
 
-			list1.add(new GBFile("fire", ".txt", sb1, "parent/fire"));
-			list1.add(new GBFile("water", ".txt", sb2, "parent/water"));
-			list2.add(new GBFile("water", ".txt", sb2, "son1/water"));
-			list2.add(new GBFile("fate", ".txt", sb4, "son1/fate"));
-			list3.add(new GBFile("nigth", ".txt", sb3, "son2/nigth"));
-			list3.add(new GBFile("fate", ".txt", sb4, "son2/fate"));
-			list4.add(new GBFile("fire", ".txt", sb1, "grandSon1-1/fire"));
-			list4.add(new GBFile("fate", ".txt", sb4, "grandSon1-1/fate"));
+			list1.add(new FileGB("fire", ".txt", sb1, "parent/fire"));
+			list1.add(new FileGB("water", ".txt", sb2, "parent/water"));
+			list2.add(new FileGB("water", ".txt", sb2, "son1/water"));
+			list2.add(new FileGB("fate", ".txt", sb4, "son1/fate"));
+			list3.add(new FileGB("nigth", ".txt", sb3, "son2/nigth"));
+			list3.add(new FileGB("fate", ".txt", sb4, "son2/fate"));
+			list4.add(new FileGB("fire", ".txt", sb1, "grandSon1-1/fire"));
+			list4.add(new FileGB("fate", ".txt", sb4, "grandSon1-1/fate"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -274,14 +274,14 @@ public class GBFolderTest {
 			e.printStackTrace();
 		}
 
-		Assert.assertEquals(dir1.getChildren().get(0), new GBFolder("games", "parent/games"));
-		Assert.assertEquals(dir1.getChildren().get(1), new GBFolder("music", "parent/music"));
-		Assert.assertEquals(dir2.getChildren().get(0), new GBFolder("games", "son1/games"));
-		Assert.assertEquals(dir2.getChildren().get(1), new GBFolder("books", "son1/books"));
-		Assert.assertEquals(dir3.getChildren().get(0), new GBFolder("music", "son2/music"));
-		Assert.assertEquals(dir3.getChildren().get(1), new GBFolder("books", "son2/books"));
-		Assert.assertEquals(dir4.getChildren().get(0), new GBFolder("comics", "grandSon1-1/comics"));
-		Assert.assertEquals(dir4.getChildren().get(1), new GBFolder("papers", "grandSon1-1/papers"));
+		Assert.assertEquals(dir1.getChildren().get(0), new FolderGB("games", "parent/games"));
+		Assert.assertEquals(dir1.getChildren().get(1), new FolderGB("music", "parent/music"));
+		Assert.assertEquals(dir2.getChildren().get(0), new FolderGB("games", "son1/games"));
+		Assert.assertEquals(dir2.getChildren().get(1), new FolderGB("books", "son1/books"));
+		Assert.assertEquals(dir3.getChildren().get(0), new FolderGB("music", "son2/music"));
+		Assert.assertEquals(dir3.getChildren().get(1), new FolderGB("books", "son2/books"));
+		Assert.assertEquals(dir4.getChildren().get(0), new FolderGB("comics", "grandSon1-1/comics"));
+		Assert.assertEquals(dir4.getChildren().get(1), new FolderGB("papers", "grandSon1-1/papers"));
 
 	}
 
@@ -298,24 +298,24 @@ public class GBFolderTest {
 			e.printStackTrace();
 		}
 		try {
-			GBFolder heaven = dir1.getChildren().get(0);
-			GBFolder sky = heaven.getChildren().get(0);
-			GBFolder earth = sky.getChildren().get(0);
-			GBFolder midgard = earth.getChildren().get(0);
-			GBFolder purgatory = midgard.getChildren().get(0);
-			GBFolder hell = purgatory.getChildren().get(0);
+			FolderGB heaven = dir1.getChildren().get(0);
+			FolderGB sky = heaven.getChildren().get(0);
+			FolderGB earth = sky.getChildren().get(0);
+			FolderGB midgard = earth.getChildren().get(0);
+			FolderGB purgatory = midgard.getChildren().get(0);
+			FolderGB hell = purgatory.getChildren().get(0);
 
-			Assert.assertEquals(heaven, new GBFolder("heaven", "parent/heaven"));
-			Assert.assertEquals(sky, new GBFolder("sky", "parent/heaven/sky"));
-			Assert.assertEquals(earth, new GBFolder("earth", "parent/heaven/sky/earth"));
-			Assert.assertEquals(midgard, new GBFolder("midgard", "parent/heaven/sky/earth/midgard"));
-			Assert.assertEquals(purgatory, new GBFolder("purgatory", "parent/heaven/sky/earth/midgard/purgatory"));
-			Assert.assertEquals(hell, new GBFolder("hell", "parent/heaven/sky/earth/midgard/purgatory/hell"));
-			Assert.assertNotEquals(earth, new GBFolder("sky", "parent/heaven/sky"));
-			Assert.assertNotEquals(hell, new GBFolder("earth", "parent/heaven/sky/earth"));
-			Assert.assertNotEquals(heaven, new GBFolder("midgard", "parent/heaven/sky/earth/midgard"));
-			Assert.assertNotEquals(midgard, new GBFolder("purgatory", "parent/heaven/sky/earth/midgard/purgatory"));
-			Assert.assertNotEquals(sky, new GBFolder("hell", "parent/heaven/sky/earth/midgard/purgatory/hell"));
+			Assert.assertEquals(heaven, new FolderGB("heaven", "parent/heaven"));
+			Assert.assertEquals(sky, new FolderGB("sky", "parent/heaven/sky"));
+			Assert.assertEquals(earth, new FolderGB("earth", "parent/heaven/sky/earth"));
+			Assert.assertEquals(midgard, new FolderGB("midgard", "parent/heaven/sky/earth/midgard"));
+			Assert.assertEquals(purgatory, new FolderGB("purgatory", "parent/heaven/sky/earth/midgard/purgatory"));
+			Assert.assertEquals(hell, new FolderGB("hell", "parent/heaven/sky/earth/midgard/purgatory/hell"));
+			Assert.assertNotEquals(earth, new FolderGB("sky", "parent/heaven/sky"));
+			Assert.assertNotEquals(hell, new FolderGB("earth", "parent/heaven/sky/earth"));
+			Assert.assertNotEquals(heaven, new FolderGB("midgard", "parent/heaven/sky/earth/midgard"));
+			Assert.assertNotEquals(midgard, new FolderGB("purgatory", "parent/heaven/sky/earth/midgard/purgatory"));
+			Assert.assertNotEquals(sky, new FolderGB("hell", "parent/heaven/sky/earth/midgard/purgatory/hell"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -342,16 +342,16 @@ public class GBFolderTest {
 		}
 
 		try {
-			Assert.assertEquals(dir1.getFiles().get(0), new GBFile("fire", "txt", sb1, "parent/fire"));
-			Assert.assertEquals(dir1.getFiles().get(1), new GBFile("water", "txt", sb2, "parent/water"));
-			Assert.assertEquals(dir2.getFiles().get(0), new GBFile("nigth", "txt", sb3, "son1/nigth"));
-			Assert.assertEquals(dir2.getFiles().get(1), new GBFile("fate", "txt", sb4, "son1/fate"));
-			Assert.assertEquals(dir3.getFiles().get(0), new GBFile("nigth", "txt", sb3, "son2/nigth"));
-			Assert.assertEquals(dir3.getFiles().get(1), new GBFile("fire", "txt", sb1, "son2/fire"));
-			Assert.assertEquals(dir3.getFiles().get(2), new GBFile("fate", "txt", sb4, "son2/fate"));
-			Assert.assertEquals(dir3.getFiles().get(3), new GBFile("water", "txt", sb2, "son2/water"));
-			Assert.assertEquals(dir4.getFiles().get(0), new GBFile("nigth", "txt", sb3, "grandSon1-1/nigth"));
-			Assert.assertEquals(dir4.getFiles().get(1), new GBFile("fire", "txt", sb1, "grandSon1-1/fire"));
+			Assert.assertEquals(dir1.getFiles().get(0), new FileGB("fire", "txt", sb1, "parent/fire"));
+			Assert.assertEquals(dir1.getFiles().get(1), new FileGB("water", "txt", sb2, "parent/water"));
+			Assert.assertEquals(dir2.getFiles().get(0), new FileGB("nigth", "txt", sb3, "son1/nigth"));
+			Assert.assertEquals(dir2.getFiles().get(1), new FileGB("fate", "txt", sb4, "son1/fate"));
+			Assert.assertEquals(dir3.getFiles().get(0), new FileGB("nigth", "txt", sb3, "son2/nigth"));
+			Assert.assertEquals(dir3.getFiles().get(1), new FileGB("fire", "txt", sb1, "son2/fire"));
+			Assert.assertEquals(dir3.getFiles().get(2), new FileGB("fate", "txt", sb4, "son2/fate"));
+			Assert.assertEquals(dir3.getFiles().get(3), new FileGB("water", "txt", sb2, "son2/water"));
+			Assert.assertEquals(dir4.getFiles().get(0), new FileGB("nigth", "txt", sb3, "grandSon1-1/nigth"));
+			Assert.assertEquals(dir4.getFiles().get(1), new FileGB("fire", "txt", sb1, "grandSon1-1/fire"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -382,17 +382,17 @@ public class GBFolderTest {
 		}
 
 		try {
-			GBFolder heaven = dir1.getChildren().get(0);
-			GBFolder sky = heaven.getChildren().get(0);
-			GBFolder earth = sky.getChildren().get(0);
-			GBFolder midgard = earth.getChildren().get(0);
+			FolderGB heaven = dir1.getChildren().get(0);
+			FolderGB sky = heaven.getChildren().get(0);
+			FolderGB earth = sky.getChildren().get(0);
+			FolderGB midgard = earth.getChildren().get(0);
 
-			Assert.assertEquals(heaven.getFiles().get(0), new GBFile("fire", "txt", sb1, "parent/heaven/fire"));
-			Assert.assertEquals(sky.getFiles().get(0), new GBFile("water", "txt", sb2, "parent/heaven/sky/water"));
+			Assert.assertEquals(heaven.getFiles().get(0), new FileGB("fire", "txt", sb1, "parent/heaven/fire"));
+			Assert.assertEquals(sky.getFiles().get(0), new FileGB("water", "txt", sb2, "parent/heaven/sky/water"));
 			Assert.assertEquals(earth.getFiles().get(0),
-					new GBFile("nigth", "txt", sb3, "parent/heaven/sky/earth/nigth"));
+					new FileGB("nigth", "txt", sb3, "parent/heaven/sky/earth/nigth"));
 			Assert.assertEquals(midgard.getFiles().get(0),
-					new GBFile("fate", "txt", sb4, "parent/heaven/sky/earth/midgard/fate"));
+					new FileGB("fate", "txt", sb4, "parent/heaven/sky/earth/midgard/fate"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

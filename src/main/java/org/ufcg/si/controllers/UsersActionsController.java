@@ -101,12 +101,22 @@ public class UsersActionsController {
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
+			String fileName = requestBody.getClickedFile().getName();
+			
 			if (!requestBody.getFileName().equals(requestBody.getClickedFile().getName())) {
 				dbUser.editFileName(requestBody.getFileName(), requestBody.getClickedFile().getName(), requestBody.getFilePath());
-			}			
+				fileName = requestBody.getFileName();
+			}
 			
-			User updateUser = editFileContent(requestBody, dbUser);
+			if (!requestBody.getFileExtension().equals(requestBody.getClickedFile().getExtension())) {
+				dbUser.editFileExtension(requestBody.getFileExtension(), fileName, requestBody.getFilePath());
+			}
 			
+			if (!requestBody.getFileContent().equals(requestBody.getClickedFile().getContent())) {
+				dbUser.editFileContent(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFilePath());
+			}
+			
+			User updateUser = userService.update(dbUser);
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
 		} catch(GreenboxException gbe) {
 			gbe.printStackTrace();

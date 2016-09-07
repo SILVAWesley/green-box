@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.ufcg.si.models.User;
-import org.ufcg.si.models.storage.GBFolder;
+import org.ufcg.si.models.storage.FolderGB;
 
 public class UserTest {
 
@@ -79,9 +79,9 @@ public class UserTest {
 		Assert.assertTrue(user0.getUserDirectory().getPath() == null);
 		Assert.assertTrue(user1.getUserDirectory().getName() == null);
 		Assert.assertTrue(user1.getUserDirectory().getPath() == null);
-		Assert.assertEquals(user2.getUserDirectory(), new GBFolder("someone"));
-		Assert.assertEquals(user3.getUserDirectory(), new GBFolder(""));
-		Assert.assertEquals(user4.getUserDirectory(), new GBFolder(" "));
+		Assert.assertEquals(user2.getUserDirectory(), new FolderGB("someone"));
+		Assert.assertEquals(user3.getUserDirectory(), new FolderGB(""));
+		Assert.assertEquals(user4.getUserDirectory(), new FolderGB(" "));
 
 	}
 
