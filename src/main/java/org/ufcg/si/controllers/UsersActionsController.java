@@ -18,6 +18,7 @@ import org.ufcg.si.beans.requests.AddFolderRequestBody;
 import org.ufcg.si.beans.requests.EditFileRequestBody;
 import org.ufcg.si.beans.requests.ShareFileRequestBody;
 import org.ufcg.si.exceptions.GreenboxException;
+import org.ufcg.si.models.Notification;
 import org.ufcg.si.models.User;
 import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
@@ -204,6 +205,27 @@ public class UsersActionsController {
 			userService.update(receivingUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
+		} catch(GreenboxException gbe) {
+			gbe.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + gbe.getMessage());
+		} catch (DataAccessException dae) {
+			dae.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
+		} 
+	}
+	
+	@RequestMapping(value = "/notifications", 
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Iterable<Notification>> listNotifications(@RequestBody User requestBody) throws Exception {
+		try {
+			User dbUser = userService.findByUsername(requestBody.getUsername());
+			
+			ExceptionHandler.checkUserInDatabase(dbUser);
+			Iterable<Notification> notifications = dbUser.listNotifications();
+			System.out.println(notifications);
+			return new ResponseEntity<>(notifications, HttpStatus.OK);
 		} catch(GreenboxException gbe) {
 			gbe.printStackTrace();
 			throw new ServletException("Request error while trying to rename folder... " + gbe.getMessage());
