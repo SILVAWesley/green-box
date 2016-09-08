@@ -70,6 +70,10 @@ public class User {
 		directory.shareFile(user.directory, name, path, filePermission);
 	}
 	
+	public Iterable<Notification> listNotifications() {
+		return directory.listNotifications();
+	}
+	
 	/**
 	 * The username getter. The username is used for authentication in the Green-Box application
 	 * @return the User's username

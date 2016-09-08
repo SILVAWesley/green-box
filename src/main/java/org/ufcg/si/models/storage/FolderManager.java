@@ -1,7 +1,9 @@
 package org.ufcg.si.models.storage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,9 +12,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.ufcg.si.exceptions.NotEnoughAccessLevel;
+import org.ufcg.si.models.Notification;
 import org.ufcg.si.util.permissions.FileActions;
 import org.ufcg.si.util.permissions.FilePermission;
 @Entity
@@ -30,6 +34,9 @@ public class FolderManager {
 	@OneToOne(cascade = CascadeType.ALL)
 	private FolderGB rootFolder; 
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Notification> notifications;
+	
 	@ElementCollection
 	private Map<FileGB, FilePermission> filePermissions;
 	
@@ -40,6 +47,7 @@ public class FolderManager {
 		this.rootFolder.addFolder(SHARED_WITH_ME_FOLDER_NAME);
 		this.rootFolder.addFolder(I_SHARED_FOLDER_NAME);
 		this.filePermissions = new HashMap<>();
+		this.notifications = new ArrayList<>();
 	}
 	
 	public FolderManager() {
@@ -56,16 +64,20 @@ public class FolderManager {
 	
 	public void shareFile(FolderManager directoryToShareWith, String name, String path, FilePermission permission) {
 		FilePermission filePermission = findFilePermission(name, path);
-		System.out.println(permission + " PRINTADO");
+		
 		if (filePermission.isAllowed(FileActions.SHARE)) {
 			FileGB sharingFile = rootFolder.findFileByPathAndName(name, path);
 			iSharedFolder().addFile(sharingFile);
 			directoryToShareWith.receiveFile(sharingFile);
 			directoryToShareWith.filePermissions.put(sharingFile, permission);
-			System.out.println(filePermissions + " EM SHARE");
+			directoryToShareWith.notifications.add(new Notification("New shared file: " + name + "."));
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + filePermission + " is not enough to complete the operation.");
 		}
+	}
+	
+	public Iterable<Notification> listNotifications() {
+		return notifications;
 	}
 	
 	public void editFileContent(String name, String newContent, String path) throws IOException {

@@ -30,6 +30,20 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$state.go('dashboard.file');
 	}
 	
+	$scope.listNotifications = function() {
+		requestData = $scope.user;
+		
+		$http.post('/server/userdirectory/notifications', requestData)
+		.then(function(response) {
+			console.log("Notifications: " + response.data);
+			$scope.notifications = response.data;
+		}, function(response) {
+			window.alert("Notification error!");
+		});
+		
+	}
+	
+	
 	$scope.share = function(sharingType){
 		requestData = {};
 		requestData.user = $scope.user;
@@ -182,7 +196,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$scope.rootDirectory = $scope.user.directory.rootFolder;
 		$scope.currentDirectory = $scope.rootDirectory;
 		$scope.openedFolders = [$scope.rootDirectory];
-		
+		$scope.notifications = [];
 		$localStorage.session.currentPath = $stateParams.folderPath;
 		
 		$scope.newFolderName = "";
@@ -190,6 +204,8 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		
 		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
 		goToPath($stateParams.folderPath);
+		
+		$scope.listNotifications();
 	}
 	
 	init();
