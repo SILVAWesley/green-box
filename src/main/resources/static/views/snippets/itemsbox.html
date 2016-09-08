@@ -2,7 +2,7 @@
 	<div class="form-top">
 		<div class="form-top-right">
 			<h3>
-				<span ng-repeat="folder in openedFolders.slice(0, foldersPath.length - 1) track by $index">
+				<span ng-repeat="folder in openedFolders.slice(1, foldersPath.length - 1) track by $index">
 					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
 					<a
 						style="color:green"
@@ -94,4 +94,5 @@
 			<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
 		</strong>
 	</button>
+	
 </div>

@@ -47,6 +47,18 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		});
 	}
 	
+	function findFileOrFolderByName(name, directory) {
+		var foldersNFiles = directory.folders.concat(directory.files);
+		
+		for (j = 0; j < foldersNFiles.length; j++) {
+			if (foldersNFiles[j].name == name) {
+				return foldersNFiles[j];
+			}
+		}
+	
+		return null;
+	}
+	
 	function createNewFile(){
 		$http.post('/server/userdirectory/newfile', requestData)
 		.then(function(response) {
