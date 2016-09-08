@@ -4,7 +4,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	}
 	
 	$scope.sharedWithMeClick = function() {
-		$state.go('dashboard.directories', {folderPath: 'root/Shared with me'});
+		$state.go('dashboard.directories', {folderPath: '/Shared with me'});
 		console.log('foi');
 	}
 	
