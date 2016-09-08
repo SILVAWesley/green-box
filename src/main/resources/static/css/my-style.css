@@ -51,6 +51,12 @@ img { max-width: 100%; }
 	text-shadow: none; 
 }
 
+.dropdown-menu {
+    height: 300x !important;
+    overflow: auto;
+    
+}
+
 /***** Btn Links *****/
 
 .btn-link-1 {
