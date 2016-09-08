@@ -70,7 +70,7 @@ public class FolderManager {
 			iSharedFolder().addFile(sharingFile);
 			directoryToShareWith.receiveFile(sharingFile);
 			directoryToShareWith.filePermissions.put(sharingFile, permission);
-			directoryToShareWith.notifications.add(new Notification("New shared file: " + name + "."));
+			directoryToShareWith.notifications.add(new Notification("A file named " + "'" + name + "' " + "was shared with you by : " + this.name + "."));
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + filePermission + " is not enough to complete the operation.");
 		}
@@ -128,6 +128,10 @@ public class FolderManager {
 	
 	public FolderGB getRootFolder() {
 		return rootFolder;
+	}
+	
+	public List<Notification> getNotifications() {
+		return notifications;
 	}
 	
 	private FilePermission findFilePermission(String name, String path) {

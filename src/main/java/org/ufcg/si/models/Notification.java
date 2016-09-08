@@ -11,6 +11,7 @@ public class Notification {
 	private Long id;
 	
 	private String content;
+	private boolean isVisited;
 	
 	public Notification(String content) {
 		this.content = content;
@@ -26,5 +27,13 @@ public class Notification {
 	
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public boolean getIsVisited() {
+		return isVisited;
+	}
+	
+	public void setIsVisited(boolean visited) {
+		this.isVisited = visited;
 	}
 }

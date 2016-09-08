@@ -235,6 +235,33 @@ public class UsersActionsController {
 		} 
 	}
 	
+	@RequestMapping(value = "/visit_notifications", 
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> visitNotifications(@RequestBody User requestBody) throws Exception {
+		try {
+			User dbUser = userService.findByUsername(requestBody.getUsername());
+			
+			ExceptionHandler.checkUserInDatabase(dbUser);
+			Iterable<Notification> notifications = dbUser.listNotifications();
+			
+			for (Notification notification : notifications) {
+				notification.setIsVisited(true);
+			}
+			
+			User updateUser = userService.update(dbUser);
+			
+			return new ResponseEntity<>(updateUser, HttpStatus.OK);
+		} catch(GreenboxException gbe) {
+			gbe.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + gbe.getMessage());
+		} catch (DataAccessException dae) {
+			dae.printStackTrace();
+			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
+		} 
+	}
+	
 	@Autowired
 	public void setUserService(UserServiceImpl userServiceImpl) {
 		this.userService = userServiceImpl;
