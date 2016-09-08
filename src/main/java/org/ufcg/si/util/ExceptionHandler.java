@@ -2,19 +2,21 @@ package org.ufcg.si.util;
 
 import javax.servlet.ServletException;
 
+import org.ufcg.si.beans.requests.AddFileRequestBody;
+import org.ufcg.si.beans.requests.AddFolderRequestBody;
+import org.ufcg.si.beans.requests.RegistrationBody;
 import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.InvalidRequestBodyException;
 import org.ufcg.si.exceptions.MissingItemException;
 import org.ufcg.si.models.User;
-import org.ufcg.si.util.requests.FileRequestBody;
-import org.ufcg.si.util.requests.FolderRequestBody;
+
 
 public class ExceptionHandler {
 	public static final String USER_USERNAME = "username";
 	public static final String USER_EMAIL = "email";
 	public static final String USER_PASSWORD = "password";
 	
-	public static void checkNewFolderBody(FolderRequestBody requestBody) {
+	public static void checkAddFolderBody(AddFolderRequestBody requestBody) {
 		if (Validator.isEmpty(requestBody.getUser())) {
 			throw new InvalidRequestBodyException("Invalid user: " + requestBody.getUser() + ".");
 		}
@@ -36,7 +38,7 @@ public class ExceptionHandler {
 		}
 	}
 	
-	public static void checkNewFileBody(FileRequestBody requestBody) {
+	public static void checkAddFileBody(AddFileRequestBody requestBody) {
 		if (Validator.isEmpty(requestBody.getUser())) {
 			throw new InvalidRequestBodyException("Invalid user: " + requestBody.getUser() + ".");
 		}
@@ -63,7 +65,7 @@ public class ExceptionHandler {
 		}
 	}
 	
-	public static void checkEditFileBody(FileRequestBody requestBody) {
+	public static void checkEditFileBody(AddFileRequestBody requestBody) {
 		if (Validator.isEmpty(requestBody.getUser())) {
 			throw new InvalidRequestBodyException("Invalid user: " + requestBody.getUser() + ".");
 		}
@@ -85,7 +87,7 @@ public class ExceptionHandler {
 		}
 	}
 	
-	public static void checkRegistrationBody(User requestBody) throws InvalidRequestBodyException {
+	public static void checkRegistrationBody(RegistrationBody requestBody) throws InvalidRequestBodyException {
 		String username = requestBody.getUsername();
 		String email = requestBody.getEmail();
 		String password = requestBody.getPassword();

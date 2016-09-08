@@ -8,12 +8,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import org.ufcg.si.util.ServerConstants;
 
-@Embeddable
-public class GBFile {
+@Entity
+public class FileGB {
+	@Id
+	@GeneratedValue
+	private Long id;
 	private String name;
 	private String extension;
 	@Column(length = 10000000)
@@ -21,7 +26,7 @@ public class GBFile {
 	private String path;
 	private File file;
 
-	public GBFile(String name, String extension, String content, String path) throws IOException {
+	public FileGB(String name, String extension, String content, String path) throws IOException {
 		this.name = name;
 		this.extension = extension;
 		this.path = path;
@@ -31,7 +36,7 @@ public class GBFile {
 		this.content = readContentFromFile();
 	}
 	
-	public GBFile() {
+	public FileGB() {
 		
 	}
 
@@ -95,6 +100,10 @@ public class GBFile {
 		writer.close();
 	}
 	
+	public Long getId() {
+		return id;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -106,8 +115,8 @@ public class GBFile {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof GBFile) {
-			GBFile otherFile = (GBFile) obj;
+		if (obj instanceof FileGB) {
+			FileGB otherFile = (FileGB) obj;
 			return this.getName().equals(otherFile.getName()) && this.getPath().equals(otherFile.getPath());
 		}
 		

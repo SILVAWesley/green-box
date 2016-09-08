@@ -1,18 +1,19 @@
 angular.module('app').controller("directoriesController", function($scope, $state, $localStorage, $http, $rootScope, $stateParams) {
-	$scope.user = $localStorage.session.user;
-	$scope.rootDirectory = $scope.user.userDirectory;
-	$scope.currentDirectory = $scope.rootDirectory;
-	$scope.openedFolders = [$scope.rootDirectory];
-	
-	
-	$localStorage.session.currentPath = $stateParams.folderPath;
-	
-	$scope.newFolderName = "";
-	$scope.currentType = "";
-	
 	$scope.folderClick = function(folder) {
 		$state.go('dashboard.directories', {folderPath: folder.path});
 	}
+	
+	$scope.sharedWithMeClick = function() {
+		$state.go('dashboard.directories', {folderPath: '/Shared with me'});
+		console.log('foi');
+	}
+	
+	$scope.myFilesClick = function() {
+		console.log($scope.rootDirectory.name);
+		$state.go('dashboard.directories', {folderPath: $scope.rootDirectory.folders[0].path});
+		console.log('foi');
+	}
+	
 	
 	$scope.actionClick = function(item){
 		$localStorage.selectedItem = item;
@@ -29,13 +30,31 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$state.go('dashboard.file');
 	}
 	
+	$scope.listNotifications = function() {
+		requestData = $scope.user;
+		
+		$http.post('/server/userdirectory/notifications', requestData)
+		.then(function(response) {
+			console.log("Notifications: " + response.data);
+			$scope.notifications = response.data;
+		}, function(response) {
+			window.alert("Notification error!");
+		});
+		
+	}
+	
+	
 	$scope.share = function(sharingType){
 		requestData = {};
 		requestData.user = $scope.user;
-		requestData.userSharedWith = $scope.userSharedWith;
-		requestData.fileName = $localStorage.selectedItem.name;
+		requestData.userSharedWith = {};
+		requestData.userSharedWith.username = $scope.userSharedWith;
+		console.log(requestData.userSharedWith);
+		requestData.name = $localStorage.selectedItem.name;
+		requestData.folderPath = $localStorage.session.currentPath;
+		requestData.permissionLevel = sharingType;
 		
-		$http.post('to-be-completed', requestData, sharingType)
+		$http.post('/server/userdirectory/sharefile', requestData)
 		.then(function(response){
 			$localStorage.session.user = response.data;
 			window.alert('File successfully shared');
@@ -84,7 +103,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		}, function(response){
 			window.alert(response.data.message);
 			window.alert('whoops!');
-		});
+		})
 		
 	}
 	
@@ -93,8 +112,9 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		requestData = {};
 		requestData.user = $scope.user;
 		requestData.folderName = $scope.newFolderName;
-		requestData.folderPath = $scope.currentDirectory.path;		
-		
+		requestData.folderPath = $scope.currentDirectory.path;
+		console.log('data');
+		console.log(requestData.folderPath);
 		
 		$http.post('/server/userdirectory/newfolder', requestData)
 			.then(function(response) {
@@ -118,7 +138,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	}	
 
 	$scope.getFolders = function() {
-		return $scope.currentDirectory.children;
+		return $scope.currentDirectory.folders;
 	}
 	
 	$scope.newFilePage = function() {
@@ -126,11 +146,10 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$state.go('dashboard.file');
 	}
 	
-	$scope.filesNFoldersToShow = $scope.getFilesNFolders();
-	goToPath($stateParams.folderPath);
+	
 	
 	function findFileOrFolderByName(name, directory) {
-		var foldersNFiles = directory.children.concat(directory.files);
+		var foldersNFiles = directory.folders.concat(directory.files);
 		
 		for (j = 0; j < foldersNFiles.length; j++) {
 			if (foldersNFiles[j].name == name) {
@@ -141,9 +160,14 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		return null;
 	}
 	
+	function sharedFolder() {
+		return $scope.user.sharedWithMeFolder;
+	}
+	
+	
 	function update () {
 		$scope.user = $localStorage.session.user;
-		$scope.rootDirectory = $scope.user.userDirectory;
+		$scope.rootDirectory = $scope.user.directory.rootFolder;
 		$scope.currentDirectory = $scope.rootDirectory;
 		$scope.openedFolders = [$scope.rootDirectory];
 	}
@@ -151,12 +175,14 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	function goToPath(path) {
 		var directoryNames = path.split("/");
 		$scope.currentDirectory = $scope.rootDirectory;
-		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
-		
+			
 		for (i = 1; i < directoryNames.length; i++) {
+			console.log($scope.currentDirectory);
 			$scope.currentDirectory = findFileOrFolderByName(directoryNames[i], $scope.currentDirectory);
 			goForward($scope.currentDirectory);
 		}
+		
+		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
 	}
 	
 	function goForward(folder) {
@@ -164,4 +190,23 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$scope.openedFolders.push(folder);
 		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
 	}
+	
+	function init() {
+		$scope.user = $localStorage.session.user;
+		$scope.rootDirectory = $scope.user.directory.rootFolder;
+		$scope.currentDirectory = $scope.rootDirectory;
+		$scope.openedFolders = [$scope.rootDirectory];
+		$scope.notifications = [];
+		$localStorage.session.currentPath = $stateParams.folderPath;
+		
+		$scope.newFolderName = "";
+		$scope.currentType = "";
+		
+		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
+		goToPath($stateParams.folderPath);
+		
+		$scope.listNotifications();
+	}
+	
+	init();
 });

@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  
-  	<!-- include libraries(jQuery, bootstrap) -->
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-	
+<base href="/"/>
 	<!-- include summernote css/js-->
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
-	
-	<!-- include summernote configuration js-->
-	<script src="./js/configurations/summernote-file-config.js"></script>
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet"></link>
+	<link rel="stylesheet" href="../static/css/summernote.css" th:href="@{css/sumernote.css}"></link>
+	<link rel="stylesheet" href="summernote.css" rel="stylesheet"></link>
+		
+	<script src="js/configurations/summernote-config.js"></script>
+	<script src="js/configurations/summernote-file-config.js"></script>
 </head>
 
 <body>
@@ -46,8 +40,6 @@
 						
 						</div> <!-- form-top ends -->					
 					</div> <!-- userbox ends -->
-					<!-- Test!!! -->
-					<div id="summernote">Hello Summernote</div>
 					
 					<form class="edit-form" method="post" action="" role="form">
 						<summernote class="click2edit" id="summernote" ng-model="content"></summernote>
