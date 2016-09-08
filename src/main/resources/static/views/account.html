@@ -47,13 +47,28 @@
 					</a>
 				</li>
 			</ul>
-			
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a title="notifications" style=color:#F31111 aria-hidden="true" data-toggle="modal" data-target="#modalNotification" href="" ng-click="actionClick(item)"> 
+					<div class="dropdown">
+					</br>
+					  <a title="notifications" style=color:#F31111 aria-hidden="true" id="dropdownNotifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> 
 						<i class="fa fa-bell fa-2x" aria-hidden="true"></i>
 						<h8>((number))<h8>
-					</a>
+					  </a>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownNotifications">
+					  	<li class="dropdown-header">
+					  		<h3 class="modal-title" id="myModalLabel" style="font-family: 'Pattaya', sans-serif">
+					        	<i class="fa fa-bell-o" aria-hidden="true"></i>
+					        	<strong>           Notifications          </strong>
+					        </h3>
+					  	</li>
+					    <li><a href="#">s</a></li>
+					    <li><a href="#">Another action</a></li>
+					    <li><a href="#">Something else here</a></li>
+					    <li role="separator" class="divider"></li>
+					    <li><a href="#">Separated link</a></li>
+					  </ul>
+					</div>
 				</li>
 			</ul>
 			
