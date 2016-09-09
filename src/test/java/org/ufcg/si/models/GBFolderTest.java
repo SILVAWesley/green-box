@@ -12,7 +12,7 @@ import org.ufcg.si.models.storage.FolderGB;
 import org.ufcg.si.util.ServerConstants;
 
 public class GBFolderTest {
-	private FolderGB dir1;
+/*	private FolderGB dir1;
 	private FolderGB dir2;
 	private FolderGB dir3;
 	private FolderGB dir4;
@@ -397,5 +397,5 @@ public class GBFolderTest {
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 }
