@@ -8,7 +8,7 @@ import org.ufcg.si.models.storage.FolderGB;
 
 public class UserTest {
 
-	private User user0;
+/*	private User user0;
 	private User user1;
 	private User user2;
 	private User user3;
@@ -83,6 +83,6 @@ public class UserTest {
 		Assert.assertEquals(user3.getUserDirectory(), new FolderGB(""));
 		Assert.assertEquals(user4.getUserDirectory(), new FolderGB(" "));
 
-	}
+	}*/
 
 }
