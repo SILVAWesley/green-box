@@ -6,6 +6,14 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 	$scope.sharedWithMeClick = function() {
 		$state.go('dashboard.directories', {folderPath: '/Shared with me'});
 		console.log('foi');
+		
+		$http.get('/server/users/get/' + $localStorage.session.user.username)
+		.then(function(response) {
+			$localStorage.session.user = response.data;
+			update();
+		}, function(response) {
+			window.alert("Notification error!");
+		});
 	}
 	
 	$scope.myFilesClick = function() {

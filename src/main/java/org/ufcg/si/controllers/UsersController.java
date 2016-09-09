@@ -29,22 +29,17 @@ import org.ufcg.si.util.Validator;
 @RequestMapping(ServerConstants.SERVER_REQUEST_URL + ServerConstants.USERS_REQUEST_URL)
 public class UsersController {
 	private UserService userService;
-
-	/**
-	 * This method return a User according to their ID
-	 * @param id The identification of a user
-	 * @return A user
-	 */
-	@RequestMapping(value = "/get/{id}", 
-					method = RequestMethod.GET, 
-					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> getUser(@PathVariable Long id) {
-		User dbUser = userService.findById(id);
-
+	
+	@RequestMapping(value = "/get/{username}", 
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> getUser(@PathVariable String username) {
+		User dbUser = userService.findByUsername(username);
+	
 		if (Validator.isEmpty(dbUser)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
+	
 		return new ResponseEntity<>(dbUser, HttpStatus.OK);
 	}
 	
