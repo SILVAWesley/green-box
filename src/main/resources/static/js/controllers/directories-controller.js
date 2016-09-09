@@ -65,10 +65,13 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		$http.post('/server/userdirectory/sharefile', requestData)
 		.then(function(response){
 			$localStorage.session.user = response.data;
-			window.alert('File successfully shared');
+			//window.alert('File successfully shared');
+			$("#fileSharedSuccessfulyModal").modal("show");		
 		}, function(response){
-			window.alert(response.data.message);
-			window.alert('whoops!');
+			//window.alert(response.data.message);
+			//window.alert('whoops!');
+			$("#fileNotSharedModal").modal("show");		
+
 		});
 	}
 	
