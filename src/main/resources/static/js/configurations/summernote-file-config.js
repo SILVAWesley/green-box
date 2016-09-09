@@ -8,6 +8,7 @@ $('.summernote').summernote({
 $(document).ready(function() {
 	$('#summernote').summernote('justifyLeft');
 	$('#summernote').summernote('fontName', 'Arial');
+	$('#summernote').summernote({placeholder: 'write here...'});
 
 });
 
