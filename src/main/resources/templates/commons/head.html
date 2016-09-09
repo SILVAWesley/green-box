@@ -23,15 +23,13 @@
 	<!-- Optional icons -->
 	<link rel="shortcut icon" href="../static/img/icons/favicon.ico" th:href="@{img/icons/favicon.ico}"></link>
 	<link rel="stylesheet" href="../static/css/font-awesome.min.css" th:href="@{css/font-awesome.min.css}"></link>
-        
-        
+           
 	<!-- Optional fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Pattaya' rel='stylesheet' type='text/css'></link>
 		   
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	  
-	                
+	  	                
 	<!-- Angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
@@ -48,4 +46,7 @@
 	<script src="./js/configurations/interceptors.js"></script>
 	<script src="./js/interceptors/token-interceptor.js"></script>
 	<script src="./js/services/authentication-service.js"></script>
+	
+	<!-- Messages for User -->
+	<ng-include src="'views/snippets/messagesUser.html'"> </ng-include>	
 </head>
