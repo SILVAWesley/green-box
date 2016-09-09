@@ -22,12 +22,6 @@ angular.module('app').controller('dashboardController', function($scope, $localS
 	$scope.actionClick = function(){
 		requestData = $localStorage.session.user;
 		
-		for (i = 0; i < $scope.notifications.length; i++) {
-			if ($scope.notifications[i].isVisited == false) {
-				window.alert($scope.notifications[i].content);
-			}
-		}
-		
 		$http.post('/server/userdirectory/visit_notifications', requestData)
 		.then(function(response) {
 			console.log("Notifications: " + response.data);
