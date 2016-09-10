@@ -4,22 +4,21 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToOne;
 
-import org.ufcg.si.util.permissions.FilePermission;
+import org.ufcg.si.util.permissions.file.FilePermissions;
 
 @Embeddable
 public class StorageRelation <T> {
-
-	private FilePermission permission;
+	private FilePermissions permission;
 	@OneToOne(cascade = CascadeType.ALL)
 	private T item;
 	
-	public StorageRelation(FilePermission permission, T item) {
+	public StorageRelation(FilePermissions permission, T item) {
 		this.permission = permission;
 		this.item = item;
 	}
 	
 	public StorageRelation() {
-		
+		this(null, null);
 	}
 	
 	public T getItem() {
@@ -30,11 +29,11 @@ public class StorageRelation <T> {
 		this.item = newItem;
 	}
 	
-	public FilePermission getPermission() {
+	public FilePermissions getPermission() {
 		return permission;
 	}
 	
-	public void setPermission(FilePermission newPermission) {
+	public void setPermission(FilePermissions newPermission) {
 		this.permission = newPermission;
 	}
 	
@@ -49,21 +48,14 @@ public class StorageRelation <T> {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		StorageRelation other = (StorageRelation) obj;
-		if (item == null) {
-			if (other.item != null)
-				return false;
-		} else if (!item.equals(other.item))
-			return false;
-		if (permission != other.permission)
-			return false;
-		return true;
+		if (obj instanceof FolderGB) {
+			StorageRelation<?> otherRelation = (StorageRelation<?>) obj;
+			
+			return this.getItem().equals(otherRelation.getItem())
+				&& this.getPermission().equals(otherRelation.getPermission());
+		}
+		
+		return false;
 	}
 
 	@Override

@@ -1,20 +1,17 @@
-package org.ufcg.si.util.permissions;
+package org.ufcg.si.util.permissions.file;
 
-import java.util.Arrays;
-
-public enum FilePermission {
+public enum FilePermissions {
 	R(), 
 	RW(FileActions.EDIT_CONTENT), 
 	OWNER(FileActions.SHARE, FileActions.EDIT_CONTENT, FileActions.EDIT_EXTENSION, FileActions.EDIT_NAME);
 	
 	private FileActions[] allowedActions;
 	
-	private FilePermission(FileActions... allowedActions) {
+	private FilePermissions(FileActions... allowedActions) {
 		this.allowedActions = allowedActions;
 	}
 	
 	public boolean isAllowed(FileActions action) {
-		System.out.println(Arrays.toString(allowedActions));
 		for (int i = 0; i < allowedActions.length; i++) {
 			if (allowedActions[i].equals(action)) {
 				return true;
@@ -24,8 +21,9 @@ public enum FilePermission {
 		return false;
 	}
 	
-	public static FilePermission valueOfIgnoreCase(String arg0) {
-		for (FilePermission permission : FilePermission.class.getEnumConstants()) {
+	public static FilePermissions valueOfIgnoreCase(String arg0) {
+		
+		for (FilePermissions permission : FilePermissions.class.getEnumConstants()) {
 	        if (permission.name().compareToIgnoreCase(arg0) == 0) {
 	            return permission;
 	        }

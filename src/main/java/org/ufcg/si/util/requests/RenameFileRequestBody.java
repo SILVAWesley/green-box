@@ -7,16 +7,30 @@ public class RenameFileRequestBody {
 	private String newName;
 	private String oldName;
 	private String folderPath;
+	private String fileExtension;
 	
-	public RenameFileRequestBody(User user, String newName, String oldName, String folderPath){
+	public RenameFileRequestBody(User user, String newName, String oldName, String folderPath, String fileExtension){
 		this.user = user;
 		this.newName = newName;
 		this.oldName = oldName;
 		this.folderPath = folderPath;
+		this.fileExtension = fileExtension;
+		
+		if (this.fileExtension == null || this.fileExtension.equals("")) {
+			this.fileExtension = "txt";
+		}
 	}
 	
 	public RenameFileRequestBody(){
-		
+		this.fileExtension = "txt";
+	}
+	
+	public String getFileExtension() {
+		return fileExtension;
+	}
+
+	public void setFileExtension(String fileExtension) {
+		this.fileExtension = fileExtension;
 	}
 	
 	public User getUser() {
@@ -49,8 +63,6 @@ public class RenameFileRequestBody {
 
 	public void setFolderPath(String newFolderPath) {
 		this.folderPath = newFolderPath;
-	}
-	
-	
+	}	
 	
 }

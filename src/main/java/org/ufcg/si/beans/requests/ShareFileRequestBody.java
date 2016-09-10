@@ -8,17 +8,31 @@ public class ShareFileRequestBody {
 	private String folderPath;
 	private User userSharedWith;
 	private String permissionLevel;
+	private String fileExtension;
 	
-	public ShareFileRequestBody(User user, User userSharedWith, String name, String folderPath, String permissionLevel) {
+	public ShareFileRequestBody(User user, User userSharedWith, String name, String folderPath, String fileExtension, String permissionLevel) {
 		this.user = user;
 		this.name = name;
 		this.folderPath = folderPath;
 		this.userSharedWith = userSharedWith;
 		this.permissionLevel = permissionLevel;
+		this.fileExtension = fileExtension;
+		
+		if (this.fileExtension == null || this.fileExtension.equals("")) {
+			this.fileExtension = "txt";
+		}
 	}
 	
 	public ShareFileRequestBody(){
-		
+		this.fileExtension = "txt";
+	}
+	
+	public String getFileExtension() {
+		return fileExtension;
+	}
+	
+	public void setFileExtension(String newFileExtension) {
+		this.fileExtension = newFileExtension;
 	}
 	
 	public User getUser() {
