@@ -30,7 +30,7 @@ angular.module('app').controller('registrationController', ['$scope', '$http', f
 			//window.alert("Congratulations! You now have a greenbox account to store your files. " +
 			//			 "Username: " + response.data.username + " "
 			//			 + "Email: " + response.data.email);
-		    $("#modalRegisterSuccessful").modal("show");
+		    $("#registerSuccessfulModal").modal("show");
 
 			
 			$scope.user = {username: "", 
@@ -40,7 +40,7 @@ angular.module('app').controller('registrationController', ['$scope', '$http', f
 			
 		}, function(response) {
 			//window.alert("Failure: " + response.data.message);
-			$("#modalRegisterErro").modal("show");
+			$("#registerErroModal").modal("show");
 		});
 		
 	};
