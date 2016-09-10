@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 
 import org.ufcg.si.models.storage.FolderManager;
 import org.ufcg.si.models.storage.StorageFactory;
-import org.ufcg.si.util.permissions.FilePermission;
+import org.ufcg.si.util.permissions.file.FilePermissions;
 
 /**
  * This class represents a Green-Box user
@@ -50,24 +50,24 @@ public class User {
 		directory.addFolder(name, path);
 	}
 	
-	public void editFileName(String newName, String oldName, String path) {
-		directory.editFileName(newName, oldName, path);
+	public void editFileName(String newName, String oldName, String extension, String path) {
+		directory.editFileName(newName, oldName, extension, path);
 	}
 	
-	public void editFileContent(String name, String newContent, String path) throws IOException {
-		directory.editFileContent(name, newContent, path);
+	public void editFileContent(String name, String newContent, String extension, String path) throws IOException {
+		directory.editFileContent(name, newContent, extension, path);
 	}
 	
-	public void editFileExtension(String newExtension, String name, String path) {
-		directory.editFileExtension(newExtension, name, path);
+	public void editFileExtension(String newExtension, String name, String oldExtension, String path) {
+		directory.editFileExtension(newExtension, name, oldExtension, path);
 	}
 	
 	public void editFolderName(String newName, String oldName, String path) {
 		directory.editFolderName(newName, oldName, path);
 	}
 	
-	public void shareFile(User user, String name, String path, FilePermission filePermission) throws IOException {
-		directory.shareFile(user.directory, name, path, filePermission);
+	public void shareFile(User user, String name, String path, String extension, FilePermissions filePermission) throws IOException {
+		directory.shareFile(user.directory, name, path, extension, filePermission);
 	}
 	
 	public Iterable<Notification> listNotifications() {

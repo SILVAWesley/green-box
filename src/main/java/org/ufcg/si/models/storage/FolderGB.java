@@ -1,8 +1,6 @@
 package org.ufcg.si.models.storage;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,6 +24,7 @@ public class FolderGB {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
 	private String name;
 	private String path;
 	
@@ -36,86 +35,123 @@ public class FolderGB {
 
 	public FolderGB(String name, String path) {
 		this.name = name;
+		this.path = path;
 		this.files = new ArrayList<>();
 		this.folders = new ArrayList<>();
-		this.path = path;
-	}
-	
-	public FolderGB() {
-		
 	}
 	
 	public FolderGB(String name) {
 		this(name, name);
 	}
 	
-	public void addFile(String name, String extension, String content) throws IOException {
-		FileGB newFile = StorageFactory.createFile(name, extension, content, this.path);
-		
-		if (files.contains(newFile)) {
-			throw new InvalidDataException("Invalid name: " + name + " already in use."); 
-		}
-		
+	public FolderGB() {
+		this("", "");
+	}
+	
+	public void addFile(String name, String extension, String content) {
+		FileGB newFile = StorageFactory.createFile(name, extension, content, path);
+		checkIfIsDuplicatedFile(newFile);
 		files.add(newFile);
 	}
 	
-	public void addFile(String name, String extension, String content, String path) throws IOException, InvalidDataException {
+	public void addFile(String name, String extension, String content, String path) {
 		findFolderByPath(path).addFile(name, extension, content);
 	}
 	
-	public void addFile(FileGB file) {
-		files.add(file);
+	public void addFile(FileGB newFile) {
+		checkIfIsDuplicatedFile(newFile);
+		files.add(newFile);
 	}
 	
 	public void addFolder(String name) throws InvalidDataException {
-		FolderGB newFolder = StorageFactory.createFolder(name, this.path);
-		
-		if (folders.contains(newFolder)) {
-			throw new InvalidDataException("Invalid name " + name + " already in use."); 
-		}
-		
+		FolderGB newFolder = StorageFactory.createFolder(name, path);
+		checkIfIsDuplicatedFolder(newFolder);
 		folders.add(newFolder);
 	}
 	
 	public void addFolder(String name, String path) throws MissingItemException, InvalidDataException {
-		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
-		System.out.println("Splited path : " + Arrays.toString(splPath));
-		FolderGB folderToAdd = findFolderByName(splPath, 0);
-		folderToAdd.addFolder(name);
+		findFolderByPath(path).addFolder(name);
 	}
 	
-	public void addFolder(FolderGB folder) {
-		folders.add(folder);
+	public void addFolder(FolderGB newFolder) {
+		checkIfIsDuplicatedFolder(newFolder);
+		folders.add(newFolder);
 	}
 	
-	public void editFileContent(String name, String newContent, String path) throws IOException {
-		findFileByPathAndName(name,path).setContent(newContent);
+	public void editFileContent(String newContent, String name, String extension, String path) {
+		FileGB fileToEdit = findFileByEverything(name, path, extension);
+		checkIfFileExists(fileToEdit);
+		fileToEdit.setContent(newContent);
 	}
 	
-	public void editFileName(String newName, String oldName, String path) {
-		findFileByPathAndName(oldName,path).rename(newName);
+	public void editFileName(String newName, String oldName, String extension, String path) {	
+		FileGB fileToEdit = findFileByEverything(oldName, path, extension);
+		FileGB duplicatedFile = findFileByEverything(newName, path, extension);
+		
+		if (duplicatedFile != null) {
+			throw new InvalidDataException("Name '" + newName + "." + extension + "' already in use.");
+		}
+		
+		checkIfFileExists(fileToEdit);
+		fileToEdit.setName(newName);
 	}
 	
-	public void editFileExtension(String newExtension, String name, String path) {
-		findFileByPathAndName(name, path).rename(name, newExtension);
+	public void editFileExtension(String newExtension, String name, String oldExtension, String path) {
+		FileGB fileToEdit = findFileByEverything(name, path, oldExtension);
+		FileGB duplicatedFile = findFileByEverything(name, path, newExtension);
+		
+		if (duplicatedFile != null) {
+			throw new InvalidDataException("Name '" + name + "." + newExtension + "' already in use.");
+		}
+		
+		checkIfFileExists(fileToEdit);
+		fileToEdit.setExtension(newExtension);
 	}
 	
 	public void editFolderName(String newName, String oldName, String path) {
-		findFolderByPathAndName(oldName, path).editFolderName(newName);
+		findFolderByPathAndName(oldName, path).setName(newName);
 	}
-	
-	public void editFolderName(String newName) {
-		if (path == null) {
-			path = "";
+
+	public FileGB findFileByEverything(String name, String path, String extension) {
+		FolderGB folder = findFolderByPath(path);
+		
+		if (folder != null) {
+			FileGB file = folder.findFileByNameAndExtension(name, extension);
+			return file;
 		}
 		
+		return null;
+	}
+	
+	public FolderGB findFolderByPathAndName(String name, String path) {
 		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
-		int depthLevel = splPath.length - 1;
-		List<String> discovered = new ArrayList<String>();
-		renamePath(newName, depthLevel);
-		name = newName;
-		discovered.add(this.getName());
-		recursiveRename(discovered, newName, depthLevel);
+		FolderGB folder = findFolderByName(splPath, 0);
+		return folder.findFolderByName(name);
+	}
+	
+	public FolderGB findFolderByPath(String path) {
+		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+		return findFolderByName(splPath, 0);	
+	}
+	
+	public FileGB findFileByNameAndExtension(String name, String extension) {
+		for (FileGB file : files) {
+			if (file.getName().equals(name) && file.getExtension().equals(extension)) {
+				return file;
+			}
+		}
+		
+		return null;
+	}
+	
+	public FolderGB findFolderByName(String name) throws MissingItemException {
+		for (FolderGB folder : this.folders) {
+			if (folder.getName().equals(name)) {
+				return folder;
+			}
+		}
+		
+		return null;
 	}
 	
 	public List<FileGB> getFiles() {
@@ -133,54 +169,38 @@ public class FolderGB {
 	public String getName() {
 		return name;
 	}
-
-	public FileGB findFileByPathAndName(String name, String path) {
-		FolderGB folder = findFolderByPath(path);
-		return folder.findFileByName(name);
+	
+	public void setName(String newName) {
+		String[] splPath = StorageUtilities.splitPath(path);
+		int depthLevel = splPath.length - 1;
+		List<String> discovered = new ArrayList<String>();
+		fixPath(newName, depthLevel);
+		name = newName;
+		discovered.add(this.getName());
+		recursiveSetName(discovered, newName, depthLevel);
 	}
 	
-	public FolderGB findFolderByPathAndName(String name, String path) {
-		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
-		FolderGB folder = findFolderByName(splPath, 0);
-		return folder.findFolderByName(name);
-	}
-	
-	public FolderGB findFolderByPath(String path) {
-		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
-		return findFolderByName(splPath, 0);	
-	}
-	
-	public FolderGB findFolderByName(String name) throws MissingItemException {
-		for (FolderGB folder : this.folders) {
-			if (folder.getName().equals(name)) {
-				return folder;
-			}
-		}
-		
-		throw new MissingItemException("Folder: " + name + " not found in collection: " + this.folders);
-	}
-	
-	private void recursiveRename(List<String> discovered, String newName, int depthLevel) {
+	private void recursiveSetName(List<String> discovered, String newName, int depthLevel) {
 		for (FolderGB folder : folders) {
 			if (!discovered.contains(folder.getName())) {
 				discovered.add(folder.getName());
-				folder.renamePath(newName, depthLevel);
+				folder.fixPath(newName, depthLevel);
 				
 				for (FileGB file : files) {
-					String[] fsplPath = file.getPath().split(ServerConstants.PATH_SEPARATOR);
+					String[] fsplPath = StorageUtilities.splitPath(file.getPath());
 					fsplPath[depthLevel] = newName;
-					file.setPath(String.join(ServerConstants.PATH_SEPARATOR, fsplPath));
+					file.setPath(StorageUtilities.joinPath(fsplPath));
 				}
 				
-				folder.recursiveRename(discovered, newName, depthLevel);
+				folder.recursiveSetName(discovered, newName, depthLevel);
 			}
 		}
 	}
 	
-	private void renamePath(String newName, int depthLevel) {
-		String[] splPath = path.split(ServerConstants.PATH_SEPARATOR);
+	private void fixPath(String newName, int depthLevel) {
+		String[] splPath = StorageUtilities.splitPath(path);
 		splPath[depthLevel] = newName;
-		path = String.join(ServerConstants.PATH_SEPARATOR, splPath);
+		path = StorageUtilities.joinPath(splPath);
 	}
 	
 	private FolderGB findFolderByName(String[] splPath, int currentIndex) throws MissingItemException {
@@ -190,15 +210,23 @@ public class FolderGB {
 			return findFolderByName(splPath[currentIndex + 1]).findFolderByName(splPath, currentIndex + 1);
 		}
 	}
-
-	public FileGB findFileByName(String name) throws MissingItemException {
-		for (FileGB file : this.files) {
-			if (file.getName().equals(name)) {
-				return file;
-			}
+	
+	private void checkIfIsDuplicatedFile(FileGB file) {
+		if (files.contains(file)) {
+			throw new InvalidDataException("Name '" + file.getName() + "." + file.getExtension() + "' already in use.");
 		}
-		
-		throw new MissingItemException("File: " + name + " not found in collection: " + this.files);
+	}
+	
+	private void checkIfIsDuplicatedFolder(FolderGB folder) {
+		if (folders.contains(folder)) {
+			throw new InvalidDataException("Name '" + folder.getName() + "' already in use.");
+		}
+	}
+	
+	private void checkIfFileExists(FileGB file) {
+		if (file == null) {
+			throw new MissingItemException("A file was not found in collection: " + files + "...");
+		}
 	}
 	
 	@Override
