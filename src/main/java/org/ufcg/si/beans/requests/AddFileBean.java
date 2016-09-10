@@ -2,16 +2,14 @@ package org.ufcg.si.beans.requests;
 
 import org.ufcg.si.models.User;
 
-public class AddFileRequestBody {
+public class AddFileBean {
 	private User user;
-	
 	private String fileName;
 	private String filePath;
 	private String fileExtension;
 	private String fileContent;
-	
 
-	public AddFileRequestBody(User user, String fileName, String fileExtension, String filePath, String fileContent) {
+	public AddFileBean(User user, String fileName, String fileExtension, String filePath, String fileContent) {
 		this.user = user;
 		this.fileName = fileName;
 		this.filePath = filePath;
@@ -19,7 +17,7 @@ public class AddFileRequestBody {
 		this.fileContent = fileContent;
 	}
 	
-	public AddFileRequestBody() {
+	public AddFileBean() {
 		
 	}
 

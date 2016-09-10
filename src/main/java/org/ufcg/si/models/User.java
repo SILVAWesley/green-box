@@ -1,7 +1,5 @@
 package org.ufcg.si.models;
 
-import java.io.IOException;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.ufcg.si.models.storage.UserActionsManager;
 import org.ufcg.si.models.storage.StorageFactory;
+import org.ufcg.si.models.storage.UserActionsManager;
 import org.ufcg.si.util.permissions.file.FilePermissions;
 
 /**
@@ -68,7 +66,7 @@ public class User {
 	 * @param path
 	 * 		The path to the folder in which the file will be created
 	 */
-	public void addFile(String name, String extension, String content, String path) throws IOException {
+	public void addFile(String name, String extension, String content, String path) {
 		userActionsManager.addFile(name, extension, content, path);
 	}
 	
@@ -113,7 +111,7 @@ public class User {
 	 * @param path
 	 * 		The file's path
 	 */
-	public void editFileContent(String name, String newContent, String extension, String path) throws IOException {
+	public void editFileContent(String name, String newContent, String extension, String path) {
 		userActionsManager.editFileContent(name, newContent, extension, path);
 	}
 	
@@ -162,7 +160,7 @@ public class User {
 	 * @param permission
 	 * 		The sharing permission (R or RW)
 	 */
-	public void shareFile(User user, String name, String path, String extension, FilePermissions filePermission) throws IOException {
+	public void shareFile(User user, String name, String path, String extension, FilePermissions filePermission) {
 		userActionsManager.shareFile(user.userActionsManager, name, path, extension, filePermission);
 	}
 	
@@ -182,7 +180,6 @@ public class User {
 	public String getUsername() {
 		return username;
 	}
-	
 	
 	/**
 	 * Updates the User's username

@@ -4,10 +4,10 @@ import javax.servlet.ServletException;
 
 import org.jboss.jandex.Main;
 import org.springframework.http.ResponseEntity;
-import org.ufcg.si.beans.requests.AddFileRequestBody;
-import org.ufcg.si.beans.requests.AddFolderRequestBody;
-import org.ufcg.si.beans.requests.EditFileRequestBody;
-import org.ufcg.si.beans.requests.RegistrationBody;
+import org.ufcg.si.beans.requests.AddFileBean;
+import org.ufcg.si.beans.requests.AddFolderBean;
+import org.ufcg.si.beans.requests.EditFileBean;
+import org.ufcg.si.beans.requests.RegistrationBean;
 import org.ufcg.si.controllers.AuthenticationController;
 import org.ufcg.si.controllers.UsersActionsController;
 import org.ufcg.si.controllers.UsersController;
@@ -29,7 +29,7 @@ public class Facade {
 	}
 
 	public void createUser(String username, String email, String password) {
-		RegistrationBody requestBody = this.createRegistrationBody(username, email, password);
+		RegistrationBean requestBody = this.createRegistrationBody(username, email, password);
 		try {
 			this.userControl.createUser(requestBody);
 		} catch (ServletException e) {
@@ -67,14 +67,14 @@ public class Facade {
 
 	public void addFile(User user, String fileName, String fileExtension, String filePath, String fileContent)
 			throws ServletException {
-		AddFileRequestBody requestBody = this.createAddFileRequestBody(user, fileName, fileExtension, filePath,
+		AddFileBean requestBody = this.createAddFileRequestBody(user, fileName, fileExtension, filePath,
 				fileContent);
 		this.userAction.addFile(requestBody);
 	}
 
 	public void editFile(User user, String fileName, String fileExtension, String fileContent, String filePath,
 			FileGB clickedFile) {
-		EditFileRequestBody requestBody = this.createEditFileRequestBody(user, fileName, fileExtension, fileContent,
+		EditFileBean requestBody = this.createEditFileRequestBody(user, fileName, fileExtension, fileContent,
 				filePath, clickedFile);
 		try {
 			this.userAction.editFile(requestBody);
@@ -93,7 +93,7 @@ public class Facade {
 	}
 	
 	public void addFolder(User user, String folderName, String folderPath){
-		AddFolderRequestBody requestBody = this.createAddFolderRequestBody(user, folderName, folderPath);
+		AddFolderBean requestBody = this.createAddFolderRequestBody(user, folderName, folderPath);
 		try {
 			this.userAction.addFolder(requestBody);
 		} catch (ServletException e) {
@@ -118,8 +118,8 @@ public class Facade {
 		
 	}
 	
-	private AddFolderRequestBody createAddFolderRequestBody(User user, String folderName, String folderPath){
-		AddFolderRequestBody requestBody = new AddFolderRequestBody(user, folderName, folderPath);
+	private AddFolderBean createAddFolderRequestBody(User user, String folderName, String folderPath){
+		AddFolderBean requestBody = new AddFolderBean(user, folderName, folderPath);
 		return requestBody;
 	}
 	
@@ -128,21 +128,21 @@ public class Facade {
 		return requestBody;
 	}
 
-	private EditFileRequestBody createEditFileRequestBody(User user, String fileName, String fileExtension,
+	private EditFileBean createEditFileRequestBody(User user, String fileName, String fileExtension,
 			String fileContent, String filePath, FileGB clickedFile) {
-		EditFileRequestBody requestBody = new EditFileRequestBody(user, fileName, fileExtension, fileContent, filePath,
+		EditFileBean requestBody = new EditFileBean(user, fileName, fileExtension, fileContent, filePath,
 				clickedFile);
 		return requestBody;
 	}
 
-	private AddFileRequestBody createAddFileRequestBody(User user, String fileName, String fileExtension,
+	private AddFileBean createAddFileRequestBody(User user, String fileName, String fileExtension,
 			String filePath, String fileContent) {
-		AddFileRequestBody requestBody = new AddFileRequestBody(user, fileName, fileExtension, filePath, fileContent);
+		AddFileBean requestBody = new AddFileBean(user, fileName, fileExtension, filePath, fileContent);
 		return requestBody;
 	}
 
-	private RegistrationBody createRegistrationBody(String username, String email, String password) {
-		RegistrationBody requestBody = new RegistrationBody();
+	private RegistrationBean createRegistrationBody(String username, String email, String password) {
+		RegistrationBean requestBody = new RegistrationBean();
 		requestBody.setUsername(username);
 		requestBody.setEmail(email);
 		requestBody.setPassword(password);

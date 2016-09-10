@@ -1,7 +1,5 @@
 package org.ufcg.si.controllers;
 
-import java.io.IOException;
-
 import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.ufcg.si.beans.requests.AddFileRequestBody;
-import org.ufcg.si.beans.requests.AddFolderRequestBody;
-import org.ufcg.si.beans.requests.EditFileRequestBody;
-import org.ufcg.si.beans.requests.ShareFileRequestBody;
+import org.ufcg.si.beans.requests.AddFileBean;
+import org.ufcg.si.beans.requests.AddFolderBean;
+import org.ufcg.si.beans.requests.EditFileBean;
+import org.ufcg.si.beans.requests.ShareFileBean;
+import org.ufcg.si.exceptions.ExceptionHandler;
 import org.ufcg.si.exceptions.GreenboxException;
 import org.ufcg.si.models.Notification;
 import org.ufcg.si.models.User;
 import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
-import org.ufcg.si.util.ExceptionHandler;
 import org.ufcg.si.util.ServerConstants;
 import org.ufcg.si.util.permissions.file.FilePermissions;
 import org.ufcg.si.util.requests.RenameFileRequestBody;
@@ -36,22 +34,27 @@ import org.ufcg.si.util.requests.RenameFolderRequestBody;
  * <strong>This controller needs to a valid token to be accessed.</strong>
  */
 @RestController
-@RequestMapping(ServerConstants.SERVER_REQUEST_URL + ServerConstants.USERS_DIRECTORY_REQUEST_URL)
+@RequestMapping(ServerConstants.SERVER_REQUEST_URL + ServerConstants.USERS_ACTIONS_REQUEST_URL)
 public class UsersActionsController {
 	private UserService userService;
+	
+	@Autowired
+	public void setUserService(UserServiceImpl userServiceImpl) {
+		this.userService = userServiceImpl;
+	}
 	
 	@RequestMapping(value = "/newfolder", 
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFolder(@RequestBody AddFolderRequestBody requestBody) throws ServletException {
+	public ResponseEntity<User> addFolder(@RequestBody AddFolderBean body) throws ServletException {
 		try {
-			ExceptionHandler.checkAddFolderBody(requestBody);
+			ExceptionHandler.checkAddFolderBody(body);
 		
-			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+			User dbUser = userService.findByUsername(body.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 
-			dbUser.addFolder(requestBody.getFolderName(), requestBody.getFolderPath());
+			dbUser.addFolder(body.getFolderName(), body.getFolderPath());
 			User updatedUser = userService.update(dbUser);
 		
 			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
@@ -68,14 +71,14 @@ public class UsersActionsController {
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFile(@RequestBody AddFileRequestBody requestBody) throws ServletException {
+	public ResponseEntity<User> addFile(@RequestBody AddFileBean body) throws ServletException {
 		try {
-			ExceptionHandler.checkAddFileBody(requestBody);
+			ExceptionHandler.checkAddFileBody(body);
 			
-			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+			User dbUser = userService.findByUsername(body.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			dbUser.addFile(requestBody.getFileName(), requestBody.getFileExtension(), requestBody.getFileContent(), requestBody.getFilePath());
+			dbUser.addFile(body.getFileName(), body.getFileExtension(), body.getFileContent(), body.getFilePath());
 			User updatedUser = userService.update(dbUser);
 			
 			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
@@ -85,9 +88,6 @@ public class UsersActionsController {
 		} catch (DataAccessException dae) {
 			dae.printStackTrace();
 			throw new ServletException("Request error while trying to create new file... " + dae.getMessage());
-		} catch(IOException ioe) {
-			ioe.printStackTrace();
-			throw new ServletException("Request error while trying to create new file... " + ioe.getMessage());
 		}
 	}
 	
@@ -95,9 +95,9 @@ public class UsersActionsController {
 					method = RequestMethod.PUT,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> editFile(@RequestBody EditFileRequestBody requestBody) throws Exception{
+	public ResponseEntity<User> editFile(@RequestBody EditFileBean requestBody) throws Exception{
 		try {
-			//ExceptionHandler.checkEditFileBody(requestBody);
+			ExceptionHandler.checkEditFileBody(requestBody);
 			
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
@@ -122,9 +122,6 @@ public class UsersActionsController {
 		} catch (DataAccessException dae) {
 			dae.printStackTrace();
 			throw new ServletException("Request error while trying to edit file... " + dae.getMessage());
-		} catch(IOException ioe) {
-			ioe.printStackTrace();
-			throw new ServletException("Request error while trying to edit file... " + ioe.getMessage());
 		}
 	}
 	
@@ -132,14 +129,14 @@ public class UsersActionsController {
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> renameFolder(@RequestBody RenameFolderRequestBody requestBody)throws Exception{
-		try{
-			
-			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+	public ResponseEntity<User> renameFolder(@RequestBody RenameFolderRequestBody body)throws Exception{
+		try {
+			ExceptionHandler.checkRenameFolderBody(body);
+			User dbUser = userService.findByUsername(body.getUser().getUsername());
 		
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			dbUser.editFolderName(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
+			dbUser.editFolderName(body.getNewName(), body.getOldName(), body.getFolderPath());
 			User updateUser = userService.update(dbUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
@@ -156,14 +153,14 @@ public class UsersActionsController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> renameFile(@RequestBody RenameFileRequestBody requestBody) throws Exception {
+	public ResponseEntity<User> renameFile(@RequestBody RenameFileRequestBody body) throws ServletException {
 		try {
+			ExceptionHandler.checkRenameFileBody(body);
 			
-			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
-		
+			User dbUser = userService.findByUsername(body.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			dbUser.editFileName(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFileExtension(), requestBody.getFolderPath());
+			dbUser.editFileName(body.getNewName(), body.getOldName(), body.getFileExtension(), body.getFolderPath());
 			User updateUser = userService.update(dbUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
@@ -180,25 +177,27 @@ public class UsersActionsController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> shareFile(@RequestBody ShareFileRequestBody requestBody) throws Exception {
+	public ResponseEntity<User> shareFile(@RequestBody ShareFileBean body) throws Exception {
 		try {
-			User sendingUser = userService.findByUsername(requestBody.getUser().getUsername());
-			User receivingUser = userService.findByUsername(requestBody.getUserSharedWith().getUsername());
+			ExceptionHandler.checkShareFileBody(body);
+			
+			User sendingUser = userService.findByUsername(body.getUser().getUsername());
+			User receivingUser = userService.findByUsername(body.getUserSharedWith().getUsername());
 		
 			ExceptionHandler.checkUserInDatabase(sendingUser);
 			ExceptionHandler.checkUserInDatabase(receivingUser);
 			
-			sendingUser.shareFile(receivingUser, requestBody.getName(), requestBody.getFolderPath(), requestBody.getFileExtension(), FilePermissions.valueOfIgnoreCase(requestBody.getPermissionLevel()));
+			sendingUser.shareFile(receivingUser, body.getName(), body.getFolderPath(), body.getFileExtension(), FilePermissions.valueOfIgnoreCase(body.getPermissionLevel()));
 			User updateUser = userService.update(sendingUser);
 			userService.update(receivingUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
 		} catch(GreenboxException gbe) {
 			gbe.printStackTrace();
-			throw new ServletException("Request error while trying to rename folder... " + gbe.getMessage());
+			throw new ServletException("Request error while trying to share file... " + gbe.getMessage());
 		} catch (DataAccessException dae) {
 			dae.printStackTrace();
-			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
+			throw new ServletException("Request error while trying to share file... " + dae.getMessage());
 		} 
 	}
 	
@@ -212,7 +211,7 @@ public class UsersActionsController {
 			
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			Iterable<Notification> notifications = dbUser.listNotifications();
-			System.out.println(notifications);
+			
 			return new ResponseEntity<>(notifications, HttpStatus.OK);
 		} catch(GreenboxException gbe) {
 			gbe.printStackTrace();
@@ -248,10 +247,5 @@ public class UsersActionsController {
 			dae.printStackTrace();
 			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
 		} 
-	}
-	
-	@Autowired
-	public void setUserService(UserServiceImpl userServiceImpl) {
-		this.userService = userServiceImpl;
 	}
 }
