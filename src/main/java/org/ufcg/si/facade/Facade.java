@@ -83,8 +83,8 @@ public class Facade {
 		}
 	}
 	
-	public void renameFile(User user, String newName, String oldName, String folderPath){
-		RenameFileRequestBody requestBody = this.createRenameFileRequestBody(user, newName, oldName, folderPath);
+	public void renameFile(User user, String newName, String oldName, String folderPath, String fileExtension){
+		RenameFileRequestBody requestBody = this.createRenameFileRequestBody(user, newName, oldName, folderPath, fileExtension);
 		try {
 			this.userAction.renameFile(requestBody);
 		} catch (Exception e) {
@@ -123,8 +123,8 @@ public class Facade {
 		return requestBody;
 	}
 	
-	private RenameFileRequestBody createRenameFileRequestBody(User user, String newName, String oldName, String folderPath){
-		RenameFileRequestBody requestBody = new RenameFileRequestBody(user, newName, oldName, folderPath);
+	private RenameFileRequestBody createRenameFileRequestBody(User user, String newName, String oldName, String folderPath, String fileExtension){
+		RenameFileRequestBody requestBody = new RenameFileRequestBody(user, newName, oldName, folderPath, fileExtension);
 		return requestBody;
 	}
 
