@@ -1,5 +1,8 @@
 package org.ufcg.si.util.permissions.file;
 
+/**
+ * An enum that has every file permission level and the actions each permission allows
+ */
 public enum FilePermissions {
 	R(), 
 	RW(FileActions.EDIT_CONTENT), 
