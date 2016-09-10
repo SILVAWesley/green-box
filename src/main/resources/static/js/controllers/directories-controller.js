@@ -60,6 +60,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		console.log(requestData.userSharedWith);
 		requestData.name = $localStorage.selectedItem.name;
 		requestData.folderPath = $localStorage.session.currentPath;
+		requestData.fileExtension = $localStorage.selectedItem.extension;
 		requestData.permissionLevel = sharingType;
 		
 		$http.post('/server/userdirectory/sharefile', requestData)
@@ -78,6 +79,7 @@ angular.module('app').controller("directoriesController", function($scope, $stat
 		requestData.newName = $scope.newName;
 		requestData.oldName = $localStorage.selectedItem.name;
 		requestData.folderPath = $localStorage.session.currentPath;
+		requestData.fileExtension = $localStorage.selectedItem.extension;
 		
 		if($scope.currentType == 'File'){
 			renameFile();

@@ -30,7 +30,7 @@ angular.module('app').controller('registrationController', ['$scope', '$http', f
 			//window.alert("Congratulations! You now have a greenbox account to store your files. " +
 			//			 "Username: " + response.data.username + " "
 			//			 + "Email: " + response.data.email);
-		    $("#modalRegister").modal("show");
+		    $("#modalRegisterSuccessful").modal("show");
 
 			
 			$scope.user = {username: "", 
@@ -39,9 +39,8 @@ angular.module('app').controller('registrationController', ['$scope', '$http', f
 			$scope.registrationForm.$setPristine();
 			
 		}, function(response) {
-			
-			window.alert("Failure: " + response.data.message);
-			
+			//window.alert("Failure: " + response.data.message);
+			$("#modalRegisterErro").modal("show");
 		});
 		
 	};

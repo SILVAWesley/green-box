@@ -1,7 +1,5 @@
 package org.ufcg.si.models.storage;
 
-import java.io.IOException;
-
 import org.ufcg.si.util.ServerConstants;
 
 public class StorageFactory {
@@ -9,7 +7,7 @@ public class StorageFactory {
 		return new FolderGB(name, contextPath + ServerConstants.PATH_SEPARATOR + name); 
 	}
 	
-	public static FileGB createFile(String name, String extension, String content, String contextPath) throws IOException {
+	public static FileGB createFile(String name, String extension, String content, String contextPath) {
 		return new FileGB(name, extension, content, contextPath + ServerConstants.PATH_SEPARATOR + name); 
 	}
 	

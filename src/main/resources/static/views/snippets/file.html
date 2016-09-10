@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<base href="/"/>
+	<base href="/"/>
 	<!-- include summernote css/js-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet"></link>
 	<link rel="stylesheet" href="../static/css/summernote.css" th:href="@{css/sumernote.css}"></link>
@@ -26,18 +26,11 @@
 								&emsp;&emsp; <!-- adition of space -->
 								<strong> Select Extension: </strong>
 								
-								<select ng-model="currentExtension" class="btn btn-success" style="font-family: 'Open Sans', sans-serif;font-size: 18px">
+								<select class="btn btn-success" style="font-family: 'Open Sans', sans-serif; font-size: 18px" ng-model="currentExtension">
   									<option ng-repeat="extension in extensions"><strong>{{extension}}</strong></option>
 								</select>
 								
 							</h3>
-							<!-- <div class="note-editable panel-body" contenteditable="true"
-								style="height: 50px;">
-								<p>
-									{{newFileName}}
-								</p>
-							</div> -->
-						
 						</div> <!-- form-top ends -->					
 					</div> <!-- userbox ends -->
 					

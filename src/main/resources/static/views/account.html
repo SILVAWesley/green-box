@@ -5,48 +5,48 @@
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
 			
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
-					data-target="#bs-example-navbar-collapse-1"aria-expanded="false">
+			<button class="navbar-toggle collapsed" data-toggle="collapse" 
+					data-target="#bs-example-navbar-collapse-1" type="button" aria-expanded="false">
 			
 				<span class="sr-only">Toggle navigation</span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
-			
+				<span class="icon-bar"></span> 		
 			</button>
 			
 			<a class="navbar-brand" href="#/dashboard/directories/root">
 				<i class="fa fa-home fa-2x" aria-hidden="true"></i>
 				<strong>Home</strong>  
 			</a>
-			
-			<a class="navbar-brand" href="" ng-click='userClick()'>
-				<i class="fa fa-user fa-2x" aria-hidden="true"></i>
-				<strong>My Account</strong>  
-			</a>
-		
+				
 		</div> <!-- navbar-header ends -->
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse">
 			
 			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a href="/" ng-click="logout()">
-						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> 
-						Logout
-					</a>
-				</li>
-			</ul>
-			
-			<ul class="nav navbar-nav navbar-right">
+				
 				<li>
 					<a href="https://github.com/SILVAWesley/green-box">
 						<i class="fa fa-question fa-2x" aria-hidden="true"></i>
 						About 
 					</a>
 				</li>
+
+				<li id="account">
+					<a href="" ng-click='userClick()'>
+						<i class="fa fa-user fa-2x" aria-hidden="true"></i>
+						My Account  
+					</a>
+				</li>
+				
+				<li>
+					<a href="/" ng-click="logout()">
+						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> 
+						Logout
+					</a>
+				</li>
+				
 			</ul>
+			
 			<ul class="nav navbar-nav navbar-right">
 				<li>
 					<div class="dropdown">
