@@ -24,7 +24,7 @@ import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ExceptionHandler;
 import org.ufcg.si.util.ServerConstants;
-import org.ufcg.si.util.permissions.FilePermission;
+import org.ufcg.si.util.permissions.file.FilePermissions;
 import org.ufcg.si.util.requests.RenameFileRequestBody;
 import org.ufcg.si.util.requests.RenameFolderRequestBody;
 
@@ -102,19 +102,16 @@ public class UsersActionsController {
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			String fileName = requestBody.getClickedFile().getName();
-			
 			if (!requestBody.getFileName().equals(requestBody.getClickedFile().getName())) {
-				dbUser.editFileName(requestBody.getFileName(), requestBody.getClickedFile().getName(), requestBody.getFilePath());
-				fileName = requestBody.getFileName();
+				dbUser.editFileName(requestBody.getFileName(), requestBody.getClickedFile().getName(), requestBody.getClickedFile().getExtension(), requestBody.getFilePath());
 			}
 			
 			if (!requestBody.getFileExtension().equals(requestBody.getClickedFile().getExtension())) {
-				dbUser.editFileExtension(requestBody.getFileExtension(), fileName, requestBody.getFilePath());
+				dbUser.editFileExtension(requestBody.getFileExtension(), requestBody.getFileName(), requestBody.getClickedFile().getExtension(), requestBody.getFilePath());
 			}
 			
 			if (!requestBody.getFileContent().equals(requestBody.getClickedFile().getContent())) {
-				dbUser.editFileContent(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFilePath());
+				dbUser.editFileContent(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFileExtension(), requestBody.getFilePath());
 			}
 			
 			User updateUser = userService.update(dbUser);
@@ -129,15 +126,6 @@ public class UsersActionsController {
 			ioe.printStackTrace();
 			throw new ServletException("Request error while trying to edit file... " + ioe.getMessage());
 		}
-	}
-	
-
-	
-	private User editFileContent(EditFileRequestBody requestBody, User dbUser) throws Exception{
-		dbUser.editFileContent(requestBody.getFileName(), requestBody.getFileContent(), requestBody.getFilePath());
-		User updateUser = userService.update(dbUser);
-		
-		return updateUser;
 	}
 	
 	@RequestMapping(value = "/renamefolder", 
@@ -175,7 +163,7 @@ public class UsersActionsController {
 		
 			ExceptionHandler.checkUserInDatabase(dbUser);
 			
-			dbUser.editFileName(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFolderPath());
+			dbUser.editFileName(requestBody.getNewName(), requestBody.getOldName(), requestBody.getFileExtension(), requestBody.getFolderPath());
 			User updateUser = userService.update(dbUser);
 		
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
@@ -200,7 +188,7 @@ public class UsersActionsController {
 			ExceptionHandler.checkUserInDatabase(sendingUser);
 			ExceptionHandler.checkUserInDatabase(receivingUser);
 			
-			sendingUser.shareFile(receivingUser, requestBody.getName(), requestBody.getFolderPath(), FilePermission.valueOfIgnoreCase(requestBody.getPermissionLevel()));
+			sendingUser.shareFile(receivingUser, requestBody.getName(), requestBody.getFolderPath(), requestBody.getFileExtension(), FilePermissions.valueOfIgnoreCase(requestBody.getPermissionLevel()));
 			User updateUser = userService.update(sendingUser);
 			userService.update(receivingUser);
 		

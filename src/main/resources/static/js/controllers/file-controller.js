@@ -24,8 +24,8 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		requestData.clickedFile = $localStorage.clickedFile;
 		
 		if (requestData.fileName == "") {
-			
-			window.alert('File name cannot be empty.');
+			//window.alert('File name cannot be empty.');
+			$("#fileEmptyModal").modal("show");		
 			
 		} else if ($localStorage.clickedFile == undefined){
 			createNewFile();
@@ -39,7 +39,8 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		.then(function(response){
 			
 			$localStorage.session.user = response.data;
-			window.alert('File successfully edited');
+			//window.alert('File successfully edited');
+			$("#fileEditedModal").modal("show");
 			$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
 			
 		}, function(response){
@@ -64,7 +65,8 @@ angular.module('app').controller('fileController', function($localStorage, $scop
 		.then(function(response) {
 			
 			$localStorage.session.user = response.data;
-			window.alert('File successfully created.');
+			//window.alert('File successfully created.');
+			$("#fileSuccessfullyModal").modal("show");
 			$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
 			$scope.path = $localStorage.session.currentPath;
 			

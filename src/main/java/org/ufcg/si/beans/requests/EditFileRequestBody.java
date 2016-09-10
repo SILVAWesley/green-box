@@ -15,10 +15,14 @@ public class EditFileRequestBody {
 	public EditFileRequestBody(User user, String fileName, String fileExtension, String fileContent, String filePath, FileGB clickedFile){
 		this.user = user;
 		this.fileName = fileName;
-		this.fileExtension = fileExtension;
 		this.fileContent = fileContent;
 		this.filePath = filePath;
 		this.clickedFile = clickedFile;
+		this.fileExtension = fileExtension;
+		
+		if (this.fileExtension == null || this.fileExtension.equals("")) {
+			this.fileExtension = "txt";
+		}
 	}
 	
 	public EditFileRequestBody(){
