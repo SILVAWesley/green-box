@@ -9,12 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.ufcg.si.models.storage.FolderManager;
+import org.ufcg.si.models.storage.UserActionsManager;
 import org.ufcg.si.models.storage.StorageFactory;
 import org.ufcg.si.util.permissions.file.FilePermissions;
 
 /**
- * This class represents a Green-Box user
+ * This class represents a Green-Box user. Work as a storage for user informations and a facade for
+ * user actions.
  */
 @Entity
 public class User {
@@ -28,50 +29,150 @@ public class User {
 	private String password;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private FolderManager directory;
-
-	public User() throws Exception {
+	private UserActionsManager userActionsManager;
+	
+	/**
+	 * User's default constructor, with default attributes
+	 */
+	public User() {
 		this("email", "dir", "password");
-		
 	}
-
+	
+	/**
+	 * User's constructor that creates the user with a certain email, username and password.
+	 * This constructor also creates a userActionsManager.
+	 * @param email
+	 * 		The user's email
+	 * @param username
+	 * 		The user's username
+	 * @param password
+	 * 		The user's password
+	 */
 	public User(String email, String username, String password) {
-		this.directory = StorageFactory.createDirectory(username);
+		this.userActionsManager = StorageFactory.createFolderManager(username);
 		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
 	
+	/**
+	 * Find a folder through a path and creates a new file in this folder, if it exists.
+	 * An exception is thrown if there is no folder for the path or if the folder doesn't
+	 * have permission to create a file.
+	 * @param name
+	 * 		The file name
+	 * @param extension
+	 * 		The file extension (md or txt)
+	 * @param content
+	 * 		The file initial content
+	 * @param path
+	 * 		The path to the folder in which the file will be created
+	 */
 	public void addFile(String name, String extension, String content, String path) throws IOException {
-		directory.addFile(name, extension, content, path);
+		userActionsManager.addFile(name, extension, content, path);
 	}
 	
+	/**
+	 * Find a folder through a path and creates a new folder in this folder, if it exists.
+	 * An exception is thrown if there is no folder for the path or if the folder doesn't
+	 * have permission to create a folder.
+	 * @param name
+	 * 		The folder name
+	 * @param path
+	 * 		The path to the folder in which the new folder will be created
+	 */
 	public void addFolder(String name, String path) {
-		directory.addFolder(name, path);
+		userActionsManager.addFolder(name, path);
 	}
 	
+	/**
+	 * Edit a file's name. An exception is thrown if you do not have permission to
+	 * change its name.
+	 * @param newName
+	 * 		The file new name
+	 * @param oldName
+	 * 		The file old name
+	 * @param extension
+	 * 		The file extension
+	 * @param path
+	 * 		The file path
+	 */
 	public void editFileName(String newName, String oldName, String extension, String path) {
-		directory.editFileName(newName, oldName, extension, path);
+		userActionsManager.editFileName(newName, oldName, extension, path);
 	}
 	
+	/**
+	 * Edit a file's content. An exception is thrown if you do not have permission to edit
+	 * the file's content
+	 * @param name
+	 * 		The file's name
+	 * @param newContent
+	 * 		The file's new content
+	 * @param extension
+	 * 		The file's extension
+	 * @param path
+	 * 		The file's path
+	 */
 	public void editFileContent(String name, String newContent, String extension, String path) throws IOException {
-		directory.editFileContent(name, newContent, extension, path);
+		userActionsManager.editFileContent(name, newContent, extension, path);
 	}
 	
+	/**
+	 * Edit a file's extension. An exception is thrown if you do not have permission to
+	 * change its extension.
+	 * @param newExtension
+	 * 		The file new extension
+	 * @param name
+	 * 		The file name
+	 * @param oldExtension
+	 * 		The file old extension
+	 * @param path
+	 * 		The file path
+	 */
 	public void editFileExtension(String newExtension, String name, String oldExtension, String path) {
-		directory.editFileExtension(newExtension, name, oldExtension, path);
+		userActionsManager.editFileExtension(newExtension, name, oldExtension, path);
 	}
 	
+	/**
+	 * Edit a folder's name. An exception is thrown if you do not have permission to
+	 * change its name.
+	 * @param newName
+	 * 		The new folder name
+	 * @param oldName
+	 * 		The old folder name
+	 * @param path
+	 * 		The folder path
+	 */
 	public void editFolderName(String newName, String oldName, String path) {
-		directory.editFolderName(newName, oldName, path);
+		userActionsManager.editFolderName(newName, oldName, path);
 	}
 	
+	/**
+	 * Shares a file with an user. There are two permission levels for a shared file: Read Only (R) and Read Write (RW).
+	 * An exception is thrown if the user that will receive the file doesn't exist or if you can't share the desired
+	 * file.
+	 * @param managerToShareWith
+	 * 		The UserActionsMenager of the User that will receive the file.
+	 * @param name
+	 * 		The name of the file to be shared
+	 * @param path
+	 * 		The path of the file to be shared
+	 * @param extension
+	 * 		The extension of the file to be shared
+	 * @param permission
+	 * 		The sharing permission (R or RW)
+	 */
 	public void shareFile(User user, String name, String path, String extension, FilePermissions filePermission) throws IOException {
-		directory.shareFile(user.directory, name, path, extension, filePermission);
+		userActionsManager.shareFile(user.userActionsManager, name, path, extension, filePermission);
 	}
 	
+	/**
+	 * Return the iterable of the notification's list
+	 * @return
+	 * 		The iterable of the notification's list
+	 */
 	public Iterable<Notification> listNotifications() {
-		return directory.listNotifications();
+		return userActionsManager.listNotifications();
 	}
 	
 	/**
@@ -112,8 +213,8 @@ public class User {
 	 * The userDirectory getter. The userDirectory is the user's most external directory.
 	 * @return the User's most external UserDirectory
 	 */
-	public FolderManager getDirectory() {
-		return directory;
+	public UserActionsManager getDirectory() {
+		return userActionsManager;
 	}
 	
 	/**
