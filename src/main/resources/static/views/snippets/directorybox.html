@@ -1,18 +1,21 @@
 <div class="col-sm-5">
-	</br>
+	<p></p>
 	<div class="btn-group" role="group" aria-label="...">
+		
 		<button class="btn btn-primary btn-lg" type="submit" ng-click="myFilesClick()">
 			<strong> 
 				<i class="fa fa-check-circle" aria-hidden="true fa-3x"></i> My Files
 			</strong>
 		</button>
+		
 		<button class="btn btn-primary btn-lg" type="submit" ng-click="sharedWithMeClick()">
 			<strong> 
 				<i class="fa fa-share-alt" aria-hidden="true fa-3x"></i> Shared With Me
 			</strong>
 		</button>
-	</div>
-</div>
+		
+	</div> <!-- btn-group ends -->
+</div> <!-- col-sm-5 ends -->
 
 <div class="col-sm-12">
 	<ng-include src="'views/snippets/itemsbox.html'"> </ng-include>
@@ -63,7 +66,7 @@
       				
     			</div> <!-- modal-content ends -->
   			</div> <!-- modal-dialog ends -->
-		</div>  
+		</div> <!-- folderModal ends -->
 
 		<!-- Modal Share File -->
 		<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="modalSharing">
@@ -90,17 +93,16 @@
       							<i class="fa fa-users fa-lg" aria-hidden="true"></i>
       							User Name: 
       							&emsp;&emsp;&ensp; <!-- Adition of space --> 
-      							<input title="Choose a friend for sharing your file" type="text" placeholder="UserName..." ng-model="userSharedWith" />
+      							<input title="Choose a friend for sharing your file" type="text" placeholder="UserName..." ng-model="userSharedWith"></input>
       							
-      							<p></p>
-      							
+      							<p></p>			
 								<i class="fa fa-file-text-o" aria-hidden="true"></i>
 								&nbsp; <!-- Adition of space -->
       							File to Share: 
       							&emsp;&emsp; <!-- Adition of space -->
       							<input style="background: #ffffff; border: 3px solid #ffffff;" type="text" 
-      								   placeholder="{{item.name + '.' + item.extension}}" ng-disabled="true" 
-      							/>
+      								   placeholder="{{item.name + '.' + item.extension}}" ng-disabled="true">
+      							</input>
 								
       						</strong>
       					</h3>
@@ -177,10 +179,12 @@
         					<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
         				</strong>
         			</button>
+        			
 		      </div>
-		    </div>
-		  </div>
-		</div>
+		      
+		    </div> <!-- modal-content ends -->
+		  </div> <!-- modal-dialog -->
+		</div> <!-- renameModal ends -->
 		 
 		<!-- Notification Modal -->
 		<!-- 
