@@ -1,5 +1,8 @@
 package org.ufcg.si.util;
 
+/**
+ * This enum represents all possible file extensions in the GreenBox application
+ */
 public enum FileExtension {
 	TXT, MD;
 	
