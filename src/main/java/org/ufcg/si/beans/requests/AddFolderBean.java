@@ -2,19 +2,19 @@ package org.ufcg.si.beans.requests;
 
 import org.ufcg.si.models.User;
 
-public class AddFolderRequestBody {
+public class AddFolderBean {
 	private User user;
 	
 	private String folderName;
 	private String folderPath;
 	
-	public AddFolderRequestBody(User user, String folderName, String folderPath) {
+	public AddFolderBean(User user, String folderName, String folderPath) {
 		this.user = user;
 		this.folderName = folderName;
 		this.folderPath = folderPath;
 	}
 	
-	public AddFolderRequestBody() {
+	public AddFolderBean() {
 		
 	}
 

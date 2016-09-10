@@ -3,7 +3,7 @@ package org.ufcg.si.beans.requests;
 import org.ufcg.si.models.User;
 import org.ufcg.si.models.storage.FileGB;
 
-public class EditFileRequestBody {
+public class EditFileBean {
 	private User user;
 	private FileGB clickedFile;
 	
@@ -12,7 +12,7 @@ public class EditFileRequestBody {
 	private String fileContent;
 	private String filePath;
 	
-	public EditFileRequestBody(User user, String fileName, String fileExtension, String fileContent, String filePath, FileGB clickedFile){
+	public EditFileBean(User user, String fileName, String fileExtension, String fileContent, String filePath, FileGB clickedFile){
 		this.user = user;
 		this.fileName = fileName;
 		this.fileContent = fileContent;
@@ -25,7 +25,7 @@ public class EditFileRequestBody {
 		}
 	}
 	
-	public EditFileRequestBody(){
+	public EditFileBean(){
 		
 	}
 	

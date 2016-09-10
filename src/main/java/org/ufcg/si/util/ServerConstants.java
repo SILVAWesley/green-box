@@ -37,7 +37,7 @@ public class ServerConstants {
 	 * in a request to access any operation allowed by 
 	 * the UsersDirectoryController.
 	 */
-	public static final String USERS_DIRECTORY_REQUEST_URL = "/userdirectory";
+	public static final String USERS_ACTIONS_REQUEST_URL = "/userdirectory";
 	
 	/* Constants related to permissions and security */
 	
@@ -49,7 +49,7 @@ public class ServerConstants {
 	 * header.
 	 */
 	public static final String USERSDIRECTORY_PATTERN = SERVER_REQUEST_URL + 
-													   USERS_DIRECTORY_REQUEST_URL + "/*";
+													   USERS_ACTIONS_REQUEST_URL + "/*";
 	
 	/**
 	 * This is the key used to encrypt and decrypt a token.  

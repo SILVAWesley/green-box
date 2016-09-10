@@ -1,11 +1,11 @@
 package org.ufcg.si.beans.requests;
 
-public class RegistrationBody {
+public class RegistrationBean {
 	private String username;
 	private String email;
 	private String password;
 	
-	public RegistrationBody() {
+	public RegistrationBean() {
 		
 	}
 	

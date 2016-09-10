@@ -30,7 +30,7 @@ public class Notification {
 	 * Default constructor
 	 */
 	public Notification() {
-		
+		this("");
 	}
 	
 	/**

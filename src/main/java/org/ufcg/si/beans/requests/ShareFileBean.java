@@ -2,7 +2,7 @@ package org.ufcg.si.beans.requests;
 
 import org.ufcg.si.models.User;
 
-public class ShareFileRequestBody {
+public class ShareFileBean {
 	private User user;
 	private String name;
 	private String folderPath;
@@ -10,7 +10,7 @@ public class ShareFileRequestBody {
 	private String permissionLevel;
 	private String fileExtension;
 	
-	public ShareFileRequestBody(User user, User userSharedWith, String name, String folderPath, String fileExtension, String permissionLevel) {
+	public ShareFileBean(User user, User userSharedWith, String name, String folderPath, String fileExtension, String permissionLevel) {
 		this.user = user;
 		this.name = name;
 		this.folderPath = folderPath;
@@ -23,7 +23,7 @@ public class ShareFileRequestBody {
 		}
 	}
 	
-	public ShareFileRequestBody(){
+	public ShareFileBean(){
 		this.fileExtension = "txt";
 	}
 	

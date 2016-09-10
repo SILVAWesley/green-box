@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.ufcg.si.beans.requests.RegistrationBody;
+import org.ufcg.si.beans.requests.RegistrationBean;
+import org.ufcg.si.exceptions.ExceptionHandler;
 import org.ufcg.si.exceptions.GreenboxException;
+import org.ufcg.si.exceptions.Validator;
 import org.ufcg.si.models.User;
 import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
-import org.ufcg.si.util.ExceptionHandler;
 import org.ufcg.si.util.ServerConstants;
-import org.ufcg.si.util.Validator;
 
 /**
  * This controller class uses JSON data format to be the 
@@ -53,7 +53,7 @@ public class UsersController {
 					method = RequestMethod.POST, 
 					consumes = MediaType.APPLICATION_JSON_VALUE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> createUser(@RequestBody RegistrationBody requestBody) throws ServletException {
+	public ResponseEntity<User> createUser(@RequestBody RegistrationBean requestBody) throws ServletException {
 		try {
 			ExceptionHandler.checkRegistrationBody(requestBody);
 			
