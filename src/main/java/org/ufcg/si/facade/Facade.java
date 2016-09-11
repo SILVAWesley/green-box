@@ -8,13 +8,13 @@ import org.ufcg.si.beans.requests.AddFileBean;
 import org.ufcg.si.beans.requests.AddFolderBean;
 import org.ufcg.si.beans.requests.EditFileBean;
 import org.ufcg.si.beans.requests.RegistrationBean;
+import org.ufcg.si.beans.requests.RenameFileBean;
 import org.ufcg.si.controllers.AuthenticationController;
 import org.ufcg.si.controllers.UsersActionsController;
 import org.ufcg.si.controllers.UsersController;
 import org.ufcg.si.models.User;
 import org.ufcg.si.models.storage.FileGB;
 import org.ufcg.si.repositories.UserServiceImpl;
-import org.ufcg.si.util.requests.RenameFileRequestBody;
 import org.ufcg.si.util.requests.RenameFolderRequestBody;
 
 public class Facade {
@@ -84,7 +84,7 @@ public class Facade {
 	}
 	
 	public void renameFile(User user, String newName, String oldName, String folderPath, String fileExtension){
-		RenameFileRequestBody requestBody = this.createRenameFileRequestBody(user, newName, oldName, folderPath, fileExtension);
+		RenameFileBean requestBody = this.createRenameFileRequestBody(user, newName, oldName, folderPath, fileExtension);
 		try {
 			this.userAction.renameFile(requestBody);
 		} catch (Exception e) {
@@ -123,8 +123,8 @@ public class Facade {
 		return requestBody;
 	}
 	
-	private RenameFileRequestBody createRenameFileRequestBody(User user, String newName, String oldName, String folderPath, String fileExtension){
-		RenameFileRequestBody requestBody = new RenameFileRequestBody(user, newName, oldName, folderPath, fileExtension);
+	private RenameFileBean createRenameFileRequestBody(User user, String newName, String oldName, String folderPath, String fileExtension){
+		RenameFileBean requestBody = new RenameFileBean(user, newName, oldName, folderPath, fileExtension);
 		return requestBody;
 	}
 
