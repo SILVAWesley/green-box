@@ -44,7 +44,7 @@ angular.module('app').factory('DirectoryService', function($http,
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
 			$("#fileSharedSuccessfulyModal").modal("show");		
 		}, function(response) {
-			$("#fileNotSharedModal").modal("show");		
+			window.alert(response.data.message);		
 		});
 	}
 	
