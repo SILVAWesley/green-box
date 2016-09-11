@@ -89,7 +89,7 @@ public class UsersController {
 	}
 	
 	/**
-	 * This method return a list with all user createds 
+	 * This method return a list with all user created 
 	 * @returnAll A list of Users 
 	 */
 	@RequestMapping(value = "/all", 

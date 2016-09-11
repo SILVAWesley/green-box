@@ -28,7 +28,7 @@ import org.ufcg.si.util.permissions.file.FilePermissions;
 
 /**
  * This controller class uses JSON data format to be the 
- * endpoint of requests related to directories of users
+ * endpoint of requests related to user actions
  * on the server-side.
  * 
  * <strong>This controller needs to a valid token to be accessed.</strong>
@@ -38,11 +38,23 @@ import org.ufcg.si.util.permissions.file.FilePermissions;
 public class UsersActionsController {
 	private UserService userService;
 	
+	/**
+	 * Updates the userService, which works as a repository
+	 * @param userServiceImpl
+	 * 		The new user service
+	 */
 	@Autowired
 	public void setUserService(UserServiceImpl userServiceImpl) {
 		this.userService = userServiceImpl;
 	}
 	
+	/**
+	 * Creates a new folder in a certain folder
+	 * @param body
+	 * 		All the information necessary to add a new folder
+	 * @return the http status and user updated
+	 * @throws ServletException if can't create the folder
+	 */
 	@RequestMapping(value = "/newfolder", 
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
@@ -67,6 +79,14 @@ public class UsersActionsController {
 		}
 	}
 	
+
+	/**
+	 * Creates a new file in a certain folder
+	 * @param body
+	 * 		All the information necessary to add a new file
+	 * @return the http status and user updated
+	 * @throws ServletException if can't create the file
+	 */
 	@RequestMapping(value = "/newfile", 
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
@@ -91,6 +111,13 @@ public class UsersActionsController {
 		}
 	}
 	
+	/**
+	 * Edits a certain file
+	 * @param requestBody
+	 * 		All the necessary information to find and edit a file
+	 * @return the http status and user updated.
+	 * @throws Exception if can't edit the file
+	 */
 	@RequestMapping(value = "/editfile",
 					method = RequestMethod.PUT,
 					produces = MediaType.APPLICATION_JSON_VALUE,
@@ -125,6 +152,13 @@ public class UsersActionsController {
 		}
 	}
 	
+	/**
+	 * Rename a certain folder
+	 * @param requestBody
+	 * 		All the necessary information to find and rename a folder
+	 * @return the http status and user updated.
+	 * @throws Exception if can't rename the folder
+	 */
 	@RequestMapping(value = "/renamefolder", 
 					method = RequestMethod.PUT,
 					produces = MediaType.APPLICATION_JSON_VALUE,
@@ -149,6 +183,13 @@ public class UsersActionsController {
 		} 
 	}
 	
+	/**
+	 * Rename a certain file
+	 * @param requestBody
+	 * 		All the necessary information to find and rename a file
+	 * @return the http status and user updated.
+	 * @throws Exception if can't rename the file
+	 */
 	@RequestMapping(value = "/renamefile", 
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
@@ -173,6 +214,13 @@ public class UsersActionsController {
 		} 
 	}
 	
+	/**
+	 * Share a certain file
+	 * @param requestBody
+	 * 		All the necessary information to find and share a file
+	 * @return the http status and user updated.
+	 * @throws Exception if can't share the file
+	 */
 	@RequestMapping(value = "/sharefile", 
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
@@ -201,6 +249,13 @@ public class UsersActionsController {
 		} 
 	}
 	
+	/**
+	 * Show the user's notification
+	 * @param requestBody
+	 * 		All the information necessary to show the user's notification
+	 * @return the http status and user updated.
+	 * @throws Exception if can't show the notifications
+	 */
 	@RequestMapping(value = "/visit_notifications", 
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
