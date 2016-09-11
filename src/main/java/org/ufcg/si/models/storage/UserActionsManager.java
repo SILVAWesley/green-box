@@ -141,7 +141,8 @@ public class UserActionsManager {
 	 * 		The sharing permission (R or RW)
 	 */
 	public void shareFile(UserActionsManager managerToShareWith, String name, String path, String extension, FilePermissions permission) {
-		FilePermissions filePermission = findFilePermission(name, extension, path);
+		FileGB fileToShare = rootFolder.findFileByEverything(name, path, extension);
+		FilePermissions filePermission = findFilePermission(name, extension, fileToShare.getPath());
 		
 		if (filePermission.isAllowed(FileActions.SHARE)) {
 			FileGB sharingFile = rootFolder.findFileByEverything(name, path, extension);
@@ -222,7 +223,6 @@ public class UserActionsManager {
 	 * 		The file path
 	 */
 	public void editFileName(String newName, String oldName, String extension, String path) {
-		System.out.println(newName + " | " + oldName + " | " + extension + " | " + path);
 		FileGB fileToEdit = rootFolder.findFileByEverything(oldName, path, extension);
 		FilePermissions permission = findFilePermission(oldName, extension, fileToEdit.getPath());
 		
