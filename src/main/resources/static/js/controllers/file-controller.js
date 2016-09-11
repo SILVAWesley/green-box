@@ -1,83 +1,45 @@
-angular.module('app').controller('fileController', function($localStorage, $scope, $http, $rootScope, $state) {
-	$scope.path = $localStorage.session.currentPath;
-	$scope.user = $localStorage.session.user;
+angular.module('app').controller('fileController', function($localStorage, 
+															$scope, 
+															$http, 
+															$rootScope, 
+															$state, 
+															DirectoryService, 
+															SessionService) {
 	$scope.content = "";
 	$scope.extensions = ["txt", "md"];
 	$scope.currentExtension = "txt";
 	
 	$scope.newFileName = "";
 	
-	if ($localStorage.clickedFile != undefined) {
-		$scope.newFileName = $localStorage.clickedFile.name;
-		$scope.content = $localStorage.clickedFile.content;
+	if (DirectoryService.getClickedItem() != undefined) {
+		$scope.newFileName = DirectoryService.getClickedItem().name;
+		$scope.content = DirectoryService.getClickedItem().content;
+		$scope.currentExtension = DirectoryService.getClickedItem().extension;
 	}
 	
-	
-	$scope.saveFile = function(){
+	$scope.saveFile = function(){	
+		var name = $scope.newFileName;
+		var extension = $scope.currentExtension;
+		var content = $scope.content;
 		
-		requestData = {};
-		requestData.user = $scope.user;
-		requestData.fileName = $scope.newFileName;
-		requestData.fileExtension = $scope.currentExtension;
-		requestData.fileContent = $scope.content;
-		requestData.filePath = $scope.path;
-		requestData.clickedFile = $localStorage.clickedFile;
-		
-		if (requestData.fileName == "") {
-			//window.alert('File name cannot be empty.');
+		if (name == "") {
 			$("#fileEmptyModal").modal("show");		
-			
-		} else if ($localStorage.clickedFile == undefined){
-			createNewFile();
+		} else if (DirectoryService.getClickedItem() == undefined){
+			newFile(name, content, extension);
 		} else {
-			editFile();
+			editFile(name, content, extension);
 		}
 	}
 	
-	function editFile(){
-		$http.put('/server/userdirectory/editfile', requestData)
-		.then(function(response){
-			
-			$localStorage.session.user = response.data;
-			//window.alert('File successfully edited');
-			$("#fileEditedModal").modal("show");
-			$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
-			
-		}, function(response){
-			window.alert(response.data.message);
-		});
+	function newFile(name, content, extension) {
+		DirectoryService.newFile(name, content, extension);
 	}
 	
-	function findFileOrFolderByName(name, directory) {
-		var foldersNFiles = directory.folders.concat(directory.files);
-		
-		for (j = 0; j < foldersNFiles.length; j++) {
-			if (foldersNFiles[j].name == name) {
-				return foldersNFiles[j];
-			}
-		}
-	
-		return null;
-	}
-	
-	function createNewFile(){
-		$http.post('/server/userdirectory/newfile', requestData)
-		.then(function(response) {
-			
-			$localStorage.session.user = response.data;
-			//window.alert('File successfully created.');
-			$("#fileSuccessfullyModal").modal("show");
-			$state.go('dashboard.directories', {'folderPath': $localStorage.session.currentPath});
-			$scope.path = $localStorage.session.currentPath;
-			
-		}, function(response) {
-			
-			window.alert(response.data.message);
-			
-		});
+	function editFile(name, content, extension) {
+		DirectoryService.editFile(name, content, extension);
 	}
 	
 	$scope.directoriesView = function() {
-		$state.go('dashboard.directories', {folderPath: $localStorage.session.currentPath});
+		$state.go('dashboard.directories', {folderPath: DirectoryService.getCurrentFolder().path});
 	}
 });

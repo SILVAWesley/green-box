@@ -1,226 +1,88 @@
-angular.module('app').controller("directoriesController", function($scope, $state, $localStorage, $http, $rootScope, $stateParams) {
-	$scope.folderClick = function(folder) {
+angular.module('app').controller("directoriesController", function($scope, 
+																   $state,   
+																   $stateParams, 
+																   SessionService, 
+																   DirectoryService) {
+	$scope.clickOnFolder = function(folder) {
 		$state.go('dashboard.directories', {folderPath: folder.path});
 	}
 	
-	$scope.sharedWithMeClick = function() {
-		$state.go('dashboard.directories', {folderPath: '/Shared with me'});
-		console.log('foi');
-		
-		$http.get('/server/users/get/' + $localStorage.session.user.username)
-		.then(function(response) {
-			$localStorage.session.user = response.data;
-			update();
-		}, function(response) {
-			window.alert("Notification error!");
-		});
-	}
-	
-	$scope.myFilesClick = function() {
-		console.log($scope.rootDirectory.name);
-		$state.go('dashboard.directories', {folderPath: $scope.rootDirectory.folders[0].path});
-		console.log('foi');
-	}
-	
-	
-	$scope.actionClick = function(item){
-		$localStorage.selectedItem = item;
-	}
-	
-	
-	$scope.renameClick = function(item, type){
-		$localStorage.selectedItem = item;
-		$scope.currentType = type;
-	}
-	
-	$scope.fileClick = function(file) {
-		$localStorage.clickedFile = file;
+	$scope.clickOnFile = function(file) {
+		DirectoryService.setClickedItem(file);
 		$state.go('dashboard.file');
 	}
 	
-	$scope.listNotifications = function() {
-		requestData = $scope.user;
-		
-		$http.post('/server/userdirectory/notifications', requestData)
-		.then(function(response) {
-			console.log("Notifications: " + response.data);
-			$scope.notifications = response.data;
-		}, function(response) {
-			window.alert("Notification error!");
-		});
-		
+	$scope.clickOnSharedWithMe = function() {
+		DirectoryService.goToSharedWithMe();
 	}
 	
-	
-	$scope.share = function(sharingType){
-		requestData = {};
-		requestData.user = $scope.user;
-		requestData.userSharedWith = {};
-		requestData.userSharedWith.username = $scope.userSharedWith;
-		console.log(requestData.userSharedWith);
-		requestData.name = $localStorage.selectedItem.name;
-		requestData.folderPath = $localStorage.session.currentPath;
-		requestData.fileExtension = $localStorage.selectedItem.extension;
-		requestData.permissionLevel = sharingType;
-		
-		$http.post('/server/userdirectory/sharefile', requestData)
-		.then(function(response){
-			$localStorage.session.user = response.data;
-			//window.alert('File successfully shared');
-			$("#fileSharedSuccessfulyModal").modal("show");		
-		}, function(response){
-			//window.alert(response.data.message);
-			//window.alert('whoops!');
-			$("#fileNotSharedModal").modal("show");		
-
-		});
+	$scope.clickOnMyFiles = function() {
+		DirectoryService.goToMyFiles();
 	}
 	
-	$scope.renameItem = function(){
-		requestData = {};
-		requestData.user = $scope.user;
-		requestData.newName = $scope.newName;
-		requestData.oldName = $localStorage.selectedItem.name;
-		requestData.folderPath = $localStorage.session.currentPath;
-		requestData.fileExtension = $localStorage.selectedItem.extension;
-		
-		if($scope.currentType == 'File'){
-			renameFile();
-		} else if( $scope.currentType == 'Folder'){
-			renameFolder();
-		} else{
-			window.alert('NOT FILE NOR FOLDER');
-		}
+	$scope.clickOnRenameFile = function(item){
+		DirectoryService.setClickedItem(item);
 	}
 	
-	function renameFile(){
-		$http.post('/server/userdirectory/renamefile', requestData)
-		.then(function(response){
-			$localStorage.session.user = response.data;
-			//window.alert('File renamed successfully');
-			$("#fileRenamedSuccessfulyModal").modal("show");		
-			update();
-			goToPath($stateParams.folderPath);
-		}, function(response){
-			window.alert(response.data.message);
-			window.alert('whoops!');
-		});
+	$scope.clickOnRenameFolder = function(item) {
+		DirectoryService.setClickedItem(item);
 	}
 	
-	function renameFolder(){
-		$http.post('/server/userdirectory/renamefolder', requestData)
-		.then(function(response){
-			$localStorage.session.user = response.data;
-			//window.alert('Folder renamed successfully');
-			$("#folderRenamedSuccessfulyModal").modal("show");		
-			update();
-			goToPath($stateParams.folderPath);
-		}, function(response){
-			window.alert(response.data.message);
-			window.alert('whoops!');
-		})
-		
+	$scope.clickOnShareFile = function(item) {
+		DirectoryService.setClickedItem(item);
+	}
+	
+	$scope.renameFile = function() {
+		DirectoryService.renameFile($scope.newName);
+	}
+	
+	$scope.renameFolder = function() {
+		DirectoryService.renameFolder($scope.newName);
+	}
+	
+	$scope.share = function(sharingType) {
+		DirectoryService.shareFile($scope.userSharedWith, sharingType);
+	}
+	
+	$scope.renameFolder = function() {
+		DirectoryService.renameFolder($scope.newName);
+	}
+	
+	$scope.renameFile = function() {
+		DirectoryService.renameFile($scope.newName);
 	}
 	
 	$scope.newFolder = function() {
-		
-		requestData = {};
-		requestData.user = $scope.user;
-		requestData.folderName = $scope.newFolderName;
-		requestData.folderPath = $scope.currentDirectory.path;
-		console.log('data');
-		console.log(requestData.folderPath);
-		
-		$http.post('/server/userdirectory/newfolder', requestData)
-			.then(function(response) {
-				
-				$localStorage.session.user = response.data;
-				update();
-				goToPath($stateParams.folderPath);
-			}, function(response) {
-				
-				window.alert(response.data.message);
-				
-		});
-	} 
+		DirectoryService.newFolder($scope.newFolderName);
+	}
 	
-	$scope.getFilesNFolders = function() {
-		return $scope.getFolders().concat($scope.getFiles());
+	$scope.getFolders = function() {
+		return DirectoryService.getCurrentFolder().folders;
 	}
 	
 	$scope.getFiles = function() {
-		return $scope.currentDirectory.files;	
-	}	
-
-	$scope.getFolders = function() {
-		return $scope.currentDirectory.folders;
+		return DirectoryService.getCurrentFolder().files;
 	}
 	
+	$scope.getCurrentFolder = function() {
+		return DirectoryService.getCurrentFolder();
+	}
+	
+	
+	
 	$scope.newFilePage = function() {
-		$localStorage.clickedFile = null;
+		DirectoryService.setClickedItem(null);
 		$state.go('dashboard.file');
 	}
 	
-	
-	
-	function findFileOrFolderByName(name, directory) {
-		var foldersNFiles = directory.folders.concat(directory.files);
-		
-		for (j = 0; j < foldersNFiles.length; j++) {
-			if (foldersNFiles[j].name == name) {
-				return foldersNFiles[j];
-			}
-		}
-	
-		return null;
-	}
-	
-	function sharedFolder() {
-		return $scope.user.sharedWithMeFolder;
-	}
-	
-	
-	function update () {
-		$scope.user = $localStorage.session.user;
-		$scope.rootDirectory = $scope.user.directory.rootFolder;
-		$scope.currentDirectory = $scope.rootDirectory;
-		$scope.openedFolders = [$scope.rootDirectory];
-	}
-	
-	function goToPath(path) {
-		var directoryNames = path.split("/");
-		$scope.currentDirectory = $scope.rootDirectory;
-			
-		for (i = 1; i < directoryNames.length; i++) {
-			console.log($scope.currentDirectory);
-			$scope.currentDirectory = findFileOrFolderByName(directoryNames[i], $scope.currentDirectory);
-			goForward($scope.currentDirectory);
-		}
-		
-		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
-	}
-	
-	function goForward(folder) {
-		$scope.currentDirectory = folder;
-		$scope.openedFolders.push(folder);
-		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
+	$scope.getOpenedFolders = function() {
+		return DirectoryService.getOpenedFolders().slice(0, DirectoryService.getOpenedFolders().length - 1); 
 	}
 	
 	function init() {
-		$scope.user = $localStorage.session.user;
-		$scope.rootDirectory = $scope.user.directory.rootFolder;
-		$scope.currentDirectory = $scope.rootDirectory;
-		$scope.openedFolders = [$scope.rootDirectory];
-		$scope.notifications = [];
-		$localStorage.session.currentPath = $stateParams.folderPath;
-		
+		DirectoryService.init();
 		$scope.newFolderName = "";
-		$scope.currentType = "";
-		
-		$scope.filesNFoldersToShow = $scope.getFilesNFolders();
-		goToPath($stateParams.folderPath);
-		
-		$scope.listNotifications();
+		DirectoryService.goToPath($stateParams.folderPath);
 	}
 	
 	init();

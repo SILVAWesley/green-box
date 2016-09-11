@@ -1,5 +1,9 @@
 angular.module('app').factory('SessionService', function($http, $localStorage, Constants) {
 	var Session = {};
+	Session.generateSession = function(user, token) {
+		$localStorage.session = {'user': user,
+								 'token': token};
+	}
 	
 	Session.getUser = function() {
 		return $localStorage.session.user;
@@ -17,12 +21,8 @@ angular.module('app').factory('SessionService', function($http, $localStorage, C
 		$localStorage.session.token = token;
 	}
 	
-	Session.getClickedFile = function() {
-		return $localStorage.session.clickedFile;
-	}
-
-	Session.setClickedFile = function(clickedFile) {
-		$localStorage.session.clickedFile = clickedFile;
+	Session.removeSession = function() {
+		$localStorage.session;
 	}
 	
 	Session.fetchUser = function() {

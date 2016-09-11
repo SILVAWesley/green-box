@@ -68,4 +68,32 @@ public class Notification {
 	public void setIsVisited(boolean visited) {
 		this.isVisited = visited;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Notification) {
+			Notification temp = (Notification) obj;
+			return this.getContent().equals(temp.getContent());
+		} else {
+			return false;
+		}
+
+	}
+	
+	@Override
+	public String toString() {
+		return "{" 
+				+ "Type: " + this.getClass().getName() + ", "
+				+ "Id: " + this.id + ", "
+				+ "Content: " + this.content + ", "
+				+ "}";
+	}
 }

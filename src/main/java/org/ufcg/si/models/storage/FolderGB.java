@@ -217,6 +217,12 @@ public class FolderGB {
 	 * 		The folder path
 	 */
 	public void editFolderName(String newName, String oldName, String path) {
+		FolderGB duplicatedFolder = findFolderByPathAndName(newName, path);
+		
+		if (duplicatedFolder != null) {
+			throw new InvalidDataException("Name '" + newName + "' already in use.");
+		}
+		
 		findFolderByPathAndName(oldName, path).setName(newName);
 	}
 	

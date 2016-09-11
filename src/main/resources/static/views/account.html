@@ -43,7 +43,7 @@
 					  		
 						    <li role="separator" class="divider"></li>				  	
 					  		
-					  		<li ng-repeat="notification in notifications">
+					  		<li ng-repeat="notification in getNotifications()">
 					  			<p align="left">
 					  				&emsp;
 					  				<i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -115,7 +115,7 @@
 			<div class="col-sm-6">
 				<div class="form-top-right">
 					<h3>
-						Hello, {{username}}! <i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
+						Hello, {{getUsername()}}! <i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
 					</h3>
 				</div>
 			</div> <!-- col-sm-6 ends -->

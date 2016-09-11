@@ -2,13 +2,13 @@
 	<p></p>
 	<div class="btn-group" role="group" aria-label="...">
 		
-		<button class="btn btn-primary btn-lg" type="submit" ng-click="myFilesClick()">
+		<button class="btn btn-primary btn-lg" type="submit" ng-click="clickOnMyFiles()">
 			<strong> 
 				<i class="fa fa-check-circle" aria-hidden="true fa-3x"></i> My Files
 			</strong>
 		</button>
 		
-		<button class="btn btn-primary btn-lg" type="submit" ng-click="sharedWithMeClick()">
+		<button class="btn btn-primary btn-lg" type="submit" ng-click="clickOnSharedWithMe()">
 			<strong> 
 				<i class="fa fa-share-alt" aria-hidden="true fa-3x"></i> Shared With Me
 			</strong>
@@ -136,8 +136,57 @@
 		
 	</div> <!-- col-sm-12 col-md-12 ends -->
 
-		<!-- Modal Rename File/Folder-->
-		<div class="modal fade" id="renameModal" tabindex="-1" role="dialog" aria-labelledby="renameModal" aria-hidden="true">
+		<!-- Modal Rename File -->
+		<div class="modal fade" id="renameFileModal" tabindex="-1" role="dialog" aria-labelledby="renameModal" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+  				
+  				<h3 class="modal-title" id="modalFile" style="font-family: 'Pattaya', sans-serif">
+   					<strong>
+   						<i class="fa fa-pencil" aria-hidden="true"></i> Rename File
+   					</strong>
+   				</h3>
+		      
+		      </div>
+				
+				<div class="modal-body">
+   					
+   					<h3 style="font-family: 'Pattaya', sans-serif">
+   						<strong>
+   							<i class="fa fa-pencil" aria-hidden="true"></i>
+   							New Name: 
+   							&emsp;&emsp;&ensp; <!-- Adition of space --> 
+   							<input title="New Name" type="text" placeholder="New Name..." ng-model="newName" />
+   						</strong>
+   					</h3>
+	   	  		</div> <!-- modal-body ends -->
+		      
+		      <div class="modal-footer">
+		        
+					<button class="btn btn-primary" type="button" data-dismiss="modal" ng-click="renameFile()">
+	        			<strong> 
+      						<i class="fa fa-pencil" aria-hidden="true"></i> Rename
+      					</strong>
+		        	</button>
+		        
+        			<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        				<strong> 
+        					<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
+        				</strong>
+        			</button>
+        			
+		      </div>
+		      
+		    </div> <!-- modal-content ends -->
+		  </div> <!-- modal-dialog -->
+		</div> <!-- renameModal ends -->
+		
+		<div class="modal fade" id="renameFolderModal" tabindex="-1" role="dialog" aria-labelledby="renameModal" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -168,7 +217,7 @@
 		      
 		      <div class="modal-footer">
 		        
-					<button class="btn btn-primary" type="button" data-dismiss="modal" ng-click="renameItem()">
+					<button class="btn btn-primary" type="button" data-dismiss="modal" ng-click="renameFolder()">
 	        			<strong> 
       						<i class="fa fa-pencil" aria-hidden="true"></i> Rename
       					</strong>

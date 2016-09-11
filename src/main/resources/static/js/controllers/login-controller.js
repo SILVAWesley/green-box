@@ -6,7 +6,6 @@ angular.module('app').controller("loginController",
 								 '$localStorage',
 
 function($scope, $http, $state, authService, $localStorage) {
-	
 	$scope.entrydata = "";
 	$scope.password = "";
 	

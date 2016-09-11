@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.ufcg.si.beans.responses.AuthenticationResponse;
 import org.ufcg.si.exceptions.ExceptionHandler;
 import org.ufcg.si.exceptions.GreenboxException;
 import org.ufcg.si.exceptions.Validator;
@@ -17,7 +18,6 @@ import org.ufcg.si.models.User;
 import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ServerConstants;
-import org.ufcg.si.util.responses.AuthenticationResponse;
 import org.ufcg.si.util.tokens.HS512_24Hours_Token;
 import org.ufcg.si.util.tokens.TokenBuilder;
 

@@ -1,5 +1,7 @@
-angular.module('app').controller('registrationController', ['$scope', '$http', function($scope, $http) {
-	
+angular.module('app').controller('registrationController', ['$scope', 
+                                                            '$http',
+                                                            'authService',
+function($scope, $http, authService) {
 	/* 
 	 * An user requires username, email and password to be created 
 	 * This variable should be filled with ng-model. Will be used
@@ -24,25 +26,17 @@ angular.module('app').controller('registrationController', ['$scope', '$http', f
 	 * Show a window alert with the error message.
 	 */
 	$scope.doRegister = function() {
-		
-		$http.post("/server/users/new", $scope.user)
-		.then(function(response) {
-			//window.alert("Congratulations! You now have a greenbox account to store your files. " +
-			//			 "Username: " + response.data.username + " "
-			//			 + "Email: " + response.data.email);
-		    $("#registerSuccessfulModal").modal("show");
-
-			
-			$scope.user = {username: "", 
-					   	   email: "", 
-					   	   password: ""}
-			$scope.registrationForm.$setPristine();
-			
-		}, function(response) {
-			//window.alert("Failure: " + response.data.message);
-			$("#registerErroModal").modal("show");
-		});
-		
+		authService.register($scope.user.username,
+							 $scope.user.email,
+							 $scope.user.password,
+							 function(result) {
+								if (result) {
+									$scope.user = {username: "", 
+												   email: "", 
+												   password: ""}
+									$scope.registrationForm.$setPristine();
+								}
+							 });
 	};
 	
 }])

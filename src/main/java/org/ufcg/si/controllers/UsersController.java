@@ -23,7 +23,7 @@ import org.ufcg.si.util.ServerConstants;
 
 /**
  * This controller class uses JSON data format to be the 
- * endpoint of requests related to users on the server-side.d
+ * endpoint of requests related to users on the server-side.
  */
 @RestController
 @RequestMapping(ServerConstants.SERVER_REQUEST_URL + ServerConstants.USERS_REQUEST_URL)
@@ -110,9 +110,6 @@ public class UsersController {
 					consumes = MediaType.APPLICATION_JSON_VALUE, 
 					produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> updateUser(@RequestBody User reqBody) {
-		/* FUTURE WORKS ON THIS CLASS SHOULD ENABLE:
-		 * Modifying data coming from the body only 
-		 * Exception handling */
 		User updatedUser = userService.update(reqBody);
 
 		if (updatedUser == null) {
