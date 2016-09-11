@@ -1,13 +1,31 @@
-angular.module('app').factory("authService", function($localStorage, $http) {
-	return {
-		'login' : function(entryinfo, password, callback) {
-			var user = createUser(entryinfo, password);
-			authenticate(user, callback);
-		},
+angular.module('app').factory("authService", function($localStorage, 
+													  $http, 
+													  Constants,
+													  SessionService) {
+	var authenticationService = {};
+	
+	authenticationService.login = function(entryinfo, password, callback) {
+		var user = createUser(entryinfo, password);
+		authenticate(user, callback);
+	}
+	
+	authenticationService.logout = function() {
+		delete $localStorage.session;
+	}
+	
+	authenticationService.register = function(username, email, password, callback) {
+		requestData = {};
+		requestData.username = username;
+		requestData.email = email;
+		requestData.password = password;
 		
-		'logout' : function() {
-			delete $localStorage.session;
-		}
+		$http.post(Constants.POST_REGISTER_URL, requestData)
+		.then(function(response) {
+		    $("#registerSuccessfulModal").modal("show");
+		    callback(true);
+		}, function(response) {
+			$("#registerErroModal").modal("show");
+		});
 	}
 	
 	function createUser(entryinfo, password) {
@@ -24,22 +42,15 @@ angular.module('app').factory("authService", function($localStorage, $http) {
 	}
 	
 	function authenticate(userInfo, callback) {
-		
-		$http.post("/server/authentication/login", userInfo)
-			.then(function(response) {
-				
-				$localStorage.session = {'user': response.data.user,
-						 				 'token': response.data.token,
-						 				 'currentPath': response.data.user.directory.rootFolder.folders[0].path};
-				console.log(response.data.user.directory.rootFolder.folders[0].path);
-				callback(true);
-				
-			}, function(response) {
-			
-				window.alert(response.data.message);
-				callback(false);
-				
+		$http.post(Constants.POST_LOGIN_URL, userInfo)
+		.then(function(response) {
+			SessionService.generateSession(response.data.user, response.data.token);
+			callback(true);
+		}, function(response) {
+			window.alert(response.data.message);
+			callback(false);
 		});
-	
 	}
+	
+	return authenticationService;
 });

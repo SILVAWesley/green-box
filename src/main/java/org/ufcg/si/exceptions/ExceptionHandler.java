@@ -7,9 +7,9 @@ import org.ufcg.si.beans.requests.AddFolderBean;
 import org.ufcg.si.beans.requests.EditFileBean;
 import org.ufcg.si.beans.requests.RegistrationBean;
 import org.ufcg.si.beans.requests.RenameFileBean;
+import org.ufcg.si.beans.requests.RenameFolderBean;
 import org.ufcg.si.beans.requests.ShareFileBean;
 import org.ufcg.si.models.User;
-import org.ufcg.si.util.requests.RenameFolderRequestBody;
 
 
 public class ExceptionHandler {
@@ -65,7 +65,7 @@ public class ExceptionHandler {
 		}
 	}
 	
-	public static void checkRenameFolderBody(RenameFolderRequestBody body) {
+	public static void checkRenameFolderBody(RenameFolderBean body) {
 		checkInvalidUser(body.getUser());
 		
 		String username = body.getUser().getUsername();

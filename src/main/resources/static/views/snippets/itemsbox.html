@@ -2,7 +2,7 @@
 	<div class="form-top">
 		<div class="form-top-right">
 			<h3>
-				<span ng-repeat="folder in openedFolders.slice(1, foldersPath.length - 1) track by $index">
+				<span ng-repeat="folder in getOpenedFolders() track by $index">
 					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
 					<a
 						style="color:green"
@@ -11,7 +11,7 @@
 				</span>
 				
 				<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
-				{{currentDirectory.name + "/"}} 
+				{{getCurrentFolder().name + "/"}} 
 				
 			</h3>
 		</div>
@@ -34,12 +34,12 @@
 					
 						<td>
 							<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
-							<a style="color:green" href="" ng-click="folderClick(item)"> {{item.name}}</a>
+							<a style="color:green" href="" ng-click="clickOnFolder(item)"> {{item.name}}</a>
 						</td>
 						
 						<td class="col-sm-2">
-							<a class="fa fa-pencil fa-2x" data-toggle="modal" data-target="#renameModal" title="Rename folder"  
-							   aria-hidden="true" style="color:#18A103" href="" ng-click="renameClick(item, 'Folder')"> 
+							<a class="fa fa-pencil fa-2x" data-toggle="modal" data-target="#renameFolderModal" title="Rename folder"  
+							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnRenameFolder(item)"> 
 							   Rename
 							</a>
 						</td> <!-- standardization of box -->
@@ -53,18 +53,18 @@
 						
 						<td>
 							<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
-							<a style="color:green" href="" ng-click="fileClick(item)"> {{item.name + '.' + item.extension}}</a>
+							<a style="color:green" href="" ng-click="clickOnFile(item)"> {{item.name + '.' + item.extension}}</a>
 						</td>
 						
 						<td class="col-sm-2">
 							<a class="fa fa-pencil fa-2x" title="Rename file" aria-hidden="true" 
-							   style="color:#18A103" href="" data-toggle="modal" data-target="#renameModal" ng-click="renameClick(item, 'File')"> Rename
+							   style="color:#18A103" href="" data-toggle="modal" data-target="#renameFileModal" ng-click="clickOnRenameFile(item)"> Rename
 							</a>
 						</td>
 	
 						<td class="col-sm-2">
 							<a class="fa fa-share-alt fa-2x" title="Share with your friends" aria-hidden="true" 
-							   style="color:#18A103" href="" data-toggle="modal" data-target="#shareModal" ng-click="actionClick(item)"> Share
+							   style="color:#18A103" href="" data-toggle="modal" data-target="#shareModal" ng-click="clickOnShareFile(item)"> Share
 							</a>
 						</td>
 

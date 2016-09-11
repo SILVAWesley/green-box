@@ -9,13 +9,13 @@ import org.ufcg.si.beans.requests.AddFolderBean;
 import org.ufcg.si.beans.requests.EditFileBean;
 import org.ufcg.si.beans.requests.RegistrationBean;
 import org.ufcg.si.beans.requests.RenameFileBean;
+import org.ufcg.si.beans.requests.RenameFolderBean;
 import org.ufcg.si.controllers.AuthenticationController;
 import org.ufcg.si.controllers.UsersActionsController;
 import org.ufcg.si.controllers.UsersController;
 import org.ufcg.si.models.User;
 import org.ufcg.si.models.storage.FileGB;
 import org.ufcg.si.repositories.UserServiceImpl;
-import org.ufcg.si.util.requests.RenameFolderRequestBody;
 
 public class Facade {
 	private UsersController userControl;
@@ -102,7 +102,7 @@ public class Facade {
 	}
 	
 	public void renameFolder(User user, String newName, String oldName, String folderPath){
-		RenameFolderRequestBody requestBody = this.createRenameFolderRequestBody(user, newName, oldName, folderPath);
+		RenameFolderBean requestBody = this.createRenameFolderRequestBody(user, newName, oldName, folderPath);
 		try {
 			this.userAction.renameFolder(requestBody);
 		} catch (Exception e) {
@@ -112,8 +112,8 @@ public class Facade {
 		
 	}
 	
-	private RenameFolderRequestBody createRenameFolderRequestBody(User user, String newName, String oldName, String folderPath){
-		RenameFolderRequestBody requestBody = new RenameFolderRequestBody(user, newName, oldName, folderPath);
+	private RenameFolderBean createRenameFolderRequestBody(User user, String newName, String oldName, String folderPath){
+		RenameFolderBean requestBody = new RenameFolderBean(user, newName, oldName, folderPath);
 		return requestBody;
 		
 	}

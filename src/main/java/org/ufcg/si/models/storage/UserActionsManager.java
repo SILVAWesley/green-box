@@ -222,6 +222,7 @@ public class UserActionsManager {
 	 * 		The file path
 	 */
 	public void editFileName(String newName, String oldName, String extension, String path) {
+		System.out.println(newName + " | " + oldName + " | " + extension + " | " + path);
 		FileGB fileToEdit = rootFolder.findFileByEverything(oldName, path, extension);
 		FilePermissions permission = findFilePermission(oldName, extension, fileToEdit.getPath());
 		

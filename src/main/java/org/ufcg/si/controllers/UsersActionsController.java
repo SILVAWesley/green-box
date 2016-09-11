@@ -15,6 +15,7 @@ import org.ufcg.si.beans.requests.AddFileBean;
 import org.ufcg.si.beans.requests.AddFolderBean;
 import org.ufcg.si.beans.requests.EditFileBean;
 import org.ufcg.si.beans.requests.RenameFileBean;
+import org.ufcg.si.beans.requests.RenameFolderBean;
 import org.ufcg.si.beans.requests.ShareFileBean;
 import org.ufcg.si.exceptions.ExceptionHandler;
 import org.ufcg.si.exceptions.GreenboxException;
@@ -24,7 +25,6 @@ import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ServerConstants;
 import org.ufcg.si.util.permissions.file.FilePermissions;
-import org.ufcg.si.util.requests.RenameFolderRequestBody;
 
 /**
  * This controller class uses JSON data format to be the 
@@ -126,10 +126,10 @@ public class UsersActionsController {
 	}
 	
 	@RequestMapping(value = "/renamefolder", 
-					method = RequestMethod.POST,
+					method = RequestMethod.PUT,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> renameFolder(@RequestBody RenameFolderRequestBody body)throws Exception{
+	public ResponseEntity<User> renameFolder(@RequestBody RenameFolderBean body)throws Exception{
 		try {
 			ExceptionHandler.checkRenameFolderBody(body);
 			User dbUser = userService.findByUsername(body.getUser().getUsername());
@@ -150,7 +150,7 @@ public class UsersActionsController {
 	}
 	
 	@RequestMapping(value = "/renamefile", 
-			method = RequestMethod.POST,
+			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> renameFile(@RequestBody RenameFileBean body) throws ServletException {
@@ -201,29 +201,8 @@ public class UsersActionsController {
 		} 
 	}
 	
-	@RequestMapping(value = "/notifications", 
-			method = RequestMethod.POST,
-			produces = MediaType.APPLICATION_JSON_VALUE,
-			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Iterable<Notification>> listNotifications(@RequestBody User requestBody) throws Exception {
-		try {
-			User dbUser = userService.findByUsername(requestBody.getUsername());
-			
-			ExceptionHandler.checkUserInDatabase(dbUser);
-			Iterable<Notification> notifications = dbUser.listNotifications();
-			
-			return new ResponseEntity<>(notifications, HttpStatus.OK);
-		} catch(GreenboxException gbe) {
-			gbe.printStackTrace();
-			throw new ServletException("Request error while trying to rename folder... " + gbe.getMessage());
-		} catch (DataAccessException dae) {
-			dae.printStackTrace();
-			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
-		} 
-	}
-	
 	@RequestMapping(value = "/visit_notifications", 
-			method = RequestMethod.POST,
+			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> visitNotifications(@RequestBody User requestBody) throws Exception {

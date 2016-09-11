@@ -1,4 +1,4 @@
-package org.ufcg.si.util.responses;
+package org.ufcg.si.beans.responses;
 
 import org.ufcg.si.models.User;
 

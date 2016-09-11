@@ -1,21 +1,21 @@
-package org.ufcg.si.util.requests;
+package org.ufcg.si.beans.requests;
 
 import org.ufcg.si.models.User;
 
-public class RenameFolderRequestBody {
+public class RenameFolderBean {
 	private User user;
 	private String newName;
 	private String oldName;
 	private String folderPath;
 	
-	public RenameFolderRequestBody(User user, String newName, String oldName, String folderPath){
+	public RenameFolderBean(User user, String newName, String oldName, String folderPath){
 		this.user = user;
 		this.newName = newName;
 		this.oldName = oldName;
 		this.folderPath = folderPath;
 	}
 	
-	public RenameFolderRequestBody(){
+	public RenameFolderBean(){
 		
 	}
 	

@@ -4,14 +4,21 @@ angular.module('app').controller('dashboardController', function($scope,
 																 $http, 
 																 authService, 
 																 SessionService, 
-																 NotificationService) {
-	SessionService.fetchUser();
+																 NotificationService,
+																 $rootScope) {
 	
-	$scope.username =  SessionService.getUser().username;
-	$scope.notifications = NotificationService.getNotifications();
+	SessionService.fetchUser();
 	
 	$scope.logout = function() {
 		authService.logout();
+	}
+	
+	$scope.getUsername = function() {
+		return SessionService.getUser().username;
+	}
+	
+	$scope.getNotifications = function() {
+		return NotificationService.getNotifications();
 	}
 	
 	$scope.numberOfNotVisitedNotifications = function() {
