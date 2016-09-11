@@ -19,7 +19,7 @@
 </div>
 
 <div class="form-bottom">
-	<form role="form" action="" method="post" class="login-form">
+	<form class="login-form" role="form" action="" method="post">
 		<div class="form-group">
 			<table class="table table-striped">
 				
@@ -38,8 +38,9 @@
 						</td>
 						
 						<td class="col-sm-2">
-							<a title="Rename folder" class="fa fa-pencil fa-2x" aria-hidden="true" 
-							   style="color:#18A103" href="" ng-click="renameClick(item, 'Folder')" data-toggle="modal" data-target="#renameModal"> Rename
+							<a class="fa fa-pencil fa-2x" data-toggle="modal" data-target="#renameModal" title="Rename folder"  
+							   aria-hidden="true" style="color:#18A103" href="" ng-click="renameClick(item, 'Folder')"> 
+							   Rename
 							</a>
 						</td> <!-- standardization of box -->
 						<td class="col-sm-1"></td> <!-- standardization of box -->
@@ -56,14 +57,14 @@
 						</td>
 						
 						<td class="col-sm-2">
-							<a title="Rename file" class="fa fa-pencil fa-2x" aria-hidden="true" 
-							   style="color:#18A103" href="" ng-click="renameClick(item, 'File')" data-toggle="modal" data-target="#renameModal"> Rename
+							<a class="fa fa-pencil fa-2x" title="Rename file" aria-hidden="true" 
+							   style="color:#18A103" href="" data-toggle="modal" data-target="#renameModal" ng-click="renameClick(item, 'File')"> Rename
 							</a>
 						</td>
 	
 						<td class="col-sm-2">
-							<a title="Share with your friends" class="fa fa-share-alt fa-2x" aria-hidden="true" 
-							   style="color:#18A103" href="" ng-click="actionClick(item)" data-toggle="modal" data-target="#shareModal"> Share
+							<a class="fa fa-share-alt fa-2x" title="Share with your friends" aria-hidden="true" 
+							   style="color:#18A103" href="" data-toggle="modal" data-target="#shareModal" ng-click="actionClick(item)"> Share
 							</a>
 						</td>
 
