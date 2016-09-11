@@ -11,6 +11,8 @@ import org.ufcg.si.models.storage.StorageFactory;
 import org.ufcg.si.models.storage.UserActionsManager;
 import org.ufcg.si.util.permissions.file.FilePermissions;
 
+import easyaccept.EasyAccept;
+
 /**
  * This class represents a Green-Box user. Work as a storage for user informations and a facade for
  * user actions.
@@ -240,5 +242,10 @@ public class User {
 			return false;
 		}
 
+	}
+	
+	public static void main(String[] args) {
+		args = new String[]{"org.ufcg.si.models.User", "src/test/java/org/ufcg/si/models/UserEasyAcceptTest.txt"};
+		EasyAccept.main(args);
 	}
 }

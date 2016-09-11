@@ -1,0 +1,50 @@
+setUsername username="Frank"
+
+#Creation of Folders
+addFolder name="Big_Bang" path="root"
+addFolder name="Abiotic" path="root/Big_Bang"
+addFolder name="Biotic" path="root/Big_Bang"
+addFolder name="Dinosauria" path="root/Big_Bang/Biotic"
+addFolder name="Synapsid" path="root/Big_Bang/Biotic"
+addFolder name="Theropods" path="root/Big_Bang/Biotic/Dinosauria"
+addFolder name="Bird" path="root/Big_Bang/Biotic/Dinosauria"
+addFolder name="Dreadnoughtus" path="root/Big_Bang/Biotic/Dinosauria"
+addFolder name="Caseasauria" path="root/Big_Bang/Biotic/Synapsid"
+addFolder name="Anomodontia" path="root/Big_Bang/Biotic/Synapsid"
+addFolder name="Biarmosuchia" path="root/Big_Bang/Biotic/Synapsid"
+addFolder name="Varanopidae" path="root/Big_Bang/Biotic/Synapsid"
+addFolder name="Carbon" path="root/Big_Bang/Abiotic"
+addFolder name="Water" path="root/Big_Bang/Abiotic"
+addFolder name="Air" path="root/Big_Bang/Abiotic"
+addFolder name="Iron" path="root/Big_Bang/Abiotic"
+
+
+#Creation of Files
+
+#Abiotic
+#addFile name="Salt" extension=".txt" content="Common salt is a mineral composed primarily of sodium chloride (NaCl)." path="root/Big_Bang/Abiotic"
+#addFile name="Diamond" extension=".txt" content="Diamond is a metastable allotrope of carbon." path="root/Big_Bang/Abiotic/Carbon"
+#addFile name="Sea" extension=".txt" content="A sea is a large body of salt water that is surrounded in whole or in part by land." path="root/Big_Bang/Abiotic/Water"
+#addFile name="Cloud" extension=".txt" content="A visible mass of condensed water vapor floating in the atmosphere, typically high above the ground." path="root/Big_Bang/Abiotic/Air"
+#addFile name="Sword" extension=".txt" content="A weapon with a long metal blade and a hilt with a hand guard, used for thrusting or striking and now typically worn as part of ceremonial dress." path="root/Big_Bang/Abiotic/Iron"
+
+
+#Dinosaur
+addFile name="Giraffatitan" extension=".txt" content="It had a giraffe-like build, with long forelimbs and a very long neck." path="root/Big_Bang/Biotic/Dinosauria"
+addFile name="Herrerasaurus" extension=".txt" content="Herrerasaurus was a lightly built bipedal carnivore with a long tail and a relatively small head." path="root/Big_Bang/Biotic/Dinosauria/Theropods"
+addFile name="Allosaurus" extension=".txt" content="The skull had a pair of horns above and in front of the eyes. " path="root/Big_Bang/Biotic/Dinosauria/Theropods"
+addFile name="Nightingale" extension=".txt" content="'Nightingale' is derived from "night", and the Old English galan, 'to sing'" path="root/Big_Bang/Biotic/Dinosauria/Bird"
+addFile name="Schrani" extension=".txt" content="Had large, back spines sticking out to the sides since it belongs to the lithostrotians." path="root/Big_Bang/Biotic/Dinosauria"
+
+#Synapsid
+addFile name="Cynognathus" extension=".txt" content="1.2 meter-long predator closely related to mammals and had an almost worldwide distribution." path="root/Big_Bang/Biotic/Synapsid"
+addFile name="Tseajaia" extension=".txt" content="In life it was about 1 meter long and may have looked vaguely like an iguana, though slower and with a more amphibian foot without claws." path="root/Big_Bang/Biotic/Synapsid"
+addFile name="Cotylorhynchus" extension=".txt" content="A Heavily built animal with a disproportionately small head and a huge barrel-shaped body, adults of the species were about 3 m" path="root/Big_Bang/Biotic/Synapsid/Caseasauria"
+addFile name="Biseridens" extension=".txt" content="Short snout; dorsally elevated zygomatic arch and septomaxilla lacking elongated posterodorsal process between nasal and maxilla" path="root/Big_Bang/Biotic/Synapsid/Anomodontia"
+addFile name="Hipposaurus" extension=".txt" content="It had a 21 cm skull and a total length of 1.2 m." path="root/Big_Bang/Biotic/Synapsid/Biarmosuchia"
+addFile name="Apsisaurus" extension=".txt" content="The skull roof of Archeria is also articulated to the postcranial skeleton." path="root/Big_Bang/Biotic/Synapsid/Varanopidae"
+
+
+#addFile(String name, String extension, String content, String path)
+#addFolder(String name, String path)
+#User email="someone@gmail.com" username="Frank" password="1234567890"
