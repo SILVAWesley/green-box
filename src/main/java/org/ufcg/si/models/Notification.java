@@ -24,6 +24,7 @@ public class Notification {
 	 */
 	public Notification(String content) {
 		this.content = content;
+		this.isVisited = false;
 	}
 	
 	/**

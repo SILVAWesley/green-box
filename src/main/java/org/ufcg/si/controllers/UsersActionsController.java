@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.ufcg.si.beans.requests.AddFileBean;
 import org.ufcg.si.beans.requests.AddFolderBean;
 import org.ufcg.si.beans.requests.EditFileBean;
+import org.ufcg.si.beans.requests.RenameFileBean;
 import org.ufcg.si.beans.requests.ShareFileBean;
 import org.ufcg.si.exceptions.ExceptionHandler;
 import org.ufcg.si.exceptions.GreenboxException;
@@ -23,7 +24,6 @@ import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ServerConstants;
 import org.ufcg.si.util.permissions.file.FilePermissions;
-import org.ufcg.si.util.requests.RenameFileRequestBody;
 import org.ufcg.si.util.requests.RenameFolderRequestBody;
 
 /**
@@ -153,7 +153,7 @@ public class UsersActionsController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> renameFile(@RequestBody RenameFileRequestBody body) throws ServletException {
+	public ResponseEntity<User> renameFile(@RequestBody RenameFileBean body) throws ServletException {
 		try {
 			ExceptionHandler.checkRenameFileBody(body);
 			

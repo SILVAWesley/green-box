@@ -1,15 +1,15 @@
-package org.ufcg.si.util.requests;
+package org.ufcg.si.beans.requests;
 
 import org.ufcg.si.models.User;
 
-public class RenameFileRequestBody {
+public class RenameFileBean {
 	private User user;
 	private String newName;
 	private String oldName;
 	private String folderPath;
 	private String fileExtension;
 	
-	public RenameFileRequestBody(User user, String newName, String oldName, String folderPath, String fileExtension){
+	public RenameFileBean(User user, String newName, String oldName, String folderPath, String fileExtension){
 		this.user = user;
 		this.newName = newName;
 		this.oldName = oldName;
@@ -21,7 +21,7 @@ public class RenameFileRequestBody {
 		}
 	}
 	
-	public RenameFileRequestBody(){
+	public RenameFileBean(){
 		this.fileExtension = "txt";
 	}
 	
