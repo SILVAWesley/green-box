@@ -15,7 +15,6 @@ function($scope, $http, $state, authService, $localStorage) {
 				$state.go('dashboard.directories', {folderPath: $localStorage.session.currentPath});
 			} else {
 			    $("#loginModal").modal("show");
-				//window.alert("Login not successful");
 			}	
 		});
 	}

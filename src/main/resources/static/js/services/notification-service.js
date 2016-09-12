@@ -14,7 +14,6 @@ angular.module('app').factory('NotificationService', function($http,
 		.then(function(response) {
 			SessionService.setUser(response.data);
 		}, function(response) {
-			//window.alert("Error at Service: 'Notification' while trying to make a request to the server.");
 			$("#serviceErrorModal .modal-body").html("'Notification' while trying to make a request to the server.");
 			$("#serviceErrorModal").modal("show");
 		});
@@ -28,6 +27,11 @@ angular.module('app').factory('NotificationService', function($http,
 			if (notifications[i].isVisited == false) {
 				numOfNotVisitedNotifications++;
 			}
+		}
+		
+		if(numOfNotVisitedNotifications==0) {
+			document.getElementById("dropdownNotifications").style.color = "green";
+			document.getElementById("dropDownHeader").style.color = "green";
 		}
 		
 		return numOfNotVisitedNotifications;
