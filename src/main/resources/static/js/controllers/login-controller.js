@@ -14,7 +14,8 @@ function($scope, $http, $state, authService, $localStorage) {
 			if (result) {
 				$state.go('dashboard.directories', {folderPath: $localStorage.session.currentPath});
 			} else {
-			    $("#loginModal").modal("show");
+				$("#loginErrorModal .modal-body").html(" UserName/Email or Password is Invalid ");
+			    $("#loginErrorModal").modal("show");
 			}	
 		});
 	}

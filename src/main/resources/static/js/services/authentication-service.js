@@ -47,7 +47,8 @@ angular.module('app').factory("authService", function($localStorage,
 			SessionService.generateSession(response.data.user, response.data.token);
 			callback(true);
 		}, function(response) {
-			window.alert(response.data.message);
+			$("#loginErrorModal .modal-body").html(response.data.message);
+		    $("#loginErrorModal").modal("show");
 			callback(false);
 		});
 	}
