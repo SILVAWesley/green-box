@@ -51,10 +51,20 @@ img { max-width: 100%; }
 	text-shadow: none; 
 }
 
-.dropdown-menu {
-    height: 300x !important;
-    overflow: auto;
-    
+/***** Drop Down *****/
+
+.dropdown-menu p {
+    margin: 0px 18px 20px;
+    text-align: left;
+}
+
+.dropdown-header h3 {
+    font-family: 'Pattaya', sans-serif; 
+    color:red;   
+}
+
+.dropdown a, .dropdown:hover a{
+    color:red;   
 }
 
 /***** Btn Links *****/

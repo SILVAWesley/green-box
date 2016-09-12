@@ -36,6 +36,14 @@ public class Validator {
 		return FilePermissions.valueOfIgnoreCase(permission) == null;
 	}
 	
+	public static boolean isEmptyUsername(String username) {
+		if (username == null || username.isEmpty() || username.equals("dir")) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public static boolean isEmpty(String target) {
 		if (target == null || target.isEmpty()) {
 			return true;
