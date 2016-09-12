@@ -67,11 +67,6 @@ img { max-width: 100%; }
     color:red;   
 }
 
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-
 /***** Btn Links *****/
 
 .btn-link-1 {
