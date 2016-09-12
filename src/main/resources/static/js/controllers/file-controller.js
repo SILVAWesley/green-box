@@ -23,7 +23,8 @@ angular.module('app').controller('fileController', function($localStorage,
 		var content = $scope.content;
 		
 		if (name == "") {
-			$("#fileEmptyModal").modal("show");		
+		    $("#fileEditErrorModal .modal-body").html("File don't have a name!");
+		    $("#fileEditErrorModal").modal("show");		
 		} else if (DirectoryService.getClickedItem() == undefined){
 			newFile(name, content, extension);
 		} else {

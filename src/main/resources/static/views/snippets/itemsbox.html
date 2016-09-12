@@ -4,9 +4,8 @@
 			<h3>
 				<span ng-repeat="folder in getOpenedFolders() track by $index">
 					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
-					<a
-						style="color:green"
-						ui-sref="dashboard.directories({folderPath: folder.path})">{{folder.name}}
+					<a style="color:green" ui-sref="dashboard.directories({folderPath: folder.path})">
+						{{folder.name}}
 					</a> / 
 				</span>
 				
@@ -14,9 +13,9 @@
 				{{getCurrentFolder().name + "/"}} 
 				
 			</h3>
-		</div>
-	</div>
-</div>
+		</div> <!-- form-top-right ends -->
+	</div> <!-- form-top ends -->
+</div> <!-- user-box ends -->
 
 <div class="form-bottom">
 	<form class="login-form" role="form" action="" method="post">
@@ -30,7 +29,7 @@
 				</thead>
 				
 				<tbody ng-repeat="item in getFolders() track by $index">
-					<tr>
+					<tr id="folderList">
 					
 						<td>
 							<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
@@ -45,11 +44,11 @@
 						</td> <!-- standardization of box -->
 						<td class="col-sm-1"></td> <!-- standardization of box -->
 						
-					</tr>
-				</tbody>
+					</tr> <!-- folderList ends -->
+				</tbody> <!-- item in getFolders() track by $index ends -->
 				
 				<tbody ng-repeat="item in getFiles() track by $index">
-					<tr>
+					<tr id="fileList">
 						
 						<td>
 							<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
@@ -57,24 +56,24 @@
 						</td>
 						
 						<td class="col-sm-2">
-							<a class="fa fa-pencil fa-2x" title="Rename file" aria-hidden="true" 
-							   style="color:#18A103" href="" data-toggle="modal" data-target="#renameFileModal" ng-click="clickOnRenameFile(item)"> Rename
+							<a class="fa fa-pencil fa-2x" title="Rename file" data-toggle="modal" data-target="#renameFileModal"  
+							   style="color:#18A103" href="" aria-hidden="true" ng-click="clickOnRenameFile(item)"> Rename
 							</a>
 						</td>
 	
 						<td class="col-sm-2">
-							<a class="fa fa-share-alt fa-2x" title="Share with your friends" aria-hidden="true" 
-							   style="color:#18A103" href="" data-toggle="modal" data-target="#shareModal" ng-click="clickOnShareFile(item)"> Share
+							<a class="fa fa-share-alt fa-2x" title="Share with your friends" data-toggle="modal" data-target="#shareModal"  
+							   style="color:#18A103" href=""  aria-hidden="true" ng-click="clickOnShareFile(item)"> Share
 							</a>
 						</td>
 
-					</tr>
-				</tbody>
+					</tr> <!-- fileList ends -->
+				</tbody> <!-- item in getFiles() track by $index ends -->
 			
-			</table>
-		</div>
-	</form>
-</div>
+			</table> <!-- table table-striped ends -->
+		</div> <!-- form-group ends -->
+	</form> <!-- login-form ends -->
+</div> <!-- form-bottom ends -->
 
 <p></p>
 
@@ -96,4 +95,4 @@
 		</strong>
 	</button>
 	
-</div>
+</div> <!-- col-sm-12 col-md-12 ends -->

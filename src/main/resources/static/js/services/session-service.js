@@ -30,7 +30,8 @@ angular.module('app').factory('SessionService', function($http, $localStorage, C
 		.then(function(response) {
 			$localStorage.session.user = response.data;
 		}, function(response) {
-			window.alert("Error at Service: 'Session' while trying to make a request to the server.");
+			$("#serviceErrorModal .modal-body").html("'Session' while trying to make a request to the server.");
+			$("#serviceErrorModal").modal("show");
 		});
 	}
 	

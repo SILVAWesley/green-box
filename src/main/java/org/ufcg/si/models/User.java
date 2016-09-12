@@ -244,8 +244,8 @@ public class User {
 
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		args = new String[]{"org.ufcg.si.models.User", "src/test/java/org/ufcg/si/models/UserEasyAcceptTest.txt"};
 		EasyAccept.main(args);
-	}
+	}*/
 }
