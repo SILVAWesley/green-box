@@ -1,4 +1,4 @@
-<!-- Login Modal-->
+<!-- Login Error Modal-->
  <div class="modal fade" id="loginModal" role="dialog">
  	<div class="modal-dialog">
     
@@ -6,7 +6,7 @@
 		<div class="modal-content">
         	
         	<div class="modal-header">
-          		<h4 class="modal-title">Erro Login</h4>
+          		<h4 class="modal-title"> Error Login </h4>
         	</div>
         
         	<div class="modal-body">
@@ -52,20 +52,20 @@
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
 
-<!-- Register Erro Modal -->
- <div class="modal fade" id="registerErroModal" role="dialog">
+<!-- Register Error Modal -->
+ <div class="modal fade" id="registerErrorModal" role="dialog">
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
 		<div class="modal-content">
 			
 			<div class="modal-header">
-          		<h4 class="modal-title">Erro</h4>
+          		<h4 class="modal-title">Error</h4>
         	</div>
         
         	<div class="modal-body">
-          		<p><strong>Erro! User Name or Email existing.</strong></p>
-          		<p><strong>Try Again!</strong></p>
+          		<p><strong> Error! User Name or Email existing. </strong></p>
+          		<p><strong> Try Again! </strong></p>
         	</div>
 		
 			<div class="modal-footer">
@@ -89,113 +89,32 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 				</button>
-			        <h4 class="modal-title" id="myModalLabel">What do I need to register?</h4>
+			        <h4 class="modal-title" id="myModalLabel">
+			        	<strong>What do you need to register?</strong>
+			        </h4>
 			</div>
 			
 			<div class="modal-body">
-				<strong>
 			       	<ol>
-				   		<li>Username between 4 and 15 characters between letters, numbers and "- or _"</li>
-				   		<li>Valid Email</li>
-				   		<li>Password with at least 6 characters, at least one letter and one number</li>
+				   		<li><strong>Username between 4 and 15 characters between letters, numbers and "- or _"</strong></li>
+				   		<li><strong>Valid Email</strong></li>
+				   		<li><strong>Password with at least 6 characters, at least one letter and one number</strong></li>
 			    	</ol>	
-			    </strong>
 			</div>
 			
 		</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
 
-<!-- File Successfully Created  Modal -->
- <div class="modal fade" id="fileSuccessfullyModal" role="dialog">
+<!-- File Share Modal -->
+ <div class="modal fade" id="fileShareModal" role="dialog">
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
 		<div class="modal-content">
 			
 			<div class="modal-header">
-          		<h4 class="modal-title">Creating File</h4>
-        	</div>
-        
-        	<div class="modal-body">
-          		<p><strong>Great! You created file successfully.</strong></p>
-        	</div>
-		
-			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
-        			<strong> 
-        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
-        			</strong>
-        		</button>
-      		</div>
-      
-    	</div> <!-- modal-content ends -->
-	</div> <!-- modal-dialog ends -->
-</div> <!-- modal-fade ends -->
-
-<!-- File Successfully Edited  Modal -->
- <div class="modal fade" id="fileEditedModal" role="dialog">
-	<div class="modal-dialog">
-    
-		<!-- Modal content-->
-		<div class="modal-content">
-			
-			<div class="modal-header">
-          		<h4 class="modal-title">Editing File</h4>
-        	</div>
-        
-        	<div class="modal-body">
-          		<p><strong>Great! You edited file successfully.</strong></p>
-        	</div>
-		
-			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
-        			<strong> 
-        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
-        			</strong>
-        		</button>
-      		</div>
-      
-    	</div> <!-- modal-content ends -->
-	</div> <!-- modal-dialog ends -->
-</div> <!-- modal-fade ends -->
-
-<!-- File Empty  Modal -->
- <div class="modal fade" id="fileEmptyModal" role="dialog">
-	<div class="modal-dialog">
-    
-		<!-- Modal content-->
-		<div class="modal-content">
-			
-			<div class="modal-header">
-          		<h4 class="modal-title">Erro File</h4>
-        	</div>
-        
-        	<div class="modal-body">
-          		<p><strong>Erro! File name cannot be empty.</strong></p>
-        	</div>
-		
-			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
-        			<strong> 
-        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
-        			</strong>
-        		</button>
-      		</div>
-      
-    	</div> <!-- modal-content ends -->
-	</div> <!-- modal-dialog ends -->
-</div> <!-- modal-fade ends -->
-
-<!-- File Shared Successfuly Modal -->
- <div class="modal fade" id="fileSharedSuccessfulyModal" role="dialog">
-	<div class="modal-dialog">
-    
-		<!-- Modal content-->
-		<div class="modal-content">
-			
-			<div class="modal-header">
-          		<h4 class="modal-title">Share File</h4>
+          		<h4 class="modal-title"> File Share </h4>
         	</div>
         
         	<div class="modal-body">
@@ -214,19 +133,18 @@
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
 
-<!-- File Not Shared Modal -->
- <div class="modal fade" id="fileNotSharedModal" role="dialog">
+<!-- File Share Error Modal -->
+ <div class="modal fade" id="fileShareErrorModal" role="dialog">
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
 		<div class="modal-content">
 			
 			<div class="modal-header">
-          		<h4 class="modal-title">Erro Share File</h4>
+          		<h4 class="modal-title"> File Share Error </h4>
         	</div>
         
         	<div class="modal-body">
-          		<p><strong>Erro! User not found!</strong></p>
         	</div>
 		
 			<div class="modal-footer">
@@ -241,15 +159,68 @@
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
 
-<!-- File Renamed Successfuly Modal -->
- <div class="modal fade" id="fileRenamedSuccessfulyModal" role="dialog">
+<!-- Folder Rename Modal -->
+ <div class="modal fade" id="folderRenameModal" role="dialog">
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
 		<div class="modal-content">
 			
 			<div class="modal-header">
-          		<h4 class="modal-title">Rename File</h4>
+          		<h4 class="modal-title"> Folder Rename </h4>
+        	</div>
+        
+        	<div class="modal-body">
+          		<p><strong>Great! Folder renamed successfully.</strong></p>
+        	</div>
+		
+			<div class="modal-footer">
+        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        			<strong> 
+        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close!
+        			</strong>
+        		</button>
+      		</div>
+      
+    	</div> <!-- modal-content ends -->
+	</div> <!-- modal-dialog ends -->
+</div> <!-- modal-fade ends -->
+
+<!-- Folder Rename Error Modal -->
+ <div class="modal fade" id="folderRenameErrorModal" role="dialog">
+	<div class="modal-dialog">
+    
+		<!-- Modal content-->
+		<div class="modal-content">
+			
+			<div class="modal-header">
+          		<h4 class="modal-title"> Folder Rename Error </h4>
+        	</div>
+        
+        	<div class="modal-body">
+        	</div>
+		
+			<div class="modal-footer">
+        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        			<strong> 
+        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
+        			</strong>
+        		</button>
+      		</div>
+      
+    	</div> <!-- modal-content ends -->
+	</div> <!-- modal-dialog ends -->
+</div> <!-- modal-fade ends -->
+
+<!-- File Rename Modal -->
+ <div class="modal fade" id="fileRenameModal" role="dialog">
+	<div class="modal-dialog">
+    
+		<!-- Modal content-->
+		<div class="modal-content">
+			
+			<div class="modal-header">
+          		<h4 class="modal-title"> File Rename </h4>
         	</div>
         
         	<div class="modal-body">
@@ -268,25 +239,156 @@
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
 
-<!-- Folder Renamed Successfuly Modal -->
- <div class="modal fade" id="folderRenamedSuccessfulyModal" role="dialog">
+<!-- File Rename Modal -->
+ <div class="modal fade" id="fileRenameErrorModal" role="dialog">
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
 		<div class="modal-content">
 			
 			<div class="modal-header">
-          		<h4 class="modal-title">Rename Folder</h4>
+          		<h4 class="modal-title"> File Rename Error </h4>
         	</div>
         
         	<div class="modal-body">
-          		<p><strong>Great! Folder renamed successfully.</strong></p>
         	</div>
 		
 			<div class="modal-footer">
         		<button class="btn btn-danger" data-dismiss="modal" type="button">							
         			<strong> 
-        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close!
+        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
+        			</strong>
+        		</button>
+      		</div>
+      
+    	</div> <!-- modal-content ends -->
+	</div> <!-- modal-dialog ends -->
+</div> <!-- modal-fade ends -->
+
+<!-- File Create Modal -->
+ <div class="modal fade" id="fileCreateModal" role="dialog">
+	<div class="modal-dialog">
+    
+		<!-- Modal content-->
+		<div class="modal-content">
+			
+			<div class="modal-header">
+          		<h4 class="modal-title"> File Create </h4>
+        	</div>
+        
+        	<div class="modal-body">
+          		<p><strong>Great! You created file successfully.</strong></p>
+        	</div>
+		
+			<div class="modal-footer">
+        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        			<strong> 
+        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
+        			</strong>
+        		</button>
+      		</div>
+      
+    	</div> <!-- modal-content ends -->
+	</div> <!-- modal-dialog ends -->
+</div> <!-- modal-fade ends -->
+
+<!-- File Create Error Modal -->
+ <div class="modal fade" id="fileCreateErrorModal" role="dialog">
+	<div class="modal-dialog">
+    
+		<!-- Modal content-->
+		<div class="modal-content">
+			
+			<div class="modal-header">
+          		<h4 class="modal-title"> File Create Error </h4>
+        	</div>
+        
+        	<div class="modal-body">
+        	</div>
+		
+			<div class="modal-footer">
+        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        			<strong> 
+        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
+        			</strong>
+        		</button>
+      		</div>
+      
+    	</div> <!-- modal-content ends -->
+	</div> <!-- modal-dialog ends -->
+</div> <!-- modal-fade ends -->
+
+<!-- File Edit Modal -->
+ <div class="modal fade" id="fileEditModal" role="dialog">
+	<div class="modal-dialog">
+    
+		<!-- Modal content-->
+		<div class="modal-content">
+			
+			<div class="modal-header">
+          		<h4 class="modal-title"> File Edit </h4>
+        	</div>
+        
+        	<div class="modal-body">
+          		<p><strong> Great! File edited successfully. </strong></p>
+        	</div>
+		
+			<div class="modal-footer">
+        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        			<strong> 
+        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
+        			</strong>
+        		</button>
+      		</div>
+      
+    	</div> <!-- modal-content ends -->
+	</div> <!-- modal-dialog ends -->
+</div> <!-- modal-fade ends -->
+
+<!-- File Edit Error Modal -->
+ <div class="modal fade" id="fileEditErrorModal" role="dialog">
+	<div class="modal-dialog">
+    
+		<!-- Modal content-->
+		<div class="modal-content">
+			
+			<div class="modal-header">
+          		<h4 class="modal-title"> File Edit Error </h4>
+        	</div>
+        
+        	<div class="modal-body">
+        	</div>
+		
+			<div class="modal-footer">
+        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        			<strong> 
+        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
+        			</strong>
+        		</button>
+      		</div>
+      
+    	</div> <!-- modal-content ends -->
+	</div> <!-- modal-dialog ends -->
+</div> <!-- modal-fade ends -->
+
+<!-- Service Error Modal -->
+ <div class="modal fade" id="serviceErrorModal" role="dialog">
+	<div class="modal-dialog">
+    
+		<!-- Modal content-->
+		<div class="modal-content">
+			
+			<div class="modal-header">
+          		<h4 class="modal-title"> Error at Service </h4>
+        	</div>
+        
+        	<div class="modal-body">
+        	</div>
+		
+			<div class="modal-footer">
+        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        			<strong> 
+        				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>
       		</div>
