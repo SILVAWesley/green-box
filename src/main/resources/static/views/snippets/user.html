@@ -1,4 +1,4 @@
-<!-- Messages for User -->
+<!-- Windows for User -->
 <ng-include src="'views/snippets/windows.html'"> </ng-include>
 	
 <div class="col-sm-12">
@@ -9,12 +9,12 @@
 				
 				<h3 style="font-family: 'Pattaya', sans-serif">
 					<i class="fa fa-check" aria-hidden="true"></i>
-					Your Username is: {{username}}
+					Your Username is: {{getUsername()}}
 				</h3>
 				
 				<h3 style="font-family: 'Pattaya', sans-serif">
 					<i class="fa fa-check" aria-hidden="true"></i>
-					Your Email is: {{email}}
+					Your Email is: {{getEmail()}}
 				</h3>
 				
 				<h3 style="font-family: 'Pattaya', sans-serif">
@@ -35,14 +35,14 @@
 				
 				<h3 style="font-family: 'Pattaya', sans-serif">
 					<a class="fa fa-pencil" style="color:#0C2DFA" href="" data-toggle="modal" 
-					   data-target="#changeUserModal" title="Edit Email" aria-hidden="true" ng-click=""> 
+					   data-target="#changeEmailModal" title="Edit Email" aria-hidden="true" ng-click=""> 
 					   Edit
 					</a>
 				</h3>
 				
 				<h3 style="font-family: 'Pattaya', sans-serif">
 					<a class="fa fa-pencil" style="color:#0C2DFA" href="" data-toggle="modal" 
-					   data-target="#changeUserModal" title="Edit Password" aria-hidden="true" ng-click=""> 
+					   data-target="#changePasswordModal" title="Edit Password" aria-hidden="true" ng-click=""> 
 					   Edit
 					</a>
 				</h3>
@@ -54,9 +54,9 @@
 </div> <!-- col-sm-12 ends -->
 
 <div class="col-md-12">
-	<button class="btn btn-warning" type="button" onclick="window.history.back()">							
+	<button class="btn btn-warning" type="button" onclick="location.href='#/dashboard/directories/root'">							
    		<strong> 
-   			<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> 
+   			<i class="fa fa-arrow-left fa-lg" aria-hidden="true"></i> 
    			Back
    		</strong>
 	</button>
