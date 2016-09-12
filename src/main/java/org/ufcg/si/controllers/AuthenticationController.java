@@ -51,7 +51,7 @@ public class AuthenticationController {
 			
 			User dbUser = null;
 			
-			if (Validator.isEmpty(requestBody.getUsername())) {
+			if (Validator.isEmptyUsername(requestBody.getUsername())) {
 				dbUser = userService.findByEmail(requestBody.getEmail());
 			} else {
 				dbUser = userService.findByUsername(requestBody.getUsername());
