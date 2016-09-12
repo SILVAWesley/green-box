@@ -24,7 +24,7 @@ angular.module('app').factory("authService", function($localStorage,
 		    $("#registerSuccessfulModal").modal("show");
 		    callback(true);
 		}, function(response) {
-			$("#registerErroModal").modal("show");
+			$("#registerErrorModal").modal("show");
 		});
 	}
 	

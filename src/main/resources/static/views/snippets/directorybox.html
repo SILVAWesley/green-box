@@ -43,14 +43,14 @@
       					<h3 style="font-family: 'Pattaya', sans-serif">
       						<strong>
       							New Folder <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i> 
-      							<input type="text" placeholder="Folder Name" name="country_code" pattern="(?!.*\s.*).*" ng-model="newFolderName" />
-      						</strong><!-- pattern="([a-zA-Z\d]+\.?)[a-zA-Z\d]"---> 
+      							<input type="text" placeholder="Folder Name" name="country_code" pattern="(([a-zA-Z\d]+\.?)[a-zA-Z\d]$" ng-model="newFolderName" />
+      						</strong>
       					</h3>
     	  			</div> <!-- modal-body ends -->
     	  			
       				<div class="modal-footer">
 						
-						<button class="btn btn-warning" type="submit" data-dismiss="modal" ng-click="newFolder()">
+						<button class="btn btn-warning" type="submit" data-dismiss="modal" ng-disabled="Form.$invalid" ng-click="newFolder()"><!-- need implement -->
 							<strong> 
 								<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
 							</strong>

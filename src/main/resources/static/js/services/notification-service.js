@@ -14,7 +14,9 @@ angular.module('app').factory('NotificationService', function($http,
 		.then(function(response) {
 			SessionService.setUser(response.data);
 		}, function(response) {
-			window.alert("Error at Service: 'Notification' while trying to make a request to the server.");
+			//window.alert("Error at Service: 'Notification' while trying to make a request to the server.");
+			$("#serviceErrorModal .modal-body").html("'Notification' while trying to make a request to the server.");
+			$("#serviceErrorModal").modal("show");
 		});
 	}
 	

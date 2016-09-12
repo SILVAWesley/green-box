@@ -54,7 +54,10 @@ img { max-width: 100%; }
 .dropdown-menu {
     height: 300x !important;
     overflow: auto;
-    
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
 
 /***** Btn Links *****/

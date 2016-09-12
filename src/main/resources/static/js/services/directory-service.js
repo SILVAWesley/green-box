@@ -42,9 +42,11 @@ angular.module('app').factory('DirectoryService', function($http,
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
-			$("#fileSharedSuccessfulyModal").modal("show");		
+			$("#fileShareModal").modal("show");
 		}, function(response) {
-			window.alert(response.data.message);		
+			$("#fileShareErrorModal .modal-body").html(response.data.message)
+			$("#fileShareErrorModal").modal("show");
+
 		});
 	}
 	
@@ -59,9 +61,10 @@ angular.module('app').factory('DirectoryService', function($http,
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
-			$("#folderRenamedSuccessfulyModal").modal("show");		
+			$("#folderRenameModal").modal("show");
 		}, function(response) {
-			window.alert(response.data.message);
+			$("#folderRenameErrorModal .modal-body").html(response.data.message);
+			$("#folderRenameErrorModal").modal("show");
 		});
 	}
 	
@@ -77,9 +80,10 @@ angular.module('app').factory('DirectoryService', function($http,
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
-			$("#fileRenamedSuccessfulyModal").modal("show");		
+			$("#fileRenameModal").modal("show");		
 		}, function(response) {
-			window.alert(response.data.message);
+			$("#fileRenameErrorModal .modal-body").html(response.data.message);
+			$("#fileRenameErrorModal").modal("show");		
 		});
 	}
 	
@@ -109,10 +113,11 @@ angular.module('app').factory('DirectoryService', function($http,
 		$http.post(Constants.POST_NEWFILE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
-			$("#fileSuccessfullyModal").modal("show");
+			$("#fileCreateModal").modal("show");
 			$state.go('dashboard.directories', {'folderPath': directoryService.getCurrentFolder().path});
 		}, function(response) {
-			window.alert(response.data.message);
+			$("#fileCreateErrorModal .modal-body").html(response.data.message);
+			$("#fileCreateErrorModal").modal("show");
 		});
 	}
 	
@@ -128,10 +133,11 @@ angular.module('app').factory('DirectoryService', function($http,
 		$http.put(Constants.PUT_EDITFILE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
-			$("#fileEditedModal").modal("show");
+			$("#fileEditModal").modal("show");
 			$state.go('dashboard.directories', {'folderPath': directoryService.getCurrentFolder().path});
 		}, function(response){
-			window.alert(response.data.message);
+		    $("#fileEditErrorModal .modal-body").html( response.data.message );
+		    $("#fileEditErrorModal").modal("show");
 		});
 	}
 	
