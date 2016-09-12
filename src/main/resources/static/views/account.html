@@ -26,26 +26,27 @@
 					<div class="dropdown">
 						
 						<p></p> <!-- adition of space -->
-						
-						<a id="dropdownNotifications" data-toggle="dropdown" style=color:#F31111 title="notifications" aria-hidden="true" aria-haspopup="true" aria-expanded="true" ng-click="actionClick()" href=""> 
-							<i class="fa fa-bell fa-2x" aria-hidden="true"></i>
-							<h8>{{numberOfNotVisitedNotifications()}}</h8>
+
+						<a id="dropdownNotifications" data-toggle="dropdown"  title="notifications" aria-hidden="true" aria-haspopup="true" aria-expanded="true" ng-click="actionClick()" href=""> 
+							<h9>
+								<i class="fa fa-bell fa-2x" aria-hidden="true"></i>
+								{{numberOfNotVisitedNotifications()}}
+							</h9>
 					  	</a>
 					  
 					  	<ul class="dropdown-menu" aria-labelledby="dropdownNotifications">
 					  	
 					  		<li class="dropdown-header">
-					  			<h3 class="modal-title" id="myModalLabel" style="font-family: 'Pattaya', sans-serif">
+					  			<h3 class="modal-title" id="dropDownHeader" ng-click="actionClick()">
 					        		<i class="fa fa-bell-o" aria-hidden="true"></i>
 					        		<strong> Notifications </strong>
 					        	</h3>
 					  		</li>
 					  		
-						    <li role="separator" class="divider"></li>				  	
+						    <li class="divider" role="separator"></li>				  	
 					  		
 					  		<li ng-repeat="notification in getNotifications()">
-					  			<p align="left">
-					  				&emsp;
+					  			<p>
 					  				<i class="fa fa-file-text-o" aria-hidden="true"></i>
 					  				{{notification.content}} 
 					  			</p>
@@ -107,7 +108,7 @@
 							Green Box
 						</strong>
 					</h1>
-				</div>
+				</div> <!-- col-sm-8 col-sm-offset-2 text ends -->
 			</div> <!-- row ends -->
 			
 			<br></br> <!-- adition of space -->
@@ -115,12 +116,13 @@
 			<div class="col-sm-6">
 				<div class="form-top-right">
 					<h3>
-						Hello, {{getUsername()}}! <i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
+						Hello, {{getUsername()}}! 
+						<i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
 					</h3>
 				</div>
 			</div> <!-- col-sm-6 ends -->
 			
-			<p></p><p></p>
+			<p></p><p></p> <!-- adition of space -->
 
 			<div ui-view=""></div><!-- need complete -->		
 		</div> <!-- container ends --> 
