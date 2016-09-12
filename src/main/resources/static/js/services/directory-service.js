@@ -97,8 +97,10 @@ angular.module('app').factory('DirectoryService', function($http,
 			.then(function(response) {
 				SessionService.setUser(response.data);
 				directoryService.goToPath(directoryService.getCurrentFolder().path);
+				$("#folderCreateModal").modal("show");		
 			}, function(response) {
-				window.alert(response.data.message);
+				$("#folderCreateErrorModal .modal-body").html(response.data.message);
+				$("#folderCreateErrorModal").modal("show");	
 		});
 	}
 	
