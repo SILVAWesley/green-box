@@ -4,7 +4,7 @@
 - Classe que deve ser executada para abrir o servidor -> [GreenBoxApplication.java] (green-box/src/main/java/org/ufcg/si/GreenBoxApplication.java);
 - URL que deve ser acessada para abrir a homepage no servidor local -> [localhost:8080] (http://localhost:8080/);
 - URL que deve ser acessada para abrir a homepage no heroku -> https://green-box-si.herokuapp.com;
-- Usar o branch **master** para executar;
+- Usar o branch **heroku-release** para executar;
 - Algumas funcionalidades necessitam de duplo refresh para aparecer no front-end;
 <br/>
 
