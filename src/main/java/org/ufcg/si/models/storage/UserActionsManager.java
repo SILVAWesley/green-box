@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.NotEnoughAccessLevel;
 import org.ufcg.si.models.Notification;
 import org.ufcg.si.util.permissions.file.FileActions;
@@ -145,11 +146,15 @@ public class UserActionsManager {
 		FilePermissions filePermission = findFilePermission(name, extension, fileToShare.getPath());
 		
 		if (filePermission.isAllowed(FileActions.SHARE)) {
-			FileGB sharingFile = rootFolder.findFileByEverything(name, path, extension);
-			retrieveFilesIShared().addFile(sharingFile);
-			managerToShareWith.receiveFile(sharingFile);
-			managerToShareWith.filePermissions.put(sharingFile, permission);
-			managerToShareWith.notifications.add(new Notification("A file named " + "'" + name + "' " + "was shared with you by : " + this.name + "."));
+			if (!this.equals(managerToShareWith)) {
+				FileGB sharingFile = rootFolder.findFileByEverything(name, path, extension);
+				retrieveFilesIShared().addFile(sharingFile);
+				managerToShareWith.receiveFile(sharingFile);
+				managerToShareWith.filePermissions.put(sharingFile, permission);
+				managerToShareWith.notifications.add(new Notification("A file named " + "'" + name + "' " + "was shared with you by : " + this.name + "."));
+			} else {
+				throw new InvalidDataException("You cannot share a file with yourself.");
+			}
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + filePermission + " is not enough to complete the operation.");
 		}
