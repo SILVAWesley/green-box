@@ -92,7 +92,7 @@ angular.module('app').factory('DirectoryService', function($http,
 	directoryService.sendToTrash = function(){
 		requestData = {};
 		requestData.user = SessionService.getUser();
-		requestData.oldName = directoryService.getClickedItem().name;
+		requestData.fileName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		requestData.fileExtension = directoryService.getClickedItem().name.extension;
 		
@@ -110,7 +110,7 @@ angular.module('app').factory('DirectoryService', function($http,
 	directoryService.finalDelete = function(){
 		requestData = {};
 		requestData.user = SessionService.getUser();
-		requestData.oldName = directoryService.getClickedItem().name;
+		requestData.fileName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		requestData.fileExtension = directoryService.getClickedItem().name.extension;
 		
