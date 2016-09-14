@@ -35,11 +35,20 @@
 							<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
 							<a style="color:green" href="" ng-click="clickOnFolder(item)"> {{item.name}}</a>
 						</td>
+
+						<td class="col-sm-2"></td> <!-- standardization of box -->
 						
 						<td class="col-sm-2">
 							<a class="fa fa-pencil fa-2x" data-toggle="modal" data-target="#renameFolderModal" title="Rename folder"  
 							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnRenameFolder(item)"> 
 							   Rename
+							</a>
+						</td> <!-- standardization of box -->
+						
+						<td class="col-sm-2">
+							<a class="fa fa-remove fa-2x" data-toggle="modal" data-target="#deleteFolderModal" title="Delete Folder"  
+							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnDeleteFolder(item)"> 
+							   Delete
 							</a>
 						</td> <!-- standardization of box -->
 						<td class="col-sm-1"></td> <!-- standardization of box -->
@@ -54,18 +63,27 @@
 							<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
 							<a style="color:green" href="" ng-click="clickOnFile(item)"> {{item.name + '.' + item.extension}}</a>
 						</td>
-						
-						<td class="col-sm-2">
-							<a class="fa fa-pencil fa-2x" title="Rename file" data-toggle="modal" data-target="#renameFileModal"  
-							   style="color:#18A103" href="" aria-hidden="true" ng-click="clickOnRenameFile(item)"> Rename
-							</a>
-						</td>
 	
 						<td class="col-sm-2">
 							<a class="fa fa-share-alt fa-2x" title="Share with your friends" data-toggle="modal" data-target="#shareModal"  
 							   style="color:#18A103" href=""  aria-hidden="true" ng-click="clickOnShareFile(item)"> Share
 							</a>
 						</td>
+											
+						<td class="col-sm-2">
+							<a class="fa fa-pencil fa-2x" title="Rename file" data-toggle="modal" data-target="#renameFileModal"  
+							   style="color:#18A103" href="" aria-hidden="true" ng-click="clickOnRenameFile(item)"> Rename
+							</a>
+						</td>
+						
+						<td class="col-sm-2">
+							<a class="fa fa-remove fa-2x" data-toggle="modal" data-target="#deleteFileModal" title="Delete File"  
+							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnDeleteFile(item)"> 
+							   Delete
+							</a>
+						</td> 
+
+						<td class="col-sm-1"></td> <!-- standardization of box -->
 
 					</tr> <!-- fileList ends -->
 				</tbody> <!-- item in getFiles() track by $index ends -->
