@@ -87,6 +87,46 @@ angular.module('app').factory('DirectoryService', function($http,
 		});
 	}
 	
+	//======================================================================================
+	//COMECO
+	directoryService.sendToTrash = function(){
+		requestData = {};
+		requestData.user = SessionService.getUser();
+		requestData.oldName = directoryService.getClickedItem().name;
+		requestData.folderPath = directoryService.getCurrentFolder().path;
+		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		
+		$http.put(Constants.POST_SENDTOTRASH_URL, requestData)
+		.then(function(response) {
+			SessionService.setUser(response.data);
+			directoryService.goToPath(directoryService.getCurrentFolder().path);
+			$("#fileSendToTrashModal").modal("show");		
+		}, function(response) {
+			$("#fileSendToTrashErrorModal .modal-body").html(response.data.message);
+			$("#fileSendToTrashErrorModal").modal("show");		
+		});
+	}
+	
+	directoryService.finalDelete = function(){
+		requestData = {};
+		requestData.user = SessionService.getUser();
+		requestData.oldName = directoryService.getClickedItem().name;
+		requestData.folderPath = directoryService.getCurrentFolder().path;
+		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		
+		$http.put(Constants.POST_FINALDELETE_URL, requestData)
+		.then(function(response) {
+			SessionService.setUser(response.data);
+			directoryService.goToPath(directoryService.getCurrentFolder().path);
+			$("#fileFinalDeleteModal").modal("show");		
+		}, function(response) {
+			$("#fileFinalDeleteErrorModal .modal-body").html(response.data.message);
+			$("#fileFinalDeleteErrorModal").modal("show");		
+		});
+	}
+	//FIM
+	//======================================================================================
+	
 	directoryService.newFolder = function(folderName) {
 		requestData = {};
 		requestData.user = SessionService.getUser();
@@ -150,6 +190,13 @@ angular.module('app').factory('DirectoryService', function($http,
 	directoryService.goToSharedWithMe = function() {
 		$state.go('dashboard.directories', {folderPath: '/Shared with me'});
 	}
+	//=================================================================
+	//COMECO
+	directoryService.goToTrash = function() {
+		$state.go('dashboard.directories', {folderPath: '/Trash'});
+	}
+	//FIM
+	//=================================================================
 	
 	directoryService.goToPath = function(path) {
 		if (path == '/' || path == '' || path == 'root') {

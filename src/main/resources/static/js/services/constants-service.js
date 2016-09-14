@@ -11,7 +11,12 @@ angular.module('app').factory('Constants', function() {
 	constants.PUT_EDITFILE_URL = '/server/userdirectory/editfile';
 	constants.POST_LOGIN_URL = '/server/authentication/login';
 	constants.POST_REGISTER_URL = '/server/users/new';
-	
+	//=========================================================================
+	//COMECO
+	constants.POST_SENDTOTRASH_URL = 'TO_BE_DEFINED';
+	constants.POST_POST_FINALDELETE_URL = 'TO_BE_DEFINED';
+	//FIM
+	//===========================================================================
 	constants.FILE_SEPARATOR = '/';
 	
 	return constants;
