@@ -14,7 +14,7 @@
 			</strong>
 		</button>
 		
-		<button class="btn btn-primary btn-lg" type="submit" ng-click="clickOnRecycleBin()">
+		<button class="btn btn-primary btn-lg" type="submit" ng-click="clickOnTrash()">
 			<strong> 
 				<i class="fa fa-trash" aria-hidden="true fa-3x"></i> Recycle Bin
 			</strong>
@@ -298,14 +298,14 @@
 		
 			<div class="modal-footer">
 			
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger" data-dismiss="modal" type="button" ng-click="sendToTrash()">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> 
         				<strong>Yes</strong>
         			</strong>
         		</button>
         		
-        		<button class="btn btn-warning" data-dismiss="modal" type="button" ng-click="deleteFile()>							
+        		<button class="btn btn-warning" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i>
 						<strong>No</strong>

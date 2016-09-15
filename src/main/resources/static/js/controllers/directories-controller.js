@@ -20,6 +20,10 @@ angular.module('app').controller("directoriesController", function($scope,
 		DirectoryService.goToMyFiles();
 	}
 	
+	$scope.clickOnTrash = function() {
+		DirectoryService.goToTrash();
+	}
+	
 	$scope.clickOnRenameFile = function(item){
 		DirectoryService.setClickedItem(item);
 	}
@@ -29,6 +33,10 @@ angular.module('app').controller("directoriesController", function($scope,
 	}
 	
 	$scope.clickOnShareFile = function(item) {
+		DirectoryService.setClickedItem(item);
+	}
+	
+	$scope.clickOnDeleteFile = function(item){
 		DirectoryService.setClickedItem(item);
 	}
 	
@@ -50,6 +58,15 @@ angular.module('app').controller("directoriesController", function($scope,
 	
 	$scope.renameFile = function() {
 		DirectoryService.renameFile($scope.newName);
+	}
+	
+	$scope.sendToTrash = function() {
+		
+		DirectoryService.sendToTrash();
+	}
+	
+	$scope.finalDelete = function(){
+		DirectoryService.finalDelete();
 	}
 	
 	$scope.newFolder = function() {
