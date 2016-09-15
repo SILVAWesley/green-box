@@ -40,6 +40,18 @@ angular.module('app').controller("directoriesController", function($scope,
 		DirectoryService.setClickedItem(item);
 	}
 	
+	$scope.clickOnDeleteFolder = function(item){
+		DirectoryService.setClickedItem(item);
+	}
+	
+	$scope.clickOnDeletePermanentlyFile = function(item){
+		DirectoryService.setClickedItem(item);
+	}
+	
+	$scope.clickOnDeletePermanentlyFolder = function(item){
+		DirectoryService.setClickedItem(item);
+	}
+	
 	$scope.renameFile = function() {
 		DirectoryService.renameFile($scope.newName);
 	}
@@ -60,17 +72,28 @@ angular.module('app').controller("directoriesController", function($scope,
 		DirectoryService.renameFile($scope.newName);
 	}
 	
-	$scope.sendToTrash = function() {
-		
-		DirectoryService.sendToTrash();
+	$scope.sendFileToTrash = function() {
+		DirectoryService.sendFileToTrash();
 	}
 	
-	$scope.finalDelete = function(){
-		DirectoryService.finalDelete();
+	$scope.sendFolderToTrash = function() {
+		DirectoryService.sendFolderToTrash();
+	}
+	
+	$scope.finalFileDelete = function(){
+		DirectoryService.finalFileDelete();
+	}
+	
+	$scope.finalFolderDelete = function(){
+		DirectoryService.finalFolderDelete();
 	}
 	
 	$scope.newFolder = function() {
 		DirectoryService.newFolder($scope.newFolderName);
+	}
+	
+	$scope.cleanTrash = function(){
+		DirectoryService.cleanTrash
 	}
 	
 	$scope.getFolders = function() {

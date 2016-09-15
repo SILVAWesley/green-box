@@ -89,39 +89,88 @@ angular.module('app').factory('DirectoryService', function($http,
 	
 	//======================================================================================
 	//COMECO
-	directoryService.sendToTrash = function(){
+	directoryService.sendFileToTrash = function(){
 		requestData = {};
 		requestData.user = SessionService.getUser();
 		requestData.fileName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		requestData.fileExtension = directoryService.getClickedItem().name.extension;
 		
-		$http.put(Constants.POST_SENDTOTRASH_URL, requestData)
+		$http.put(Constants.POST_SENDFILETOTRASH_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
-			$("#fileSendToTrashModal").modal("show");		
+			$("#sendFileToTrashModal").modal("show");		
 		}, function(response) {
-			$("#fileSendToTrashErrorModal .modal-body").html(response.data.message);
-			$("#fileSendToTrashErrorModal").modal("show");		
+			$("#sendFileToTrashErrorModal .modal-body").html(response.data.message);
+			$("#sendFileToTrashErrorModal").modal("show");		
 		});
 	}
 	
-	directoryService.finalDelete = function(){
+	directoryService.sendFolderToTrash = function(){
+		requestData = {};
+		requestData.user = SessionService.getUser();
+		requestData.folderName = directoryService.getClickedItem().name;
+		requestData.folderPath = directoryService.getCurrentFolder().path;
+		
+		$http.put(Constants.POST_SENDFOLDERTOTRASH_URL, requestData)
+		.then(function(response) {
+			SessionService.setUser(response.data);
+			directoryService.goToPath(directoryService.getCurrentFolder().path);
+			$("#sendFolderToTrashModal").modal("show");		
+		}, function(response) {
+			$("#sendFolderToTrashErrorModal .modal-body").html(response.data.message);
+			$("#sendFolderToTrashErrorModal").modal("show");		
+		});
+	}
+	
+	directoryService.finalFileDelete = function(){
 		requestData = {};
 		requestData.user = SessionService.getUser();
 		requestData.fileName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		requestData.fileExtension = directoryService.getClickedItem().name.extension;
 		
-		$http.put(Constants.POST_FINALDELETE_URL, requestData)
+		$http.put(Constants.POST_FINALFILEDELETE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
-			$("#fileFinalDeleteModal").modal("show");		
+			$("#finalFileDeleteModal").modal("show");		
 		}, function(response) {
-			$("#fileFinalDeleteErrorModal .modal-body").html(response.data.message);
-			$("#fileFinalDeleteErrorModal").modal("show");		
+			$("#finalFileDeleteErrorModal .modal-body").html(response.data.message);
+			$("#finalFilelDeleteErrorModal").modal("show");		
+		});
+	}
+	
+	directoryService.finalFolderDelete = function(){
+		requestData = {};
+		requestData.user = SessionService.getUser();
+		requestData.folderName = directoryService.getClickedItem().name;
+		requestData.folderPath = directoryService.getCurrentFolder().path;
+		
+		$http.put(Constants.POST_FINALFOLDERDELETE_URL, requestData)
+		.then(function(response) {
+			SessionService.setUser(response.data);
+			directoryService.goToPath(directoryService.getCurrentFolder().path);
+			$("#finalFolderDeleteModal").modal("show");		
+		}, function(response) {
+			$("#finalFolderDeleteErrorModal .modal-body").html(response.data.message);
+			$("#finalFolderDeleteErrorModal").modal("show");		
+		});
+	}
+	
+	directoryService.cleanTrash = function(){
+		requestData = {};
+		requestData.user = SessionService.getUser();
+		
+		$http.put(Constants.POST_CLEANTRASH_URL, requestData)
+		.then(function(response) {
+			SessionService.setUser(response.data);
+			directoryService.goToPath(directoryService.getCurrentFolder().path);
+			$("#cleanTrashModal").modal("show");		
+		}, function(response) {
+			$("#cleanTrashErrorModal .modal-body").html(response.data.message);
+			$("#cleanTrashErrorModal").modal("show");		
 		});
 	}
 	//FIM
