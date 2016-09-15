@@ -13,8 +13,11 @@ angular.module('app').factory('Constants', function() {
 	constants.POST_REGISTER_URL = '/server/users/new';
 	//=========================================================================
 	//COMECO
-	constants.POST_SENDTOTRASH_URL = 'TO_BE_DEFINED';
-	constants.POST_POST_FINALDELETE_URL = 'TO_BE_DEFINED';
+	constants.POST_SENDFILETOTRASH_URL = 'TO_BE_DEFINED';
+	constants.POST_FINALFILEDELETE_URL = 'TO_BE_DEFINED';
+	constants.POST_SENDFOLDERTOTRASH_URL = 'TO_BE_DEFINED';
+	constants.POST_FINALFOLDERDELETE_URL = 'TO_BE_DEFINED';
+	constants.POST_CLEANTRASH_URL = 'TO_BE_DEFINED';
 	//FIM
 	//===========================================================================
 	constants.FILE_SEPARATOR = '/';
