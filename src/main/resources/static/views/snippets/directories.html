@@ -1,4 +1,4 @@
-<div class="col-sm-6">
+<div class="col-md-6">
 	<p></p>
 	<div class="btn-group" role="group" aria-label="...">
 		
@@ -8,28 +8,54 @@
 			</strong>
 		</button>
 		
-		<button class="btn btn-primary btn-lg" type="submit" ng-click="clickOnSharedWithMe()">
+		<button class="btn btn-warning btn-lg" type="submit" ng-click="clickOnSharedWithMe()">
 			<strong> 
 				<i class="fa fa-share-alt" aria-hidden="true fa-3x"></i> Shared With Me
 			</strong>
 		</button>
 		
-		<button class="btn btn-primary btn-lg" type="submit" ng-click="clickOnTrash()">
+		<button class="btn btn-default btn-lg" type="submit" ng-click="clickOnTrash()">
 			<strong> 
 				<i class="fa fa-trash" aria-hidden="true fa-3x"></i> Recycle Bin
 			</strong>
 		</button>
 		
 	</div> <!-- btn-group ends -->
-</div> <!-- col-sm-5 ends -->
+</div> <!-- col-md-6 ends -->
 
-<div class="col-sm-12">
-	<ng-include src="'views/snippets/itemsbox.html'"> </ng-include>
+<!-- organising of boxes -->
+<div class="col-sm-12"></div>
+
+<ng-include src="'views/snippets/directoriesbox.html'"> </ng-include>
+
+
+<!-- organising of boxes -->
+<p></p>
+<div class="col-sm-8"></div>
+
+<div class="col-sm-12 col-md-12">
 	
-		<!-- Modal Create Folder-->
-		<div class="modal fade" id="folderModal" tabindex="-1" role="dialog" aria-labelledby="modalFolder">
-  			<div class="modal-dialog" role="document">
-    			<div class="modal-content">
+	<button class="btn btn-primary btn-lg" type="submit" ng-click="newFilePage()">
+		<strong> 
+			<i class="fa fa-file-text-o" aria-hidden="true fa-3x"></i> Create File
+		</strong>
+	</button>
+
+	<!-- Button trigger modal -->
+	<button class="btn btn-warning btn-lg" data-toggle="modal" data-target="#folderModal" type="button">
+		<strong> 
+			<i class="fa fa-folder" aria-hidden="true fa-3x"></i> Create Folder
+		</strong>
+	</button>
+	
+</div> <!-- col-sm-12 col-md-12 ends -->
+	
+<!-- MODALS -->
+
+<!-- Modal Create Folder-->
+<div class="modal fade" id="folderModal" tabindex="-1" role="dialog" aria-labelledby="modalFolder">
+ 	<div class="modal-dialog" role="document">
+  			<div class="modal-content">
       				
       				<div class="modal-header">
         				
@@ -37,7 +63,7 @@
         					<span aria-hidden="true">&times;</span>
         				</button>
         				
-        				<h3 class="modal-title" id="modalFolder" style="font-family: 'Pattaya', sans-serif">
+        				<h3 class="modal-title" id="modalFolder">
         					<strong>
         						<i class="fa fa-cog fa-lg" aria-hidden="true"></i> Creating Folder
         					</strong>
@@ -72,10 +98,10 @@
       				
     			</div> <!-- modal-content ends -->
   			</div> <!-- modal-dialog ends -->
-		</div> <!-- folderModal ends -->
+</div> <!-- folderModal ends -->
 
-		<!-- Modal Share File -->
-		<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="modalSharing">
+<!-- Modal Share File -->
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="modalSharing">
   			<div class="modal-dialog" role="document">
     			<div class="modal-content">
       				
@@ -85,7 +111,7 @@
         					<span aria-hidden="true">&times;</span>
         				</button>
         				
-        				<h3 class="modal-title" id="modalSharing" style="font-family: 'Pattaya', sans-serif">
+        				<h3 class="modal-title" id="modalSharing" >
         					<strong>
         						<i class="fa fa-share-alt-square fa-lg" aria-hidden="true"></i> Share
         					</strong>
@@ -141,12 +167,10 @@
       				
     			</div> <!-- modal-content ends -->
   			</div> <!-- modal-dialog ends -->
-		</div> <!-- modalShare ends -->
+</div> <!-- modalShare ends -->
 		
-	</div> <!-- col-sm-12 col-md-12 ends -->
-
-		<!-- Modal Rename File -->
-		<div class="modal fade" id="renameFileModal" tabindex="-1" role="dialog" aria-labelledby="renameModal" aria-hidden="true">
+<!-- Modal Rename File -->
+<div class="modal fade" id="renameFileModal" tabindex="-1" role="dialog" aria-labelledby="renameModal" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -193,9 +217,9 @@
 		      
 		    </div> <!-- modal-content ends -->
 		  </div> <!-- modal-dialog -->
-		</div> <!-- renameModal ends -->
+</div> <!-- renameModal ends -->
 		
-		<div class="modal fade" id="renameFolderModal" tabindex="-1" role="dialog" aria-labelledby="renameModal" aria-hidden="true">
+<div class="modal fade" id="renameFolderModal" tabindex="-1" role="dialog" aria-labelledby="renameModal" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -206,7 +230,7 @@
   				
   				<h3 class="modal-title" id="modalFolder" style="font-family: 'Pattaya', sans-serif">
    					<strong>
-   						<i class="fa fa-pencil" aria-hidden="true"></i> Rename File/Folder
+   						<i class="fa fa-pencil" aria-hidden="true"></i> Rename Folder
    					</strong>
    				</h3>
 		      
@@ -242,10 +266,10 @@
 		      
 		    </div> <!-- modal-content ends -->
 		  </div> <!-- modal-dialog -->
-		</div> <!-- renameModal ends -->
+</div> <!-- renameModal ends -->
 		
 <!-- Delete Folder Modal -->
- <div class="modal fade" id="deleteFolderModal" role="dialog">
+<div class="modal fade" id="deleteFolderModal" role="dialog">
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
@@ -282,7 +306,7 @@
 </div> <!-- modal-fade ends -->
 
 <!-- Delete File Modal -->
- <div class="modal fade" id="deleteFileModal" role="dialog">
+<div class="modal fade" id="deleteFileModal" role="dialog">
 	<div class="modal-dialog">
     
 		<!-- Modal content-->

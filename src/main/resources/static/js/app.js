@@ -16,7 +16,7 @@ angular.module('app').config(['$urlRouterProvider', '$stateProvider', function($
 	
 	$stateProvider.state('dashboard.directories', {
 		url: '/directories/{folderPath:.*}',
-		templateUrl: 'views/snippets/directorybox.html',
+		templateUrl: 'views/snippets/directories.html',
 		controller: 'directoriesController'
 	});
 	

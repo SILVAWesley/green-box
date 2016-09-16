@@ -1,0 +1,91 @@
+<div class="user-box">
+	<div class="form-top">
+		<div class="form-top-right">
+			<h3>
+				<span ng-repeat="folder in getOpenedFolders() track by $index">
+					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
+					<a style="color:green" ui-sref="dashboard.directories({folderPath: folder.path})">
+						{{folder.name}}
+					</a> / 
+				</span>
+				
+				<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
+				{{getCurrentFolder().name + "/"}} 
+				
+			</h3>
+		</div> <!-- form-top-right ends -->
+	</div> <!-- form-top ends -->
+</div> <!-- user-box ends -->
+
+<div class="form-bottom">
+	<form class="login-form" role="form" action="" method="post">
+		<div class="form-group">
+			<table class="table table-striped">
+				
+				<thead>
+					<tr>
+						<th>Name</th>
+					</tr>
+				</thead>
+				
+				<tbody ng-repeat="item in getFolders() track by $index">
+					<tr id="folderList">
+					
+						<td>
+							<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
+							<a style="color:green" href="" ng-click="clickOnFolder(item)"> {{item.name}}</a>
+						</td>
+
+						<td class="col-sm-2"></td> <!-- standardization of box -->
+						
+						<td class="col-sm-2">
+						</td> <!-- standardization of box -->
+						
+						<td class="col-sm-2">
+							<a class="fa fa-remove fa-2x" data-toggle="modal" data-target="#deleteFolderModal" title="Delete Folder"  
+							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnDeleteFolder(item)"> 
+							   Delete
+							</a>
+						</td> <!-- standardization of box -->
+						<td class="col-sm-1"></td> <!-- standardization of box -->
+						
+					</tr> <!-- folderList ends -->
+				</tbody> <!-- item in getFolders() track by $index ends -->
+				
+				<tbody ng-repeat="item in getFiles() track by $index">
+					<tr id="fileList">
+						
+						<td>
+							<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
+							<a style="color:green" href="" ng-click="clickOnFile(item)"> {{item.name + '.' + item.extension}}</a>
+						</td>
+	
+						<td class="col-sm-2">
+
+						</td>
+											
+						<td class="col-sm-2">
+
+						</td>
+						
+						<td class="col-sm-2">
+							<a class="fa fa-remove fa-2x" data-toggle="modal" data-target="#deleteFileModal" title="Delete File"  
+							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnDeleteFile(item)"> 
+							   Delete
+							</a>
+						</td> 
+
+						<td class="col-sm-1"></td> <!-- standardization of box -->
+
+					</tr> <!-- fileList ends -->
+				</tbody> <!-- item in getFiles() track by $index ends -->
+			
+			</table> <!-- table table-striped ends -->
+		</div> <!-- form-group ends -->
+	</form> <!-- login-form ends -->
+</div> <!-- form-bottom ends -->
+
+<p></p>
+
+<!-- organising of boxes -->
+<div class="col-sm-8"></div>
