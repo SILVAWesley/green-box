@@ -52,6 +52,10 @@ angular.module('app').controller("directoriesController", function($scope,
 		DirectoryService.setClickedItem(item);
 	}
 	
+	$scope.clickOnZipFile = function(item){
+		DirectoryService.setClickedItem(item);
+	}
+	
 	$scope.renameFile = function() {
 		DirectoryService.renameFile($scope.newName);
 	}
