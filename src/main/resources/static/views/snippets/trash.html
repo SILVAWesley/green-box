@@ -2,19 +2,19 @@
 	<p></p>
 	<div class="btn-group" role="group" aria-label="...">
 		
-		<button class="btn btn-primary btn-lg" type="submit" ng-click="clickOnMyFiles()">
+		<button class="btn btn-warning btn-lg" type="submit" ng-click="clickOnMyFiles()">
 			<strong> 
 				<i class="fa fa-check-circle" aria-hidden="true fa-3x"></i> My Files
 			</strong>
 		</button>
 		
-		<button class="btn btn-warning btn-lg" type="submit" ng-click="clickOnSharedWithMe()">
+		<button class="btn btn-primary btn-lg" type="submit" ng-click="clickOnSharedWithMe()">
 			<strong> 
 				<i class="fa fa-share-alt" aria-hidden="true fa-3x"></i> Shared With Me
 			</strong>
 		</button>
 		
-		<button class="btn btn-default btn-lg" type="submit" ng-click="clickOnTrash()">
+		<button class="btn btn-danger btn-lg" type="submit" ng-click="clickOnTrash()">
 			<strong> 
 				<i class="fa fa-trash" aria-hidden="true fa-3x"></i> Recycle Bin
 			</strong>
@@ -22,6 +22,7 @@
 		
 	</div> <!-- btn-group ends -->
 </div> <!-- col-md-6 ends -->
+
 
 <!-- organising of boxes -->
 <div class="col-sm-12"></div>
@@ -68,10 +69,13 @@
 						<td class="col-sm-2"></td> <!-- standardization of box -->
 
 						<td class="col-sm-3">
-							<a class="fa fa-remove fa-2x" data-toggle="modal" data-target="#deletePermanentlyFolderModal" title="Delete Permanently Folder"  
-							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnDeletePermanentlyFolder(item)"> 
-							   Delete Permanently
-							</a>
+ 							<button class="btn-link4" title="Delete Permanently File" data-toggle="modal" data-target="#deletePermanentlyFolderModal" title="Delete Permanently Folder"
+							    aria-hidden="true" ng-click="clickOnDeletePermanentlyFolder(item)">
+  								<strong> 
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> 
+							   		Delete Permanently
+								</strong>
+ 							</button>
 						</td> <!-- standardization of box -->
 						<td class="col-sm-1"></td> <!-- standardization of box -->
 						
@@ -90,10 +94,13 @@
 						<td class="col-sm-2"></td> <!-- standardization of box -->
 
 						<td class="col-sm-2">
-							<a class="fa fa-remove fa-2x" title="Delete Permanently File" data-toggle="modal" data-target="#deletePermanentlyFileModal" title="Delete Permanently File" 
-							   style="color:#18A103" href=""  aria-hidden="true" ng-click="clickOnDeletePermanentlyFile(item)"> 
-							   Delete Permanently
-							</a>
+ 							<button class="btn-link4" title="Delete Permanently File" data-toggle="modal" data-target="#deletePermanentlyFileModal" title="Delete Permanently File"  
+							    aria-hidden="true" ng-click="clickOnDeletePermanentlyFile(item)">
+  								<strong> 
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> 
+							   		Delete Permanently
+								</strong>
+ 							</button>
 						</td>
 						<td class="col-sm-1"></td> <!-- standardization of box -->
 
