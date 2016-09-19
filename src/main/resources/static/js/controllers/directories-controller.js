@@ -88,6 +88,14 @@ angular.module('app').controller("directoriesController", function($scope,
 		DirectoryService.finalFolderDelete();
 	}
 	
+	$scope.zipFile = function(){
+		DirectoryService.zipFile();
+	}
+	
+	$scope.unzipFile = function(){
+		DirectoryService.unzipFile();
+	}	
+	
 	$scope.newFolder = function() {
 		DirectoryService.newFolder($scope.newFolderName);
 	}
