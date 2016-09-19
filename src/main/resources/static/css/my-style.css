@@ -88,7 +88,7 @@ img { max-width: 100%; }
 	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
 }
 
-.btn-link3:hover, .btn-link4:hover, .btn-link5:hover {
+.btn-link3:hover, .btn-link4:hover, .btn-link5:hover, .btn-link6:hover {
   	background: #85C4B9;
   	text-decoration: none;
 }
@@ -115,6 +115,16 @@ img { max-width: 100%; }
 	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
 }
 
+.btn-link6 {
+  	font-family: Arial;
+  	color: #ffffff;
+  	font-size: 22px;
+  	background: #008BBA;
+  	padding: 2px 25px 2px 25px;
+  	text-decoration: none;
+  	outline: 0;
+	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
+}
 
 /***** Top content *****/
 
