@@ -39,17 +39,22 @@
 						<td class="col-sm-2"></td> <!-- standardization of box -->
 						
 						<td class="col-sm-2">
-							<a class="fa fa-pencil fa-2x" data-toggle="modal" data-target="#renameFolderModal" title="Rename folder"  
-							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnRenameFolder(item)"> 
-							   Rename
-							</a>
+ 							<button class="btn-link3" title="Rename Folder" data-toggle="modal" data-target="#renameFolderModal" title="Rename folder"  
+							   aria-hidden="true" ng-click="clickOnRenameFolder(item)" type="button">
+  								<strong> 
+   									<i class="fa fa-pencil"  aria-hidden="true fa-3x"></i> Rename
+								</strong>
+ 							</button>
 						</td> <!-- standardization of box -->
 						
 						<td class="col-sm-2">
-							<a class="fa fa-remove fa-2x" data-toggle="modal" data-target="#deleteFolderModal" title="Delete Folder"  
-							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnDeleteFolder(item)"> 
-							   Delete
-							</a>
+ 							<button class="btn-link4" data-toggle="modal" data-target="#deleteFolderModal" type="button" title="Delete Folder"  
+							   aria-hidden="true" ng-click="clickOnDeleteFolder(item)">
+  								<strong> 
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> 
+							   		Delete
+								</strong>
+ 							</button>
 						</td> <!-- standardization of box -->
 						<td class="col-sm-1"></td> <!-- standardization of box -->
 						
@@ -65,22 +70,30 @@
 						</td>
 	
 						<td class="col-sm-2">
-							<a class="fa fa-share-alt fa-2x" title="Share with your friends" data-toggle="modal" data-target="#shareModal"  
-							   style="color:#18A103" href=""  aria-hidden="true" ng-click="clickOnShareFile(item)"> Share
-							</a>
+ 							<button class="btn-link5" title="Share with your friends" data-toggle="modal" data-target="#shareModal"  type="button"
+							   aria-hidden="true" ng-click="clickOnShareFile(item)">
+  								<strong> 
+   									<i class="fa fa-share-alt"  aria-hidden="true fa-3x"></i> Share
+								</strong>
+ 							</button>
 						</td>
 											
 						<td class="col-sm-2">
-							<a class="fa fa-pencil fa-2x" title="Rename file" data-toggle="modal" data-target="#renameFileModal"  
-							   style="color:#18A103" href="" aria-hidden="true" ng-click="clickOnRenameFile(item)"> Rename
-							</a>
+ 							<button class="btn-link3" title="Rename file" data-toggle="modal" data-target="#renameFileModal" type="button" ng-click="clickOnRenameFile(item)">
+  								<strong> 
+   									<i class="fa fa-pencil"  aria-hidden="true fa-3x"></i> Rename
+								</strong>
+ 							</button>
 						</td>
 						
 						<td class="col-sm-2">
-							<a class="fa fa-remove fa-2x" data-toggle="modal" data-target="#deleteFileModal" title="Delete File"  
-							   aria-hidden="true" style="color:#18A103" href="" ng-click="clickOnDeleteFile(item)"> 
-							   Delete
-							</a>
+ 							<button class="btn-link4" data-toggle="modal" data-target="#deleteFileModal" type="button" title="Delete File"  
+							    ng-click="clickOnDeleteFile(item)">
+  								<strong> 
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> 
+							   		Delete
+								</strong>
+ 							</button>
 						</td> 
 
 						<td class="col-sm-1"></td> <!-- standardization of box -->
