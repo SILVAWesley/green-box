@@ -7,6 +7,8 @@ body {
     text-align: center;
 	background-image: url(../img/backgrounds/green-gradient.jpg);
  	background-repeat: repeat;
+ 	padding-right: 0 !important;
+ 	overflow-y: scroll;	
 }
 
 li a {
