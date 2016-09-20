@@ -3,11 +3,11 @@
 <head>
 	<base href="/"/>
 	<!-- include summernote css/js-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet"></link>
-	<link rel="stylesheet" href="summernote.css" rel="stylesheet"></link>
-		
 	<script src="js/configurations/summernote-config.js"></script>
 	<script src="js/configurations/summernote-file-config.js"></script>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet"></link>
+	<link rel="stylesheet" href="summernote.css"></link>		
 </head>
 
 <body>
@@ -19,14 +19,14 @@
 
 					<div class="user-box">
 						<div class="form-top">	
-							<h3 style="font-family: 'Pattaya', sans-serif"><strong>New File: </strong>
+							<h3>
+								<strong>New File: </strong>								
+								<input type="text" placeholder="File Name" ng-model="newFileName"></input>
+								&emsp; <!-- adition of space -->
 								
-								<input type="text" placeholder="File Name" ng-model="newFileName"/>
-								&emsp;&emsp; <!-- adition of space -->
-								<strong> Select Extension: </strong>
-								
-								<select class="btn btn-success" style="font-family: 'Open Sans', sans-serif; font-size: 18px" ng-model="currentExtension">
-  									<option ng-repeat="extension in extensions"><strong>{{extension}}</strong></option>
+								<strong> Select Extension: </strong>							
+								<select class="btn btn-success" style="font-family: 'Open Sans', sans-serif; font-size: 18px; background:#ffac00;" ng-model="currentExtension">
+  									<option ng-repeat="extension in extensions">{{extension}}</option>
 								</select>
 								
 							</h3>
@@ -36,11 +36,9 @@
 					<form class="edit-form" method="post" action="" role="form">
 						<summernote class="click2edit" id="summernote" ng-model="content"></summernote>
 					</form>
-
-					<p></p>
-					
+				
 					<!-- organising of boxes -->
-					<div class="col-sm-8"></div>
+					<p></p><div class="col-sm-8"></div>					
 					
 					<div class="col-sm-4">
 						
