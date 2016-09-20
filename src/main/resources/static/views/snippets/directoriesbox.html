@@ -36,27 +36,28 @@
 							<a style="color:green" href="" ng-click="clickOnFolder(item)"> {{item.name}}</a>
 						</td>
 
-						<td class="col-sm-2"></td> <!-- standardization of box -->
-						<td class="col-sm-2"></td> <!-- standardization of box -->
+						<!-- standardization of box -->
+						<td class="col-md-2"></td> 
+						<td class="col-md-2"></td>
 						
-						<td class="col-sm-2">
- 							<button class="btn-link3" title="Rename Folder" data-toggle="modal" data-target="#renameFolderModal" title="Rename folder"  
-							   aria-hidden="true" ng-click="clickOnRenameFolder(item)" type="button">
+						<td class="col-md-2">
+ 							<button class="btn-button2" title="Rename Folder" type="button" data-toggle="modal" 
+ 									data-target="#renameFolderModal" aria-hidden="true" ng-click="clickOnRenameFolder(item)">
   								<strong> 
    									<i class="fa fa-pencil"  aria-hidden="true fa-3x"></i> Rename
 								</strong>
  							</button>
 						</td> <!-- standardization of box -->
 						
-						<td class="col-sm-2">
- 							<button class="btn-link4" data-toggle="modal" data-target="#deleteFolderModal" type="button" title="Delete Folder"  
-							   aria-hidden="true" ng-click="clickOnDeleteFolder(item)">
+						<td class="col-md-2">
+ 							<button class="btn-button1" data-toggle="modal" data-target="#deleteFolderModal" type="button" 
+ 									title="Delete Folder" aria-hidden="true" ng-click="clickOnDeleteFolder(item)">
   								<strong> 
-   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> 
-							   		Delete
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> Delete
 								</strong>
  							</button>
-						</td> <!-- standardization of box -->						
+						</td> <!-- col-md-3 ends -->
+											
 					</tr> <!-- folderList ends -->
 				</tbody> <!-- item in getFolders() track by $index ends -->
 				
@@ -68,38 +69,38 @@
 							<a style="color:green" href="" ng-click="clickOnFile(item)"> {{item.name + '.' + item.extension}}</a>
 						</td>
 						
-						<td class="col-sm-2">
- 							<button class="btn-link6" title="Share with your friends" data-toggle="modal" data-target="#zipModal"  type="button"
-							   aria-hidden="true" ng-click="clickOnZipFile(item)">
+						<td class="col-md-2">
+ 							<button class="btn-button4" title="Share with your friends" type="button" data-toggle="modal" 
+ 									data-target="#zipModal" aria-hidden="true" ng-click="clickOnZipFile(item)">
   								<strong> 
    									<i class="fa fa-file-zip-o"  aria-hidden="true fa-3x"></i> Zip
 								</strong>
  							</button>
 						</td>
 	
-						<td class="col-sm-2">
- 							<button class="btn-link5" title="Share with your friends" data-toggle="modal" data-target="#shareModal"  type="button"
-							   aria-hidden="true" ng-click="clickOnShareFile(item)">
+						<td class="col-md-2">
+ 							<button class="btn-button3" title="Share with your friends"  type="button" data-toggle="modal" 
+ 									data-target="#shareModal" aria-hidden="true" ng-click="clickOnShareFile(item)">
   								<strong> 
    									<i class="fa fa-share-alt"  aria-hidden="true fa-3x"></i> Share
 								</strong>
  							</button>
 						</td>
 											
-						<td class="col-sm-2">
- 							<button class="btn-link3" title="Rename file" data-toggle="modal" data-target="#renameFileModal" type="button" ng-click="clickOnRenameFile(item)">
+						<td class="col-md-2">
+ 							<button class="btn-button2" title="Rename file" type="button" data-toggle="modal" 
+ 									data-target="#renameFileModal" ng-click="clickOnRenameFile(item)">
   								<strong> 
    									<i class="fa fa-pencil"  aria-hidden="true fa-3x"></i> Rename
 								</strong>
  							</button>
 						</td>
 						
-						<td class="col-sm-2">
- 							<button class="btn-link4" data-toggle="modal" data-target="#deleteFileModal" type="button" title="Delete File"  
-							    ng-click="clickOnDeleteFile(item)">
+						<td class="col-md-2">
+ 							<button class="btn-button1" title="Delete File" type="button" data-toggle="modal" 
+ 									data-target="#deleteFileModal" ng-click="clickOnDeleteFile(item)">
   								<strong> 
-   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> 
-							   		Delete
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> Delete
 								</strong>
  							</button>
 						</td> 

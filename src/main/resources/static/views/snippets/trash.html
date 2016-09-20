@@ -64,20 +64,22 @@
 							<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
 							<a style="color:green" href="" ng-click="clickOnFolder(item)"> {{item.name}}</a>
 						</td>
-
-						<td class="col-sm-2"></td> <!-- standardization of box -->
-						<td class="col-sm-2"></td> <!-- standardization of box -->
+						
+						<!-- standardization of box -->
+						<td class="col-sm-2"></td> 
+						<td class="col-sm-2"></td>
 
 						<td class="col-sm-3">
- 							<button class="btn-link4" title="Delete Permanently File" data-toggle="modal" data-target="#deletePermanentlyFolderModal" title="Delete Permanently Folder"
-							    aria-hidden="true" ng-click="clickOnDeletePermanentlyFolder(item)">
+ 							<button class="btn-button1" title="Delete Permanently File" data-toggle="modal" data-target="#deletePermanentlyFolderModal" 
+ 									title="Delete Permanently Folder" aria-hidden="true" ng-click="clickOnDeletePermanentlyFolder(item)">
   								<strong> 
-   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> 
-							   		Delete Permanently
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> Delete Permanently
 								</strong>
  							</button>
-						</td> <!-- standardization of box -->
-						<td class="col-sm-1"></td> <!-- standardization of box -->
+						</td> <!-- col-sm-3 ends -->
+						
+						 <!-- standardization of box -->
+						<td class="col-sm-1"></td>
 						
 					</tr> <!-- folderList ends -->
 				</tbody> <!-- item in getFolders() track by $index ends -->
@@ -89,20 +91,22 @@
 							<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
 							<a style="color:green" href="" ng-click="clickOnFile(item)"> {{item.name + '.' + item.extension}}</a>
 						</td>
-
-						<td class="col-sm-2"></td> <!-- standardization of box -->
-						<td class="col-sm-2"></td> <!-- standardization of box -->
+						
+						<!-- standardization of box -->
+						<td class="col-sm-2"></td>
+						<td class="col-sm-2"></td>
 
 						<td class="col-sm-2">
- 							<button class="btn-link4" title="Delete Permanently File" data-toggle="modal" data-target="#deletePermanentlyFileModal" title="Delete Permanently File"  
+ 							<button class="btn-button1" title="Delete Permanently File" data-toggle="modal" data-target="#deletePermanentlyFileModal" title="Delete Permanently File"  
 							    aria-hidden="true" ng-click="clickOnDeletePermanentlyFile(item)">
   								<strong> 
-   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> 
-							   		Delete Permanently
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> Delete Permanently
 								</strong>
  							</button>
 						</td>
-						<td class="col-sm-1"></td> <!-- standardization of box -->
+						
+						<!-- standardization of box -->
+						<td class="col-sm-1"></td>
 
 					</tr> <!-- fileList ends -->
 				</tbody> <!-- item in getFiles() track by $index ends -->

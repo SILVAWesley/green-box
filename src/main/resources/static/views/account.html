@@ -21,14 +21,13 @@
 					<div class="dropdown">
 						
 						<p></p> <!-- adition of space -->
-
-						<a id="dropdownNotifications" data-toggle="dropdown"  title="notifications" aria-hidden="true" aria-haspopup="true" aria-expanded="true" ng-click="actionClick()" href=""> 
-							<h9>
+						
+						<a id="dropdownNotifications" title="notifications" data-toggle="dropdown" href="" 
+							aria-hidden="true" aria-haspopup="true" aria-expanded="true" ng-click="actionClick()"> 					
 								<i class="fa fa-bell fa-2x" aria-hidden="true"></i>
 								{{numberOfNotVisitedNotifications()}}
-							</h9>
 					  	</a>
-					  
+					  	
 					  	<ul class="dropdown-menu" aria-labelledby="dropdownNotifications">
 					  	
 					  		<li class="dropdown-header">
@@ -42,8 +41,7 @@
 					  		
 					  		<li ng-repeat="notification in getNotifications()">
 					  			<p>
-					  				<i class="fa fa-file-text-o" aria-hidden="true"></i>
-					  				{{notification.content}} 
+					  				<i class="fa fa-file-text-o" aria-hidden="true"></i> {{notification.content}} 
 					  			</p>
 					  		</li>
 
