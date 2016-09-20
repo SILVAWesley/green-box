@@ -3,13 +3,11 @@
 	<div class="container-fluid">
 		
 		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-				
+		<div class="navbar-header">				
 			<a class="navbar-brand" href="#/dashboard/directories/root">
 				<i class="fa fa-home fa-2x" aria-hidden="true"></i>
 				<strong>Home</strong>  
-			</a>
-				
+			</a>				
 		</div> <!-- navbar-header ends -->
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,22 +49,19 @@
 				
 				<li>
 					<a href="https://github.com/SILVAWesley/green-box">
-						<i class="fa fa-question fa-2x" aria-hidden="true"></i>
-						About 
+						<i class="fa fa-question fa-2x" aria-hidden="true"></i> About 
 					</a>
 				</li>
 
 				<li id="account">
 					<a href="" ng-click='userClick()'>
-						<i class="fa fa-user fa-2x" aria-hidden="true"></i>
-						My Account  
+						<i class="fa fa-user fa-2x" aria-hidden="true"></i> My Account  
 					</a>
 				</li>
 				
 				<li>
 					<a href="/" ng-click="logout()">
-						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> 
-						Logout
+						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>  Logout
 					</a>
 				</li>			
 			</ul> <!-- nav navbar-nav navbar-right ends -->
@@ -78,7 +73,7 @@
 					<input class="form-control" type="text" placeholder="Find" ng-model="findFile"><!-- need implement this -->
 				</div>
 				
-				<button class="btn btn-default" type="submit" title="Find in all root" ng-click="findFile()"><!-- need implement this -->
+				<button class="btn btn-success active" type="submit" title="Find in all root" ng-click="findFile()"><!-- need implement this -->
 					<strong>Submit</strong>
 				</button>
 			
@@ -94,26 +89,24 @@
 		<div class="container">
 			
 			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2 text">
+				<div class="col-md-8 col-md-offset-2 text">
 					<h1>
 						<strong>
-							<i class="fa fa-cube fa-2x" aria-hidden="true"></i> 
-							Green Box
+							<i class="fa fa-cube fa-2x" aria-hidden="true"></i> Green Box
 						</strong>
 					</h1>
-				</div> <!-- col-sm-8 col-sm-offset-2 text ends -->
+				</div> <!-- col-md-8 col-md-offset-2 text ends -->
 			</div> <!-- row ends -->
 			
 			<br></br> <!-- adition of space -->
 
-			<div class="col-sm-6">
+			<div class="col-md-6">
 				<div class="form-top-right">
 					<h3>
-						Hello, {{getUsername()}}! 
-						<i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
+						Hello, {{getUsername()}}! <i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
 					</h3>
 				</div>
-			</div> <!-- col-sm-6 ends -->
+			</div> <!-- col-md-6 ends -->
 			
 			<p></p><p></p> <!-- adition of space -->
 
