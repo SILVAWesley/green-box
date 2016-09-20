@@ -26,6 +26,8 @@ import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ServerConstants;
 import org.ufcg.si.util.permissions.file.FilePermissions;
 
+import io.undertow.attribute.RequestMethodAttribute;
+
 /**
  * This controller class uses JSON data format to be the 
  * endpoint of requests related to user actions
@@ -282,4 +284,35 @@ public class UsersActionsController {
 			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
 		} 
 	}
+	
+	/**
+	 * Delete a file
+	 * @param requestBody
+	 * 		All the information necessary to delete a file
+	 * @return the http status and user updated.
+	 * @throws Exception if can't delete the file
+	 */
+	
+	@RequestMapping(value = "/delete_file", 
+			method = RequestMethod.DELETE,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<User> deleteFile(@RequestBody User requestBody)throws Exception{
+			try{
+				User dbUser = userService.findByUsername(requestBody.getUsername());
+				
+				ExceptionHandler.checkUserInDatabase(dbUser);
+				
+				User updateUser = userService.update(dbUser);
+				
+				return new ResponseEntity<>(updateUser, HttpStatus.OK);
+			}catch(GreenboxException gbe){
+				gbe.printStackTrace();
+				throw new ServletException("Request error while trying to delete file..." + gbe.getMessage());
+			}catch(DataAccessException dae){
+				dae.printStackTrace();
+				throw new ServletException("Request error while trying to delete file... " + dae.getMessage());
+			}
+		
+		}
 }

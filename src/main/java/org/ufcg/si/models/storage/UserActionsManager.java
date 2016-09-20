@@ -68,6 +68,7 @@ public class UserActionsManager {
 		
 		this.rootFolder = new FolderGB(name, "");
 		this.rootFolder.addFolder(name);
+		this.rootFolder.addFolder("Trash");
 		this.rootFolder.addFolder(SHARED_WITH_ME_FOLDER_NAME);
 		this.rootFolder.addFolder(I_SHARED_FOLDER_NAME);
 		
@@ -257,6 +258,11 @@ public class UserActionsManager {
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
 		}
+	}
+	
+	public void deleteFile(String fileName, String extension,String path){
+		FileGB fileToDelete = rootFolder.findFileByEverything(fileName, path, extension);
+		FilePermissions permission = findFilePermission(fileName, extension, fileToDelete.getPath());
 	}
 	
 	/**
