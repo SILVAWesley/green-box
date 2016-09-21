@@ -6,7 +6,9 @@ package org.ufcg.si.util.permissions.folder;
 public enum FolderPermissions {
 	OWNER(FolderActions.ADD_FILE,
 		  FolderActions.ADD_FOLDER,
-		  FolderActions.EDIT_FOLDER_NAME),
+		  FolderActions.EDIT_FOLDER_NAME,
+		  FolderActions.DELETE_FILE,
+		  FolderActions.DELETE_FOLDER),
 	SHARED();
 	
 	private FolderActions[] allowedActions;

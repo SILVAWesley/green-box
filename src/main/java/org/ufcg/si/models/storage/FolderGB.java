@@ -307,6 +307,16 @@ public class FolderGB {
 	}
 	
 	/**
+	 * 
+	 */
+	
+	public void deleteFile(String name, String extension, String path) {
+		FolderGB folder = findFolderByPath(path);
+		FileGB file = folder.findFileByNameAndExtension(name, extension);
+		folder.files.remove(file);
+	}
+	
+	/**
 	 * @return the list of children files
 	 */
 	public List<FileGB> getFiles() {
