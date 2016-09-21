@@ -167,6 +167,14 @@ public class User {
 	}
 	
 	/**
+	 * 
+	 */
+	
+	public void deleteFile(String name, String extension, String path) {
+		userActionsManager.deleteFile(name, extension, path);
+	}
+	
+	/**
 	 * Return the iterable of the notification's list
 	 * @return
 	 * 		The iterable of the notification's list
