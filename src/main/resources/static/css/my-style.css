@@ -77,11 +77,11 @@ img { max-width: 100%; }
 
 .dropdown-header h3 {
     font-family: 'Pattaya', sans-serif; 
-    color:#DF514C;   
+    color:#df514c;   
 }
 
 .dropdown a, .dropdown:hover a{
-    color:#DF514C;   
+    color:#df514c;   
 }
 
 
@@ -96,10 +96,10 @@ img { max-width: 100%; }
 .btn-button1 {
   	color: #ffffff;
 	font-family: Arial;
-  	font-size: 22px;
+  	font-size: 16px;
   	text-decoration: none;
-  	background: #dc403b;
-  	padding: 2px 25px 2px 25px;
+  	background: #df514c;
+  	padding: 2px 20px 2px 20px;
 	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
 	outline: 0;
 }
@@ -107,10 +107,10 @@ img { max-width: 100%; }
 .btn-button2 {
   	color: #ffffff;
   	font-family: Arial;
-  	font-size: 22px;
+  	font-size: 16px;
   	text-decoration: none;
   	background: #ffac00;
-  	padding: 2px 25px 2px 25px;
+  	padding: 2px 20px 2px 20px;
   	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
   	outline: 0;
 	
@@ -119,10 +119,10 @@ img { max-width: 100%; }
 .btn-button3 {
   	color: #ffffff;
 	font-family: Arial;
-  	font-size: 22px;
+  	font-size: 16px;
   	text-decoration: none;
   	background: #b1eb00;
-  	padding: 2px 25px 2px 25px;
+  	padding: 2px 20px 2px 20px;
 	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
 	outline: 0;
 }
@@ -130,10 +130,10 @@ img { max-width: 100%; }
 .btn-button4 {
   	color: #ffffff;
   	font-family: Arial;
-  	font-size: 22px;
+  	font-size: 16px;
   	text-decoration: none;
   	background: #008bba;
-  	padding: 2px 25px 2px 25px;
+  	padding: 2px 20px 2px 20px;
 	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
 	outline: 0;
 }
@@ -141,6 +141,16 @@ img { max-width: 100%; }
 .btn-button1:hover, .btn-button2:hover, .btn-button3:hover, .btn-button4:hover {
   	background: #85C4B9;
   	text-decoration: none;
+}
+
+
+/***** NavBar Buttons Style *****/
+
+ul:hover li:hover a:hover {
+	color: #19E748;
+}
+.navbar-header:hover a:hover{
+	color: #19E748;
 }
 
 
@@ -161,7 +171,7 @@ img { max-width: 100%; }
 }
 
 
-/***** Forms *****/
+/***** Forms Show Files and Folders *****/
 
 .form-box {
 	margin-top: 70px;
@@ -206,13 +216,8 @@ img { max-width: 100%; }
 	text-align: left;
 }
 
-
-.form-bottom form button.btn {
-	width: 100%;
-}
-
-.form-bottom form .input-error {
-	border-color: #ec2a1d;
+table tbody:hover tr td {
+	background-color: #ececec
 }
 
 
