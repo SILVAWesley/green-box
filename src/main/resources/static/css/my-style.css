@@ -87,9 +87,37 @@ img { max-width: 100%; }
 
 /***** Modals *****/
 
-.modal-body h4, .modal-header h3 {
-	 font-family: 'Pattaya', sans-serif; 
+.modal-header h3 {
+	font-family: 'Pattaya', sans-serif;
+	font-weight: bold; 
 }
+
+.modal-body, .modal-body h4 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+    font-size: 15px; 
+}
+
+.fa-exclamation-triangle {
+	color: #ffca00;		  	 	
+}
+
+.fa-info-circle {
+	color: #74aaf7;		  	 	
+}
+
+.fa-question-circle {
+	color: #3b5998;		  	 	
+}
+
+.fa-envelope {
+	color: #19e748;		  	 	
+}
+
+.fa-cog {
+	color: #85919C;
+}
+
 
 /***** Btn Buttons Style *****/
 
@@ -215,6 +243,17 @@ ul:hover li:hover a:hover {
 	-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
 	text-align: left;
 }
+
+.form-bottom form button.btn {
+	width: 100%;
+}
+
+.middle-border {
+	min-height: 300px;
+	margin-top: 170px;
+	border-right: 1px solid #400040;
+}
+
 
 table tbody:hover tr td {
 	background-color: #ececec
