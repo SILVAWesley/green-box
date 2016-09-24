@@ -26,7 +26,6 @@ import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ServerConstants;
 import org.ufcg.si.util.permissions.file.FilePermissions;
 
-import io.undertow.attribute.RequestMethodAttribute;
 
 /**
  * This controller class uses JSON data format to be the 
@@ -294,7 +293,7 @@ public class UsersActionsController {
 	 */
 	
 	@RequestMapping(value = "/deletefile", 
-			method = RequestMethod.POST,
+			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<User> deleteFile(@RequestBody AddNDeleteFileBean requestBody)throws Exception {
@@ -325,7 +324,7 @@ public class UsersActionsController {
 	 */
 	
 	@RequestMapping(value = "/deletefolder",
-			method = RequestMethod.POST,
+			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> deleteFolder(@RequestBody RenameNDeleteFolderBean requestBody)throws Exception {

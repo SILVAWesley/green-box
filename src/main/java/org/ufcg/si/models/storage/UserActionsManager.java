@@ -268,6 +268,7 @@ public class UserActionsManager {
 	 */
 	
 	public void deleteFile(String name, String extension, String path) {
+		System.out.println("PRINTANDO O PATH: " + path);
 		FolderGB folder = rootFolder.findFolderByPath(path);
 		FolderPermissions permission = findFolderPermission(folder.getName(), folder.getPath());
 		

@@ -4,12 +4,11 @@ import javax.servlet.ServletException;
 
 import org.jboss.jandex.Main;
 import org.springframework.http.ResponseEntity;
-import org.ufcg.si.beans.requests.AddFileBean;
 import org.ufcg.si.beans.requests.AddFolderBean;
+import org.ufcg.si.beans.requests.AddNDeleteFileBean;
 import org.ufcg.si.beans.requests.EditFileBean;
 import org.ufcg.si.beans.requests.RegistrationBean;
 import org.ufcg.si.beans.requests.RenameFileBean;
-import org.ufcg.si.beans.requests.RenameFolderBean;
 import org.ufcg.si.controllers.AuthenticationController;
 import org.ufcg.si.controllers.UsersActionsController;
 import org.ufcg.si.controllers.UsersController;
@@ -67,7 +66,7 @@ public class Facade {
 
 	public void addFile(User user, String fileName, String fileExtension, String filePath, String fileContent)
 			throws ServletException {
-		AddFileBean requestBody = this.createAddFileRequestBody(user, fileName, fileExtension, filePath,
+		AddNDeleteFileBean requestBody = this.createAddNDeleteFileRequestBody(user, fileName, fileExtension, filePath,
 				fileContent);
 		this.userAction.addFile(requestBody);
 	}
