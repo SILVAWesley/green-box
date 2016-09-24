@@ -15,7 +15,7 @@ import org.ufcg.si.beans.requests.AddNDeleteFileBean;
 import org.ufcg.si.beans.requests.AddFolderBean;
 import org.ufcg.si.beans.requests.EditFileBean;
 import org.ufcg.si.beans.requests.RenameFileBean;
-import org.ufcg.si.beans.requests.RenameFolderBean;
+import org.ufcg.si.beans.requests.RenameNDeleteFolderBean;
 import org.ufcg.si.beans.requests.ShareFileBean;
 import org.ufcg.si.exceptions.ExceptionHandler;
 import org.ufcg.si.exceptions.GreenboxException;
@@ -165,7 +165,7 @@ public class UsersActionsController {
 					method = RequestMethod.PUT,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> renameFolder(@RequestBody RenameFolderBean body)throws Exception{
+	public ResponseEntity<User> renameFolder(@RequestBody RenameNDeleteFolderBean body)throws Exception{
 		try {
 			ExceptionHandler.checkRenameFolderBody(body);
 			User dbUser = userService.findByUsername(body.getUser().getUsername());
@@ -293,8 +293,8 @@ public class UsersActionsController {
 	 * @throws Exception if can't delete the file
 	 */
 	
-	@RequestMapping(value = "/delete_file", 
-			method = RequestMethod.DELETE,
+	@RequestMapping(value = "/deletefile", 
+			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<User> deleteFile(@RequestBody AddNDeleteFileBean requestBody)throws Exception {
@@ -303,9 +303,6 @@ public class UsersActionsController {
 				
 				ExceptionHandler.checkUserInDatabase(dbUser);
 				dbUser.deleteFile(requestBody.getFileName(), requestBody.getFileExtension(), requestBody.getFilePath());
-				
-				
-				
 				User updateUser = userService.update(dbUser);
 				
 				return new ResponseEntity<>(updateUser, HttpStatus.OK);
@@ -318,4 +315,35 @@ public class UsersActionsController {
 			}
 		
 		}
+	
+	/**
+	 * Delete a folder
+	 * @param requestBody
+	 * 		All the information necessary to delete a folder
+	 * @return the http status and user updated.
+	 * @throws Exception if can't delete the folder
+	 */
+	
+	@RequestMapping(value = "/deletefolder",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> deleteFolder(@RequestBody RenameNDeleteFolderBean requestBody)throws Exception {
+		try {
+			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+			
+			ExceptionHandler.checkUserInDatabase(dbUser);
+			dbUser.deleteFolder(requestBody.getFolderPath());
+			User updateUser = userService.update(dbUser);
+			
+			return new ResponseEntity<>(updateUser, HttpStatus.OK);
+		}  catch(GreenboxException gbe) {
+			gbe.printStackTrace();
+			throw new ServletException("Request error while trying to delete file..." + gbe.getMessage());
+		} catch(DataAccessException dae) {
+			dae.printStackTrace();
+			throw new ServletException("Request error while trying to delete file... " + dae.getMessage());
+		}
+	}
+	
 }
