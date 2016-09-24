@@ -93,7 +93,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData = {};
 		requestData.user = SessionService.getUser();
 		requestData.fileName = directoryService.getClickedItem().name;
-		requestData.folderPath = directoryService.getCurrentFolder().path;
+		requestData.filePath = directoryService.getCurrentFolder().path;
 		requestData.fileExtension = directoryService.getClickedItem().name.extension;
 		
 		$http.put(Constants.POST_SENDFILETOTRASH_URL, requestData)
