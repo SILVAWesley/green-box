@@ -174,11 +174,8 @@ img { max-width: 100%; }
 
 /***** NavBar Buttons Style *****/
 
-ul:hover li:hover a:hover {
-	color: #19E748;
-}
-.navbar-header:hover a:hover{
-	color: #19E748;
+ul:hover li:hover a:hover, .navbar-header:hover a:hover{
+	color: #19e748;
 }
 
 

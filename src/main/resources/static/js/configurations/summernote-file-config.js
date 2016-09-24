@@ -9,10 +9,6 @@ $(document).ready(function() {
 	$('#summernote').summernote('justifyLeft');
 	$('#summernote').summernote('fontName', 'Arial');
 	$('.note-toolbar .note-table, .note-toolbar .note-insert').remove();
-	$('#summernote').summernote({
-		  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New']
-		});
-
 });
 
 // save texts of html page 
