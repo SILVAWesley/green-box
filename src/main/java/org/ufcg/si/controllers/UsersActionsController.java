@@ -301,6 +301,7 @@ public class UsersActionsController {
 				User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 				
 				ExceptionHandler.checkUserInDatabase(dbUser);
+				System.out.println("EXTENSION: " + requestBody.getFileExtension());
 				dbUser.deleteFile(requestBody.getFileName(), requestBody.getFileExtension(), requestBody.getFilePath());
 				User updateUser = userService.update(dbUser);
 				

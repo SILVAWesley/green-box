@@ -74,7 +74,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.newName = newName;
 		requestData.oldName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
 		$http.put(Constants.PUT_RENAMEFILE_URL, requestData)
 		.then(function(response) {
@@ -94,7 +94,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.user = SessionService.getUser();
 		requestData.fileName = directoryService.getClickedItem().name;
 		requestData.filePath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
 		$http.put(Constants.POST_SENDFILETOTRASH_URL, requestData)
 		.then(function(response) {
@@ -129,7 +129,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.user = SessionService.getUser();
 		requestData.fileName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
 		$http.put(Constants.POST_FINALFILEDELETE_URL, requestData)
 		.then(function(response) {
@@ -179,7 +179,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.user = SessionService.getUser();
 		requestData.fileName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
 		$http.put(Constants.POST_ZIPFILE_URL, requestData)
 		.then(function(response) {
@@ -197,7 +197,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.user = SessionService.getUser();
 		requestData.fileName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
 		$http.put(Constants.POST_UNZIPFILE_URL, requestData)
 		.then(function(response) {

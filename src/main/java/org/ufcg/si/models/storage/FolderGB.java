@@ -311,6 +311,7 @@ public class FolderGB {
 	 */
 	
 	public FileGB deleteFile(String name, String extension, String path) {
+		System.out.println("NAME: " + name + " PATH: " + path + " EXTENSION: " + extension);
 		FolderGB folder = findFolderByPath(path);
 		FileGB file = folder.findFileByNameAndExtension(name, extension);
 		folder.files.remove(file);
