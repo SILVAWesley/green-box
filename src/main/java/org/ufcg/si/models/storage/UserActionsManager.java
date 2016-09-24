@@ -267,12 +267,32 @@ public class UserActionsManager {
 	 * @param path
 	 */
 	
-	public void deleteFile(String name, String extension,String path) {
+	public void deleteFile(String name, String extension, String path) {
 		FolderGB folder = rootFolder.findFolderByPath(path);
 		FolderPermissions permission = findFolderPermission(folder.getName(), folder.getPath());
 		
 		if (permission.isAllowed(FolderActions.DELETE_FILE)) {
-			rootFolder.deleteFile(name, extension, path);
+			FileGB fileToTrash = rootFolder.deleteFile(name, extension, path);
+			rootFolder.findFolderByName("Trash").addFile(fileToTrash);
+		} else {
+			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @param path
+	 */
+	
+	public void deleteFolder(String path) {
+		FolderGB folder = rootFolder.findFolderByPath(path);
+		FolderPermissions permission = findFolderPermission(folder.getName(), folder.getPath());
+		
+		if(permission.isAllowed(FolderActions.DELETE_FOLDER)) {
+			FolderGB folderToTrash = rootFolder.deleteFolder(path);
+			rootFolder.findFolderByName("Trash").addFolder(folderToTrash);
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
 		}

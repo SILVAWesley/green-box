@@ -175,6 +175,14 @@ public class User {
 	}
 	
 	/**
+	 * 
+	 */
+	
+	public void deleteFolder(String path) {
+		userActionsManager.deleteFolder(path);
+	}
+	
+	/**
 	 * Return the iterable of the notification's list
 	 * @return
 	 * 		The iterable of the notification's list
