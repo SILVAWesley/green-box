@@ -333,11 +333,9 @@ public class UsersActionsController {
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			
 			ExceptionHandler.checkUserInDatabase(dbUser);
-			System.out.println("velho path: " + requestBody.getFolderPath());
 			dbUser.deleteFolder(requestBody.getFolderPath(), requestBody.getFolderName());
-			System.out.println("a9");
 			User updateUser = userService.update(dbUser);
-			System.out.println("a10");
+	
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
 		}  catch(GreenboxException gbe) {
 			gbe.printStackTrace();
