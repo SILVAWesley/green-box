@@ -2,19 +2,19 @@ package org.ufcg.si.beans.requests;
 
 import org.ufcg.si.models.User;
 
-public class AddFolderBean {
+public class AddNDeleteFolderBean {
 	private User user;
 	
 	private String folderName;
 	private String folderPath;
 	
-	public AddFolderBean(User user, String folderName, String folderPath) {
+	public AddNDeleteFolderBean(User user, String folderName, String folderPath) {
 		this.user = user;
 		this.folderName = folderName;
 		this.folderPath = folderPath;
 	}
 	
-	public AddFolderBean() {
+	public AddNDeleteFolderBean() {
 		
 	}
 

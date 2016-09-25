@@ -8,7 +8,8 @@ public enum FolderPermissions {
 		  FolderActions.ADD_FOLDER,
 		  FolderActions.EDIT_FOLDER_NAME,
 		  FolderActions.DELETE_FILE,
-		  FolderActions.DELETE_FOLDER),
+		  FolderActions.DELETE_FOLDER,
+		  FolderActions.CLEAN_TRASH),
 	SHARED();
 	
 	private FolderActions[] allowedActions;
