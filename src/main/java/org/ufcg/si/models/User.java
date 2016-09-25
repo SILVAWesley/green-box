@@ -260,6 +260,12 @@ public class User {
 
 	}
 	
+	@Override
+	public String toString(){
+		String result = "Username: " + this.username + " Email: " + this.email + " PW: " + this.password + "\n" + this.userActionsManager.toString();
+		return result;
+	}
+	
 	/*public static void main(String[] args) {
 		args = new String[]{"org.ufcg.si.models.User", "src/test/java/org/ufcg/si/models/UserEasyAcceptTest.txt"};
 		EasyAccept.main(args);
