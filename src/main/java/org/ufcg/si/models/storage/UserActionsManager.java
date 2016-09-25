@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.NotEnoughAccessLevel;
 import org.ufcg.si.models.Notification;
+import org.ufcg.si.models.User;
 import org.ufcg.si.util.permissions.file.FileActions;
 import org.ufcg.si.util.permissions.file.FilePermissions;
 import org.ufcg.si.util.permissions.folder.FolderActions;
@@ -268,7 +269,6 @@ public class UserActionsManager {
 	 */
 	
 	public void deleteFile(String name, String extension, String path) {
-		System.out.println("PRINTANDO O PATH: " + path);
 		FolderGB folder = rootFolder.findFolderByPath(path);
 		FolderPermissions permission = findFolderPermission(folder.getName(), folder.getPath());
 		
@@ -287,18 +287,19 @@ public class UserActionsManager {
 	 * @param path
 	 */
 	
-	public void deleteFolder(String path) {
+	public void deleteFolder(String path, String name) {
 		FolderGB folder = rootFolder.findFolderByPath(path);
 		FolderPermissions permission = findFolderPermission(folder.getName(), folder.getPath());
 		
 		if(permission.isAllowed(FolderActions.DELETE_FOLDER)) {
-			FolderGB folderToTrash = rootFolder.deleteFolder(path);
+			FolderGB folderToTrash = rootFolder.deleteFolder(path, name);
 			rootFolder.findFolderByName("Trash").addFolder(folderToTrash);
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
 		}
-		
 	}
+	
+	
 	
 	/**
 	 * Return the automated generated manager's ID
