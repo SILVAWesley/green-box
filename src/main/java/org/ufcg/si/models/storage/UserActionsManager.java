@@ -333,6 +333,11 @@ public class UserActionsManager {
 		return notifications;
 	}
 	
+	@Override
+	public String toString(){
+		return rootFolder.toString();
+	}
+	
 	// If a file doesnt have the R or RW permission, then it is a file created by the User.
 	private FilePermissions findFilePermission(String name, String extension, String path) {
 		Set<FileGB> files = filePermissions.keySet();

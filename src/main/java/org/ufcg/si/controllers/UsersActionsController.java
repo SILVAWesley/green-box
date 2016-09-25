@@ -333,7 +333,9 @@ public class UsersActionsController {
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			
 			ExceptionHandler.checkUserInDatabase(dbUser);
+			System.out.println("USER ANTES: "+ dbUser);
 			dbUser.deleteFolder(requestBody.getFolderPath());
+			System.out.println("USER DEPOIS: "+ dbUser);
 			User updateUser = userService.update(dbUser);
 			
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
