@@ -325,15 +325,11 @@ public class FolderGB {
 	 */
 	
 	public FolderGB deleteFolder(String path, String name) {
-		System.out.println("a1");
 		FolderGB folder =  findFolderByPath(path);
 		System.out.println(folder.name);
-		System.out.println("a2");
 		FolderGB folderToRemove = findFolderByPathAndName(name, path);
 		System.out.println(folderToRemove.name);
-		System.out.println("a3");
 		folder.getFolders().remove(folderToRemove);
-		System.out.println("a4");
 		return folderToRemove;
 		
 	}
