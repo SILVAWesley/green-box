@@ -293,6 +293,8 @@ public class UserActionsManager {
 		
 		if(permission.isAllowed(FolderActions.DELETE_FOLDER)) {
 			FolderGB folderToTrash = rootFolder.deleteFolder(path, name);
+			//folderToTrash.setName("FileToTrash");
+			//rootFolder.findFolderByName("Trash").getFolders().add(folderToTrash);
 			rootFolder.findFolderByName("Trash").addFolder(folderToTrash);
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
