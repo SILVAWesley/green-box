@@ -17,7 +17,7 @@ angular.module('app').factory('Constants', function() {
 	constants.POST_FINALFILEDELETE_URL = 'TO_BE_DEFINED';
 	constants.POST_SENDFOLDERTOTRASH_URL = '/server/userdirectory/deletefolder';
 	constants.POST_FINALFOLDERDELETE_URL = 'TO_BE_DEFINED';
-	constants.POST_CLEANTRASH_URL = 'TO_BE_DEFINED';
+	constants.POST_CLEANTRASH_URL = '/server/userdirectory/cleantrash';
 	constants.POST_ZIPFILE_URL = 'TO_BE_DEFINED';
 	constants.POST_UNZIPFILE_URL = 'TO_BE_DEFINED';
 	//FIM

@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.ufcg.si.beans.requests.AddNDeleteFileBean;
-import org.ufcg.si.beans.requests.AddFolderBean;
+import org.ufcg.si.beans.requests.AddNDeleteFolderBean;
+import org.ufcg.si.beans.requests.AddNDeleteFolderBean;
 import org.ufcg.si.beans.requests.EditFileBean;
 import org.ufcg.si.beans.requests.RenameFileBean;
-import org.ufcg.si.beans.requests.RenameNDeleteFolderBean;
+import org.ufcg.si.beans.requests.RenameFolderBean;
 import org.ufcg.si.beans.requests.ShareFileBean;
 import org.ufcg.si.exceptions.ExceptionHandler;
 import org.ufcg.si.exceptions.GreenboxException;
@@ -60,7 +61,7 @@ public class UsersActionsController {
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFolder(@RequestBody AddFolderBean body) throws ServletException {
+	public ResponseEntity<User> addFolder(@RequestBody AddNDeleteFolderBean body) throws ServletException {
 		try {
 			ExceptionHandler.checkAddFolderBody(body);
 		
@@ -164,7 +165,7 @@ public class UsersActionsController {
 					method = RequestMethod.PUT,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> renameFolder(@RequestBody RenameNDeleteFolderBean body)throws Exception{
+	public ResponseEntity<User> renameFolder(@RequestBody RenameFolderBean body)throws Exception{
 		try {
 			ExceptionHandler.checkRenameFolderBody(body);
 			User dbUser = userService.findByUsername(body.getUser().getUsername());
@@ -301,7 +302,6 @@ public class UsersActionsController {
 				User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 				
 				ExceptionHandler.checkUserInDatabase(dbUser);
-				System.out.println("EXTENSION: " + requestBody.getFileExtension());
 				dbUser.deleteFile(requestBody.getFileName(), requestBody.getFileExtension(), requestBody.getFilePath());
 				User updateUser = userService.update(dbUser);
 				
@@ -328,16 +328,15 @@ public class UsersActionsController {
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> deleteFolder(@RequestBody RenameNDeleteFolderBean requestBody)throws Exception {
+	public ResponseEntity<User> deleteFolder(@RequestBody AddNDeleteFolderBean requestBody)throws Exception {
 		try {
 			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
 			
 			ExceptionHandler.checkUserInDatabase(dbUser);
-			System.out.println("USER ANTES: "+ dbUser);
-			dbUser.deleteFolder(requestBody.getFolderPath());
-			System.out.println("USER DEPOIS: "+ dbUser);
+
+			dbUser.deleteFolder(requestBody.getFolderPath(), requestBody.getFolderName());
 			User updateUser = userService.update(dbUser);
-			
+	
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
 		}  catch(GreenboxException gbe) {
 			gbe.printStackTrace();

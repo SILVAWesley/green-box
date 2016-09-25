@@ -1,5 +1,7 @@
 package org.ufcg.si.models.storage;
 
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.apache.catalina.User;
 import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.MissingItemException;
 import org.ufcg.si.util.ServerConstants;
@@ -311,7 +314,6 @@ public class FolderGB {
 	 */
 	
 	public FileGB deleteFile(String name, String extension, String path) {
-		System.out.println("NAME: " + name + " PATH: " + path + " EXTENSION: " + extension);
 		FolderGB folder = findFolderByPath(path);
 		FileGB file = folder.findFileByNameAndExtension(name, extension);
 		folder.files.remove(file);
@@ -322,11 +324,16 @@ public class FolderGB {
 	 * 
 	 */
 	
-	public FolderGB deleteFolder(String path) {
-		FolderGB folder = findFolderByPath(path);
-		folders.remove(folder);
-		return folder;
+	public FolderGB deleteFolder(String path, String name) {
+		FolderGB folder =  findFolderByPath(path);
+		System.out.println(folder.name);
+		FolderGB folderToRemove = findFolderByPathAndName(name, path);
+		System.out.println(folderToRemove.name);
+		folder.getFolders().remove(folderToRemove);
+		return folderToRemove;
+		
 	}
+	
 	
 	/**
 	 * @return the list of children files

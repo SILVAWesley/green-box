@@ -178,8 +178,8 @@ public class User {
 	 * 
 	 */
 	
-	public void deleteFolder(String path) {
-		userActionsManager.deleteFolder(path);
+	public void deleteFolder(String path, String name) {
+		userActionsManager.deleteFolder(path, name);
 	}
 	
 	/**
