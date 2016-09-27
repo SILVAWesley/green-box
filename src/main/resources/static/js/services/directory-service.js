@@ -96,7 +96,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.filePath = directoryService.getCurrentFolder().path;
 		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
-		$http.put(Constants.POST_SENDFILETOTRASH_URL, requestData)
+		$http.put(Constants.PUT_SENDFILETOTRASH_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -113,7 +113,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.folderName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		
-		$http.put(Constants.POST_SENDFOLDERTOTRASH_URL, requestData)
+		$http.put(Constants.PUT_SENDFOLDERTOTRASH_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -131,7 +131,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
-		$http.put(Constants.POST_FINALFILEDELETE_URL, requestData)
+		$http.delete(Constants.DELETE_FINALFILEDELETE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -148,7 +148,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.folderName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		
-		$http.put(Constants.POST_FINALFOLDERDELETE_URL, requestData)
+		$http.delete(Constants.DELETE_FINALFOLDERDELETE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -163,7 +163,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData = {};
 		requestData.user = SessionService.getUser();
 		
-		$http.put(Constants.POST_CLEANTRASH_URL, requestData)
+		$http.delete(Constants.DELETE_CLEANTRASH_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -181,7 +181,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
-		$http.put(Constants.POST_ZIPFILE_URL, requestData)
+		$http.put(Constants.PUT_ZIPFILE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -199,7 +199,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
-		$http.put(Constants.POST_UNZIPFILE_URL, requestData)
+		$http.put(Constants.PUT_UNZIPFILE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
