@@ -2,25 +2,21 @@
 	<div class="col-md-6">
 		<p></p>
 		<div class="btn-group" role="group" aria-label="...">
-
 			<button class="btn btn-warning" type="submit" ng-click="clickOnMyFiles()">
 				<strong> 
 					<i class="fa fa-check-circle" aria-hidden="true fa-3x"></i> My Files
 				</strong>
 			</button>
-
 			<button class="btn btn-success" type="submit" ng-click="clickOnSharedWithMe()">
 				<strong> 
 					<i class="fa fa-share-alt" aria-hidden="true fa-3x"></i> Shared With Me
 				</strong>
 			</button>
-
 			<button class="btn btn-danger" type="submit" ng-click="clickOnTrash()">
 				<strong> 
 					<i class="fa fa-trash" aria-hidden="true fa-3x"></i> Recycle Bin
 				</strong>
 			</button>
-
 		</div>
 		<!-- btn-group ends -->
 	</div>
@@ -32,17 +28,14 @@
 	<div class="user-box">
 		<div class="form-top">
 			<div class="form-top-right">
-				<h3>
-					
+				<h3>		
 					<span ng-repeat="folder in getOpenedFolders() track by $index">
 						<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
 						<a style="color:green" ui-sref="dashboard.directories({folderPath: folder.path})">
 							{{folder.name}}
 						</a> / 
-					</span>
-				
-					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> {{getCurrentFolder().name + "/"}} 
-				
+					</span>				
+					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> {{getCurrentFolder().name + "/"}} 			
 				</h3>
 			</div> <!-- form-top-right ends -->
 		</div> <!-- form-top ends -->
@@ -51,26 +44,22 @@
 	<div class="form-bottom">
 		<form class="login-form" role="form" action="" method="post">
 			<div class="form-group">
-				<table class="table table-striped">
-				
+				<table class="table table-striped">			
 					<thead>
 						<tr>
 							<th>Name</th>
 						</tr>
-					</thead>
-				
+					</thead>			
 					<tbody ng-repeat="item in getFolders() track by $index">
-						<tr id="folderList">
-					
+						<tr id="folderList">				
 							<td>
 								<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
 								<a style="color:green" href="" ng-click="clickOnFolder(item)"> {{item.name}}</a>
 							</td>
-						
+					
 							<!-- Standardization of box -->
 							<td class="col-md-2"></td> 
 							<td class="col-md-2"></td>
-
 							<td class="col-md-3">
  								<button class="btn-button1" title="Delete Permanently File" data-toggle="modal" data-target="#deletePermanentlyFolderModal" 
  										title="Delete Permanently Folder" aria-hidden="true" ng-click="clickOnDeletePermanentlyFolder(item)">
@@ -97,7 +86,6 @@
 							<!-- Standardization of box -->
 							<td class="col-md-2"></td> 
 							<td class="col-md-2"></td>
-
 							<td class="col-md-2">
  								<button class="btn-button1" title="Delete Permanently File" data-toggle="modal" data-target="#deletePermanentlyFileModal" title="Delete Permanently File"  
 							    	aria-hidden="true" ng-click="clickOnDeletePermanentlyFile(item)">
@@ -105,8 +93,7 @@
    										<i class="fa fa-remove" aria-hidden="true fa-3x"></i> Delete Permanently
 									</strong>
  								</button>
-							</td>
-						
+							</td>				
 							<!-- Standardization of box -->
 							<td class="col-md-1"></td>
 
@@ -123,13 +110,11 @@
 	<div class="col-md-8"></div>
 
 	<div class="col-md-12 col-md-12">
-	
 		<button class="btn btn-danger btn-lg" type="submit" ng-click="cleanTrash()">
 			<strong> 
 				<i class="fa fa-eraser fa-2x" aria-hidden="true fa-3x"></i> Clean Trash
 			</strong>
 		</button>
-
 	</div> <!-- col-md-12 col-md-12 ends -->
 </body>
 
@@ -138,18 +123,14 @@
 <!-- Delete Permanently Folder Modal -->
  <div class="modal fade" id="deletePermanentlyFolderModal" role="dialog">
 	<div class="modal-dialog">
-    
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">	
 			<div class="modal-header">
           		<h3 class="modal-title"> Delete Permanently Folder </h3>
-        	</div>
-        
+        	</div> 
         	<div class="modal-body">
         		<h4> Are you sure you want to <strong>permanently delete</strong> this folder? </h4>
-        	</div>
-		
+        	</div>	
 			<div class="modal-footer">
 			
         		<button class="btn btn-danger" data-dismiss="modal" type="button" ng-click="finalFolderDelete()">							
@@ -157,8 +138,7 @@
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> 
         				<strong>Yes</strong>
         			</strong>
-        		</button>
-        		
+        		</button>    		
         		<button class="btn btn-warning" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i>
@@ -166,27 +146,22 @@
         			</strong>
         		</button>
 
-      		</div>
-      
+      		</div>     
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
 
 <!-- Delete Permanently File Modal -->
  <div class="modal fade" id="deletePermanentlyFileModal" role="dialog">
-	<div class="modal-dialog">
-    
+	<div class="modal-dialog">   
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
           		<h3 class="modal-title"> Delete Permanently File </h3>
-        	</div>
-        
+        	</div>     
         	<div class="modal-body">
         		<h4> Are you sure you want to <strong>permanently delete</strong> this file? </h4>
-        	</div>
-		
+        	</div>	
 			<div class="modal-footer">
 			
         		<button class="btn btn-danger" data-dismiss="modal" type="button"  ng-click="finalFileDelete()">							
@@ -194,8 +169,7 @@
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> 
         				<strong>Yes</strong>
         			</strong>
-        		</button>
-        		
+        		</button>     		
         		<button class="btn btn-warning" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i>
@@ -203,8 +177,7 @@
         			</strong>
         		</button>
 
-      		</div>
-      
+      		</div>    
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
