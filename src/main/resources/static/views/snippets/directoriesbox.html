@@ -7,11 +7,8 @@
 					<a style="color:green" ui-sref="dashboard.directories({folderPath: folder.path})">
 						{{folder.name}}
 					</a> / 
-				</span>
-				
-				<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
-				{{getCurrentFolder().name + "/"}} 
-				
+				</span>				
+				<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> {{getCurrentFolder().name + "/"}} 				
 			</h3>
 		</div> <!-- form-top-right ends -->
 	</div> <!-- form-top ends -->
@@ -68,7 +65,10 @@
 							<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
 							<a style="color:green" href="" ng-click="clickOnFile(item)"> {{item.name + '.' + item.extension}}</a>
 						</td>
-						
+
+						<!-- standardization of box -->
+						<td class="col-md-2"></td> 
+												
 						<td class="col-md-2">
  							<button class="btn-button3" title="Share with your friends"  type="button" data-toggle="modal" 
  									data-target="#shareModal" aria-hidden="true" ng-click="clickOnShareFile(item)">
