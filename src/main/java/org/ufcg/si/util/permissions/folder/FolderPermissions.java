@@ -10,6 +10,7 @@ public enum FolderPermissions {
 		  FolderActions.DELETE_FILE,
 		  FolderActions.DELETE_FOLDER,
 		  FolderActions.CLEAN_TRASH),
+	TRASH(),
 	SHARED();
 	
 	private FolderActions[] allowedActions;

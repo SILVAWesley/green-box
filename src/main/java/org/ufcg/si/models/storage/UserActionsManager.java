@@ -75,6 +75,7 @@ public class UserActionsManager {
 		
 		this.folderPermissions.put(retrieveSharedWithMe(), FolderPermissions.SHARED);
 		this.folderPermissions.put(retrieveFilesIShared(), FolderPermissions.SHARED);
+		this.folderPermissions.put(retrieveTrash(), FolderPermissions.TRASH);
 	}
 	
 	/**
@@ -281,21 +282,15 @@ public class UserActionsManager {
 		
 	}
 	
-	/**
-	 * 
-	 * @param name
-	 * @param path
-	 */
-	
 	public void deleteFolder(String path, String name) {
 		FolderGB folder = rootFolder.findFolderByPath(path);
 		FolderPermissions permission = findFolderPermission(folder.getName(), folder.getPath());
-		
-		if(permission.isAllowed(FolderActions.DELETE_FOLDER)) {
+
+		if (permission.isAllowed(FolderActions.DELETE_FOLDER)) {
 			FolderGB folderToTrash = rootFolder.deleteFolder(path, name);
-			//folderToTrash.setName("FileToTrash");
-			//rootFolder.findFolderByName("Trash").getFolders().add(folderToTrash);
-			rootFolder.findFolderByName("Trash").addFolder(folderToTrash);
+			FolderGB trash = rootFolder.findFolderByName("Trash"); 
+			FolderGB copyFolder = new FolderGB(folderToTrash); 
+			trash.addFolder(copyFolder);
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
 		}
@@ -384,5 +379,9 @@ public class UserActionsManager {
 	
 	private FolderGB retrieveFilesIShared() {
 		return rootFolder.findFolderByName(I_SHARED_FOLDER_NAME);
+	}
+	
+	private FolderGB retrieveTrash() {
+		return rootFolder.findFolderByName("Trash");
 	}
 }
