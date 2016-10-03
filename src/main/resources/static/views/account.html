@@ -1,123 +1,85 @@
 <!-- Navbar -->
 <nav class="navbar navbar-default">
-	<div class="container-fluid">
-		
-		<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="container-fluid">	
 		<div class="navbar-header">
-				
-			<a class="navbar-brand" href="#/dashboard/directories/root">
-				<i class="fa fa-home fa-2x" aria-hidden="true"></i>
-				<strong>Home</strong>  
-			</a>
-				
-		</div> <!-- navbar-header ends -->
-
+			<i class="fa fa-cube fa-2x" aria-hidden="true" style="font-size: 60px;"></i>
+			Green<span style="color: #19e748;">Box</span>
+			<span style="font-size: 40px;">.com</span>  			
+		</div> 
+		<!-- navbar-header ends -->
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse">
-
 			<ul class="nav navbar-nav navbar-right">
-				
-				<li id="bell-dropdown">
+				<li id="home">
+					<a class="navbar-brand" href="#/dashboard/directories/root">
+						<i class="fa fa-home fa-2x" aria-hidden="true"></i>
+						<strong>Home</strong>  
+					</a>	
+				</li>		
+				<li class="navbar-brand" id="bell-dropdown" style="font-size: 100%;">
 					<div class="dropdown">
-						
-						<p></p> <!-- adition of space -->
-						
-						<a id="dropdownNotifications" title="notifications" data-toggle="dropdown" href="" 
-							aria-hidden="true" aria-haspopup="true" aria-expanded="true" ng-click="actionClick()"> 					
-								<i class="fa fa-bell fa-2x" aria-hidden="true"></i>
-								{{numberOfNotVisitedNotifications()}}
-					  	</a>
-					  	
+						<a id="dropdownNotifications" title="notifications" data-toggle="dropdown" href="" aria-hidden="true" aria-haspopup="true" aria-expanded="true" ng-click="actionClick()"> 					
+								<i class="fa fa-bell fa-2x" aria-hidden="true"></i> {{numberOfNotVisitedNotifications()}}
+					  	</a>			  	
 					  	<ul class="dropdown-menu" aria-labelledby="dropdownNotifications">
-					  	
 					  		<li class="dropdown-header">
 					  			<h3 class="modal-title" id="dropDownHeader" ng-click="actionClick()">
 					        		<i class="fa fa-bell-o" aria-hidden="true"></i>
 					        		<strong> Notifications </strong>
 					        	</h3>
 					  		</li>
-					  		
 						    <li class="divider" role="separator"></li>				  	
-					  		
 					  		<li ng-repeat="notification in getNotifications()">
 					  			<p>
 					  				<i class="fa fa-file-text-o" aria-hidden="true"></i> {{notification.content}} 
 					  			</p>
 					  		</li>
-
 					  	</ul> <!-- dropdown-menu ends -->
 					</div> <!-- dropdown ends -->
-				</li> <!-- bell-dropdown ends -->
-				
+				</li> <!-- bell-dropdown ends -->	
 				<li>
-					<a href="https://github.com/SILVAWesley/green-box">
-						<i class="fa fa-question fa-2x" aria-hidden="true"></i>
-						About 
+					<a class="navbar-brand" href="" ng-click='aboutClick()'>
+						<i class="fa fa-question fa-2x" aria-hidden="true"></i> About 
 					</a>
 				</li>
-
-				<li id="account">
-					<a href="" ng-click='userClick()'>
-						<i class="fa fa-user fa-2x" aria-hidden="true"></i>
-						My Account  
+				<li>
+					<a class="navbar-brand" href="" ng-click='contactClick()'>
+						<i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i> Contact 
 					</a>
 				</li>
-				
 				<li>
-					<a href="/" ng-click="logout()">
-						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> 
-						Logout
+					<a class="navbar-brand" href="/" ng-click="logout()">
+						<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>  Logout
 					</a>
 				</li>			
 			</ul> <!-- nav navbar-nav navbar-right ends -->
-			
-			<!-- Optional Form -->
-			<form class="navbar-form navbar-left">
-				
-				<div class="form-group">
-					<input class="form-control" type="text" placeholder="Find" ng-model="findFile"><!-- need implement this -->
-				</div>
-				
-				<button class="btn btn-default" type="submit" title="Find in all root" ng-click="findFile()"><!-- need implement this -->
-					<strong>Submit</strong>
-				</button>
-			
-			</form>		
-				
 		</div> <!-- collapse navbar-collapse ends -->
 	</div> <!-- container-fluid ends -->
-</nav>
+</nav><!-- navbar navbar-default ends -->
 
 <!-- Top content -->
 <div class="top-content">
 	<div class="inner-bg">
 		<div class="container">
-			
 			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2 text">
+				<div class="col-md-8 col-md-offset-2 text">
 					<h1>
 						<strong>
-							<i class="fa fa-cube fa-2x" aria-hidden="true"></i> 
-							Green Box
+							<i class="fa fa-cube fa-2x" aria-hidden="true"></i> Green Box
 						</strong>
 					</h1>
-				</div> <!-- col-sm-8 col-sm-offset-2 text ends -->
+				</div> <!-- col-md-8 col-md-offset-2 text ends -->
 			</div> <!-- row ends -->
-			
 			<br></br> <!-- adition of space -->
-
-			<div class="col-sm-6">
+			<div class="col-md-6">
 				<div class="form-top-right">
 					<h3>
-						Hello, {{getUsername()}}! 
-						<i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
+						Hello, {{getUsername()}}! <i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
 					</h3>
 				</div>
-			</div> <!-- col-sm-6 ends -->
-			
+			</div> <!-- col-md-6 ends -->
 			<p></p><p></p> <!-- adition of space -->
-
-			<div ui-view=""></div><!-- need complete -->		
+			<div ui-view=""></div>		
 		</div> <!-- container ends --> 
 	</div> <!-- inner-bg ends -->
 </div> <!-- top-content ends -->

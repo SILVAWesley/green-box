@@ -8,6 +8,7 @@ $('.summernote').summernote({
 $(document).ready(function() {
 	$('#summernote').summernote('justifyLeft');
 	$('#summernote').summernote('fontName', 'Arial');
+	$('.note-toolbar .note-table, .note-toolbar .note-insert').remove();
 });
 
 // save texts of html page 
