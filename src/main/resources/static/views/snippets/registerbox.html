@@ -21,16 +21,7 @@
 				<label class="sr-only" for="password">Password</label> 
 				<input class="form-password form-control" id="form-password" type="password" name="password" placeholder="Password..." pattern="^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$" ng-model="user.password" required></input>
 				<span style="color:red" ng-show="registrationForm.password.$error.required && registrationForm.password.$dirty">Password required.</span>
-			</div> <!-- form-group-3 ends -->
-
-			<!-- NEED IMPLEMENT -->
-			<div class="form-group" id="form-group-4">
-				
-				<label class="sr-only" for="password">Password</label> 
-				<input class="form-password form-control" id="form-password" type="password" name="passwordConfirm" placeholder="Confirm Password..." pattern="^(?=.*[0-9])(?=.*[a-zA-Z]).{6,}$" ng-model="user.password" required></input>
-				<span style="color:red" ng-show="registrationForm.password.$error.required && registrationForm.password.$dirty">Confirm Password.</span>
-			</div> <!-- form-group-4 ends -->
-			
+			</div> <!-- form-group-3 ends -->	
 			<a class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#helpModal"  href="" title="help" aria-hidden="true" ng-click="actionClick(item)"> 
 				<i style="color:#6a6aff;">Help!</i>
 			</a>

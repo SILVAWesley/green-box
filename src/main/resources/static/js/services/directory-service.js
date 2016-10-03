@@ -173,42 +173,6 @@ angular.module('app').factory('DirectoryService', function($http,
 			$("#cleanTrashErrorModal").modal("show");		
 		});
 	}
-	
-	directoryService.zipFile = function(){
-		requestData = {};
-		requestData.user = SessionService.getUser();
-		requestData.fileName = directoryService.getClickedItem().name;
-		requestData.folderPath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
-		
-		$http.put(Constants.POST_ZIPFILE_URL, requestData)
-		.then(function(response) {
-			SessionService.setUser(response.data);
-			directoryService.goToPath(directoryService.getCurrentFolder().path);
-			$("#zipFileModal").modal("show");		
-		}, function(response) {
-			$("#zipFileErrorModal .modal-body").html(response.data.message);
-			$("#zipFileErrorModal").modal("show");		
-		});
-	}
-	
-	directoryService.unzipFile = function(){
-		requestData = {};
-		requestData.user = SessionService.getUser();
-		requestData.fileName = directoryService.getClickedItem().name;
-		requestData.folderPath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
-		
-		$http.put(Constants.POST_UNZIPFILE_URL, requestData)
-		.then(function(response) {
-			SessionService.setUser(response.data);
-			directoryService.goToPath(directoryService.getCurrentFolder().path);
-			$("#unzipFileModal").modal("show");		
-		}, function(response) {
-			$("#unzipFileErrorModal .modal-body").html(response.data.message);
-			$("#unzipFileErrorModal").modal("show");		
-		});
-	}
 	//FIM
 	//======================================================================================
 	
