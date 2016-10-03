@@ -65,6 +65,13 @@ public class FolderGB {
 		this("", "");
 	}
 	
+	public FolderGB(FolderGB folder) {
+		this.name = folder.getName();
+		this.path = folder.getPath();
+		this.files = folder.getFiles();
+		this.folders = folder.getFolders();
+	}
+	
 	/**
 	 * Creates and adds a file to the folder. An exception is thrown if the file already exists.
 	 * @param name
