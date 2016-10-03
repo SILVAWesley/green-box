@@ -52,10 +52,6 @@ angular.module('app').controller("directoriesController", function($scope,
 		DirectoryService.setClickedItem(item);
 	}
 	
-	$scope.clickOnZipFile = function(item){
-		DirectoryService.setClickedItem(item);
-	}
-	
 	$scope.renameFile = function() {
 		DirectoryService.renameFile($scope.newName);
 	}
@@ -91,14 +87,6 @@ angular.module('app').controller("directoriesController", function($scope,
 	$scope.finalFolderDelete = function(){
 		DirectoryService.finalFolderDelete();
 	}
-	
-	$scope.zipFile = function(){
-		DirectoryService.zipFile();
-	}
-	
-	$scope.unzipFile = function(){
-		DirectoryService.unzipFile();
-	}	
 	
 	$scope.newFolder = function() {
 		DirectoryService.newFolder($scope.newFolderName);

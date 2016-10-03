@@ -1,5 +1,4 @@
 /***** Body *****/
-
 body {
     font-size: 16px;
     font-weight: 300;
@@ -21,10 +20,7 @@ body.modal-open{
 
 
 /***** Tags of Body *****/
-
-li a {
-    width: 180px;
-}
+li a { width: 180px; }
 
 a, a:hover, a:focus {
 	color: #ec2a1d;
@@ -54,7 +50,6 @@ img { max-width: 100%; }
 
 
 /***** Selection browser *****/
-
 ::-moz-selection { 
 	background: #00ffff; 
 	color: #fff; 
@@ -69,7 +64,6 @@ img { max-width: 100%; }
 
 
 /***** Drop Down *****/
-
 .dropdown-menu p {
     margin: 0px 18px 20px;
     text-align: left;
@@ -77,30 +71,38 @@ img { max-width: 100%; }
 
 .dropdown-header h3 {
     font-family: 'Pattaya', sans-serif; 
-    color:#DF514C;   
+    color:#df514c;   
 }
 
-.dropdown a, .dropdown:hover a{
-    color:#DF514C;   
-}
+.dropdown a, .dropdown:hover a{ color:#df514c; }
 
 
 /***** Modals *****/
-
-.modal-header h4, .modal-header h3 {
-	 font-family: 'Pattaya', sans-serif; 
-	 font-size: 25px;
+.modal-header h3 {
+	font-family: 'Pattaya', sans-serif;
+	font-weight: bold; 
 }
 
-/***** Btn Buttons Style *****/
+.modal-body, .modal-body h4 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+    font-size: 15px; 
+}
 
+.fa-exclamation-triangle { color: #ffca00; }
+.fa-info-circle { color: #74aaf7; }
+.fa-question-circle { color: #3b5998; }
+.fa-envelope { color: #19e748; }
+.fa-cog { color: #85919c; }
+
+/***** Btn Buttons Style *****/
 .btn-button1 {
   	color: #ffffff;
 	font-family: Arial;
-  	font-size: 22px;
+  	font-size: 16px;
   	text-decoration: none;
-  	background: #dc403b;
-  	padding: 2px 25px 2px 25px;
+  	background: #df514c;
+  	padding: 2px 20px 2px 20px;
 	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
 	outline: 0;
 }
@@ -108,10 +110,10 @@ img { max-width: 100%; }
 .btn-button2 {
   	color: #ffffff;
   	font-family: Arial;
-  	font-size: 22px;
+  	font-size: 16px;
   	text-decoration: none;
   	background: #ffac00;
-  	padding: 2px 25px 2px 25px;
+  	padding: 2px 20px 2px 20px;
   	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
   	outline: 0;
 	
@@ -120,10 +122,10 @@ img { max-width: 100%; }
 .btn-button3 {
   	color: #ffffff;
 	font-family: Arial;
-  	font-size: 22px;
+  	font-size: 16px;
   	text-decoration: none;
   	background: #b1eb00;
-  	padding: 2px 25px 2px 25px;
+  	padding: 2px 20px 2px 20px;
 	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
 	outline: 0;
 }
@@ -131,10 +133,10 @@ img { max-width: 100%; }
 .btn-button4 {
   	color: #ffffff;
   	font-family: Arial;
-  	font-size: 22px;
+  	font-size: 16px;
   	text-decoration: none;
   	background: #008bba;
-  	padding: 2px 25px 2px 25px;
+  	padding: 2px 20px 2px 20px;
 	border-radius: 28px; -moz-border-radius: 28px; -webkit-border-radius: 28px;
 	outline: 0;
 }
@@ -145,11 +147,18 @@ img { max-width: 100%; }
 }
 
 
-/***** Top content *****/
+/***** NavBar Buttons Style *****/
+ul:hover li:hover a:hover, .navbar-header:hover a:hover{ color: #19e748; }
 
-.inner-bg {
-    padding: 60px 0 80px 0;
+.navbar-header {
+	font-weight: bold; 
+	font-family: 'Pattaya', sans-serif;
+	font-size: 50px;
 }
+
+
+/***** Top content *****/
+.inner-bg { padding: 60px 0 80px 0; }
 
 .top-content .text h1 {
 	font-size: 320%;
@@ -157,16 +166,11 @@ img { max-width: 100%; }
 	color: #000; 
 }
 
-.top-content h3 {
-    font-family: 'Pattaya', sans-serif; 
-}
+.top-content h3 { font-family: 'Pattaya', sans-serif; }
 
 
-/***** Forms *****/
-
-.form-box {
-	margin-top: 70px;
-}
+/***** Forms Show Files and Folders *****/
+.form-box { margin-top: 70px; }
 
 .form-top {
 	overflow: hidden;
@@ -207,18 +211,19 @@ img { max-width: 100%; }
 	text-align: left;
 }
 
+.form-bottom form button.btn { width: 100%; }
 
-.form-bottom form button.btn {
-	width: 100%;
+.middle-border {
+	min-height: 300px;
+	margin-top: 170px;
+	border-right: 1px solid #400040;
 }
 
-.form-bottom form .input-error {
-	border-color: #ec2a1d;
-}
+
+table tbody:hover tr td { background-color: #ececec }
 
 
 /***** Footer *****/
-
 footer {
 	padding-bottom: 70px;
 	color: #000;
@@ -248,7 +253,6 @@ footer a:hover, footer a:focus {
 }
 
 /***** Media queries *****/
-
 @media (min-width: 992px) and (max-width: 1199px) {}
 
 @media (min-width: 768px) and (max-width: 991px) {}

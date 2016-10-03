@@ -3,23 +3,23 @@
  	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-        	
+		<div class="modal-content">	
         	<div class="modal-header">
-          		<h4 class="modal-title"> Error Login </h4>
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			        <span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Error Login 
+          		</h3>
         	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+        	<div class="modal-body"></div>
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try again!
         			</strong>
         		</button>
       		</div>
-      
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -30,23 +30,24 @@
     
 		<!-- Modal content-->
 		<div class="modal-content">
-			
 			<div class="modal-header">
-          		<h4 class="modal-title">Welcome to The GreenBox</h4>
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			        <span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title">
+          			<i class="fa fa-cube" aria-hidden="true"></i> Welcome to The GreenBox
+          		</h3>
         	</div>
-        
         	<div class="modal-body">
-          		<p><strong>Congratulations! You have now a GreenBox account to store your files.</strong></p>
+          		<h4>Congratulations! You have now a GreenBox account to store your files.</h4>
         	</div>
-		
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>
       		</div>
-      
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -57,24 +58,25 @@
     
 		<!-- Modal content-->
 		<div class="modal-content">
-			
 			<div class="modal-header">
-          		<h4 class="modal-title">Error</h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			        <span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title">
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Error
+          		</h3>
+        	</div>     
         	<div class="modal-body">
-          		<p><strong> Error! User Name or Email existing. </strong></p>
-          		<p><strong> Try Again! </strong></p>
-        	</div>
-		
+          		<h4>Error! User Name or Email existing.</h4>
+          		<h4> Try Again! </h4>
+        	</div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>    
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -82,25 +84,22 @@
 <!-- Information Modal -->
 <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-				</button>
-			        <h4 class="modal-title" id="myModalLabel">
-			        	<strong>What do you need to register?</strong>
-			        </h4>
+		<div class="modal-content">		
+			<div class="modal-header">				
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>			       
+			     <h3 class="modal-title" id="myModalLabel">
+			        <i class="fa fa-info-circle" aria-hidden="true"></i> What do you need to register?
+			     </h3>
 			</div>
-			
 			<div class="modal-body">
-			       	<ol>
-				   		<li><strong>Username between 4 and 15 characters between letters, numbers and "- or _"</strong></li>
-				   		<li><strong>Valid Email</strong></li>
-				   		<li><strong>Password with at least 6 characters, at least one letter and one number</strong></li>
-			    	</ol>	
+				<ol>
+					<li><strong>User Name must be between 4 and 15 characters, be letters, numbers and "-" or "_"</strong></li>
+					<li><strong>Email must be valid</strong></li>
+					<li><strong>Password must have 6 or more characters at least, 1 letter and number</strong></li>
+				</ol>
 			</div>
-			
 		</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -110,24 +109,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> File Share </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-envelope" aria-hidden="true"></i> File Share 
+          		</h3>
+        	</div>    
         	<div class="modal-body">
-          		<p><strong>Great! File successfully shared.</strong></p>
-        	</div>
-		
+          		<h4>Great! File successfully shared.</h4>
+        	</div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close!
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>     
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -137,23 +137,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> File Share Error </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> File Share Error 
+          		</h3>
+        	</div>     
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-toggle="modal" data-target="#shareModal" data-dismiss="modal"  type="button" >							
+        		<button class="btn btn-warning active" data-toggle="modal" data-target="#shareModal" data-dismiss="modal"  type="button" >							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>    
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -163,24 +163,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Folder Rename </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-envelope" aria-hidden="true"></i> Folder Rename 
+          		</h3>
+        	</div>   
         	<div class="modal-body">
-          		<p><strong>Great! Folder renamed successfully.</strong></p>
-        	</div>
-		
+          		<h4>Great! Folder renamed successfully.</h4>
+        	</div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close!
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>    
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -190,23 +191,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Folder Rename Error </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Folder Rename Error
+          		</h3>
+        	</div>     
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>   
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -216,24 +217,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> File Rename </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-envelope" aria-hidden="true"></i> File Rename 
+          		</h3>
+        	</div>    
         	<div class="modal-body">
-          		<p><strong>Great! File renamed successfully.</strong></p>
-        	</div>
-		
+          		<h4>Great! File renamed successfully.</h4>
+        	</div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close!
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>    
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -241,25 +243,25 @@
 <!-- File Rename Modal -->
  <div class="modal fade" id="fileRenameErrorModal" role="dialog">
 	<div class="modal-dialog">
-    
-		<!-- Modal content-->
-		<div class="modal-content">
-			
-			<div class="modal-header">
-          		<h4 class="modal-title"> File Rename Error </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
 		
+		<!-- Modal content-->
+		<div class="modal-content">	
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> File Rename Error 
+          		</h3>
+        	</div> 
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>  
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -269,24 +271,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> File Create </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-envelope" aria-hidden="true"></i> File Create 
+          		</h3>
+        	</div>     
         	<div class="modal-body">
-          		<p><strong>Great! File created successfully.</strong></p>
-        	</div>
-		
+          		<h4>Great! File created successfully.</h4>
+        	</div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>  
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -294,25 +297,25 @@
 <!-- File Create Error Modal -->
  <div class="modal fade" id="fileCreateErrorModal" role="dialog">
 	<div class="modal-dialog">
-    
+ 
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">	
 			<div class="modal-header">
-          		<h4 class="modal-title"> File Create Error </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> File Create Error 
+          		</h3>
+        	</div>   
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>
-      		</div>
-      
+      		</div> 
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -322,24 +325,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">	
 			<div class="modal-header">
-          		<h4 class="modal-title"> Folder Create </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-envelope" aria-hidden="true"></i> Folder Create 
+          		</h3>
+        	</div>  
         	<div class="modal-body">
-          		<p><strong>Great! Folder created successfully.</strong></p>
-        	</div>
-		
+          		<h4>Great! Folder created successfully.</h4>
+        	</div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>    
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -349,23 +353,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">			
 			<div class="modal-header">
-          		<h4 class="modal-title"> Folder Create Error </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Folder Create Error 
+          		</h3>
+        	</div>       
+        	<div class="modal-body"></div>		
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>     
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -375,24 +379,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">			
 			<div class="modal-header">
-          		<h4 class="modal-title"> File Edit </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-envelope" aria-hidden="true"></i> File Edit 
+          		</h3>
+        	</div>     
         	<div class="modal-body">
-          		<p><strong> Great! File edited successfully. </strong></p>
-        	</div>
-		
+          		<h4>Great! File edited successfully.</h4>
+        	</div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>     
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -402,23 +407,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> File Edit Error </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> File Edit Error 
+          		</h3>
+        	</div>     
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>  
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -428,23 +433,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Error at Service </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Error at Service 
+          		</h3>
+        	</div>    
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>
-      		</div>
-      
+      		</div>   
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -454,24 +459,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Delete </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-envelope" aria-hidden="true"></i> Delete 
+          		</h3>
+        	</div>  
         	<div class="modal-body">
-        		<p> Great! File deleted successfully. </p>
-        	</div>
-		
+        		<h4>Great! File deleted successfully.</h4>
+        	</div>	
 			<div class="modal-footer">       		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>        		
-      		</div>
-      
+      		</div>    
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -481,23 +487,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Deletion </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Delete 
+          		</h3>
+        	</div>  
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">      		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>      		
-      		</div>
-      
+      		</div>   
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -507,24 +513,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Delete </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-envelope" aria-hidden="true"></i> Delete 
+          		</h3>
+        	</div>    
         	<div class="modal-body">
-        		<p> Great! Folder deleted successfully. </p>
-        	</div>
-		
+        		<h4>Great! Folder deleted successfully.</h4>
+        	</div>	
 			<div class="modal-footer">       		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>        		
-      		</div>
-      
+      		</div>   
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -534,23 +541,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Oops! Something Wrong </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Oops! Something Wrong 
+          		</h3>
+        	</div>       
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">      		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>      		
-      		</div>
-      
+      		</div>   
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -560,24 +567,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Send to Trash </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			Send to Trash 
+          		</h3>
+        	</div>     
         	<div class="modal-body">
-        		<p> Great! Your file is on trash now. </p>
-        	</div>
-		
+        		<h4>Great! Your file is on trash now.</h4>
+        	</div>	
 			<div class="modal-footer">       		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>        		
-      		</div>
-      
+      		</div>    
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -587,23 +595,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Oops! Something Wrong. </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Oops! Something Wrong 
+          		</h3>
+        	</div>     
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">      		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>      		
-      		</div>
-      
+      		</div>   
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -613,24 +621,25 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Send to Trash </h4>
-        	</div>
-        
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			Send to Trash 
+          		</h3>
+        	</div>    
         	<div class="modal-body">
-        		<p> Great! Your folder is on trash now. </p>
-        	</div>
-		
+        		<h4>Great! Your folder is on trash now.</h4>
+        	</div>	
 			<div class="modal-footer">       		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>        		
-      		</div>
-      
+      		</div>    
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -640,23 +649,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">	
 			<div class="modal-header">
-          		<h4 class="modal-title"> Oops! Something Wrong. </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Oops! Something Wrong 
+          		</h3>
+        	</div>    
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">      		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>      		
-      		</div>
-      
+      		</div>   
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -666,24 +675,22 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">		
 			<div class="modal-header">
-          		<h4 class="modal-title"> Clean Trash </h4>
-        	</div>
-        
+          		<h3 class="modal-title"> 
+          			Clean Trash 
+          		</h3>
+        	</div>    
         	<div class="modal-body">
-        		<p> Great! Your trash is empty now. </p>
-        	</div>
-		
+        		<h4>Great! Your trash is empty now.</h4>
+        	</div>	
 			<div class="modal-footer">       		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-danger active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Close
         			</strong>
         		</button>        		
-      		</div>
-      
+      		</div> 
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->
@@ -693,23 +700,23 @@
 	<div class="modal-dialog">
     
 		<!-- Modal content-->
-		<div class="modal-content">
-			
+		<div class="modal-content">	
 			<div class="modal-header">
-          		<h4 class="modal-title"> Oops! Something Wrong. </h4>
-        	</div>
-        
-        	<div class="modal-body">
-        	</div>
-		
+				<button class="close" data-dismiss="modal" type="button" aria-label="Close">
+			    	<span aria-hidden="true">&times;</span>
+				</button>
+          		<h3 class="modal-title"> 
+          			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Oops! Something Wrong 
+          		</h3>
+        	</div>     
+        	<div class="modal-body"></div>	
 			<div class="modal-footer">      		
-        		<button class="btn btn-danger" data-dismiss="modal" type="button">							
+        		<button class="btn btn-warning active" data-dismiss="modal" type="button">							
         			<strong> 
         				<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Try Again!
         			</strong>
         		</button>      		
-      		</div>
-      
+      		</div> 
     	</div> <!-- modal-content ends -->
 	</div> <!-- modal-dialog ends -->
 </div> <!-- modal-fade ends -->

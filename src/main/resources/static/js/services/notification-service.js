@@ -30,8 +30,8 @@ angular.module('app').factory('NotificationService', function($http,
 		}
 		
 		if(numOfNotVisitedNotifications==0) {
-			document.getElementById("dropdownNotifications").style.color = "#d0c91f";
-			document.getElementById("dropDownHeader").style.color = "#d0c91f";
+			document.getElementById("dropdownNotifications").style.color = "#b1eb00";
+			document.getElementById("dropDownHeader").style.color = "#b1eb00";
 		}
 		
 		return numOfNotVisitedNotifications;

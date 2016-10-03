@@ -173,6 +173,7 @@ angular.module('app').factory('DirectoryService', function($http,
 			$("#cleanTrashErrorModal").modal("show");		
 		});
 	}
+<<<<<<< HEAD
 	
 	directoryService.zipFile = function(){
 		requestData = {};
@@ -209,6 +210,8 @@ angular.module('app').factory('DirectoryService', function($http,
 			$("#unzipFileErrorModal").modal("show");		
 		});
 	}
+=======
+>>>>>>> refs/heads/front-end
 	//FIM
 	//======================================================================================
 	
