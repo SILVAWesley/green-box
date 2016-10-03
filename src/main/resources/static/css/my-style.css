@@ -93,8 +93,7 @@ img { max-width: 100%; }
 .fa-info-circle { color: #74aaf7; }
 .fa-question-circle { color: #3b5998; }
 .fa-envelope { color: #19e748; }
-.fa-cog { color: #85919C; }
-
+.fa-cog { color: #85919c; }
 
 /***** Btn Buttons Style *****/
 .btn-button1 {
@@ -154,6 +153,7 @@ ul:hover li:hover a:hover, .navbar-header:hover a:hover{ color: #19e748; }
 .navbar-header {
 	font-weight: bold; 
 	font-family: 'Pattaya', sans-serif;
+	font-size: 50px;
 }
 
 
