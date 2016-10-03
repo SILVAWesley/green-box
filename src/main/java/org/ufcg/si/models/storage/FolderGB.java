@@ -68,8 +68,8 @@ public class FolderGB {
 	public FolderGB(FolderGB folder) {
 		this.name = folder.getName();
 		this.path = folder.getPath();
-		this.files = folder.getFiles();
-		this.folders = folder.getFolders();
+		this.files = new ArrayList<>();
+		this.folders = new ArrayList<>();
 	}
 	
 	/**
