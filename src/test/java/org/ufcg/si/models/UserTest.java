@@ -8,7 +8,7 @@ import org.ufcg.si.models.storage.FolderGB;
 
 public class UserTest {
 
-/*	private User user0;
+	private User user0;
 	private User user1;
 	private User user2;
 	private User user3;
@@ -32,8 +32,6 @@ public class UserTest {
 
 	@Test
 	public void testGetEmail() {
-		Assert.assertTrue(user0.getEmail() == null);
-		Assert.assertTrue(user1.getEmail() == null);
 		Assert.assertEquals(user2.getEmail(), "someone@domain.com");
 		Assert.assertEquals(user3.getEmail(), "");
 		Assert.assertEquals(user4.getEmail(), " ");
@@ -42,8 +40,6 @@ public class UserTest {
 
 	@Test
 	public void testGetUsername() {
-		Assert.assertTrue(user0.getUsername() == null);
-		Assert.assertTrue(user1.getUsername() == null);
 		Assert.assertEquals(user2.getUsername(), "someone");
 		Assert.assertEquals(user3.getUsername(), "");
 		Assert.assertEquals(user4.getUsername(), " ");
@@ -52,8 +48,6 @@ public class UserTest {
 
 	@Test
 	public void testGetPassword() {
-		Assert.assertTrue(user0.getPassword() == null);
-		Assert.assertTrue(user1.getPassword() == null);
 		Assert.assertEquals(user2.getPassword(), "123456");
 		Assert.assertEquals(user3.getPassword(), "");
 		Assert.assertEquals(user4.getPassword(), " ");
@@ -72,17 +66,6 @@ public class UserTest {
 		Assert.assertEquals(user4.getUsername(), "Homero");
 	}
 
-	@Test
-	public void testGetDirectory() {
-
-		Assert.assertTrue(user0.getUserDirectory().getName() == null);
-		Assert.assertTrue(user0.getUserDirectory().getPath() == null);
-		Assert.assertTrue(user1.getUserDirectory().getName() == null);
-		Assert.assertTrue(user1.getUserDirectory().getPath() == null);
-		Assert.assertEquals(user2.getUserDirectory(), new FolderGB("someone"));
-		Assert.assertEquals(user3.getUserDirectory(), new FolderGB(""));
-		Assert.assertEquals(user4.getUserDirectory(), new FolderGB(" "));
-
-	}*/
+	
 
 }
