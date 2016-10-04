@@ -11,8 +11,15 @@ angular.module('app').factory('Constants', function() {
 	constants.PUT_EDITFILE_URL = '/server/userdirectory/editfile';
 	constants.POST_LOGIN_URL = '/server/authentication/login';
 	constants.POST_REGISTER_URL = '/server/users/new';
-	
+	//=========================================================================
+	//COMECO
+	constants.PUT_SENDFILETOTRASH_URL = '/server/userdirectory/deletefile';
+	constants.PUT_SENDFOLDERTOTRASH_URL = '/server/userdirectory/deletefolder';
+	constants.DELETE_CLEANTRASH_URL = '/server/userdirectory/cleantrash';
+	//FIM
+	//===========================================================================
 	constants.FILE_SEPARATOR = '/';
+	constants.TRASH_PARAM = "/Trash";
 	
 	return constants;
 });

@@ -1,0 +1,106 @@
+<div class="user-box">
+	<div class="form-top">
+		<div class="form-top-right">
+			<h3>
+				<span ng-repeat="folder in getOpenedFolders() track by $index">
+					<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> 
+					<a style="color:green" ui-sref="dashboard.directories({folderPath: folder.path})">
+						{{folder.name}}
+					</a> / 
+				</span>				
+				<i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> {{getCurrentFolder().name + "/"}} 				
+			</h3>
+		</div> <!-- form-top-right ends -->
+	</div> <!-- form-top ends -->
+</div> <!-- user-box ends -->
+
+<div class="form-bottom">
+	<form class="login-form" role="form" action="" method="post">
+		<div class="form-group">
+			<table class="table table-striped">
+				
+				<thead>
+					<tr>
+						<th>Name</th>
+					</tr>
+				</thead>
+				
+				<tbody ng-repeat="item in getFolders() track by $index">
+					<tr id="folderList">
+					
+						<td>
+							<i class="fa fa-folder fa-2x" aria-hidden="true"></i> 
+							<a style="color:green" href="" ng-click="clickOnFolder(item)"> {{item.name}}</a>
+						</td>
+
+						<!-- standardization of box -->
+						<td class="col-md-2"></td> 
+						<td class="col-md-2"></td>
+						
+						<td class="col-md-2">
+ 							<button class="btn-button2" title="Rename Folder" type="button" data-toggle="modal" 
+ 									data-target="#renameFolderModal" aria-hidden="true" ng-click="clickOnRenameFolder(item)">
+  								<strong> 
+   									<i class="fa fa-pencil"  aria-hidden="true fa-3x"></i> Rename
+								</strong>
+ 							</button>
+						</td> <!-- standardization of box -->
+						
+						<td class="col-md-2">
+ 							<button class="btn-button1" data-toggle="modal" data-target="#deleteFolderModal" type="button" 
+ 									title="Delete Folder" aria-hidden="true" ng-click="clickOnDeleteFolder(item)">
+  								<strong> 
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> Delete
+								</strong>
+ 							</button>
+						</td> <!-- col-md-3 ends -->
+											
+					</tr> <!-- folderList ends -->
+				</tbody> <!-- item in getFolders() track by $index ends -->
+				
+				<tbody ng-repeat="item in getFiles() track by $index">
+					<tr id="fileList">
+						
+						<td>
+							<i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> 
+							<a style="color:green" href="" ng-click="clickOnFile(item)"> {{item.name + '.' + item.extension}}</a>
+						</td>
+
+						<!-- standardization of box -->
+						<td class="col-md-2"></td> 
+												
+						<td class="col-md-2">
+ 							<button class="btn-button3" title="Share with your friends"  type="button" data-toggle="modal" 
+ 									data-target="#shareModal" aria-hidden="true" ng-click="clickOnShareFile(item)">
+  								<strong> 
+   									<i class="fa fa-share-alt"  aria-hidden="true fa-3x"></i> Share
+								</strong>
+ 							</button>
+						</td>
+											
+						<td class="col-md-2">
+ 							<button class="btn-button2" title="Rename file" type="button" data-toggle="modal" 
+ 									data-target="#renameFileModal" ng-click="clickOnRenameFile(item)">
+  								<strong> 
+   									<i class="fa fa-pencil"  aria-hidden="true fa-3x"></i> Rename
+								</strong>
+ 							</button>
+						</td>
+						
+						<td class="col-md-2">
+ 							<button class="btn-button1" title="Delete File" type="button" data-toggle="modal" 
+ 									data-target="#deleteFileModal" ng-click="clickOnDeleteFile(item)">
+  								<strong> 
+   									<i class="fa fa-remove" aria-hidden="true fa-3x"></i> Delete
+								</strong>
+ 							</button>
+						</td> 
+
+
+					</tr> <!-- fileList ends -->
+				</tbody> <!-- item in getFiles() track by $index ends -->
+			
+			</table> <!-- table table-striped ends -->
+		</div> <!-- form-group ends -->
+	</form> <!-- login-form ends -->
+</div> <!-- form-bottom ends -->

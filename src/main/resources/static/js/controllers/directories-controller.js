@@ -2,14 +2,25 @@ angular.module('app').controller("directoriesController", function($scope,
 																   $state,   
 																   $stateParams, 
 																   SessionService, 
-																   DirectoryService) {
+																   DirectoryService,
+																   Constants) {
 	$scope.clickOnFolder = function(folder) {
-		$state.go('dashboard.directories', {folderPath: folder.path});
+		if ($stateParams.folderPath != Constants.TRASH_PARAM) {
+			$state.go('dashboard.directories', {folderPath: folder.path});
+		} else {
+			$("#sendFileToTrashErrorModal .modal-body").html('This item has been removed, it is not possible to enter it.');
+			$("#sendFileToTrashErrorModal").modal("show");
+		}
 	}
 	
 	$scope.clickOnFile = function(file) {
-		DirectoryService.setClickedItem(file);
-		$state.go('dashboard.file');
+		if ($stateParams.folderPath != Constants.TRASH_PARAM) {
+			DirectoryService.setClickedItem(file);
+			$state.go('dashboard.file');
+		} else {
+			$("#sendFileToTrashErrorModal .modal-body").html('This item has been removed, it is not possible to enter it.');
+			$("#sendFileToTrashErrorModal").modal("show");
+		}
 	}
 	
 	$scope.clickOnSharedWithMe = function() {
@@ -18,6 +29,10 @@ angular.module('app').controller("directoriesController", function($scope,
 	
 	$scope.clickOnMyFiles = function() {
 		DirectoryService.goToMyFiles();
+	}
+	
+	$scope.clickOnTrash = function() {
+		DirectoryService.goToTrash();
 	}
 	
 	$scope.clickOnRenameFile = function(item){
@@ -29,6 +44,22 @@ angular.module('app').controller("directoriesController", function($scope,
 	}
 	
 	$scope.clickOnShareFile = function(item) {
+		DirectoryService.setClickedItem(item);
+	}
+	
+	$scope.clickOnDeleteFile = function(item){
+		DirectoryService.setClickedItem(item);
+	}
+	
+	$scope.clickOnDeleteFolder = function(item){
+		DirectoryService.setClickedItem(item);
+	}
+	
+	$scope.clickOnDeletePermanentlyFile = function(item){
+		DirectoryService.setClickedItem(item);
+	}
+	
+	$scope.clickOnDeletePermanentlyFolder = function(item){
 		DirectoryService.setClickedItem(item);
 	}
 	
@@ -52,8 +83,28 @@ angular.module('app').controller("directoriesController", function($scope,
 		DirectoryService.renameFile($scope.newName);
 	}
 	
+	$scope.sendFileToTrash = function() {
+		DirectoryService.sendFileToTrash();
+	}
+	
+	$scope.sendFolderToTrash = function() {
+		DirectoryService.sendFolderToTrash();
+	}
+	
+	$scope.finalFileDelete = function(){
+		DirectoryService.finalFileDelete();
+	}
+	
+	$scope.finalFolderDelete = function(){
+		DirectoryService.finalFolderDelete();
+	}
+	
 	$scope.newFolder = function() {
 		DirectoryService.newFolder($scope.newFolderName);
+	}
+	
+	$scope.cleanTrash = function(){
+		DirectoryService.cleanTrash
 	}
 	
 	$scope.getFolders = function() {

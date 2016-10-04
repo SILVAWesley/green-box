@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.Session;
 import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.NotEnoughAccessLevel;
 import org.ufcg.si.models.Notification;
@@ -32,6 +33,7 @@ import org.ufcg.si.util.permissions.folder.FolderPermissions;
 public class UserActionsManager {
 	public static final String SHARED_WITH_ME_FOLDER_NAME = "Shared with me";
 	public static final String I_SHARED_FOLDER_NAME = "Files you shared";
+	public static final String TRASH_NAME = "Trash";
 	
 	@Id
 	@GeneratedValue
@@ -68,11 +70,13 @@ public class UserActionsManager {
 		
 		this.rootFolder = new FolderGB(name, "");
 		this.rootFolder.addFolder(name);
+		this.rootFolder.addFolder("Trash");
 		this.rootFolder.addFolder(SHARED_WITH_ME_FOLDER_NAME);
 		this.rootFolder.addFolder(I_SHARED_FOLDER_NAME);
 		
 		this.folderPermissions.put(retrieveSharedWithMe(), FolderPermissions.SHARED);
 		this.folderPermissions.put(retrieveFilesIShared(), FolderPermissions.SHARED);
+		this.folderPermissions.put(retrieveTrash(), FolderPermissions.REMOVED);
 	}
 	
 	/**
@@ -260,6 +264,41 @@ public class UserActionsManager {
 	}
 	
 	/**
+	 * 
+	 * @param fileName
+	 * @param extension
+	 * @param path
+	 */
+	
+	public void deleteFile(String name, String extension, String path) {
+		FolderGB folder = rootFolder.findFolderByPath(path);
+		FolderPermissions permission = findFolderPermission(folder.getName(), folder.getPath());
+		
+		if (permission.isAllowed(FolderActions.DELETE_FILE)) {
+			FileGB fileToTrash = rootFolder.deleteFile(name, extension, path);
+			retrieveTrash().addFile(fileToTrash);
+			filePermissions.put(fileToTrash, FilePermissions.REMOVED);
+		} else {
+			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
+		}
+		
+	}
+	
+	public void deleteFolder(String path, String name) {
+		FolderGB folder = rootFolder.findFolderByPath(path);
+		FolderPermissions permission = findFolderPermission(folder.getName(), folder.getPath());
+
+		if (permission.isAllowed(FolderActions.DELETE_FOLDER)) {
+			FolderGB folderToTrash = rootFolder.deleteFolder(path, name); 
+			FolderGB copyFolder = new FolderGB(folderToTrash); 
+			retrieveTrash().addFolder(copyFolder);
+			folderPermissions.put(copyFolder, FolderPermissions.REMOVED);
+		} else {
+			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
+		}
+	}
+	
+	/**
 	 * Return the automated generated manager's ID
 	 * @return the manager ID
 	 */
@@ -290,6 +329,11 @@ public class UserActionsManager {
 	 */
 	public List<Notification> getNotifications() {
 		return notifications;
+	}
+	
+	@Override
+	public String toString(){
+		return rootFolder.toString();
 	}
 	
 	// If a file doesnt have the R or RW permission, then it is a file created by the User.
@@ -335,5 +379,9 @@ public class UserActionsManager {
 	
 	private FolderGB retrieveFilesIShared() {
 		return rootFolder.findFolderByName(I_SHARED_FOLDER_NAME);
+	}
+	
+	private FolderGB retrieveTrash() {
+		return rootFolder.findFolderByName(TRASH_NAME);
 	}
 }

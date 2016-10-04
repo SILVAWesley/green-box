@@ -1,5 +1,6 @@
 package org.ufcg.si.models.storage;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,13 @@ public class FolderGB {
 	 */
 	public FolderGB() {
 		this("", "");
+	}
+	
+	public FolderGB(FolderGB folder) {
+		this.name = folder.getName();
+		this.path = folder.getPath();
+		this.files = new ArrayList<>();
+		this.folders = new ArrayList<>();
 	}
 	
 	/**
@@ -305,6 +313,30 @@ public class FolderGB {
 		
 		return null;
 	}
+	
+	/**
+	 * 
+	 */
+	
+	public FileGB deleteFile(String name, String extension, String path) {
+		FolderGB folder = findFolderByPath(path);
+		FileGB file = folder.findFileByNameAndExtension(name, extension);
+		folder.files.remove(file);
+		return file;
+	}
+	
+	/**
+	 * 
+	 */
+	
+	public FolderGB deleteFolder(String path, String name) {
+		FolderGB folder =  findFolderByPath(path);
+		FolderGB folderToRemove = findFolderByPathAndName(name, path);
+		folder.getFolders().remove(folderToRemove);
+		return folderToRemove;
+		
+	}
+	
 	
 	/**
 	 * @return the list of children files

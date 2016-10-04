@@ -29,7 +29,11 @@ angular.module('app').controller('dashboardController', function($scope,
 		NotificationService.visitAll();
 	}
 	
-	$scope.userClick = function(){
-		$state.go('dashboard.user');
+	$scope.aboutClick = function(){
+		$state.go('dashboard.about');
+	}
+	
+	$scope.contactClick = function(){
+		$state.go('dashboard.contact');
 	}
 })
