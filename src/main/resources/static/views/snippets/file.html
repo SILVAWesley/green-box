@@ -8,8 +8,8 @@
 	
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel='stylesheet' type='text/css'></link>
 	</head>
-
 	<body>
+		<br></br>
 		<!-- Top content -->
 		<div class="top-content">
 			<div class="inner-bg">
@@ -26,8 +26,7 @@
 									<strong> Select Extension: </strong>							
 									<select class="btn btn-success" style="font-family: 'Open Sans', sans-serif; font-size: 18px; background:#ffac00;" ng-model="currentExtension">
   										<option ng-repeat="extension in extensions">{{extension}}</option>
-									</select>
-								
+									</select>								
 								</h3>
 							</div> <!-- form-top ends -->					
 						</div> <!-- userbox ends -->
@@ -37,29 +36,24 @@
 						</form>
 				
 						<!-- organising of boxes -->
-						<p></p><div class="col-md-8"></div>					
-					
+						<p></p><div class="col-md-8"></div>								
 						<div class="col-md-4">
 						
 							<button class="btn btn-info" type="submit" ng-click="saveFile()">
 								<strong> 
 									<i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i> Save
 								</strong>
-							</button>
-						
+							</button>					
 							<button class="btn btn-danger active" type="submit" ng-click="directoriesView()">
 								<strong> 
 									<i class="fa fa-times-circle fa-lg" aria-hidden="true"></i> Cancel
 								</strong>
 							</button>
 
-						</div> <!-- col-md-4 -->
-					
+						</div> <!-- col-md-4 -->					
 					</div> <!-- col-md-12 ends -->
 				</div> <!-- container ends -->
 			</div> <!-- inner-bg ends -->
-		</div> <!-- top-content ends -->
-	
+		</div> <!-- top-content ends -->	
 	</body>
-	
 </html>
