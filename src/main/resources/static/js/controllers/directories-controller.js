@@ -8,7 +8,8 @@ angular.module('app').controller("directoriesController", function($scope,
 		if ($stateParams.folderPath != Constants.TRASH_PARAM) {
 			$state.go('dashboard.directories', {folderPath: folder.path});
 		} else {
-			window.alert('This item has been removed, it is not possible to enter it.');
+			$("#sendFileToTrashErrorModal .modal-body").html('This item has been removed, it is not possible to enter it.');
+			$("#sendFileToTrashErrorModal").modal("show");
 		}
 	}
 	
@@ -17,7 +18,8 @@ angular.module('app').controller("directoriesController", function($scope,
 			DirectoryService.setClickedItem(file);
 			$state.go('dashboard.file');
 		} else {
-			window.alert('This item has been removed, it is not possible to enter it.');
+			$("#sendFileToTrashErrorModal .modal-body").html('This item has been removed, it is not possible to enter it.');
+			$("#sendFileToTrashErrorModal").modal("show");
 		}
 	}
 	
