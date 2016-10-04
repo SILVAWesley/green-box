@@ -2,8 +2,8 @@ package org.ufcg.si.exceptions;
 
 import javax.servlet.ServletException;
 
-import org.ufcg.si.beans.requests.AddFileBean;
-import org.ufcg.si.beans.requests.AddFolderBean;
+import org.ufcg.si.beans.requests.AddNDeleteFileBean;
+import org.ufcg.si.beans.requests.AddNDeleteFolderBean;
 import org.ufcg.si.beans.requests.EditFileBean;
 import org.ufcg.si.beans.requests.RegistrationBean;
 import org.ufcg.si.beans.requests.RenameFileBean;
@@ -17,7 +17,7 @@ public class ExceptionHandler {
 	public static final String USER_EMAIL = "email";
 	public static final String USER_PASSWORD = "password";
 	
-	public static void checkAddFolderBody(AddFolderBean body) {
+	public static void checkAddFolderBody(AddNDeleteFolderBean body) {
 		checkInvalidUser(body.getUser());
 		
 		String username = body.getUser().getUsername();
@@ -29,7 +29,7 @@ public class ExceptionHandler {
 		checkInvalidPath(folderPath);
 	}
 	
-	public static void checkAddFileBody(AddFileBean body) {
+	public static void checkAddFileBody(AddNDeleteFileBean body) {
 		checkInvalidUser(body.getUser());
 		
 		String username = body.getUser().getUsername();

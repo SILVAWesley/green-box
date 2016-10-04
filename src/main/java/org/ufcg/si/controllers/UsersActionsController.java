@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.ufcg.si.beans.requests.AddFileBean;
-import org.ufcg.si.beans.requests.AddFolderBean;
+import org.ufcg.si.beans.requests.AddNDeleteFileBean;
+import org.ufcg.si.beans.requests.AddNDeleteFolderBean;
+import org.ufcg.si.beans.requests.AddNDeleteFolderBean;
 import org.ufcg.si.beans.requests.EditFileBean;
 import org.ufcg.si.beans.requests.RenameFileBean;
 import org.ufcg.si.beans.requests.RenameFolderBean;
@@ -25,6 +26,7 @@ import org.ufcg.si.repositories.UserService;
 import org.ufcg.si.repositories.UserServiceImpl;
 import org.ufcg.si.util.ServerConstants;
 import org.ufcg.si.util.permissions.file.FilePermissions;
+
 
 /**
  * This controller class uses JSON data format to be the 
@@ -59,7 +61,7 @@ public class UsersActionsController {
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFolder(@RequestBody AddFolderBean body) throws ServletException {
+	public ResponseEntity<User> addFolder(@RequestBody AddNDeleteFolderBean body) throws ServletException {
 		try {
 			ExceptionHandler.checkAddFolderBody(body);
 		
@@ -91,7 +93,7 @@ public class UsersActionsController {
 					method = RequestMethod.POST,
 					produces = MediaType.APPLICATION_JSON_VALUE,
 					consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> addFile(@RequestBody AddFileBean body) throws ServletException {
+	public ResponseEntity<User> addFile(@RequestBody AddNDeleteFileBean body) throws ServletException {
 		try {
 			ExceptionHandler.checkAddFileBody(body);
 			
@@ -282,4 +284,67 @@ public class UsersActionsController {
 			throw new ServletException("Request error while trying to rename folder... " + dae.getMessage());
 		} 
 	}
+	
+	/**
+	 * Delete a file
+	 * @param requestBody
+	 * 		All the information necessary to delete a file
+	 * @return the http status and user updated.
+	 * @throws Exception if can't delete the file
+	 */
+	
+	@RequestMapping(value = "/deletefile", 
+			method = RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+		public ResponseEntity<User> deleteFile(@RequestBody AddNDeleteFileBean requestBody)throws Exception {
+			try {
+				User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+				
+				ExceptionHandler.checkUserInDatabase(dbUser);
+				dbUser.deleteFile(requestBody.getFileName(), requestBody.getFileExtension(), requestBody.getFilePath());
+				User updateUser = userService.update(dbUser);
+				
+				return new ResponseEntity<>(updateUser, HttpStatus.OK);
+			} catch(GreenboxException gbe) {
+				gbe.printStackTrace();
+				throw new ServletException("Request error while trying to delete file..." + gbe.getMessage());
+			} catch(DataAccessException dae) {
+				dae.printStackTrace();
+				throw new ServletException("Request error while trying to delete file... " + dae.getMessage());
+			}
+		
+		}
+	
+	/**
+	 * Delete a folder
+	 * @param requestBody
+	 * 		All the information necessary to delete a folder
+	 * @return the http status and user updated.
+	 * @throws Exception if can't delete the folder
+	 */
+	
+	@RequestMapping(value = "/deletefolder",
+			method = RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> deleteFolder(@RequestBody AddNDeleteFolderBean requestBody)throws Exception {
+		try {
+			User dbUser = userService.findByUsername(requestBody.getUser().getUsername());
+			
+			ExceptionHandler.checkUserInDatabase(dbUser);
+
+			dbUser.deleteFolder(requestBody.getFolderPath(), requestBody.getFolderName());
+			System.out.println(dbUser);
+			User updateUser = userService.update(dbUser);
+			return new ResponseEntity<>(updateUser, HttpStatus.OK);
+		}  catch(GreenboxException gbe) {
+			gbe.printStackTrace();
+			throw new ServletException("Request error while trying to delete file..." + gbe.getMessage());
+		} catch(DataAccessException dae) {
+			dae.printStackTrace();
+			throw new ServletException("Request error while trying to delete file... " + dae.getMessage());
+		}
+	}
+	
 }

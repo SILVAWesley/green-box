@@ -16,13 +16,18 @@ angular.module('app').config(['$urlRouterProvider', '$stateProvider', function($
 	
 	$stateProvider.state('dashboard.directories', {
 		url: '/directories/{folderPath:.*}',
-		templateUrl: 'views/snippets/directorybox.html',
+		templateUrl: 'views/snippets/directories.html',
 		controller: 'directoriesController'
 	});
 	
-	$stateProvider.state('dashboard.user', {
-		url: '/user/',
-		templateUrl: 'views/snippets/user.html',
+	$stateProvider.state('dashboard.about', {
+		url: '/about/',
+		templateUrl: 'views/snippets/about.html',
+	});
+	
+	$stateProvider.state('dashboard.contact', {
+		url: '/contact/',
+		templateUrl: 'views/snippets/contact.html',
 	});
 	
 	$stateProvider.state('dashboard.file', {

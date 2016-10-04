@@ -6,7 +6,8 @@ package org.ufcg.si.util.permissions.file;
 public enum FilePermissions {
 	R(), 
 	RW(FileActions.EDIT_CONTENT), 
-	OWNER(FileActions.SHARE, FileActions.EDIT_CONTENT, FileActions.EDIT_EXTENSION, FileActions.EDIT_NAME);
+	OWNER(FileActions.SHARE, FileActions.EDIT_CONTENT, FileActions.EDIT_EXTENSION, FileActions.EDIT_NAME),
+	REMOVED();
 	
 	private FileActions[] allowedActions;
 	
