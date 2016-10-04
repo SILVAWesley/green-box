@@ -14,10 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.Session;
 import org.ufcg.si.exceptions.InvalidDataException;
 import org.ufcg.si.exceptions.NotEnoughAccessLevel;
 import org.ufcg.si.models.Notification;
-import org.ufcg.si.models.User;
 import org.ufcg.si.util.permissions.file.FileActions;
 import org.ufcg.si.util.permissions.file.FilePermissions;
 import org.ufcg.si.util.permissions.folder.FolderActions;
@@ -76,7 +76,7 @@ public class UserActionsManager {
 		
 		this.folderPermissions.put(retrieveSharedWithMe(), FolderPermissions.SHARED);
 		this.folderPermissions.put(retrieveFilesIShared(), FolderPermissions.SHARED);
-		this.folderPermissions.put(retrieveTrash(), FolderPermissions.TRASH);
+		this.folderPermissions.put(retrieveTrash(), FolderPermissions.REMOVED);
 	}
 	
 	/**
@@ -277,6 +277,7 @@ public class UserActionsManager {
 		if (permission.isAllowed(FolderActions.DELETE_FILE)) {
 			FileGB fileToTrash = rootFolder.deleteFile(name, extension, path);
 			retrieveTrash().addFile(fileToTrash);
+			filePermissions.put(fileToTrash, FilePermissions.REMOVED);
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
 		}
@@ -291,7 +292,7 @@ public class UserActionsManager {
 			FolderGB folderToTrash = rootFolder.deleteFolder(path, name); 
 			FolderGB copyFolder = new FolderGB(folderToTrash); 
 			retrieveTrash().addFolder(copyFolder);
-			folderPermissions.put(copyFolder, FolderPermissions.TRASH);
+			folderPermissions.put(copyFolder, FolderPermissions.REMOVED);
 		} else {
 			throw new NotEnoughAccessLevel("Your permission: " + permission + " is not enough to complete the operation.");
 		}
