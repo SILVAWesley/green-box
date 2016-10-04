@@ -17,6 +17,7 @@
 **Link para os arquivos com as decisões de projeto:**
 - [Parte 1] (https://docs.google.com/a/ccc.ufcg.edu.br/document/d/1UiMmcIcAxkNDWNESD-hiz2iYHh934GrmqlwTLSeR4oA/edit?usp=sharing).
 - [Parte 2] (https://docs.google.com/a/ccc.ufcg.edu.br/document/d/1wrVjfn9iEbF9c0AOgRZd7funolg8Pzj761QL75_xqao/edit?usp=sharing).
+- [Parte 3] (https://docs.google.com/a/ccc.ufcg.edu.br/document/d/1ZT_eIiIiDkF6JBpxURnH-kjoP4PFzgvg0VwJg5RYqD4/edit?usp=sharing).
 
 
 
