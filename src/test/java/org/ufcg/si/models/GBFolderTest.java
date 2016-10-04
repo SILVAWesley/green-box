@@ -341,6 +341,107 @@ public class GBFolderTest {
 		}
 
 	}
+	
+//	@Test
+//	public void testDeleteFolder(){
+//
+//		try {
+//			dir1.addFolder("games", "parent");
+//			dir1.addFolder("music", "parent");
+//			dir2.addFolder("games", "son1");
+//			dir2.addFolder("books", "son1");
+//			dir3.addFolder("music", "son2");
+//			dir3.addFolder("books", "son2");
+//			dir4.addFolder("comics", "grandSon1-1");
+//			dir4.addFolder("papers", "grandSon1-1");
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		Assert.assertEquals(dir1.getFolders().get(0), new FolderGB("games", "parent/games"));
+//		Assert.assertEquals(dir1.getFolders().get(1), new FolderGB("music", "parent/music"));
+//		Assert.assertEquals(dir2.getFolders().get(0), new FolderGB("games", "son1/games"));
+//		Assert.assertEquals(dir2.getFolders().get(1), new FolderGB("books", "son1/books"));
+//		Assert.assertEquals(dir3.getFolders().get(0), new FolderGB("music", "son2/music"));
+//		Assert.assertEquals(dir3.getFolders().get(1), new FolderGB("books", "son2/books"));
+//		Assert.assertEquals(dir4.getFolders().get(0), new FolderGB("comics", "grandSon1-1/comics"));
+//		Assert.assertEquals(dir4.getFolders().get(1), new FolderGB("papers", "grandSon1-1/papers"));
+//		
+//		dir1.deleteFolder("parent/games", "games");
+//		dir1.deleteFolder("parent/music", "music");
+//		dir2.deleteFolder("son1/games", "games");
+//		dir2.deleteFolder("son1/books", "books");
+//		dir3.deleteFolder("son2/music", "music");
+//		dir3.deleteFolder("son2/books", "books");
+//		dir4.deleteFolder("grandSon1-1/comics", "comics");
+//		dir4.deleteFolder("grandSon1-1/papers", "papers");
+//		Assert.assertEquals(dir1.getFolders(), new ArrayList<FolderGB>());
+//
+//
+//	}
+	
+	
+	@Test
+	public void testDeleteFile() {
+		String sb1 = new String("I see fire");
+		String sb2 = new String("I see water");
+		String sb3 = new String("I see nigth");
+		String sb4 = new String("I see fate");
+		List<FileGB> list1 = new ArrayList<FileGB>();
+		List<FileGB> list2 = new ArrayList<FileGB>();
+		List<FileGB> list3 = new ArrayList<FileGB>();
+		List<FileGB> list4 = new ArrayList<FileGB>();
+
+		try {
+			dir1.addFile("fire", "txt", sb1);
+			dir1.addFile("water", "txt", sb2);
+			dir2.addFile("water", "txt", sb2);
+			dir2.addFile("fate", "txt", sb4);
+			dir3.addFile("nigth", "txt", sb3);
+			dir3.addFile("fate", "txt", sb4);
+			dir4.addFile("fire", "txt", sb1);
+			dir4.addFile("fate", "txt", sb4);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+
+			list1.add(new FileGB("fire", "txt", sb1, "parent/fire"));
+			list1.add(new FileGB("water", "txt", sb2, "parent/water"));
+			list2.add(new FileGB("water", "txt", sb2, "son1/water"));
+			list2.add(new FileGB("fate", "txt", sb4, "son1/fate"));
+			list3.add(new FileGB("nigth", "txt", sb3, "son2/nigth"));
+			list3.add(new FileGB("fate", "txt", sb4, "son2/fate"));
+			list4.add(new FileGB("fire", "txt", sb1, "grandSon1-1/fire"));
+			list4.add(new FileGB("fate", "txt", sb4, "grandSon1-1/fate"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Assert.assertEquals(dir1.getFiles(), list1);
+		Assert.assertEquals(dir2.getFiles(), list2);
+		Assert.assertEquals(dir3.getFiles(), list3);
+		Assert.assertEquals(dir4.getFiles(), list4);
+	
+		
+		
+		dir1.deleteFile("fire", "txt", "parent");
+		dir1.deleteFile("water", "txt", "parent");
+		dir2.deleteFile("water", "txt", "son1");
+		dir2.deleteFile("fate", "txt", "son1");
+		dir3.deleteFile("nigth", "txt", "son2");
+		dir3.deleteFile("fate", "txt", "son2");
+		dir4.deleteFile("fire", "txt", "grandSon1-1");
+		dir4.deleteFile("fate", "txt", "grandSon1-1");
+
+		Assert.assertEquals(dir1.getFiles(), new ArrayList<FileGB>());
+		Assert.assertEquals(dir2.getFiles(), new ArrayList<FileGB>());
+		Assert.assertEquals(dir3.getFiles(), new ArrayList<FileGB>());
+		Assert.assertEquals(dir4.getFiles(), new ArrayList<FileGB>());
+	}
 
 	@Test
 	public void testAddFile2() {
