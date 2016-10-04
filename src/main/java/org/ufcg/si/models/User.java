@@ -167,6 +167,22 @@ public class User {
 	}
 	
 	/**
+	 * 
+	 */
+	
+	public void deleteFile(String name, String extension, String path) {
+		userActionsManager.deleteFile(name, extension, path);
+	}
+	
+	/**
+	 * 
+	 */
+	
+	public void deleteFolder(String path, String name) {
+		userActionsManager.deleteFolder(path, name);
+	}
+	
+	/**
 	 * Return the iterable of the notification's list
 	 * @return
 	 * 		The iterable of the notification's list
@@ -242,6 +258,12 @@ public class User {
 			return false;
 		}
 
+	}
+	
+	@Override
+	public String toString(){
+		String result = "Username: " + this.username + " Email: " + this.email + " PW: " + this.password + "\n" + this.userActionsManager.toString();
+		return result;
 	}
 	
 	/*public static void main(String[] args) {

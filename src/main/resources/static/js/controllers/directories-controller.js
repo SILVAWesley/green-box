@@ -2,14 +2,25 @@ angular.module('app').controller("directoriesController", function($scope,
 																   $state,   
 																   $stateParams, 
 																   SessionService, 
-																   DirectoryService) {
+																   DirectoryService,
+																   Constants) {
 	$scope.clickOnFolder = function(folder) {
-		$state.go('dashboard.directories', {folderPath: folder.path});
+		if ($stateParams.folderPath != Constants.TRASH_PARAM) {
+			$state.go('dashboard.directories', {folderPath: folder.path});
+		} else {
+			$("#sendFileToTrashErrorModal .modal-body").html('This item has been removed, it is not possible to enter it.');
+			$("#sendFileToTrashErrorModal").modal("show");
+		}
 	}
 	
 	$scope.clickOnFile = function(file) {
-		DirectoryService.setClickedItem(file);
-		$state.go('dashboard.file');
+		if ($stateParams.folderPath != Constants.TRASH_PARAM) {
+			DirectoryService.setClickedItem(file);
+			$state.go('dashboard.file');
+		} else {
+			$("#sendFileToTrashErrorModal .modal-body").html('This item has been removed, it is not possible to enter it.');
+			$("#sendFileToTrashErrorModal").modal("show");
+		}
 	}
 	
 	$scope.clickOnSharedWithMe = function() {

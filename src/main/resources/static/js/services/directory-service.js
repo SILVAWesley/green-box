@@ -74,7 +74,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.newName = newName;
 		requestData.oldName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
 		$http.put(Constants.PUT_RENAMEFILE_URL, requestData)
 		.then(function(response) {
@@ -93,10 +93,10 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData = {};
 		requestData.user = SessionService.getUser();
 		requestData.fileName = directoryService.getClickedItem().name;
-		requestData.folderPath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		requestData.filePath = directoryService.getCurrentFolder().path;
+		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
-		$http.put(Constants.POST_SENDFILETOTRASH_URL, requestData)
+		$http.put(Constants.PUT_SENDFILETOTRASH_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -113,7 +113,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.folderName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		
-		$http.put(Constants.POST_SENDFOLDERTOTRASH_URL, requestData)
+		$http.put(Constants.PUT_SENDFOLDERTOTRASH_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -129,9 +129,9 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.user = SessionService.getUser();
 		requestData.fileName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
-		requestData.fileExtension = directoryService.getClickedItem().name.extension;
+		requestData.fileExtension = directoryService.getClickedItem().extension;
 		
-		$http.put(Constants.POST_FINALFILEDELETE_URL, requestData)
+		$http.delete(Constants.DELETE_FINALFILEDELETE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -148,7 +148,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData.folderName = directoryService.getClickedItem().name;
 		requestData.folderPath = directoryService.getCurrentFolder().path;
 		
-		$http.put(Constants.POST_FINALFOLDERDELETE_URL, requestData)
+		$http.delete(Constants.DELETE_FINALFOLDERDELETE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -163,7 +163,7 @@ angular.module('app').factory('DirectoryService', function($http,
 		requestData = {};
 		requestData.user = SessionService.getUser();
 		
-		$http.put(Constants.POST_CLEANTRASH_URL, requestData)
+		$http.delete(Constants.DELETE_CLEANTRASH_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
@@ -173,8 +173,6 @@ angular.module('app').factory('DirectoryService', function($http,
 			$("#cleanTrashErrorModal").modal("show");		
 		});
 	}
-	//FIM
-	//======================================================================================
 	
 	directoryService.newFolder = function(folderName) {
 		requestData = {};
