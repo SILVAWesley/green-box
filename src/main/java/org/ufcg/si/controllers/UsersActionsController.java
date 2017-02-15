@@ -144,6 +144,10 @@ public class UsersActionsController {
 			}
 			
 			User updateUser = userService.update(dbUser);
+			
+			long used  = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+			updateUser.setMemoryUsage(used);
+			
 			return new ResponseEntity<>(updateUser, HttpStatus.OK);
 		} catch(GreenboxException gbe) {
 			gbe.printStackTrace();
@@ -304,6 +308,9 @@ public class UsersActionsController {
 				ExceptionHandler.checkUserInDatabase(dbUser);
 				dbUser.deleteFile(requestBody.getFileName(), requestBody.getFileExtension(), requestBody.getFilePath());
 				User updateUser = userService.update(dbUser);
+				
+				long used  = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+				updateUser.setMemoryUsage(used);
 				
 				return new ResponseEntity<>(updateUser, HttpStatus.OK);
 			} catch(GreenboxException gbe) {
