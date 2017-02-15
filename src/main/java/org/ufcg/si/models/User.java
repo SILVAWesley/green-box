@@ -27,6 +27,9 @@ public class User {
 	@Column(unique = true)
 	private String email;
 	private String password;
+	
+	private long memoryUsage;
+	private long timeUsage;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private UserActionsManager userActionsManager;
@@ -265,9 +268,27 @@ public class User {
 		String result = "Username: " + this.username + " Email: " + this.email + " PW: " + this.password + "\n" + this.userActionsManager.toString();
 		return result;
 	}
+
+	public long getMemoryUsage() {
+		return memoryUsage;
+	}
+
+	public void setMemoryUsage(long memoryUsage) {
+		this.memoryUsage = memoryUsage;
+	}
+
+	public long getTimeUsage() {
+		return timeUsage;
+	}
+
+	public void setTimeUsage(long timeUsage) {
+		this.timeUsage = timeUsage;
+	}
 	
 	/*public static void main(String[] args) {
 		args = new String[]{"org.ufcg.si.models.User", "src/test/java/org/ufcg/si/models/UserEasyAcceptTest.txt"};
 		EasyAccept.main(args);
 	}*/
+	
+	
 }

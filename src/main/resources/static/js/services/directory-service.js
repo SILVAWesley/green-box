@@ -100,6 +100,8 @@ angular.module('app').factory('DirectoryService', function($http,
 		.then(function(response) {
 			SessionService.setUser(response.data);
 			directoryService.goToPath(directoryService.getCurrentFolder().path);
+			//ADSD
+			console.log(response.data.memoryUsage);
 			$("#sendFileToTrashModal").modal("show");		
 		}, function(response) {
 			$("#sendFileToTrashErrorModal .modal-body").html(response.data.message);
@@ -222,6 +224,8 @@ angular.module('app').factory('DirectoryService', function($http,
 		$http.put(Constants.PUT_EDITFILE_URL, requestData)
 		.then(function(response) {
 			SessionService.setUser(response.data);
+			//ADSD
+			console.log(response.data.memoryUsage);
 			$("#fileEditModal").modal("show");
 			$state.go('dashboard.directories', {'folderPath': directoryService.getCurrentFolder().path});
 		}, function(response){

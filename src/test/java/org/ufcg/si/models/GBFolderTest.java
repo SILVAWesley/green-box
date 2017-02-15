@@ -12,7 +12,7 @@ import org.ufcg.si.models.storage.FolderGB;
 import org.ufcg.si.util.ServerConstants;
 
 public class GBFolderTest {
-/*	private FolderGB dir1;
+	private FolderGB dir1;
 	private FolderGB dir2;
 	private FolderGB dir3;
 	private FolderGB dir4;
@@ -87,9 +87,9 @@ public class GBFolderTest {
 		dir2.addFolder("Poseidon");
 		dir2.addFolder("Mare");
 
-		Assert.assertEquals(dir1.getChildren().get(0).getName(), dir2.getChildren().get(1).getName());
-		Assert.assertEquals(dir1.getChildren().get(1).getName(), dir2.getChildren().get(2).getName());
-		Assert.assertEquals(dir1.getChildren().get(2).getName(), dir2.getChildren().get(0).getName());
+		Assert.assertEquals(dir1.getFolders().get(0).getName(), dir2.getFolders().get(1).getName());
+		Assert.assertEquals(dir1.getFolders().get(1).getName(), dir2.getFolders().get(2).getName());
+		Assert.assertEquals(dir1.getFolders().get(2).getName(), dir2.getFolders().get(0).getName());
 	}
 
 	@Test
@@ -100,11 +100,11 @@ public class GBFolderTest {
 			dir1.addFolder("bojack");
 			dir2.addFolder("something");
 			dir2.addFolder("something else");
-			Assert.assertEquals(dir1.getChildren().get(0), new FolderGB("pepe", "parent/pepe"));
-			Assert.assertEquals(dir1.getChildren().get(1), new FolderGB("blobo", "parent/blobo"));
-			Assert.assertEquals(dir1.getChildren().get(2), new FolderGB("bojack", "parent/bojack"));
-			Assert.assertEquals(dir2.getChildren().get(0), new FolderGB("something", "son1/something"));
-			Assert.assertEquals(dir2.getChildren().get(1), new FolderGB("something else", "son1/something else"));
+			Assert.assertEquals(dir1.getFolders().get(0), new FolderGB("pepe", "parent/pepe"));
+			Assert.assertEquals(dir1.getFolders().get(1), new FolderGB("blobo", "parent/blobo"));
+			Assert.assertEquals(dir1.getFolders().get(2), new FolderGB("bojack", "parent/bojack"));
+			Assert.assertEquals(dir2.getFolders().get(0), new FolderGB("something", "son1/something"));
+			Assert.assertEquals(dir2.getFolders().get(1), new FolderGB("something else", "son1/something else"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -159,10 +159,10 @@ public class GBFolderTest {
 
 	@Test
 	public void testRename() {
-		dir1.rename("Izanami");
-		dir2.rename("Moira");
-		dir3.rename("Scylla");
-		dir4.rename("Children of the Sun");
+		dir1.setName("Izanami");
+		dir2.setName("Moira");
+		dir3.setName("Scylla");
+		dir4.setName("Children of the Sun");
 
 		Assert.assertNotEquals(dir1.getName(), "parent");
 		Assert.assertNotEquals(dir2.getName(), "son1");
@@ -178,22 +178,18 @@ public class GBFolderTest {
 
 	@Test
 	public void testRenameFile() {
-		try {
-			dir1.addFile("fire", "txt", sb1);
-			dir1.addFile("water", "txt", sb2);
-			dir2.addFile("nigth", "txt", sb3);
-			dir2.addFile("fate", "txt", sb4);
-			dir3.addFile("nigth", "txt", sb3);
-			dir3.addFile("fire", "txt", sb1);
-			dir4.addFile("nigth", "txt", sb3);
-			dir4.addFile("fire", "txt", sb1);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		dir1.renameFile("Aurora", "fire", "parent");
-		dir2.renameFile("Boreal", "fate", "son1");
-		dir3.renameFile("Darkness", "nigth", "son2");
-		dir4.renameFile("Tomorrow", "fire", "grandSon1-1");
+		dir1.addFile("fire", "txt", sb1);
+		dir1.addFile("water", "txt", sb2);
+		dir2.addFile("nigth", "txt", sb3);
+		dir2.addFile("fate", "txt", sb4);
+		dir3.addFile("nigth", "txt", sb3);
+		dir3.addFile("fire", "txt", sb1);
+		dir4.addFile("nigth", "txt", sb3);
+		dir4.addFile("fire", "txt", sb1);
+		dir1.editFileName("Aurora", "fire", "txt", "parent");
+		dir2.editFileName("Boreal", "fate", "txt", "son1");
+		dir3.editFileName("Darkness", "nigth", "txt", "son2");
+		dir4.editFileName("Tomorrow", "fire", "txt", "grandSon1-1");
 
 		Assert.assertNotEquals(dir1.getFiles().get(0).getName(), "fire");
 		Assert.assertNotEquals(dir2.getFiles().get(1).getName(), "fate");
@@ -208,43 +204,31 @@ public class GBFolderTest {
 
 	@Test
 	public void testRenameFile2() {
-		try {
-			dir1.addFile("fire", "txt", sb1);
-			dir1.addFile("water", "txt", sb2);
-			dir2.addFile("nigth", "txt", sb3);
-			dir2.addFile("fate", "txt", sb4);
-			dir3.addFile("nigth", "txt", sb3);
-			dir3.addFile("fire", "txt", sb1);
-			dir4.addFile("nigth", "txt", sb3);
-			dir4.addFile("fire", "txt", sb1);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		dir1.renameFile("Aurora", "fire", "parent");
-		dir2.renameFile("Aurora", "fate", "son1");
-		dir3.renameFile("Aurora", "nigth", "son2");
-		dir4.renameFile("Aurora", "fire", "grandSon1-1");
+		dir1.addFile("fire", "txt", sb1);
+		dir1.addFile("water", "txt", sb2);
+		dir2.addFile("nigth", "txt", sb3);
+		dir2.addFile("fate", "txt", sb4);
+		dir3.addFile("nigth", "txt", sb3);
+		dir3.addFile("fire", "txt", sb1);
+		dir4.addFile("nigth", "txt", sb3);
+		dir4.addFile("fire", "txt", sb1);
+		dir1.editFileName("Aurora", "fire", "txt", "parent");
+		dir2.editFileName("Aurora", "fate", "txt", "son1");
+		dir3.editFileName("Aurora", "nigth", "txt", "son2");
+		dir4.editFileName("Aurora", "fire", "txt", "grandSon1-1");
 	}
 
 	@Test
 	public void testEditFile() {
-		try {
-			dir1.addFile("water", "txt", sb2);
-			dir2.addFile("fate", "txt", sb4);
-			dir3.addFile("fire", "txt", sb1);
-			dir4.addFile("nigth", "txt", sb3);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		dir1.addFile("water", "txt", sb2);
+		dir2.addFile("fate", "txt", sb4);
+		dir3.addFile("fire", "txt", sb1);
+		dir4.addFile("nigth", "txt", sb3);
 
-		try {
-			dir1.editFileContent("water", "Madness is only the start", "");
-			dir2.editFileContent("fate", "Death is only the start", "");
-			dir3.editFileContent("fire", "Disgrace thy family", "");
-			dir4.editFileContent("nigth", "Plague take you", "");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		dir1.editFileContent("Madness is only the start", "water", "txt", "parent");
+		dir2.editFileContent("Death is only the start", "fate", "txt", "son1");
+		dir3.editFileContent("Disgrace thy family", "fire", "txt", "son2");
+		dir4.editFileContent("Plague take you", "nigth", "txt", "grandSon1-1");
 		Assert.assertNotEquals(dir1.getFiles().get(0).getContent(), "I see water");
 		Assert.assertNotEquals(dir2.getFiles().get(0).getContent(), "I see fate");
 		Assert.assertNotEquals(dir3.getFiles().get(0).getContent(), "I see fire");
@@ -274,14 +258,14 @@ public class GBFolderTest {
 			e.printStackTrace();
 		}
 
-		Assert.assertEquals(dir1.getChildren().get(0), new FolderGB("games", "parent/games"));
-		Assert.assertEquals(dir1.getChildren().get(1), new FolderGB("music", "parent/music"));
-		Assert.assertEquals(dir2.getChildren().get(0), new FolderGB("games", "son1/games"));
-		Assert.assertEquals(dir2.getChildren().get(1), new FolderGB("books", "son1/books"));
-		Assert.assertEquals(dir3.getChildren().get(0), new FolderGB("music", "son2/music"));
-		Assert.assertEquals(dir3.getChildren().get(1), new FolderGB("books", "son2/books"));
-		Assert.assertEquals(dir4.getChildren().get(0), new FolderGB("comics", "grandSon1-1/comics"));
-		Assert.assertEquals(dir4.getChildren().get(1), new FolderGB("papers", "grandSon1-1/papers"));
+		Assert.assertEquals(dir1.getFolders().get(0), new FolderGB("games", "parent/games"));
+		Assert.assertEquals(dir1.getFolders().get(1), new FolderGB("music", "parent/music"));
+		Assert.assertEquals(dir2.getFolders().get(0), new FolderGB("games", "son1/games"));
+		Assert.assertEquals(dir2.getFolders().get(1), new FolderGB("books", "son1/books"));
+		Assert.assertEquals(dir3.getFolders().get(0), new FolderGB("music", "son2/music"));
+		Assert.assertEquals(dir3.getFolders().get(1), new FolderGB("books", "son2/books"));
+		Assert.assertEquals(dir4.getFolders().get(0), new FolderGB("comics", "grandSon1-1/comics"));
+		Assert.assertEquals(dir4.getFolders().get(1), new FolderGB("papers", "grandSon1-1/papers"));
 
 	}
 
@@ -298,12 +282,12 @@ public class GBFolderTest {
 			e.printStackTrace();
 		}
 		try {
-			FolderGB heaven = dir1.getChildren().get(0);
-			FolderGB sky = heaven.getChildren().get(0);
-			FolderGB earth = sky.getChildren().get(0);
-			FolderGB midgard = earth.getChildren().get(0);
-			FolderGB purgatory = midgard.getChildren().get(0);
-			FolderGB hell = purgatory.getChildren().get(0);
+			FolderGB heaven = dir1.getFolders().get(0);
+			FolderGB sky = heaven.getFolders().get(0);
+			FolderGB earth = sky.getFolders().get(0);
+			FolderGB midgard = earth.getFolders().get(0);
+			FolderGB purgatory = midgard.getFolders().get(0);
+			FolderGB hell = purgatory.getFolders().get(0);
 
 			Assert.assertEquals(heaven, new FolderGB("heaven", "parent/heaven"));
 			Assert.assertEquals(sky, new FolderGB("sky", "parent/heaven/sky"));
@@ -357,6 +341,107 @@ public class GBFolderTest {
 		}
 
 	}
+	
+//	@Test
+//	public void testDeleteFolder(){
+//
+//		try {
+//			dir1.addFolder("games", "parent");
+//			dir1.addFolder("music", "parent");
+//			dir2.addFolder("games", "son1");
+//			dir2.addFolder("books", "son1");
+//			dir3.addFolder("music", "son2");
+//			dir3.addFolder("books", "son2");
+//			dir4.addFolder("comics", "grandSon1-1");
+//			dir4.addFolder("papers", "grandSon1-1");
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		Assert.assertEquals(dir1.getFolders().get(0), new FolderGB("games", "parent/games"));
+//		Assert.assertEquals(dir1.getFolders().get(1), new FolderGB("music", "parent/music"));
+//		Assert.assertEquals(dir2.getFolders().get(0), new FolderGB("games", "son1/games"));
+//		Assert.assertEquals(dir2.getFolders().get(1), new FolderGB("books", "son1/books"));
+//		Assert.assertEquals(dir3.getFolders().get(0), new FolderGB("music", "son2/music"));
+//		Assert.assertEquals(dir3.getFolders().get(1), new FolderGB("books", "son2/books"));
+//		Assert.assertEquals(dir4.getFolders().get(0), new FolderGB("comics", "grandSon1-1/comics"));
+//		Assert.assertEquals(dir4.getFolders().get(1), new FolderGB("papers", "grandSon1-1/papers"));
+//		
+//		dir1.deleteFolder("parent/games", "games");
+//		dir1.deleteFolder("parent/music", "music");
+//		dir2.deleteFolder("son1/games", "games");
+//		dir2.deleteFolder("son1/books", "books");
+//		dir3.deleteFolder("son2/music", "music");
+//		dir3.deleteFolder("son2/books", "books");
+//		dir4.deleteFolder("grandSon1-1/comics", "comics");
+//		dir4.deleteFolder("grandSon1-1/papers", "papers");
+//		Assert.assertEquals(dir1.getFolders(), new ArrayList<FolderGB>());
+//
+//
+//	}
+	
+	
+	@Test
+	public void testDeleteFile() {
+		String sb1 = new String("I see fire");
+		String sb2 = new String("I see water");
+		String sb3 = new String("I see nigth");
+		String sb4 = new String("I see fate");
+		List<FileGB> list1 = new ArrayList<FileGB>();
+		List<FileGB> list2 = new ArrayList<FileGB>();
+		List<FileGB> list3 = new ArrayList<FileGB>();
+		List<FileGB> list4 = new ArrayList<FileGB>();
+
+		try {
+			dir1.addFile("fire", "txt", sb1);
+			dir1.addFile("water", "txt", sb2);
+			dir2.addFile("water", "txt", sb2);
+			dir2.addFile("fate", "txt", sb4);
+			dir3.addFile("nigth", "txt", sb3);
+			dir3.addFile("fate", "txt", sb4);
+			dir4.addFile("fire", "txt", sb1);
+			dir4.addFile("fate", "txt", sb4);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+
+			list1.add(new FileGB("fire", "txt", sb1, "parent/fire"));
+			list1.add(new FileGB("water", "txt", sb2, "parent/water"));
+			list2.add(new FileGB("water", "txt", sb2, "son1/water"));
+			list2.add(new FileGB("fate", "txt", sb4, "son1/fate"));
+			list3.add(new FileGB("nigth", "txt", sb3, "son2/nigth"));
+			list3.add(new FileGB("fate", "txt", sb4, "son2/fate"));
+			list4.add(new FileGB("fire", "txt", sb1, "grandSon1-1/fire"));
+			list4.add(new FileGB("fate", "txt", sb4, "grandSon1-1/fate"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Assert.assertEquals(dir1.getFiles(), list1);
+		Assert.assertEquals(dir2.getFiles(), list2);
+		Assert.assertEquals(dir3.getFiles(), list3);
+		Assert.assertEquals(dir4.getFiles(), list4);
+	
+		
+		
+		dir1.deleteFile("fire", "txt", "parent");
+		dir1.deleteFile("water", "txt", "parent");
+		dir2.deleteFile("water", "txt", "son1");
+		dir2.deleteFile("fate", "txt", "son1");
+		dir3.deleteFile("nigth", "txt", "son2");
+		dir3.deleteFile("fate", "txt", "son2");
+		dir4.deleteFile("fire", "txt", "grandSon1-1");
+		dir4.deleteFile("fate", "txt", "grandSon1-1");
+
+		Assert.assertEquals(dir1.getFiles(), new ArrayList<FileGB>());
+		Assert.assertEquals(dir2.getFiles(), new ArrayList<FileGB>());
+		Assert.assertEquals(dir3.getFiles(), new ArrayList<FileGB>());
+		Assert.assertEquals(dir4.getFiles(), new ArrayList<FileGB>());
+	}
 
 	@Test
 	public void testAddFile2() {
@@ -382,10 +467,10 @@ public class GBFolderTest {
 		}
 
 		try {
-			FolderGB heaven = dir1.getChildren().get(0);
-			FolderGB sky = heaven.getChildren().get(0);
-			FolderGB earth = sky.getChildren().get(0);
-			FolderGB midgard = earth.getChildren().get(0);
+			FolderGB heaven = dir1.getFolders().get(0);
+			FolderGB sky = heaven.getFolders().get(0);
+			FolderGB earth = sky.getFolders().get(0);
+			FolderGB midgard = earth.getFolders().get(0);
 
 			Assert.assertEquals(heaven.getFiles().get(0), new FileGB("fire", "txt", sb1, "parent/heaven/fire"));
 			Assert.assertEquals(sky.getFiles().get(0), new FileGB("water", "txt", sb2, "parent/heaven/sky/water"));
@@ -397,5 +482,5 @@ public class GBFolderTest {
 			e.printStackTrace();
 		}
 
-	}*/
+	}
 }

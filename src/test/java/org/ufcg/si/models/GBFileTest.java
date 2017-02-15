@@ -31,18 +31,8 @@ public class GBFileTest {
 		file4 = new FileGB("fate", "txt", sb4, "archives/file4");
 
 	}
+
 	
-	/*
-	@Test(expected = NullPointerException.class)
-	public void construction1() throws Exception {
-		FileGB broken1 = new FileGB(null, null, null, null);
-
-	}
-
-	@Test(expected = NullPointerException.class)
-	public void construction2() throws Exception {
-		FileGB broken3 = new FileGB("broken", ".txt", null, "archives/");
-	}*/
 
 	@Test
 	public void testEquals() {
@@ -67,19 +57,20 @@ public class GBFileTest {
 		FileGB tempFile2;
 		FileGB tempFile3;
 		FileGB tempFile4;
-		try {
-			tempFile1 = new FileGB("fire", "txt", sb1, "archives/tempFile1");
-			tempFile2 = new FileGB("water", "txt", sb2, "archives/tempFile2");
-			tempFile3 = new FileGB("nigth", "txt", sb3, "archives/tempFile3");
-			tempFile4 = new FileGB("fate", "txt", sb4, "archives/tempFile4");
-			Assert.assertEquals(file1.getContent(), tempFile1.getContent());
-			Assert.assertEquals(file2.getContent(), tempFile2.getContent());
-			Assert.assertEquals(file3.getContent(), tempFile3.getContent());
-			Assert.assertEquals(file4.getContent(), tempFile4.getContent());
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		tempFile1 = new FileGB("fire", "txt", sb1, "archives/tempFile1");
+		tempFile2 = new FileGB("water", "txt", sb2, "archives/tempFile2");
+		tempFile3 = new FileGB("nigth", "txt", sb3, "archives/tempFile3");
+		tempFile4 = new FileGB("fate", "txt", sb4, "archives/tempFile4");
+		Assert.assertEquals(file1.getContent(), tempFile1.getContent());
+		Assert.assertEquals(file2.getContent(), tempFile2.getContent());
+		Assert.assertEquals(file3.getContent(), tempFile3.getContent());
+		Assert.assertEquals(file4.getContent(), tempFile4.getContent());
+
+		Assert.assertEquals(file1.getContent(), new FileGB("fire", "txt", sb1, "storage/file1").getContent());
+		Assert.assertEquals(file2.getContent(), new FileGB("water", "txt", sb2, "storage/file2").getContent());
+		Assert.assertEquals(file3.getContent(), new FileGB("nigth", "txt", sb3, "storage/file3").getContent());
+		Assert.assertEquals(file4.getContent(), new FileGB("fate", "txt", sb4, "storage/file4").getContent());
 
 	}
 
@@ -204,27 +195,9 @@ public class GBFileTest {
 
 	}
 
-	@Deprecated
-	public void testReadContentFromFile() {
-/*
-		try {
-			Assert.assertEquals(file1.readContentFromFile(),
-					new FileGB("fire", "txt", sb1, "storage/file1").readContentFromFile());
-			Assert.assertEquals(file2.readContentFromFile(),
-					new FileGB("water", "txt", sb2, "storage/file2").readContentFromFile());
-			Assert.assertEquals(file3.readContentFromFile(),
-					new FileGB("nigth", "txt", sb3, "storage/file3").readContentFromFile());
-			Assert.assertEquals(file4.readContentFromFile(),
-					new FileGB("fate", "txt", sb4, "storage/file4").readContentFromFile());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
-
-	}
-
 	@Test
 	public void testToString() {
-		
+
 		Assert.assertEquals(file1.toString(), new FileGB("fire", "txt", sb1, "archives/file1").toString());
 		Assert.assertEquals(file2.toString(), new FileGB("water", "txt", sb2, "archives/file2").toString());
 		Assert.assertEquals(file3.toString(), new FileGB("nigth", "txt", sb3, "archives/file3").toString());
