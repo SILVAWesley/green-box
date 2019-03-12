@@ -81,7 +81,7 @@ You just need to run the following command:
 * **Ronan Souza** - *Front-end* - [RonnanSouza](https://github.com/RonnanSouza)
 * **Wesley Silva** - *Front-end Back-end* - [SILVAWesley](https://github.com/SILVAWesley)
 
-See also the list of [contributors](https://github.com/Benardi/numerical_methods/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/the-green-box/green-box/contributors) who participated in this project.
 
 ## License
 
